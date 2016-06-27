@@ -1,0 +1,1 @@
+<?phpnamespace Lahaina\Helper\Alert;class DangerAlert extends AbstractAlert{    protected $type = 'danger';}

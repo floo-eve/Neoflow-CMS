@@ -1,0 +1,1 @@
+<?phpnamespace Lahaina\Framework\HTTP\Responsing;class JsonResponse extends Response{    public function __construct($data, $statusCode = 200)    {        $content = json_encode($data);        $this->setHeader('Content-type: application/json');        $this->setStatusCode($statusCode);        $this->setContent($content);    }}

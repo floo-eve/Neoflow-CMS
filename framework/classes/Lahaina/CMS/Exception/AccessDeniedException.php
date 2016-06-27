@@ -1,0 +1,1 @@
+<?phpnamespace Lahaina\CMS\Exception;class AccessDeniedException extends \Exception{}

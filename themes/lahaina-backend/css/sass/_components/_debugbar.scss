@@ -1,0 +1,15 @@
+// Debugbar
+#debugBar {
+    position: fixed;
+    left: 0;
+    z-index: 99999;
+    bottom: 0;
+    width: 100%;
+    background: rgba($gray-dark, 0.8);
+    color: #fff;
+    padding: 20px 25px;
+
+    ul {
+        margin: 0;
+    }
+}

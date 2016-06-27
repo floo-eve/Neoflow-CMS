@@ -1,0 +1,205 @@
+/*$brand-primary: #EF6039; */
+/*$brand-primary: #D83096; grelles pink*/
+/*$brand-primary: #9464A8; violet*/
+/*$brand-primary: #F5A212; gelb*/
+/*$brand-primary: #EF6262; mattes pink*/
+/*$state-success-text: $brand-success;
+$state-success-bg: lighten($brand-success, 40%);
+$alert-success-border: $state-success-bg;*/
+/*
+$state-info-text: #fff;
+$state-info-bg: $brand-info;
+$alert-info-border: $brand-info;
+
+$state-warning-text: #fff;
+$state-warning-bg: $brand-warning;
+$alert-warning-border: $brand-warning;
+
+$state-danger-text: #fff;
+$state-danger-bg: $brand-danger;
+$alert-danger-border: $brand-danger;*/
+.ps-container {
+  -ms-touch-action: none;
+  touch-action: none;
+  overflow: hidden !important;
+  -ms-overflow-style: none; }
+  @supports (-ms-overflow-style: none) {
+    .ps-container {
+      overflow: auto !important; } }
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .ps-container {
+      overflow: auto !important; } }
+  .ps-container.ps-active-x > .ps-scrollbar-x-rail, .ps-container.ps-active-y > .ps-scrollbar-y-rail {
+    display: block;
+    background-color: transparent; }
+  .ps-container.ps-in-scrolling {
+    pointer-events: none; }
+    .ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+      background-color: #eee;
+      opacity: 0.9; }
+      .ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+        background-color: #999; }
+    .ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+      background-color: #eee;
+      opacity: 0.9; }
+      .ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+        background-color: #999; }
+  .ps-container > .ps-scrollbar-x-rail {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    /* please don't change 'position' */
+    border-radius: 4px;
+    opacity: 0;
+    transition: background-color .2s linear, opacity .2s linear;
+    bottom: 3px;
+    /* there must be 'bottom' for ps-scrollbar-x-rail */
+    height: 8px; }
+    .ps-container > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+      position: absolute;
+      /* please don't change 'position' */
+      background-color: #aaa;
+      border-radius: 4px;
+      transition: background-color .2s linear;
+      bottom: 0;
+      /* there must be 'bottom' for ps-scrollbar-x */
+      height: 8px; }
+  .ps-container > .ps-scrollbar-y-rail {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    /* please don't change 'position' */
+    border-radius: 4px;
+    opacity: 0;
+    transition: background-color .2s linear, opacity .2s linear;
+    right: 3px;
+    /* there must be 'right' for ps-scrollbar-y-rail */
+    width: 8px; }
+    .ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+      position: absolute;
+      /* please don't change 'position' */
+      background-color: #aaa;
+      border-radius: 4px;
+      transition: background-color .2s linear;
+      right: 0;
+      /* there must be 'right' for ps-scrollbar-y */
+      width: 8px; }
+  .ps-container:hover.ps-in-scrolling {
+    pointer-events: none; }
+    .ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+      background-color: #eee;
+      opacity: 0.9; }
+      .ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+        background-color: #999; }
+    .ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+      background-color: #eee;
+      opacity: 0.9; }
+      .ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+        background-color: #999; }
+  .ps-container:hover > .ps-scrollbar-x-rail,
+  .ps-container:hover > .ps-scrollbar-y-rail {
+    opacity: 0.6; }
+  .ps-container:hover > .ps-scrollbar-x-rail:hover {
+    background-color: #eee;
+    opacity: 0.9; }
+    .ps-container:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x {
+      background-color: #999; }
+  .ps-container:hover > .ps-scrollbar-y-rail:hover {
+    background-color: #eee;
+    opacity: 0.9; }
+    .ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
+      background-color: #999; }
+
+.ps-theme-lahaina {
+  -ms-touch-action: none;
+  touch-action: none;
+  overflow: hidden !important;
+  -ms-overflow-style: none; }
+  @supports (-ms-overflow-style: none) {
+    .ps-theme-lahaina {
+      overflow: auto !important; } }
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .ps-theme-lahaina {
+      overflow: auto !important; } }
+  .ps-theme-lahaina.ps-active-x > .ps-scrollbar-x-rail, .ps-theme-lahaina.ps-active-y > .ps-scrollbar-y-rail {
+    display: block;
+    background-color: transparent; }
+  .ps-theme-lahaina.ps-in-scrolling {
+    pointer-events: none; }
+    .ps-theme-lahaina.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+      background-color: transparent;
+      opacity: 0.9; }
+      .ps-theme-lahaina.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+        background-color: #666; }
+    .ps-theme-lahaina.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+      background-color: transparent;
+      opacity: 0.9; }
+      .ps-theme-lahaina.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+        background-color: #666; }
+  .ps-theme-lahaina > .ps-scrollbar-x-rail {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    /* please don't change 'position' */
+    border-radius: 0;
+    opacity: 0;
+    transition: background-color .2s linear, opacity .2s linear;
+    bottom: 3px;
+    /* there must be 'bottom' for ps-scrollbar-x-rail */
+    height: 8px; }
+    .ps-theme-lahaina > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+      position: absolute;
+      /* please don't change 'position' */
+      background-color: #666;
+      border-radius: 0;
+      transition: background-color .2s linear;
+      bottom: 0;
+      /* there must be 'bottom' for ps-scrollbar-x */
+      height: 3px; }
+  .ps-theme-lahaina > .ps-scrollbar-y-rail {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    /* please don't change 'position' */
+    border-radius: 0;
+    opacity: 0;
+    transition: background-color .2s linear, opacity .2s linear;
+    right: 3px;
+    /* there must be 'right' for ps-scrollbar-y-rail */
+    width: 8px; }
+    .ps-theme-lahaina > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+      position: absolute;
+      /* please don't change 'position' */
+      background-color: #666;
+      border-radius: 0;
+      transition: background-color .2s linear;
+      right: 0;
+      /* there must be 'right' for ps-scrollbar-y */
+      width: 3px; }
+  .ps-theme-lahaina:hover.ps-in-scrolling {
+    pointer-events: none; }
+    .ps-theme-lahaina:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+      background-color: transparent;
+      opacity: 0.9; }
+      .ps-theme-lahaina:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+        background-color: #666; }
+    .ps-theme-lahaina:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+      background-color: transparent;
+      opacity: 0.9; }
+      .ps-theme-lahaina:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+        background-color: #666; }
+  .ps-theme-lahaina:hover > .ps-scrollbar-x-rail,
+  .ps-theme-lahaina:hover > .ps-scrollbar-y-rail {
+    opacity: 0.6; }
+  .ps-theme-lahaina:hover > .ps-scrollbar-x-rail:hover {
+    background-color: transparent;
+    opacity: 0.9; }
+    .ps-theme-lahaina:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x {
+      background-color: #666; }
+  .ps-theme-lahaina:hover > .ps-scrollbar-y-rail:hover {
+    background-color: transparent;
+    opacity: 0.9; }
+    .ps-theme-lahaina:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
+      background-color: #666; }
+
+/*# sourceMappingURL=perfect-scrollbar.css.map */

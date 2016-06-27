@@ -1,0 +1,1803 @@
+[2016-06-27 12:44:26.446969] [INFO] DisabledCache created
+[2016-06-27 12:44:26.448090] [INFO] Database connected
+[2016-06-27 12:44:26.472054] [INFO] Application initialized
+[2016-06-27 12:44:26.535422] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:26.535569] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:26.535648] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:26.536139] [INFO] Query executed
+[2016-06-27 12:44:26.536411] [INFO] Start session
+[2016-06-27 12:44:26.541270] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:26.543440] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:26.543515] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:26.543963] [INFO] Query executed
+[2016-06-27 12:44:26.565258] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:26.565365] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:26.565743] [INFO] Query executed
+[2016-06-27 12:44:26.571854] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:26.571939] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:26.572257] [INFO] Query executed
+[2016-06-27 12:44:26.572549] [INFO] Start router
+[2016-06-27 12:44:26.632380] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:44:26.632519] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:44:26.632589] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:26.632989] [INFO] Query executed
+[2016-06-27 12:44:26.633497] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:26.633594] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:26.633661] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:26.633940] [INFO] Query executed
+[2016-06-27 12:44:26.634577] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:44:26.634687] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:44:26.634752] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:26.635020] [INFO] Query executed
+[2016-06-27 12:44:26.641180] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:26.641293] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:26.641400] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:26.641791] [INFO] Query executed
+[2016-06-27 12:44:26.642302] [DEBUG]       String: SELECT * FROM languages
+[2016-06-27 12:44:26.642378] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:26.642647] [INFO] Query executed
+[2016-06-27 12:44:26.643201] [DEBUG]       String: SELECT * FROM themes
+[2016-06-27 12:44:26.643277] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:26.643537] [INFO] Query executed
+[2016-06-27 12:44:26.680155] [INFO] Application executed
+[2016-06-27 12:44:26.680249] [INFO] Publish application
+[2016-06-27 12:44:26.680546] [INFO] # Application published
+[2016-06-27 12:44:27.576842] [INFO] DisabledCache created
+[2016-06-27 12:44:27.577543] [INFO] Database connected
+[2016-06-27 12:44:27.581383] [INFO] Application initialized
+[2016-06-27 12:44:27.587163] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:27.587296] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:27.587378] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:27.588671] [INFO] Query executed
+[2016-06-27 12:44:27.588970] [INFO] Start session
+[2016-06-27 12:44:27.591145] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:27.591270] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:27.591352] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:27.591685] [INFO] Query executed
+[2016-06-27 12:44:27.595010] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:27.595117] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:27.596318] [INFO] Query executed
+[2016-06-27 12:44:27.597526] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:27.597619] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:27.597893] [INFO] Query executed
+[2016-06-27 12:44:27.598191] [INFO] Start router
+[2016-06-27 12:44:27.604746] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:44:27.604876] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:44:27.604945] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:27.605948] [INFO] Query executed
+[2016-06-27 12:44:27.606456] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:27.606555] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:27.606623] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:27.606903] [INFO] Query executed
+[2016-06-27 12:44:27.607525] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:44:27.607636] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:44:27.607705] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:27.607954] [INFO] Query executed
+[2016-06-27 12:44:27.609416] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:27.609519] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:27.609586] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:27.609850] [INFO] Query executed
+[2016-06-27 12:44:27.610342] [DEBUG]       String: SELECT * FROM languages
+[2016-06-27 12:44:27.610419] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:27.610660] [INFO] Query executed
+[2016-06-27 12:44:27.611315] [DEBUG]       String: SELECT * FROM themes
+[2016-06-27 12:44:27.611412] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:27.611759] [INFO] Query executed
+[2016-06-27 12:44:27.619455] [INFO] Application executed
+[2016-06-27 12:44:27.619529] [INFO] Publish application
+[2016-06-27 12:44:27.619812] [INFO] # Application published
+[2016-06-27 12:44:28.395642] [INFO] DisabledCache created
+[2016-06-27 12:44:28.396296] [INFO] Database connected
+[2016-06-27 12:44:28.399426] [INFO] Application initialized
+[2016-06-27 12:44:28.404223] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:28.404340] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:28.404412] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:28.404799] [INFO] Query executed
+[2016-06-27 12:44:28.405060] [INFO] Start session
+[2016-06-27 12:44:28.406636] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:28.406743] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:28.406811] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:28.407092] [INFO] Query executed
+[2016-06-27 12:44:28.409512] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:28.409589] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:28.409813] [INFO] Query executed
+[2016-06-27 12:44:28.410732] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:28.410809] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:28.411051] [INFO] Query executed
+[2016-06-27 12:44:28.411343] [INFO] Start router
+[2016-06-27 12:44:28.420312] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:44:28.420444] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:44:28.420512] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:28.420870] [INFO] Query executed
+[2016-06-27 12:44:28.421379] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:28.421474] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:28.421539] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:28.421793] [INFO] Query executed
+[2016-06-27 12:44:28.422416] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:44:28.422523] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:44:28.422585] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:28.422815] [INFO] Query executed
+[2016-06-27 12:44:28.443499] [INFO] Application executed
+[2016-06-27 12:44:28.443586] [INFO] Publish application
+[2016-06-27 12:44:28.443880] [INFO] # Application published
+[2016-06-27 12:44:30.026221] [INFO] DisabledCache created
+[2016-06-27 12:44:30.028070] [INFO] Database connected
+[2016-06-27 12:44:30.031574] [INFO] Application initialized
+[2016-06-27 12:44:30.037087] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:30.037214] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:30.037287] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:30.038456] [INFO] Query executed
+[2016-06-27 12:44:30.038724] [INFO] Start session
+[2016-06-27 12:44:30.040699] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:30.040810] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:30.040889] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:30.041783] [INFO] Query executed
+[2016-06-27 12:44:30.044802] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:30.045001] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:30.046201] [INFO] Query executed
+[2016-06-27 12:44:30.047485] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:30.047576] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:30.047848] [INFO] Query executed
+[2016-06-27 12:44:30.048114] [INFO] Start router
+[2016-06-27 12:44:30.066504] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:44:30.066643] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:44:30.066715] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:30.067831] [INFO] Query executed
+[2016-06-27 12:44:30.068336] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:30.068435] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:30.068501] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:30.068778] [INFO] Query executed
+[2016-06-27 12:44:30.069402] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:44:30.069509] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:44:30.069572] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:30.069820] [INFO] Query executed
+[2016-06-27 12:44:30.076175] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:30.076287] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:30.076354] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:30.076673] [INFO] Query executed
+[2016-06-27 12:44:30.077471] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:44:30.077581] [DEBUG]       Params: ? => '2'
+[2016-06-27 12:44:30.077646] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:30.077955] [INFO] Query executed
+[2016-06-27 12:44:30.087863] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id IS ? AND language_id = ? AND navigation_id = ? ORDER BY position ASC
+[2016-06-27 12:44:30.088022] [DEBUG]       Params: ? => NULL, ? => '2', ? => 1
+[2016-06-27 12:44:30.088100] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:30.089251] [INFO] Query executed
+[2016-06-27 12:44:30.101175] [INFO] Application executed
+[2016-06-27 12:44:30.101263] [INFO] Publish application
+[2016-06-27 12:44:30.101533] [INFO] # Application published
+[2016-06-27 12:44:31.096678] [INFO] DisabledCache created
+[2016-06-27 12:44:31.097327] [INFO] Database connected
+[2016-06-27 12:44:31.100517] [INFO] Application initialized
+[2016-06-27 12:44:31.105149] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:31.105261] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:31.105329] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.105746] [INFO] Query executed
+[2016-06-27 12:44:31.106009] [INFO] Start session
+[2016-06-27 12:44:31.107646] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:31.107752] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:31.107829] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.108124] [INFO] Query executed
+[2016-06-27 12:44:31.110606] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:31.110691] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.110994] [INFO] Query executed
+[2016-06-27 12:44:31.112066] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:31.112152] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.112492] [INFO] Query executed
+[2016-06-27 12:44:31.112768] [INFO] Start router
+[2016-06-27 12:44:31.134531] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:44:31.134666] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:44:31.134733] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.135163] [INFO] Query executed
+[2016-06-27 12:44:31.135658] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:31.135756] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:31.135822] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.136132] [INFO] Query executed
+[2016-06-27 12:44:31.136758] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:44:31.136871] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:44:31.136938] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.137207] [INFO] Query executed
+[2016-06-27 12:44:31.143604] [DEBUG]       String: SELECT * FROM navigations
+[2016-06-27 12:44:31.143697] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.145226] [INFO] Query executed
+[2016-06-27 12:44:31.159255] [INFO] Application executed
+[2016-06-27 12:44:31.159344] [INFO] Publish application
+[2016-06-27 12:44:31.159627] [INFO] # Application published
+[2016-06-27 12:44:31.942595] [INFO] DisabledCache created
+[2016-06-27 12:44:31.943236] [INFO] Database connected
+[2016-06-27 12:44:31.946620] [INFO] Application initialized
+[2016-06-27 12:44:31.952126] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:31.952251] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:31.952326] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.952756] [INFO] Query executed
+[2016-06-27 12:44:31.953036] [INFO] Start session
+[2016-06-27 12:44:31.954993] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:31.955102] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:31.955190] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.955452] [INFO] Query executed
+[2016-06-27 12:44:31.958331] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:31.958412] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.958631] [INFO] Query executed
+[2016-06-27 12:44:31.959625] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:31.959707] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.959911] [INFO] Query executed
+[2016-06-27 12:44:31.960167] [INFO] Start router
+[2016-06-27 12:44:31.967266] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:44:31.967403] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:44:31.967473] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.967820] [INFO] Query executed
+[2016-06-27 12:44:31.968353] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:31.968456] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:31.968523] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.968769] [INFO] Query executed
+[2016-06-27 12:44:31.969424] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:44:31.969532] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:44:31.969597] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.969818] [INFO] Query executed
+[2016-06-27 12:44:31.971702] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:31.971805] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:31.971873] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.972095] [INFO] Query executed
+[2016-06-27 12:44:31.972788] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:44:31.972898] [DEBUG]       Params: ? => '2'
+[2016-06-27 12:44:31.972990] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.973229] [INFO] Query executed
+[2016-06-27 12:44:31.974850] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id IS ? AND language_id = ? AND navigation_id = ? ORDER BY position ASC
+[2016-06-27 12:44:31.975008] [DEBUG]       Params: ? => NULL, ? => '2', ? => 1
+[2016-06-27 12:44:31.975116] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:31.975500] [INFO] Query executed
+[2016-06-27 12:44:31.984002] [INFO] Application executed
+[2016-06-27 12:44:31.984090] [INFO] Publish application
+[2016-06-27 12:44:31.984397] [INFO] # Application published
+[2016-06-27 12:44:44.493882] [INFO] DisabledCache created
+[2016-06-27 12:44:44.494996] [INFO] Database connected
+[2016-06-27 12:44:44.498486] [INFO] Application initialized
+[2016-06-27 12:44:44.503387] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:44.503496] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:44.503566] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:44.503957] [INFO] Query executed
+[2016-06-27 12:44:44.504220] [INFO] Start session
+[2016-06-27 12:44:44.506102] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:44.506206] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:44.506275] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:44.506567] [INFO] Query executed
+[2016-06-27 12:44:44.509350] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:44.509432] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:44.509694] [INFO] Query executed
+[2016-06-27 12:44:44.510682] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:44.510763] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:44.511076] [INFO] Query executed
+[2016-06-27 12:44:44.511440] [INFO] Start router
+[2016-06-27 12:44:44.518351] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:44:44.518491] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:44:44.518560] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:44.518934] [INFO] Query executed
+[2016-06-27 12:44:44.519447] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:44.519547] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:44.519614] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:44.519881] [INFO] Query executed
+[2016-06-27 12:44:44.520502] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:44:44.520613] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:44:44.520680] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:44.520926] [INFO] Query executed
+[2016-06-27 12:44:44.522774] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:44.522877] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:44.522945] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:44.523190] [INFO] Query executed
+[2016-06-27 12:44:44.523850] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:44:44.523958] [DEBUG]       Params: ? => '3'
+[2016-06-27 12:44:44.524024] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:44.524286] [INFO] Query executed
+[2016-06-27 12:44:44.525543] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id IS ? AND language_id = ? AND navigation_id = ? ORDER BY position ASC
+[2016-06-27 12:44:44.525676] [DEBUG]       Params: ? => NULL, ? => '3', ? => 1
+[2016-06-27 12:44:44.525743] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:44.526048] [INFO] Query executed
+[2016-06-27 12:44:44.533974] [INFO] Application executed
+[2016-06-27 12:44:44.534054] [INFO] Publish application
+[2016-06-27 12:44:44.534322] [INFO] # Application published
+[2016-06-27 12:44:45.395994] [INFO] DisabledCache created
+[2016-06-27 12:44:45.396711] [INFO] Database connected
+[2016-06-27 12:44:45.400022] [INFO] Application initialized
+[2016-06-27 12:44:45.404998] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:45.405108] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:45.405179] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:45.405570] [INFO] Query executed
+[2016-06-27 12:44:45.405833] [INFO] Start session
+[2016-06-27 12:44:45.407716] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:45.407860] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:45.407932] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:45.408220] [INFO] Query executed
+[2016-06-27 12:44:45.411050] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:45.411159] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:45.411592] [INFO] Query executed
+[2016-06-27 12:44:45.412794] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:45.412880] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:45.413173] [INFO] Query executed
+[2016-06-27 12:44:45.413451] [INFO] Start router
+[2016-06-27 12:44:45.420175] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:44:45.420295] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:44:45.420362] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:45.420674] [INFO] Query executed
+[2016-06-27 12:44:45.421197] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:45.421299] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:45.421366] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:45.421638] [INFO] Query executed
+[2016-06-27 12:44:45.422266] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:44:45.422378] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:44:45.422446] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:45.422696] [INFO] Query executed
+[2016-06-27 12:44:45.424530] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:45.424632] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:45.424699] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:45.424943] [INFO] Query executed
+[2016-06-27 12:44:45.425586] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:44:45.425695] [DEBUG]       Params: ? => '2'
+[2016-06-27 12:44:45.425761] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:45.426002] [INFO] Query executed
+[2016-06-27 12:44:45.427287] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id IS ? AND language_id = ? AND navigation_id = ? ORDER BY position ASC
+[2016-06-27 12:44:45.427443] [DEBUG]       Params: ? => NULL, ? => '2', ? => 1
+[2016-06-27 12:44:45.427510] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:45.427921] [INFO] Query executed
+[2016-06-27 12:44:45.435950] [INFO] Application executed
+[2016-06-27 12:44:45.436022] [INFO] Publish application
+[2016-06-27 12:44:45.436294] [INFO] # Application published
+[2016-06-27 12:44:46.596158] [INFO] DisabledCache created
+[2016-06-27 12:44:46.596837] [INFO] Database connected
+[2016-06-27 12:44:46.600404] [INFO] Application initialized
+[2016-06-27 12:44:46.605597] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:46.605706] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:46.605777] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.606179] [INFO] Query executed
+[2016-06-27 12:44:46.606441] [INFO] Start session
+[2016-06-27 12:44:46.608330] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:46.608434] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:46.608503] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.608805] [INFO] Query executed
+[2016-06-27 12:44:46.612088] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:46.612185] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.612523] [INFO] Query executed
+[2016-06-27 12:44:46.613607] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:46.613693] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.613957] [INFO] Query executed
+[2016-06-27 12:44:46.614229] [INFO] Start router
+[2016-06-27 12:44:46.620975] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:44:46.621094] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:44:46.621162] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.621464] [INFO] Query executed
+[2016-06-27 12:44:46.621975] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:46.622147] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:46.622219] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.622498] [INFO] Query executed
+[2016-06-27 12:44:46.623122] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:44:46.623234] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:44:46.623301] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.623570] [INFO] Query executed
+[2016-06-27 12:44:46.625411] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:46.625514] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:46.625582] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.625854] [INFO] Query executed
+[2016-06-27 12:44:46.626521] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:44:46.626630] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:44:46.626696] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.626975] [INFO] Query executed
+[2016-06-27 12:44:46.628504] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id IS ? AND language_id = ? AND navigation_id = ? ORDER BY position ASC
+[2016-06-27 12:44:46.628709] [DEBUG]       Params: ? => NULL, ? => '1', ? => 1
+[2016-06-27 12:44:46.628783] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.629190] [INFO] Query executed
+[2016-06-27 12:44:46.632514] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:44:46.632631] [DEBUG]       Params: ? => '21'
+[2016-06-27 12:44:46.632698] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.632998] [INFO] Query executed
+[2016-06-27 12:44:46.633914] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:44:46.634027] [DEBUG]       Params: ? => '23'
+[2016-06-27 12:44:46.634093] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.634382] [INFO] Query executed
+[2016-06-27 12:44:46.635282] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:44:46.635390] [DEBUG]       Params: ? => '22'
+[2016-06-27 12:44:46.635457] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.635757] [INFO] Query executed
+[2016-06-27 12:44:46.636778] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:44:46.636887] [DEBUG]       Params: ? => '24'
+[2016-06-27 12:44:46.636954] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.637252] [INFO] Query executed
+[2016-06-27 12:44:46.638005] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:44:46.638115] [DEBUG]       Params: ? => '21'
+[2016-06-27 12:44:46.638180] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.638477] [INFO] Query executed
+[2016-06-27 12:44:46.638995] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:44:46.639103] [DEBUG]       Params: ? => '23'
+[2016-06-27 12:44:46.639168] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.639466] [INFO] Query executed
+[2016-06-27 12:44:46.639982] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:44:46.640090] [DEBUG]       Params: ? => '22'
+[2016-06-27 12:44:46.640156] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.640458] [INFO] Query executed
+[2016-06-27 12:44:46.641093] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:44:46.641201] [DEBUG]       Params: ? => '24'
+[2016-06-27 12:44:46.641266] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:46.641561] [INFO] Query executed
+[2016-06-27 12:44:46.647572] [INFO] Application executed
+[2016-06-27 12:44:46.647651] [INFO] Publish application
+[2016-06-27 12:44:46.647937] [INFO] # Application published
+[2016-06-27 12:44:48.155913] [INFO] DisabledCache created
+[2016-06-27 12:44:48.156550] [INFO] Database connected
+[2016-06-27 12:44:48.159609] [INFO] Application initialized
+[2016-06-27 12:44:48.164576] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:48.164694] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:48.164763] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:48.165450] [INFO] Query executed
+[2016-06-27 12:44:48.165775] [INFO] Start session
+[2016-06-27 12:44:48.168123] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:48.168240] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:48.168309] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:48.168673] [INFO] Query executed
+[2016-06-27 12:44:48.171612] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:48.171696] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:48.171981] [INFO] Query executed
+[2016-06-27 12:44:48.172972] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:48.173053] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:48.173322] [INFO] Query executed
+[2016-06-27 12:44:48.173579] [INFO] Start router
+[2016-06-27 12:44:48.180715] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:44:48.180847] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:44:48.180918] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:48.181288] [INFO] Query executed
+[2016-06-27 12:44:48.181817] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:48.181921] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:48.181998] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:48.182296] [INFO] Query executed
+[2016-06-27 12:44:48.182907] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:44:48.183016] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:44:48.183080] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:48.183363] [INFO] Query executed
+[2016-06-27 12:44:48.185220] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:48.185321] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:48.185388] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:48.185673] [INFO] Query executed
+[2016-06-27 12:44:48.186321] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:44:48.186429] [DEBUG]       Params: ? => '2'
+[2016-06-27 12:44:48.186495] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:48.186774] [INFO] Query executed
+[2016-06-27 12:44:48.188034] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id IS ? AND language_id = ? AND navigation_id = ? ORDER BY position ASC
+[2016-06-27 12:44:48.188167] [DEBUG]       Params: ? => NULL, ? => '2', ? => 1
+[2016-06-27 12:44:48.188232] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:48.188556] [INFO] Query executed
+[2016-06-27 12:44:48.196511] [INFO] Application executed
+[2016-06-27 12:44:48.196594] [INFO] Publish application
+[2016-06-27 12:44:48.196873] [INFO] # Application published
+[2016-06-27 12:44:50.686860] [INFO] DisabledCache created
+[2016-06-27 12:44:50.687537] [INFO] Database connected
+[2016-06-27 12:44:50.690741] [INFO] Application initialized
+[2016-06-27 12:44:50.696086] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:50.696221] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:50.696297] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:50.696727] [INFO] Query executed
+[2016-06-27 12:44:50.697017] [INFO] Start session
+[2016-06-27 12:44:50.699068] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:50.699184] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:50.699258] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:50.699621] [INFO] Query executed
+[2016-06-27 12:44:50.702548] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:50.702631] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:50.702913] [INFO] Query executed
+[2016-06-27 12:44:50.703977] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:44:50.704102] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:50.704365] [INFO] Query executed
+[2016-06-27 12:44:50.704622] [INFO] Start router
+[2016-06-27 12:44:50.710649] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:44:50.710767] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:44:50.710834] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:50.711242] [INFO] Query executed
+[2016-06-27 12:44:50.711864] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:44:50.711977] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:50.712044] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:50.712328] [INFO] Query executed
+[2016-06-27 12:44:50.712965] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:44:50.713082] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:44:50.713150] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:50.713402] [INFO] Query executed
+[2016-06-27 12:44:50.715178] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:44:50.715286] [DEBUG]       Params: ? => 1
+[2016-06-27 12:44:50.715357] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:50.715629] [INFO] Query executed
+[2016-06-27 12:44:50.716141] [DEBUG]       String: SELECT * FROM languages
+[2016-06-27 12:44:50.716243] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:50.716703] [INFO] Query executed
+[2016-06-27 12:44:50.717386] [DEBUG]       String: SELECT * FROM themes
+[2016-06-27 12:44:50.717468] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:44:50.717701] [INFO] Query executed
+[2016-06-27 12:44:50.725802] [INFO] Application executed
+[2016-06-27 12:44:50.725920] [INFO] Publish application
+[2016-06-27 12:44:50.726203] [INFO] # Application published
+[2016-06-27 12:45:08.487582] [INFO] DisabledCache created
+[2016-06-27 12:45:08.488195] [INFO] Database connected
+[2016-06-27 12:45:08.491166] [INFO] Application initialized
+[2016-06-27 12:45:08.496129] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:45:08.496247] [DEBUG]       Params: ? => 1
+[2016-06-27 12:45:08.496318] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:45:08.496678] [INFO] Query executed
+[2016-06-27 12:45:08.496957] [INFO] Start session
+[2016-06-27 12:45:08.499373] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:45:08.499500] [DEBUG]       Params: ? => 1
+[2016-06-27 12:45:08.499573] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:45:08.499937] [INFO] Query executed
+[2016-06-27 12:45:08.502875] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:45:08.502959] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:45:08.503202] [INFO] Query executed
+[2016-06-27 12:45:08.504179] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:45:08.504261] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:45:08.504475] [INFO] Query executed
+[2016-06-27 12:45:08.504712] [INFO] Start router
+[2016-06-27 12:45:08.510792] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:45:08.511020] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:45:08.511112] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:45:08.511445] [INFO] Query executed
+[2016-06-27 12:45:08.511951] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:45:08.512052] [DEBUG]       Params: ? => 1
+[2016-06-27 12:45:08.512119] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:45:08.512361] [INFO] Query executed
+[2016-06-27 12:45:08.513004] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:45:08.513117] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:45:08.513185] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:45:08.513423] [INFO] Query executed
+[2016-06-27 12:45:08.515258] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:45:08.515423] [DEBUG]       Params: ? => 1
+[2016-06-27 12:45:08.515497] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:45:08.515865] [INFO] Query executed
+[2016-06-27 12:45:08.516374] [DEBUG]       String: SELECT * FROM languages
+[2016-06-27 12:45:08.516450] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:45:08.516679] [INFO] Query executed
+[2016-06-27 12:45:08.517229] [DEBUG]       String: SELECT * FROM themes
+[2016-06-27 12:45:08.517304] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:45:08.517522] [INFO] Query executed
+[2016-06-27 12:45:08.525749] [INFO] Application executed
+[2016-06-27 12:45:08.525840] [INFO] Publish application
+[2016-06-27 12:45:08.526119] [INFO] # Application published
+[2016-06-27 12:49:07.374553] [INFO] DisabledCache created
+[2016-06-27 12:49:07.375297] [INFO] Database connected
+[2016-06-27 12:49:07.378570] [INFO] Application initialized
+[2016-06-27 12:49:07.383513] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:07.383644] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:07.383718] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:07.384187] [INFO] Query executed
+[2016-06-27 12:49:07.384454] [INFO] Start session
+[2016-06-27 12:49:07.386046] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:07.386153] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:07.386223] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:07.386506] [INFO] Query executed
+[2016-06-27 12:49:07.388979] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:07.389060] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:07.389288] [INFO] Query executed
+[2016-06-27 12:49:07.390209] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:07.390289] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:07.390532] [INFO] Query executed
+[2016-06-27 12:49:07.390770] [INFO] Start router
+[2016-06-27 12:49:07.396295] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:07.396445] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:07.396513] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:07.396881] [INFO] Query executed
+[2016-06-27 12:49:07.397387] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:07.397486] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:07.397553] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:07.397805] [INFO] Query executed
+[2016-06-27 12:49:07.398421] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:07.398526] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:07.398591] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:07.398813] [INFO] Query executed
+[2016-06-27 12:49:07.419492] [INFO] Application executed
+[2016-06-27 12:49:07.419580] [INFO] Publish application
+[2016-06-27 12:49:07.419874] [INFO] # Application published
+[2016-06-27 12:49:12.828109] [INFO] DisabledCache created
+[2016-06-27 12:49:12.828953] [INFO] Database connected
+[2016-06-27 12:49:12.832050] [INFO] Application initialized
+[2016-06-27 12:49:12.836616] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:12.836724] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:12.836792] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.837173] [INFO] Query executed
+[2016-06-27 12:49:12.837465] [INFO] Start session
+[2016-06-27 12:49:12.839030] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:12.839138] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:12.839207] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.839505] [INFO] Query executed
+[2016-06-27 12:49:12.842714] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:12.842840] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.843174] [INFO] Query executed
+[2016-06-27 12:49:12.844187] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:12.844273] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.844551] [INFO] Query executed
+[2016-06-27 12:49:12.844815] [INFO] Start router
+[2016-06-27 12:49:12.850085] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:12.850200] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:12.850267] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.850537] [INFO] Query executed
+[2016-06-27 12:49:12.851002] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:12.851099] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:12.851162] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.851425] [INFO] Query executed
+[2016-06-27 12:49:12.852044] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:12.852154] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:12.852219] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.852509] [INFO] Query executed
+[2016-06-27 12:49:12.854774] [INFO] Application executed
+[2016-06-27 12:49:12.854846] [INFO] Publish application
+[2016-06-27 12:49:12.854948] [INFO] # Application published
+[2016-06-27 12:49:12.901817] [INFO] DisabledCache created
+[2016-06-27 12:49:12.902415] [INFO] Database connected
+[2016-06-27 12:49:12.905447] [INFO] Application initialized
+[2016-06-27 12:49:12.910373] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:12.910495] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:12.910569] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.910963] [INFO] Query executed
+[2016-06-27 12:49:12.911241] [INFO] Start session
+[2016-06-27 12:49:12.913621] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:12.913736] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:12.913805] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.914086] [INFO] Query executed
+[2016-06-27 12:49:12.916587] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:12.916670] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.916913] [INFO] Query executed
+[2016-06-27 12:49:12.917906] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:12.917989] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.918231] [INFO] Query executed
+[2016-06-27 12:49:12.918505] [INFO] Start router
+[2016-06-27 12:49:12.923793] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:12.923911] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:12.923979] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.924256] [INFO] Query executed
+[2016-06-27 12:49:12.924774] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:12.924877] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:12.924943] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.925280] [INFO] Query executed
+[2016-06-27 12:49:12.925904] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:12.926017] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:12.926100] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:12.926350] [INFO] Query executed
+[2016-06-27 12:49:12.947185] [INFO] Application executed
+[2016-06-27 12:49:12.947272] [INFO] Publish application
+[2016-06-27 12:49:12.947552] [INFO] # Application published
+[2016-06-27 12:49:15.295706] [INFO] DisabledCache created
+[2016-06-27 12:49:15.296365] [INFO] Database connected
+[2016-06-27 12:49:15.299427] [INFO] Application initialized
+[2016-06-27 12:49:15.303920] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:15.304028] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:15.304105] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.304455] [INFO] Query executed
+[2016-06-27 12:49:15.304728] [INFO] Start session
+[2016-06-27 12:49:15.306236] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:15.306343] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:15.306411] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.306687] [INFO] Query executed
+[2016-06-27 12:49:15.309451] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:15.309547] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.309874] [INFO] Query executed
+[2016-06-27 12:49:15.310868] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:15.310952] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.311180] [INFO] Query executed
+[2016-06-27 12:49:15.311435] [INFO] Start router
+[2016-06-27 12:49:15.316735] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:15.316854] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:15.316921] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.317199] [INFO] Query executed
+[2016-06-27 12:49:15.317682] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:15.317780] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:15.317847] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.318084] [INFO] Query executed
+[2016-06-27 12:49:15.318685] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:15.318794] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:15.318859] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.319083] [INFO] Query executed
+[2016-06-27 12:49:15.321269] [INFO] Application executed
+[2016-06-27 12:49:15.321341] [INFO] Publish application
+[2016-06-27 12:49:15.321443] [INFO] # Application published
+[2016-06-27 12:49:15.349164] [INFO] DisabledCache created
+[2016-06-27 12:49:15.349754] [INFO] Database connected
+[2016-06-27 12:49:15.352667] [INFO] Application initialized
+[2016-06-27 12:49:15.357135] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:15.357249] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:15.357319] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.357652] [INFO] Query executed
+[2016-06-27 12:49:15.357899] [INFO] Start session
+[2016-06-27 12:49:15.360256] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:15.360369] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:15.360438] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.360718] [INFO] Query executed
+[2016-06-27 12:49:15.363169] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:15.363253] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.363450] [INFO] Query executed
+[2016-06-27 12:49:15.364404] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:15.364484] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.364685] [INFO] Query executed
+[2016-06-27 12:49:15.364916] [INFO] Start router
+[2016-06-27 12:49:15.370040] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:15.370174] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:15.370240] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.370466] [INFO] Query executed
+[2016-06-27 12:49:15.370948] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:15.371041] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:15.371104] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.371355] [INFO] Query executed
+[2016-06-27 12:49:15.371932] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:15.372035] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:15.372100] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:15.372354] [INFO] Query executed
+[2016-06-27 12:49:15.394174] [INFO] Application executed
+[2016-06-27 12:49:15.394264] [INFO] Publish application
+[2016-06-27 12:49:15.394560] [INFO] # Application published
+[2016-06-27 12:49:17.482788] [INFO] DisabledCache created
+[2016-06-27 12:49:17.483386] [INFO] Database connected
+[2016-06-27 12:49:17.486414] [INFO] Application initialized
+[2016-06-27 12:49:17.491030] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:17.491154] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:17.491247] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.491729] [INFO] Query executed
+[2016-06-27 12:49:17.492012] [INFO] Start session
+[2016-06-27 12:49:17.493761] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:17.493976] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:17.494052] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.494404] [INFO] Query executed
+[2016-06-27 12:49:17.496984] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:17.497070] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.497282] [INFO] Query executed
+[2016-06-27 12:49:17.498224] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:17.498308] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.498502] [INFO] Query executed
+[2016-06-27 12:49:17.498769] [INFO] Start router
+[2016-06-27 12:49:17.504002] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:17.504118] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:17.504185] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.504411] [INFO] Query executed
+[2016-06-27 12:49:17.504911] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:17.505008] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:17.505074] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.505285] [INFO] Query executed
+[2016-06-27 12:49:17.505904] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:17.506014] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:17.506079] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.506283] [INFO] Query executed
+[2016-06-27 12:49:17.508572] [INFO] Application executed
+[2016-06-27 12:49:17.508661] [INFO] Publish application
+[2016-06-27 12:49:17.508797] [INFO] # Application published
+[2016-06-27 12:49:17.536942] [INFO] DisabledCache created
+[2016-06-27 12:49:17.537563] [INFO] Database connected
+[2016-06-27 12:49:17.540555] [INFO] Application initialized
+[2016-06-27 12:49:17.545372] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:17.545494] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:17.545567] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.545901] [INFO] Query executed
+[2016-06-27 12:49:17.546158] [INFO] Start session
+[2016-06-27 12:49:17.548445] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:17.548552] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:17.548619] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.548919] [INFO] Query executed
+[2016-06-27 12:49:17.551389] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:17.551472] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.551709] [INFO] Query executed
+[2016-06-27 12:49:17.552675] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:17.552767] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.552980] [INFO] Query executed
+[2016-06-27 12:49:17.553217] [INFO] Start router
+[2016-06-27 12:49:17.558651] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:17.558799] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:17.558868] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.559314] [INFO] Query executed
+[2016-06-27 12:49:17.559851] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:17.559953] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:17.560023] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.560262] [INFO] Query executed
+[2016-06-27 12:49:17.560900] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:17.561016] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:17.561084] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:17.561314] [INFO] Query executed
+[2016-06-27 12:49:17.582320] [INFO] Application executed
+[2016-06-27 12:49:17.582410] [INFO] Publish application
+[2016-06-27 12:49:17.582705] [INFO] # Application published
+[2016-06-27 12:49:19.056174] [INFO] DisabledCache created
+[2016-06-27 12:49:19.056833] [INFO] Database connected
+[2016-06-27 12:49:19.060111] [INFO] Application initialized
+[2016-06-27 12:49:19.065169] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:19.065324] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:19.065398] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.065853] [INFO] Query executed
+[2016-06-27 12:49:19.066159] [INFO] Start session
+[2016-06-27 12:49:19.067889] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:19.068022] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:19.068094] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.068495] [INFO] Query executed
+[2016-06-27 12:49:19.071265] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:19.071374] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.071715] [INFO] Query executed
+[2016-06-27 12:49:19.072858] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:19.072956] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.073261] [INFO] Query executed
+[2016-06-27 12:49:19.073555] [INFO] Start router
+[2016-06-27 12:49:19.079842] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:19.079992] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:19.080063] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.080436] [INFO] Query executed
+[2016-06-27 12:49:19.080976] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:19.081084] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:19.081152] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.081442] [INFO] Query executed
+[2016-06-27 12:49:19.082087] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:19.090600] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:19.090789] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.091269] [INFO] Query executed
+[2016-06-27 12:49:19.093777] [INFO] Application executed
+[2016-06-27 12:49:19.093871] [INFO] Publish application
+[2016-06-27 12:49:19.093976] [INFO] # Application published
+[2016-06-27 12:49:19.122670] [INFO] DisabledCache created
+[2016-06-27 12:49:19.123270] [INFO] Database connected
+[2016-06-27 12:49:19.126420] [INFO] Application initialized
+[2016-06-27 12:49:19.131047] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:19.131164] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:19.131237] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.131577] [INFO] Query executed
+[2016-06-27 12:49:19.131850] [INFO] Start session
+[2016-06-27 12:49:19.134183] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:19.134296] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:19.134367] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.134582] [INFO] Query executed
+[2016-06-27 12:49:19.137061] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:19.137145] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.137339] [INFO] Query executed
+[2016-06-27 12:49:19.138328] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:19.138412] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.138632] [INFO] Query executed
+[2016-06-27 12:49:19.138885] [INFO] Start router
+[2016-06-27 12:49:19.144241] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:19.144373] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:19.144443] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.144730] [INFO] Query executed
+[2016-06-27 12:49:19.145225] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:19.145323] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:19.145391] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.145592] [INFO] Query executed
+[2016-06-27 12:49:19.146208] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:19.146318] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:19.146425] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:19.146612] [INFO] Query executed
+[2016-06-27 12:49:19.167401] [INFO] Application executed
+[2016-06-27 12:49:19.167490] [INFO] Publish application
+[2016-06-27 12:49:19.167778] [INFO] # Application published
+[2016-06-27 12:49:20.314591] [INFO] DisabledCache created
+[2016-06-27 12:49:20.315268] [INFO] Database connected
+[2016-06-27 12:49:20.318409] [INFO] Application initialized
+[2016-06-27 12:49:20.322973] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:20.323082] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:20.323154] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.323559] [INFO] Query executed
+[2016-06-27 12:49:20.323831] [INFO] Start session
+[2016-06-27 12:49:20.325927] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:20.326050] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:20.326119] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.326517] [INFO] Query executed
+[2016-06-27 12:49:20.329042] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:20.329127] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.329411] [INFO] Query executed
+[2016-06-27 12:49:20.330375] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:20.330459] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.330714] [INFO] Query executed
+[2016-06-27 12:49:20.330976] [INFO] Start router
+[2016-06-27 12:49:20.336266] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:20.336385] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:20.336452] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.336735] [INFO] Query executed
+[2016-06-27 12:49:20.337232] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:20.337351] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:20.337418] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.337696] [INFO] Query executed
+[2016-06-27 12:49:20.338314] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:20.338428] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:20.338495] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.338762] [INFO] Query executed
+[2016-06-27 12:49:20.340998] [INFO] Application executed
+[2016-06-27 12:49:20.341073] [INFO] Publish application
+[2016-06-27 12:49:20.341176] [INFO] # Application published
+[2016-06-27 12:49:20.368926] [INFO] DisabledCache created
+[2016-06-27 12:49:20.369693] [INFO] Database connected
+[2016-06-27 12:49:20.372813] [INFO] Application initialized
+[2016-06-27 12:49:20.377980] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:20.378109] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:20.378184] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.378604] [INFO] Query executed
+[2016-06-27 12:49:20.378884] [INFO] Start session
+[2016-06-27 12:49:20.381266] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:20.381400] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:20.381474] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.381793] [INFO] Query executed
+[2016-06-27 12:49:20.384306] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:20.384409] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.384690] [INFO] Query executed
+[2016-06-27 12:49:20.385715] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:20.385798] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.386061] [INFO] Query executed
+[2016-06-27 12:49:20.386329] [INFO] Start router
+[2016-06-27 12:49:20.391838] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:20.391974] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:20.392045] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.392440] [INFO] Query executed
+[2016-06-27 12:49:20.392966] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:20.393116] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:20.393189] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.393462] [INFO] Query executed
+[2016-06-27 12:49:20.394103] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:20.394217] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:20.394287] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:20.394535] [INFO] Query executed
+[2016-06-27 12:49:20.415519] [INFO] Application executed
+[2016-06-27 12:49:20.415605] [INFO] Publish application
+[2016-06-27 12:49:20.415882] [INFO] # Application published
+[2016-06-27 12:49:22.682390] [INFO] DisabledCache created
+[2016-06-27 12:49:22.683064] [INFO] Database connected
+[2016-06-27 12:49:22.686114] [INFO] Application initialized
+[2016-06-27 12:49:22.690613] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:22.690721] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:22.690789] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.691215] [INFO] Query executed
+[2016-06-27 12:49:22.691596] [INFO] Start session
+[2016-06-27 12:49:22.693367] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:22.693486] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:22.693557] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.693958] [INFO] Query executed
+[2016-06-27 12:49:22.696582] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:22.696670] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.696963] [INFO] Query executed
+[2016-06-27 12:49:22.697952] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:22.698038] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.698297] [INFO] Query executed
+[2016-06-27 12:49:22.698561] [INFO] Start router
+[2016-06-27 12:49:22.703843] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:22.703970] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:22.704049] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.704335] [INFO] Query executed
+[2016-06-27 12:49:22.704835] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:22.704937] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:22.705023] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.705301] [INFO] Query executed
+[2016-06-27 12:49:22.705919] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:22.706034] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:22.706103] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.706372] [INFO] Query executed
+[2016-06-27 12:49:22.708710] [INFO] Application executed
+[2016-06-27 12:49:22.708817] [INFO] Publish application
+[2016-06-27 12:49:22.708965] [INFO] # Application published
+[2016-06-27 12:49:22.736155] [INFO] DisabledCache created
+[2016-06-27 12:49:22.736789] [INFO] Database connected
+[2016-06-27 12:49:22.739814] [INFO] Application initialized
+[2016-06-27 12:49:22.744862] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:22.744987] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:22.745060] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.745455] [INFO] Query executed
+[2016-06-27 12:49:22.745729] [INFO] Start session
+[2016-06-27 12:49:22.748085] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:22.748195] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:22.748264] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.748533] [INFO] Query executed
+[2016-06-27 12:49:22.751040] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:22.751121] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.751374] [INFO] Query executed
+[2016-06-27 12:49:22.752367] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:22.752448] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.752710] [INFO] Query executed
+[2016-06-27 12:49:22.752966] [INFO] Start router
+[2016-06-27 12:49:22.758414] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:22.758579] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:22.758647] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.759037] [INFO] Query executed
+[2016-06-27 12:49:22.759565] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:22.759666] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:22.759736] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.759984] [INFO] Query executed
+[2016-06-27 12:49:22.760617] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:22.760731] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:22.760801] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:22.761033] [INFO] Query executed
+[2016-06-27 12:49:22.781979] [INFO] Application executed
+[2016-06-27 12:49:22.782068] [INFO] Publish application
+[2016-06-27 12:49:22.782355] [INFO] # Application published
+[2016-06-27 12:49:30.198203] [INFO] DisabledCache created
+[2016-06-27 12:49:30.198864] [INFO] Database connected
+[2016-06-27 12:49:30.201874] [INFO] Application initialized
+[2016-06-27 12:49:30.206422] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:30.206532] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:30.206604] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.206981] [INFO] Query executed
+[2016-06-27 12:49:30.207267] [INFO] Start session
+[2016-06-27 12:49:30.209009] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:30.209141] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:30.209212] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.209562] [INFO] Query executed
+[2016-06-27 12:49:30.212061] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:30.212146] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.212414] [INFO] Query executed
+[2016-06-27 12:49:30.213398] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:30.213479] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.213748] [INFO] Query executed
+[2016-06-27 12:49:30.214015] [INFO] Start router
+[2016-06-27 12:49:30.219306] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:30.219422] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:30.219487] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.219783] [INFO] Query executed
+[2016-06-27 12:49:30.220303] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:30.220405] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:30.220472] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.220746] [INFO] Query executed
+[2016-06-27 12:49:30.221384] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:30.221498] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:30.221565] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.221833] [INFO] Query executed
+[2016-06-27 12:49:30.224056] [INFO] Application executed
+[2016-06-27 12:49:30.224148] [INFO] Publish application
+[2016-06-27 12:49:30.224252] [INFO] # Application published
+[2016-06-27 12:49:30.252368] [INFO] DisabledCache created
+[2016-06-27 12:49:30.252994] [INFO] Database connected
+[2016-06-27 12:49:30.256016] [INFO] Application initialized
+[2016-06-27 12:49:30.260673] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:30.260791] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:30.260862] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.261231] [INFO] Query executed
+[2016-06-27 12:49:30.261487] [INFO] Start session
+[2016-06-27 12:49:30.263808] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:30.263915] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:30.263981] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.264329] [INFO] Query executed
+[2016-06-27 12:49:30.266855] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:30.266979] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.267227] [INFO] Query executed
+[2016-06-27 12:49:30.268182] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:30.268263] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.268472] [INFO] Query executed
+[2016-06-27 12:49:30.268708] [INFO] Start router
+[2016-06-27 12:49:30.273926] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:30.274050] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:30.274118] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.274568] [INFO] Query executed
+[2016-06-27 12:49:30.275106] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:30.275309] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:30.275424] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.275712] [INFO] Query executed
+[2016-06-27 12:49:30.276408] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:30.276525] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:30.276593] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:30.276829] [INFO] Query executed
+[2016-06-27 12:49:30.298582] [INFO] Application executed
+[2016-06-27 12:49:30.298670] [INFO] Publish application
+[2016-06-27 12:49:30.298965] [INFO] # Application published
+[2016-06-27 12:49:36.282937] [INFO] DisabledCache created
+[2016-06-27 12:49:36.283598] [INFO] Database connected
+[2016-06-27 12:49:36.286694] [INFO] Application initialized
+[2016-06-27 12:49:36.291354] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:36.291569] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:36.291692] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:36.292206] [INFO] Query executed
+[2016-06-27 12:49:36.292489] [INFO] Start session
+[2016-06-27 12:49:36.294137] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:36.294250] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:36.294322] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:36.294639] [INFO] Query executed
+[2016-06-27 12:49:36.297178] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:36.297270] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:36.297528] [INFO] Query executed
+[2016-06-27 12:49:36.298511] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:36.298594] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:36.298867] [INFO] Query executed
+[2016-06-27 12:49:36.299151] [INFO] Start router
+[2016-06-27 12:49:36.304604] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:36.304748] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:36.304815] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:36.305100] [INFO] Query executed
+[2016-06-27 12:49:36.305592] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:36.305727] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:36.305793] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:36.306006] [INFO] Query executed
+[2016-06-27 12:49:36.306592] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:36.306716] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:36.306781] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:36.306994] [INFO] Query executed
+[2016-06-27 12:49:36.308693] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:36.308826] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:36.308923] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:36.309261] [INFO] Query executed
+[2016-06-27 12:49:36.309987] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:49:36.310101] [DEBUG]       Params: ? => '2'
+[2016-06-27 12:49:36.310169] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:36.310404] [INFO] Query executed
+[2016-06-27 12:49:36.311547] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id IS ? AND language_id = ? AND navigation_id = ? ORDER BY position ASC
+[2016-06-27 12:49:36.311727] [DEBUG]       Params: ? => NULL, ? => '2', ? => 1
+[2016-06-27 12:49:36.311800] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:36.312074] [INFO] Query executed
+[2016-06-27 12:49:36.319588] [INFO] Application executed
+[2016-06-27 12:49:36.319658] [INFO] Publish application
+[2016-06-27 12:49:36.319952] [INFO] # Application published
+[2016-06-27 12:49:37.675028] [INFO] DisabledCache created
+[2016-06-27 12:49:37.675693] [INFO] Database connected
+[2016-06-27 12:49:37.679073] [INFO] Application initialized
+[2016-06-27 12:49:37.683820] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:37.683943] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:37.684019] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.684446] [INFO] Query executed
+[2016-06-27 12:49:37.684715] [INFO] Start session
+[2016-06-27 12:49:37.686233] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:37.686335] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:37.686403] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.686701] [INFO] Query executed
+[2016-06-27 12:49:37.689162] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:37.689245] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.689496] [INFO] Query executed
+[2016-06-27 12:49:37.690526] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:37.690607] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.690929] [INFO] Query executed
+[2016-06-27 12:49:37.691231] [INFO] Start router
+[2016-06-27 12:49:37.696867] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:37.696989] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:37.697057] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.697365] [INFO] Query executed
+[2016-06-27 12:49:37.697869] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:37.697988] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:37.698055] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.698299] [INFO] Query executed
+[2016-06-27 12:49:37.698906] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:37.699014] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:37.699080] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.699311] [INFO] Query executed
+[2016-06-27 12:49:37.700759] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:37.700860] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:37.700937] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.701169] [INFO] Query executed
+[2016-06-27 12:49:37.701805] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:49:37.701956] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:37.702023] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.702248] [INFO] Query executed
+[2016-06-27 12:49:37.703310] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id IS ? AND language_id = ? AND navigation_id = ? ORDER BY position ASC
+[2016-06-27 12:49:37.703444] [DEBUG]       Params: ? => NULL, ? => '1', ? => 1
+[2016-06-27 12:49:37.703512] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.703797] [INFO] Query executed
+[2016-06-27 12:49:37.706861] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:37.706990] [DEBUG]       Params: ? => '21'
+[2016-06-27 12:49:37.707056] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.707331] [INFO] Query executed
+[2016-06-27 12:49:37.708482] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:37.708620] [DEBUG]       Params: ? => '23'
+[2016-06-27 12:49:37.708684] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.708986] [INFO] Query executed
+[2016-06-27 12:49:37.709911] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:37.710067] [DEBUG]       Params: ? => '22'
+[2016-06-27 12:49:37.710139] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.710390] [INFO] Query executed
+[2016-06-27 12:49:37.711447] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:37.711560] [DEBUG]       Params: ? => '24'
+[2016-06-27 12:49:37.711628] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.711874] [INFO] Query executed
+[2016-06-27 12:49:37.712600] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:37.712709] [DEBUG]       Params: ? => '21'
+[2016-06-27 12:49:37.712775] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.713016] [INFO] Query executed
+[2016-06-27 12:49:37.713525] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:37.713630] [DEBUG]       Params: ? => '23'
+[2016-06-27 12:49:37.713696] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.713951] [INFO] Query executed
+[2016-06-27 12:49:37.714462] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:37.714565] [DEBUG]       Params: ? => '22'
+[2016-06-27 12:49:37.714627] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.714875] [INFO] Query executed
+[2016-06-27 12:49:37.715512] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:37.715619] [DEBUG]       Params: ? => '24'
+[2016-06-27 12:49:37.715683] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:37.715936] [INFO] Query executed
+[2016-06-27 12:49:37.721707] [INFO] Application executed
+[2016-06-27 12:49:37.721785] [INFO] Publish application
+[2016-06-27 12:49:37.722090] [INFO] # Application published
+[2016-06-27 12:49:41.326369] [INFO] DisabledCache created
+[2016-06-27 12:49:41.327061] [INFO] Database connected
+[2016-06-27 12:49:41.330219] [INFO] Application initialized
+[2016-06-27 12:49:41.334908] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:41.335022] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:41.335093] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:41.335510] [INFO] Query executed
+[2016-06-27 12:49:41.335777] [INFO] Start session
+[2016-06-27 12:49:41.337199] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:41.337300] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:41.337366] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:41.337677] [INFO] Query executed
+[2016-06-27 12:49:41.340063] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:41.340143] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:41.340396] [INFO] Query executed
+[2016-06-27 12:49:41.341444] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:41.341564] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:41.341883] [INFO] Query executed
+[2016-06-27 12:49:41.342294] [INFO] Start router
+[2016-06-27 12:49:41.348400] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:41.348522] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:41.348592] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:41.348922] [INFO] Query executed
+[2016-06-27 12:49:41.349421] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:41.349523] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:41.349589] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:41.349838] [INFO] Query executed
+[2016-06-27 12:49:41.350449] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:41.350557] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:41.350629] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:41.350858] [INFO] Query executed
+[2016-06-27 12:49:41.352956] [DEBUG]       String: SELECT * FROM navigations
+[2016-06-27 12:49:41.353070] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:41.353312] [INFO] Query executed
+[2016-06-27 12:49:41.363514] [INFO] Application executed
+[2016-06-27 12:49:41.363601] [INFO] Publish application
+[2016-06-27 12:49:41.363888] [INFO] # Application published
+[2016-06-27 12:49:42.569801] [INFO] DisabledCache created
+[2016-06-27 12:49:42.570445] [INFO] Database connected
+[2016-06-27 12:49:42.573457] [INFO] Application initialized
+[2016-06-27 12:49:42.578321] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:42.578454] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:42.578528] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.578970] [INFO] Query executed
+[2016-06-27 12:49:42.579269] [INFO] Start session
+[2016-06-27 12:49:42.581010] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:42.581120] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:42.581192] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.581535] [INFO] Query executed
+[2016-06-27 12:49:42.584052] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:42.584135] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.584405] [INFO] Query executed
+[2016-06-27 12:49:42.585432] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:42.585513] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.585767] [INFO] Query executed
+[2016-06-27 12:49:42.586035] [INFO] Start router
+[2016-06-27 12:49:42.591734] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:42.591892] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:42.591972] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.592344] [INFO] Query executed
+[2016-06-27 12:49:42.592875] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:42.592978] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:42.593048] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.593317] [INFO] Query executed
+[2016-06-27 12:49:42.593962] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:42.594078] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:42.594146] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.594417] [INFO] Query executed
+[2016-06-27 12:49:42.596746] [DEBUG]       String: SELECT * FROM navigations WHERE navigation_id = ?
+[2016-06-27 12:49:42.596857] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:42.596926] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.597197] [INFO] Query executed
+[2016-06-27 12:49:42.597877] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:42.598004] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:42.598076] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.598339] [INFO] Query executed
+[2016-06-27 12:49:42.599910] [INFO] Application executed
+[2016-06-27 12:49:42.599983] [INFO] Publish application
+[2016-06-27 12:49:42.600089] [INFO] # Application published
+[2016-06-27 12:49:42.627782] [INFO] DisabledCache created
+[2016-06-27 12:49:42.628427] [INFO] Database connected
+[2016-06-27 12:49:42.631499] [INFO] Application initialized
+[2016-06-27 12:49:42.635993] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:42.636100] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:42.636169] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.636583] [INFO] Query executed
+[2016-06-27 12:49:42.636850] [INFO] Start session
+[2016-06-27 12:49:42.638319] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:42.638427] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:42.638494] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.638797] [INFO] Query executed
+[2016-06-27 12:49:42.641242] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:42.641351] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.641680] [INFO] Query executed
+[2016-06-27 12:49:42.642898] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:42.643069] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.643346] [INFO] Query executed
+[2016-06-27 12:49:42.643614] [INFO] Start router
+[2016-06-27 12:49:42.649214] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:42.649359] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:42.649427] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.649736] [INFO] Query executed
+[2016-06-27 12:49:42.650230] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:42.650331] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:42.650397] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.650614] [INFO] Query executed
+[2016-06-27 12:49:42.651215] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:42.651333] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:42.651407] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.651606] [INFO] Query executed
+[2016-06-27 12:49:42.653846] [DEBUG]       String: SELECT * FROM navigations WHERE navigation_id = ?
+[2016-06-27 12:49:42.653949] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:42.654016] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.654227] [INFO] Query executed
+[2016-06-27 12:49:42.654714] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:42.654813] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:42.654879] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.655086] [INFO] Query executed
+[2016-06-27 12:49:42.655731] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:49:42.655838] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:42.655900] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.656114] [INFO] Query executed
+[2016-06-27 12:49:42.657239] [DEBUG]       String: SELECT * FROM navitems WHERE navigation_id = ? AND parent_navitem_id IS ? AND language_id = ?
+[2016-06-27 12:49:42.657413] [DEBUG]       Params: ? => '1', ? => NULL, ? => '1'
+[2016-06-27 12:49:42.657490] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:42.657756] [INFO] Query executed
+[2016-06-27 12:49:42.708511] [ERROR] ErrorException: Call to undefined method Lahaina\CMS\Views\Backend\NavigationView::renderNestableList()
+    code: 0
+    file: 'C:\dev\wamp64\www\lahaina-cms\application\views\backend\navigation\edit.php'
+    line: 51
+    stack trace: '#0 C:\dev\wamp64\www\lahaina-cms\framework\classes\Lahaina\Framework\App.php(372): Lahaina\CMS\App->errorHandler(1, 'Call to undefin...', 'C:\\dev\\wamp64\\w...', 51)
+    #1 [internal function]: Lahaina\Framework\App->shutdownFunction()
+    #2 {main}'
+[2016-06-27 12:49:47.131114] [INFO] DisabledCache created
+[2016-06-27 12:49:47.131764] [INFO] Database connected
+[2016-06-27 12:49:47.134804] [INFO] Application initialized
+[2016-06-27 12:49:47.139390] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:47.139501] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:47.139571] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:47.139951] [INFO] Query executed
+[2016-06-27 12:49:47.140218] [INFO] Start session
+[2016-06-27 12:49:47.142045] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:47.142160] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:47.142244] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:47.142613] [INFO] Query executed
+[2016-06-27 12:49:47.145281] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:47.145374] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:47.145693] [INFO] Query executed
+[2016-06-27 12:49:47.146724] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:47.146810] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:47.147057] [INFO] Query executed
+[2016-06-27 12:49:47.147330] [INFO] Start router
+[2016-06-27 12:49:47.153080] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:47.153199] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:47.153327] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:47.153613] [INFO] Query executed
+[2016-06-27 12:49:47.154114] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:47.154215] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:47.154299] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:47.154556] [INFO] Query executed
+[2016-06-27 12:49:47.155178] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:47.155308] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:47.155375] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:47.155621] [INFO] Query executed
+[2016-06-27 12:49:47.157835] [DEBUG]       String: SELECT * FROM navigations
+[2016-06-27 12:49:47.157919] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:47.158267] [INFO] Query executed
+[2016-06-27 12:49:47.168322] [INFO] Application executed
+[2016-06-27 12:49:47.168396] [INFO] Publish application
+[2016-06-27 12:49:47.168672] [INFO] # Application published
+[2016-06-27 12:49:49.429125] [INFO] DisabledCache created
+[2016-06-27 12:49:49.429817] [INFO] Database connected
+[2016-06-27 12:49:49.432909] [INFO] Application initialized
+[2016-06-27 12:49:49.437473] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:49.437580] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:49.437649] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.438039] [INFO] Query executed
+[2016-06-27 12:49:49.438303] [INFO] Start session
+[2016-06-27 12:49:49.439769] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:49.439870] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:49.439935] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.440237] [INFO] Query executed
+[2016-06-27 12:49:49.443159] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:49.443258] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.443608] [INFO] Query executed
+[2016-06-27 12:49:49.444654] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:49.444741] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.445004] [INFO] Query executed
+[2016-06-27 12:49:49.445276] [INFO] Start router
+[2016-06-27 12:49:49.450726] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:49.450845] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:49.450913] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.451214] [INFO] Query executed
+[2016-06-27 12:49:49.451745] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:49.451847] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:49.451914] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.452191] [INFO] Query executed
+[2016-06-27 12:49:49.452810] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:49.452920] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:49.452987] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.453258] [INFO] Query executed
+[2016-06-27 12:49:49.454737] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:49.454843] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:49.454927] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.455225] [INFO] Query executed
+[2016-06-27 12:49:49.455956] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:49:49.456068] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:49.456135] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.456414] [INFO] Query executed
+[2016-06-27 12:49:49.457595] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id IS ? AND language_id = ? AND navigation_id = ? ORDER BY position ASC
+[2016-06-27 12:49:49.457732] [DEBUG]       Params: ? => NULL, ? => '1', ? => 1
+[2016-06-27 12:49:49.457801] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.458173] [INFO] Query executed
+[2016-06-27 12:49:49.461570] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:49.461734] [DEBUG]       Params: ? => '21'
+[2016-06-27 12:49:49.461807] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.462136] [INFO] Query executed
+[2016-06-27 12:49:49.463092] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:49.463203] [DEBUG]       Params: ? => '23'
+[2016-06-27 12:49:49.463272] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.463562] [INFO] Query executed
+[2016-06-27 12:49:49.464454] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:49.464565] [DEBUG]       Params: ? => '22'
+[2016-06-27 12:49:49.464632] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.464901] [INFO] Query executed
+[2016-06-27 12:49:49.465934] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:49.466043] [DEBUG]       Params: ? => '24'
+[2016-06-27 12:49:49.466109] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.466379] [INFO] Query executed
+[2016-06-27 12:49:49.467091] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:49.467197] [DEBUG]       Params: ? => '21'
+[2016-06-27 12:49:49.467263] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.467544] [INFO] Query executed
+[2016-06-27 12:49:49.468051] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:49.468158] [DEBUG]       Params: ? => '23'
+[2016-06-27 12:49:49.468223] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.468472] [INFO] Query executed
+[2016-06-27 12:49:49.468980] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:49.469085] [DEBUG]       Params: ? => '22'
+[2016-06-27 12:49:49.469151] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.469425] [INFO] Query executed
+[2016-06-27 12:49:49.470061] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:49.470166] [DEBUG]       Params: ? => '24'
+[2016-06-27 12:49:49.470232] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:49.470504] [INFO] Query executed
+[2016-06-27 12:49:49.476344] [INFO] Application executed
+[2016-06-27 12:49:49.476428] [INFO] Publish application
+[2016-06-27 12:49:49.476712] [INFO] # Application published
+[2016-06-27 12:49:51.900445] [INFO] DisabledCache created
+[2016-06-27 12:49:51.901097] [INFO] Database connected
+[2016-06-27 12:49:51.904171] [INFO] Application initialized
+[2016-06-27 12:49:51.908754] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:51.908869] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:51.908940] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.909332] [INFO] Query executed
+[2016-06-27 12:49:51.909626] [INFO] Start session
+[2016-06-27 12:49:51.911122] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:51.911225] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:51.911293] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.911576] [INFO] Query executed
+[2016-06-27 12:49:51.914048] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:51.914132] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.914371] [INFO] Query executed
+[2016-06-27 12:49:51.915379] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:51.915462] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.915719] [INFO] Query executed
+[2016-06-27 12:49:51.915985] [INFO] Start router
+[2016-06-27 12:49:51.921618] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:51.921734] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:51.921801] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.922106] [INFO] Query executed
+[2016-06-27 12:49:51.922667] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:51.922769] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:51.922833] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.923127] [INFO] Query executed
+[2016-06-27 12:49:51.923764] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:51.923876] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:51.923943] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.924232] [INFO] Query executed
+[2016-06-27 12:49:51.926640] [DEBUG]       String: SELECT * FROM navitems WHERE navitem_id = ?
+[2016-06-27 12:49:51.926744] [DEBUG]       Params: ? => 21
+[2016-06-27 12:49:51.926812] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.927099] [INFO] Query executed
+[2016-06-27 12:49:51.928152] [DEBUG]       String: SELECT * FROM navigations WHERE navigation_id = ?
+[2016-06-27 12:49:51.928267] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:51.928335] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.928601] [INFO] Query executed
+[2016-06-27 12:49:51.929255] [DEBUG]       String: SELECT * FROM navitems WHERE navigation_id = ? AND parent_navitem_id IS ? ORDER BY position DESC
+[2016-06-27 12:49:51.929374] [DEBUG]       Params: ? => '1', ? => NULL
+[2016-06-27 12:49:51.929442] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.929761] [INFO] Query executed
+[2016-06-27 12:49:51.930644] [DEBUG]       String: UPDATE navitems SET parent_navitem_id = ?, position = ?, collapsed = ? WHERE navitem_id = ?
+[2016-06-27 12:49:51.930795] [DEBUG]       Params: ? => NULL, ? => 4, ? => 0, ? => '21'
+[2016-06-27 12:49:51.930865] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.933717] [INFO] Query executed
+[2016-06-27 12:49:51.934156] [DEBUG]       String: SELECT * FROM navitems WHERE navitem_id = ?
+[2016-06-27 12:49:51.934256] [DEBUG]       Params: ? => 23
+[2016-06-27 12:49:51.934323] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.934585] [INFO] Query executed
+[2016-06-27 12:49:51.935175] [DEBUG]       String: SELECT * FROM navigations WHERE navigation_id = ?
+[2016-06-27 12:49:51.935283] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:51.935349] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.935616] [INFO] Query executed
+[2016-06-27 12:49:51.936193] [DEBUG]       String: SELECT * FROM navitems WHERE navigation_id = ? AND parent_navitem_id IS ? ORDER BY position DESC
+[2016-06-27 12:49:51.936309] [DEBUG]       Params: ? => '1', ? => NULL
+[2016-06-27 12:49:51.936373] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.936676] [INFO] Query executed
+[2016-06-27 12:49:51.937103] [DEBUG]       String: UPDATE navitems SET parent_navitem_id = ?, position = ?, collapsed = ? WHERE navitem_id = ?
+[2016-06-27 12:49:51.937242] [DEBUG]       Params: ? => NULL, ? => 5, ? => 0, ? => '23'
+[2016-06-27 12:49:51.937308] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.939579] [INFO] Query executed
+[2016-06-27 12:49:51.940002] [DEBUG]       String: SELECT * FROM navitems WHERE navitem_id = ?
+[2016-06-27 12:49:51.940100] [DEBUG]       Params: ? => 22
+[2016-06-27 12:49:51.940166] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.940433] [INFO] Query executed
+[2016-06-27 12:49:51.941075] [DEBUG]       String: SELECT * FROM navigations WHERE navigation_id = ?
+[2016-06-27 12:49:51.941185] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:51.941251] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.941504] [INFO] Query executed
+[2016-06-27 12:49:51.942095] [DEBUG]       String: SELECT * FROM navitems WHERE navigation_id = ? AND parent_navitem_id IS ? ORDER BY position DESC
+[2016-06-27 12:49:51.942214] [DEBUG]       Params: ? => '1', ? => NULL
+[2016-06-27 12:49:51.942281] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.942588] [INFO] Query executed
+[2016-06-27 12:49:51.943030] [DEBUG]       String: UPDATE navitems SET parent_navitem_id = ?, position = ?, collapsed = ? WHERE navitem_id = ?
+[2016-06-27 12:49:51.943213] [DEBUG]       Params: ? => NULL, ? => 6, ? => 1, ? => '22'
+[2016-06-27 12:49:51.943285] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.945672] [INFO] Query executed
+[2016-06-27 12:49:51.946103] [DEBUG]       String: SELECT * FROM navitems WHERE navitem_id = ?
+[2016-06-27 12:49:51.946201] [DEBUG]       Params: ? => 24
+[2016-06-27 12:49:51.946266] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.946546] [INFO] Query executed
+[2016-06-27 12:49:51.947149] [DEBUG]       String: SELECT * FROM navigations WHERE navigation_id = ?
+[2016-06-27 12:49:51.947259] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:51.947326] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.947571] [INFO] Query executed
+[2016-06-27 12:49:51.948173] [DEBUG]       String: SELECT * FROM navitems WHERE navigation_id = ? AND parent_navitem_id = ? ORDER BY position DESC
+[2016-06-27 12:49:51.948297] [DEBUG]       Params: ? => '1', ? => 22
+[2016-06-27 12:49:51.948364] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.948633] [INFO] Query executed
+[2016-06-27 12:49:51.949071] [DEBUG]       String: UPDATE navitems SET parent_navitem_id = ?, position = ?, collapsed = ? WHERE navitem_id = ?
+[2016-06-27 12:49:51.949222] [DEBUG]       Params: ? => 22, ? => 2, ? => 0, ? => '24'
+[2016-06-27 12:49:51.949289] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:51.952512] [INFO] Query executed
+[2016-06-27 12:49:51.953778] [INFO] Application executed
+[2016-06-27 12:49:51.953851] [INFO] Publish application
+[2016-06-27 12:49:51.953953] [INFO] # Application published
+[2016-06-27 12:49:52.703648] [INFO] DisabledCache created
+[2016-06-27 12:49:52.704273] [INFO] Database connected
+[2016-06-27 12:49:52.707257] [INFO] Application initialized
+[2016-06-27 12:49:52.711997] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:52.712121] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:52.712193] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:52.712599] [INFO] Query executed
+[2016-06-27 12:49:52.712873] [INFO] Start session
+[2016-06-27 12:49:52.714348] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:52.714452] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:52.714519] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:52.714792] [INFO] Query executed
+[2016-06-27 12:49:52.717216] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:52.717298] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:52.717575] [INFO] Query executed
+[2016-06-27 12:49:52.718569] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:52.718651] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:52.718898] [INFO] Query executed
+[2016-06-27 12:49:52.719171] [INFO] Start router
+[2016-06-27 12:49:52.724672] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:52.724942] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:52.725013] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:52.725368] [INFO] Query executed
+[2016-06-27 12:49:52.725915] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:52.726022] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:52.726092] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:52.726402] [INFO] Query executed
+[2016-06-27 12:49:52.727047] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:52.727161] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:52.727231] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:52.727492] [INFO] Query executed
+[2016-06-27 12:49:52.729121] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:52.729228] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:52.729298] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:52.729518] [INFO] Query executed
+[2016-06-27 12:49:52.730176] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:49:52.730335] [DEBUG]       Params: ? => '2'
+[2016-06-27 12:49:52.730417] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:52.730621] [INFO] Query executed
+[2016-06-27 12:49:52.731719] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id IS ? AND language_id = ? AND navigation_id = ? ORDER BY position ASC
+[2016-06-27 12:49:52.731854] [DEBUG]       Params: ? => NULL, ? => '2', ? => 1
+[2016-06-27 12:49:52.731921] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:52.732170] [INFO] Query executed
+[2016-06-27 12:49:52.739718] [INFO] Application executed
+[2016-06-27 12:49:52.739792] [INFO] Publish application
+[2016-06-27 12:49:52.740067] [INFO] # Application published
+[2016-06-27 12:49:53.536454] [INFO] DisabledCache created
+[2016-06-27 12:49:53.537090] [INFO] Database connected
+[2016-06-27 12:49:53.539988] [INFO] Application initialized
+[2016-06-27 12:49:53.544800] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:53.544920] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:53.544991] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:53.545367] [INFO] Query executed
+[2016-06-27 12:49:53.545635] [INFO] Start session
+[2016-06-27 12:49:53.547102] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:53.547204] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:53.547271] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:53.547538] [INFO] Query executed
+[2016-06-27 12:49:53.550029] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:53.550112] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:53.550348] [INFO] Query executed
+[2016-06-27 12:49:53.551358] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:53.551441] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:53.551671] [INFO] Query executed
+[2016-06-27 12:49:53.551954] [INFO] Start router
+[2016-06-27 12:49:53.557368] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:53.557487] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:53.557557] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:53.557904] [INFO] Query executed
+[2016-06-27 12:49:53.558572] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:53.558707] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:53.558815] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:53.559221] [INFO] Query executed
+[2016-06-27 12:49:53.559870] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:53.559986] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:53.560055] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:53.560305] [INFO] Query executed
+[2016-06-27 12:49:53.561870] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:53.561975] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:53.562043] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:53.562287] [INFO] Query executed
+[2016-06-27 12:49:53.562943] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:49:53.563055] [DEBUG]       Params: ? => '3'
+[2016-06-27 12:49:53.563122] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:53.563355] [INFO] Query executed
+[2016-06-27 12:49:53.564454] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id IS ? AND language_id = ? AND navigation_id = ? ORDER BY position ASC
+[2016-06-27 12:49:53.564588] [DEBUG]       Params: ? => NULL, ? => '3', ? => 1
+[2016-06-27 12:49:53.564655] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:53.564932] [INFO] Query executed
+[2016-06-27 12:49:53.572576] [INFO] Application executed
+[2016-06-27 12:49:53.572654] [INFO] Publish application
+[2016-06-27 12:49:53.572947] [INFO] # Application published
+[2016-06-27 12:49:54.326709] [INFO] DisabledCache created
+[2016-06-27 12:49:54.327380] [INFO] Database connected
+[2016-06-27 12:49:54.330563] [INFO] Application initialized
+[2016-06-27 12:49:54.335078] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:54.335228] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:54.335302] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.335715] [INFO] Query executed
+[2016-06-27 12:49:54.335982] [INFO] Start session
+[2016-06-27 12:49:54.337388] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:54.337488] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:54.337554] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.337840] [INFO] Query executed
+[2016-06-27 12:49:54.340207] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:54.340287] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.340548] [INFO] Query executed
+[2016-06-27 12:49:54.341799] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:54.341898] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.342350] [INFO] Query executed
+[2016-06-27 12:49:54.342801] [INFO] Start router
+[2016-06-27 12:49:54.348417] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:54.348541] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:54.348609] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.348963] [INFO] Query executed
+[2016-06-27 12:49:54.349467] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:54.349566] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:54.349633] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.349916] [INFO] Query executed
+[2016-06-27 12:49:54.350533] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:54.350641] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:54.350707] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.350975] [INFO] Query executed
+[2016-06-27 12:49:54.352395] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:54.352494] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:54.352560] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.352829] [INFO] Query executed
+[2016-06-27 12:49:54.353465] [DEBUG]       String: SELECT * FROM languages WHERE language_id = ?
+[2016-06-27 12:49:54.353573] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:54.353638] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.353899] [INFO] Query executed
+[2016-06-27 12:49:54.354969] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id IS ? AND language_id = ? AND navigation_id = ? ORDER BY position ASC
+[2016-06-27 12:49:54.355101] [DEBUG]       Params: ? => NULL, ? => '1', ? => 1
+[2016-06-27 12:49:54.355166] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.355483] [INFO] Query executed
+[2016-06-27 12:49:54.358794] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:54.358926] [DEBUG]       Params: ? => '21'
+[2016-06-27 12:49:54.358994] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.359364] [INFO] Query executed
+[2016-06-27 12:49:54.360318] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:54.360431] [DEBUG]       Params: ? => '23'
+[2016-06-27 12:49:54.360500] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.360788] [INFO] Query executed
+[2016-06-27 12:49:54.361701] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:54.361812] [DEBUG]       Params: ? => '22'
+[2016-06-27 12:49:54.361880] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.362170] [INFO] Query executed
+[2016-06-27 12:49:54.363210] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:54.363322] [DEBUG]       Params: ? => '24'
+[2016-06-27 12:49:54.363389] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.363675] [INFO] Query executed
+[2016-06-27 12:49:54.364396] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:54.364552] [DEBUG]       Params: ? => '21'
+[2016-06-27 12:49:54.364623] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.364903] [INFO] Query executed
+[2016-06-27 12:49:54.365418] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:54.365526] [DEBUG]       Params: ? => '23'
+[2016-06-27 12:49:54.365592] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.365868] [INFO] Query executed
+[2016-06-27 12:49:54.366384] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:54.366492] [DEBUG]       Params: ? => '22'
+[2016-06-27 12:49:54.366556] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.366838] [INFO] Query executed
+[2016-06-27 12:49:54.367469] [DEBUG]       String: SELECT * FROM navitems WHERE parent_navitem_id = ? ORDER BY position ASC
+[2016-06-27 12:49:54.367575] [DEBUG]       Params: ? => '24'
+[2016-06-27 12:49:54.367641] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:54.367919] [INFO] Query executed
+[2016-06-27 12:49:54.373482] [INFO] Application executed
+[2016-06-27 12:49:54.373553] [INFO] Publish application
+[2016-06-27 12:49:54.373852] [INFO] # Application published
+[2016-06-27 12:49:58.803683] [INFO] DisabledCache created
+[2016-06-27 12:49:58.804310] [INFO] Database connected
+[2016-06-27 12:49:58.807195] [INFO] Application initialized
+[2016-06-27 12:49:58.811852] [DEBUG]       String: SELECT * FROM settings WHERE setting_id = ?
+[2016-06-27 12:49:58.811970] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:58.812041] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.812458] [INFO] Query executed
+[2016-06-27 12:49:58.812762] [INFO] Start session
+[2016-06-27 12:49:58.814251] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:58.814354] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:58.814423] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.814730] [INFO] Query executed
+[2016-06-27 12:49:58.817262] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:58.817348] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.817662] [INFO] Query executed
+[2016-06-27 12:49:58.818684] [DEBUG]       String: SELECT * FROM modules
+[2016-06-27 12:49:58.818768] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.819042] [INFO] Query executed
+[2016-06-27 12:49:58.819310] [INFO] Start router
+[2016-06-27 12:49:58.824883] [DEBUG]       String: SELECT * FROM themes WHERE theme_id = ?
+[2016-06-27 12:49:58.825001] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:58.825067] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.825376] [INFO] Query executed
+[2016-06-27 12:49:58.825865] [DEBUG]       String: SELECT * FROM languages WHERE is_active = ?
+[2016-06-27 12:49:58.825963] [DEBUG]       Params: ? => 1
+[2016-06-27 12:49:58.826029] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.826306] [INFO] Query executed
+[2016-06-27 12:49:58.826910] [DEBUG]       String: SELECT * FROM languages WHERE code = ?
+[2016-06-27 12:49:58.827018] [DEBUG]       Params: ? => 'en'
+[2016-06-27 12:49:58.827084] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.827351] [INFO] Query executed
+[2016-06-27 12:49:58.829610] [DEBUG]       String: SELECT * FROM navitems WHERE navitem_id = ?
+[2016-06-27 12:49:58.829711] [DEBUG]       Params: ? => 21
+[2016-06-27 12:49:58.829778] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.830058] [INFO] Query executed
+[2016-06-27 12:49:58.831083] [DEBUG]       String: SELECT * FROM navigations WHERE navigation_id = ?
+[2016-06-27 12:49:58.831196] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:58.831263] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.831528] [INFO] Query executed
+[2016-06-27 12:49:58.832195] [DEBUG]       String: SELECT * FROM navitems WHERE navigation_id = ? AND parent_navitem_id IS ? ORDER BY position DESC
+[2016-06-27 12:49:58.832365] [DEBUG]       Params: ? => '1', ? => NULL
+[2016-06-27 12:49:58.832434] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.832758] [INFO] Query executed
+[2016-06-27 12:49:58.833623] [DEBUG]       String: UPDATE navitems SET parent_navitem_id = ?, position = ?, collapsed = ? WHERE navitem_id = ?
+[2016-06-27 12:49:58.833771] [DEBUG]       Params: ? => NULL, ? => 7, ? => 0, ? => '21'
+[2016-06-27 12:49:58.833839] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.837799] [INFO] Query executed
+[2016-06-27 12:49:58.838226] [DEBUG]       String: SELECT * FROM navitems WHERE navitem_id = ?
+[2016-06-27 12:49:58.838321] [DEBUG]       Params: ? => 23
+[2016-06-27 12:49:58.838387] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.838666] [INFO] Query executed
+[2016-06-27 12:49:58.839257] [DEBUG]       String: SELECT * FROM navigations WHERE navigation_id = ?
+[2016-06-27 12:49:58.839365] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:58.839432] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.839698] [INFO] Query executed
+[2016-06-27 12:49:58.840277] [DEBUG]       String: SELECT * FROM navitems WHERE navigation_id = ? AND parent_navitem_id IS ? ORDER BY position DESC
+[2016-06-27 12:49:58.840394] [DEBUG]       Params: ? => '1', ? => NULL
+[2016-06-27 12:49:58.840460] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.840791] [INFO] Query executed
+[2016-06-27 12:49:58.841223] [DEBUG]       String: UPDATE navitems SET parent_navitem_id = ?, position = ?, collapsed = ? WHERE navitem_id = ?
+[2016-06-27 12:49:58.841363] [DEBUG]       Params: ? => NULL, ? => 8, ? => 0, ? => '23'
+[2016-06-27 12:49:58.841428] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.843977] [INFO] Query executed
+[2016-06-27 12:49:58.844405] [DEBUG]       String: SELECT * FROM navitems WHERE navitem_id = ?
+[2016-06-27 12:49:58.844504] [DEBUG]       Params: ? => 22
+[2016-06-27 12:49:58.844569] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.844834] [INFO] Query executed
+[2016-06-27 12:49:58.845422] [DEBUG]       String: SELECT * FROM navigations WHERE navigation_id = ?
+[2016-06-27 12:49:58.845530] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:58.845597] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.845840] [INFO] Query executed
+[2016-06-27 12:49:58.846422] [DEBUG]       String: SELECT * FROM navitems WHERE navigation_id = ? AND parent_navitem_id IS ? ORDER BY position DESC
+[2016-06-27 12:49:58.846534] [DEBUG]       Params: ? => '1', ? => NULL
+[2016-06-27 12:49:58.846597] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.846870] [INFO] Query executed
+[2016-06-27 12:49:58.847285] [DEBUG]       String: UPDATE navitems SET parent_navitem_id = ?, position = ?, collapsed = ? WHERE navitem_id = ?
+[2016-06-27 12:49:58.847448] [DEBUG]       Params: ? => NULL, ? => 9, ? => 1, ? => '22'
+[2016-06-27 12:49:58.847532] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.849888] [INFO] Query executed
+[2016-06-27 12:49:58.850300] [DEBUG]       String: SELECT * FROM navitems WHERE navitem_id = ?
+[2016-06-27 12:49:58.850394] [DEBUG]       Params: ? => 24
+[2016-06-27 12:49:58.850457] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.850716] [INFO] Query executed
+[2016-06-27 12:49:58.851299] [DEBUG]       String: SELECT * FROM navigations WHERE navigation_id = ?
+[2016-06-27 12:49:58.851406] [DEBUG]       Params: ? => '1'
+[2016-06-27 12:49:58.851470] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.851715] [INFO] Query executed
+[2016-06-27 12:49:58.852303] [DEBUG]       String: SELECT * FROM navitems WHERE navigation_id = ? AND parent_navitem_id = ? ORDER BY position DESC
+[2016-06-27 12:49:58.852421] [DEBUG]       Params: ? => '1', ? => 22
+[2016-06-27 12:49:58.852483] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.852756] [INFO] Query executed
+[2016-06-27 12:49:58.853177] [DEBUG]       String: UPDATE navitems SET parent_navitem_id = ?, position = ?, collapsed = ? WHERE navitem_id = ?
+[2016-06-27 12:49:58.853358] [DEBUG]       Params: ? => 22, ? => 3, ? => 0, ? => '24'
+[2016-06-27 12:49:58.853426] [DEBUG]       Result: 0 row(s) affected
+[2016-06-27 12:49:58.855819] [INFO] Query executed
+[2016-06-27 12:49:58.856918] [INFO] Application executed
+[2016-06-27 12:49:58.856988] [INFO] Publish application
+[2016-06-27 12:49:58.857089] [INFO] # Application published

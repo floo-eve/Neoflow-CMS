@@ -1,0 +1,1 @@
+<?phpnamespace Lahaina\Helper\Alert;class SuccessAlert extends AbstractAlert{    protected $type = 'success';}
