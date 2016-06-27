@@ -17,5 +17,4 @@ return array(
     'debugging' => array(
         'debugBar' => true, // true | false
     ),
-//    'languages' => ['de', 'en']
 );

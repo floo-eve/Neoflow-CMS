@@ -1,1 +1,4 @@
 *nbproject*
+*temp/cache*
+*temp/logs*
+*config.php
