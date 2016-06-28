@@ -111,11 +111,8 @@ abstract class AbstractQuery
             $statement->setFetchMode(PDO::FETCH_ASSOC);
         }
 
-        $this->logQueryData($query, $parameters, $statement->rowCount());
         $statement->execute($parameters);
-        $this->getLogger()->info('Query executed');
-//        $this->logQueryData($query, $parameters, $statement->rowCount());
-
+        $this->logQueryData('Query executed', $query, $parameters, $statement->rowCount());
         return $statement;
     }
 
@@ -125,18 +122,20 @@ abstract class AbstractQuery
      * @param array $parameters
      * @param int $affectedRows
      */
-    protected function logQueryData($query, array $parameters = array(), $affectedRows = 0)
+    protected function logQueryData($message, $query, array $parameters = array(), $affectedRows = 0)
     {
-        $this->getLogger()->debug('      String: ' . $query);
+        $this->getLogger()->info($message);
+
+        $this->getLogger()->debug('       Query: ' . $query);
 
         $parameters = array_map(array($this, 'quote'), $parameters);
 
         if (count($parameters) > 0) {
-            $this->getLogger()->debug('      Params: ' . implode(', ', array_map(function ($value, $key) {
+            $this->getLogger()->debug('       Params: ' . implode(', ', array_map(function ($value, $key) {
                         return (is_string($key) ? $key : '?') . ' => ' . $value;
                     }, $parameters, array_keys($parameters))));
         }
-        $this->getLogger()->debug('      Result: ' . $affectedRows . ' row(s) affected');
+        $this->getLogger()->debug('       Result: ' . $affectedRows . ' row(s) affected');
     }
 
     /**

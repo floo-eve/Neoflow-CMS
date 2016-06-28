@@ -77,7 +77,7 @@ class SelectQuery extends AbstractQuery
 
         // Fetch from cache
         $result = $this->fetchFromCache($cacheKey);
-        if (!$result) {
+        if ($result === false) {
 
             // Fetch from database
             $statement = $this->asObject(false)->execute();
@@ -225,7 +225,7 @@ class SelectQuery extends AbstractQuery
 
         // Fetch from cache
         $result = $this->fetchFromCache($cacheKey);
-        if (!$result) {
+        if ($result === false) {
 
             // Fetch from database
             $statement = $this->execute();
@@ -251,7 +251,7 @@ class SelectQuery extends AbstractQuery
 
         // Fetch from cache
         $result = $this->fetchFromCache($cacheKey);
-        if (!$result) {
+        if ($result === false) {
 
             // Fetch from database
             $statement = $this->execute();
@@ -330,8 +330,7 @@ class SelectQuery extends AbstractQuery
         if ($this->caching) {
             if ($this->getCache()->exists($cacheKey)) {
                 $result = $this->getCache()->fetch($cacheKey);
-                $this->getLogger()->info('Query cached');
-                $this->logQueryData($this->getQuery(), $this->getParameters(), count($result));
+                $this->logQueryData('Cached query fetched', $this->getQuery(), $this->getParameters(), count($result));
                 return $result;
             }
         }

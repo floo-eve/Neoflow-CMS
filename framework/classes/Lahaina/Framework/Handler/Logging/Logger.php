@@ -68,8 +68,8 @@ class Logger
             throw new RuntimeException('The file could not be written to. Check that appropriate permissions have been set.');
         }
 
-        $this->fileHandle = fopen($this->logFilePath, 'a');
-
+        $this->fileHandle = fopen($this->logFilePath, 'a+');
+        flock($this->fileHandle, LOCK_UN);
         if (!$this->fileHandle) {
             throw new RuntimeException('The file could not be opened. Check permissions.');
         }
@@ -192,12 +192,15 @@ class Logger
     public function write($message)
     {
         if (null !== $this->fileHandle) {
-            if (fwrite($this->fileHandle, $message) === false) {
-                throw new RuntimeException('The file could not be written to. Check that appropriate permissions have been set.');
-            } else {
-                $this->lastLine = trim($message);
-                ++$this->logLineCount;
+            if (flock($this->fileHandle, LOCK_EX)) {
+                if (fwrite($this->fileHandle, $message) === false) {
+                    throw new RuntimeException('The file could not be written to. Check that appropriate permissions have been set.');
+                } else {
+                    $this->lastLine = trim($message);
+                    ++$this->logLineCount;
+                }
             }
+            flock($this->fileHandle, LOCK_UN);
         }
 
         return $this;

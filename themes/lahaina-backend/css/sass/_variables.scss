@@ -20,7 +20,7 @@ $brand-secondary: #F5A212;
 
 
 // #F5846B
-$brand-success: #42B569;
+$brand-success: #43AC6A;
 $brand-info: #528FC4;
 $brand-warning: #EA981E;
 $brand-danger: #DB4C4C;
@@ -118,10 +118,12 @@ $navbar-inverse-link-color: #fff;
 $navbar-inverse-link-hover-bg: $gray-darker;
 $navbar-inverse-link-hover-color: $brand-primary;
 
+$state-success-text: #fff;
+$state-success-bg: $brand-success;
+$alert-success-border: darken($brand-success, 5%);
 
-/*$state-success-text: $brand-success;
-$state-success-bg: lighten($brand-success, 40%);
-$alert-success-border: $state-success-bg;*/
+$text-muted: $gray;
+
 /*
 $state-info-text: #fff;
 $state-info-bg: $brand-info;

@@ -7,6 +7,7 @@ use Lahaina\Framework\Persistence\ORM;
 
 class LanguageModel extends AbstractModel
 {
+
     /**
      * @var string
      */
@@ -59,6 +60,6 @@ class LanguageModel extends AbstractModel
      */
     public function renderFlagIcon()
     {
-        return '<i class="flag-icon flag-icon-'.$this->flag_code.'"></i>';
+        return '<i class="flag-icon flag-icon-' . $this->flag_code . '"></i>';
     }
 }

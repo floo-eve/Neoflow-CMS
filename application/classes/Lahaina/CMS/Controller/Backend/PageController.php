@@ -138,6 +138,27 @@ class PageController extends BackendController
 
         if ($page) {
 
+            $navitems = $this->navitemMapper->getOrm()
+                ->where('parent_navitem_id', 'IS', null)
+                ->where('language_id', '=', $page->language_id)
+                ->where('navigation_id', '=', 1)
+                ->orderByAsc('position')
+                ->fetchAll();
+
+            $navitem = $page->navitems()
+                ->where('navigation_id', '=', 1)
+                ->fetch();
+
+            $parentNavitemId = false;
+            $parentNavitem = $navitem->parentNavitem()->fetch();
+            if ($parentNavitem) {
+                $parentNavitemId = $parentNavitem->id();
+            }
+            return $this->render('backend/page/edit', array(
+                    'page' => $page,
+                    'navitems' => $navitems,
+                    'parentNavitemId' => $parentNavitemId
+            ));
         }
         $this->getSession()
             ->setFlash('alert', new WarningAlert('Page not found'));
@@ -165,6 +186,46 @@ class PageController extends BackendController
         }
 
         return $this->redirectToRoute('page_index');
+    }
+
+    /**
+     * Update action
+     *
+     * @param array $args
+     * @return Response
+     */
+    public function updateAction($args)
+    {
+        try {
+
+            // Get post data
+            $postData = $this->getRequest()->getPostData();
+
+            // Get page by id
+            $page = $this->pageMapper->findById($postData->get('page_id'));
+
+            if ($page) {
+
+                $page->title = $postData->get('title');
+                $page->is_active = $postData->get('is_active');
+                $page->visibility = $postData->get('visibility');
+                $page->save();
+
+                $this->getSession()
+                    ->setFlash('alert', new SuccessAlert('Page successful updated'));
+            } else {
+                $this->getSession()
+                    ->setFlash('alert', new WarningAlert('Page not found'));
+            }
+        } catch (ValidationException $ex) {
+
+            // Fallback if validation fails
+            $this->getSession()
+                ->setFlash('alert', new DangerAlert($ex->getErrors()));
+
+            return $this->redirectToRoute('page_index');
+        }
+        return $this->redirectToRoute('page_edit', array('id' => $page->id(), 'language_id' => $page->language_id));
     }
 
     /**
