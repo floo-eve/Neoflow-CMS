@@ -1,6 +1,6 @@
 <?php
 
-namespace Lahaina\Framework\Persistence\Querying;
+namespace Neoflow\Framework\Persistence\Querying;
 
 trait JoinTrait
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Lahaina\CMS\Views\Backend;
+namespace Neoflow\CMS\Views\Backend;
 
-class PageView extends \Lahaina\CMS\Views\BackendView
+class PageView extends \Neoflow\CMS\Views\BackendView
 {
 
     /**

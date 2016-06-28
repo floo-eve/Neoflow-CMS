@@ -1,6 +1,6 @@
 <?php
 
-namespace Lahaina\Framework\Persistence\Querying;
+namespace Neoflow\Framework\Persistence\Querying;
 
 /**
  * @method UpdateQuery where(string $condition, string $operator, mixed $parameter) Add WHERE condition
@@ -12,7 +12,7 @@ class UpdateQuery extends AbstractQuery
     /**
      * Use WHERE statements
      */
-    use \Lahaina\Framework\Persistence\Querying\WhereTrait;
+    use \Neoflow\Framework\Persistence\Querying\WhereTrait;
 
     /**
      * @var array

@@ -1,8 +1,8 @@
 <?php
 
-namespace Lahaina\CMS\Views;
+namespace Neoflow\CMS\Views;
 
-class FrontendView extends \Lahaina\CMS\Core\AbstractView
+class FrontendView extends \Neoflow\CMS\Core\AbstractView
 {
 
     /**

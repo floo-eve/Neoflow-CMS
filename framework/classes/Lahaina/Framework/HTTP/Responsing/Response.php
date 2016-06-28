@@ -1,6 +1,6 @@
 <?php
 
-namespace Lahaina\Framework\HTTP\Responsing;
+namespace Neoflow\Framework\HTTP\Responsing;
 
 use DateTime;
 use InvalidArgumentException;
@@ -11,7 +11,7 @@ class Response
     /**
      * App trait.
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * @var string

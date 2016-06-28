@@ -1,11 +1,11 @@
 <?php
 
-namespace Lahaina\Framework;
+namespace Neoflow\Framework;
 
-use \Lahaina\Framework\Handler\Logging\Logger;
-use \Lahaina\Framework\Handler\Router;
-use \Lahaina\Framework\Persistence\Database;
-use \Lahaina\Framework\Persistence\ORM;
+use \Neoflow\Framework\Handler\Logging\Logger;
+use \Neoflow\Framework\Handler\Router;
+use \Neoflow\Framework\Persistence\Database;
+use \Neoflow\Framework\Persistence\ORM;
 use \ReflectionClass;
 
 trait AppTrait

@@ -1,20 +1,20 @@
 <?php
 
-namespace Lahaina\CMS\Controller\Backend;
+namespace Neoflow\CMS\Controller\Backend;
 
-use \Lahaina\CMS\Controller\BackendController;
-use \Lahaina\CMS\Mapper\LanguageMapper;
-use \Lahaina\CMS\Mapper\ModuleMapper;
-use \Lahaina\CMS\Mapper\NavitemMapper;
-use \Lahaina\CMS\Mapper\PageMapper;
-use \Lahaina\CMS\Model\NavitemModel;
-use \Lahaina\CMS\Model\PageModel;
-use \Lahaina\CMS\Views\Backend\PageView;
-use \Lahaina\Framework\Handler\Validation\ValidationException;
-use \Lahaina\Framework\HTTP\Responsing\Response;
-use \Lahaina\Helper\Alert\DangerAlert;
-use \Lahaina\Helper\Alert\SuccessAlert;
-use \Lahaina\Helper\Alert\WarningAlert;
+use \Neoflow\CMS\Controller\BackendController;
+use \Neoflow\CMS\Mapper\LanguageMapper;
+use \Neoflow\CMS\Mapper\ModuleMapper;
+use \Neoflow\CMS\Mapper\NavitemMapper;
+use \Neoflow\CMS\Mapper\PageMapper;
+use \Neoflow\CMS\Model\NavitemModel;
+use \Neoflow\CMS\Model\PageModel;
+use \Neoflow\CMS\Views\Backend\PageView;
+use \Neoflow\Framework\Handler\Validation\ValidationException;
+use \Neoflow\Framework\HTTP\Responsing\Response;
+use \Neoflow\Helper\Alert\DangerAlert;
+use \Neoflow\Helper\Alert\SuccessAlert;
+use \Neoflow\Helper\Alert\WarningAlert;
 
 class PageController extends BackendController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lahaina\Framework\Common;
+namespace Neoflow\Framework\Common;
 
 trait KeyTaggingTrait
 {

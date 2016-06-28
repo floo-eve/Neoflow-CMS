@@ -1,1 +1,1 @@
-<?phpnamespace Lahaina\Helper\Alert;class WarningAlert extends AbstractAlert{    protected $type = 'warning';}
+<?phpnamespace Neoflow\Helper\Alert;class WarningAlert extends AbstractAlert{    protected $type = 'warning';}

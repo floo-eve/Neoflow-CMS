@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Backend - Lahaina CMS</title>
+        <title>Backend - Neoflow CMS</title>
 
         <!-- Meta data -->
         <meta charset="utf-8">

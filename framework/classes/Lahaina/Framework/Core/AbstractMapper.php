@@ -1,8 +1,8 @@
 <?php
 
-namespace Lahaina\Framework\Core;
+namespace Neoflow\Framework\Core;
 
-use Lahaina\Framework\Persistence\ORM;
+use Neoflow\Framework\Persistence\ORM;
 
 abstract class AbstractMapper
 {
@@ -15,7 +15,7 @@ abstract class AbstractMapper
     /**
      * App trait.
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * @var ORM

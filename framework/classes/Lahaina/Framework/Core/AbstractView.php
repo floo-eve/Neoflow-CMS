@@ -1,15 +1,15 @@
 <?php
 
-namespace Lahaina\Framework\Core;
+namespace Neoflow\Framework\Core;
 
 use \Exception;
 use \InvalidArgumentException;
-use \Lahaina\CMS\Core\View;
-use \Lahaina\Framework\Common\Container;
-use \Lahaina\Framework\Handler\Config;
-use \Lahaina\Framework\Handler\Presentation;
-use \Lahaina\Framework\Handler\Translator;
-use \Lahaina\Framework\Handler\Validation\ValidationHelper;
+use \Neoflow\CMS\Core\View;
+use \Neoflow\Framework\Common\Container;
+use \Neoflow\Framework\Handler\Config;
+use \Neoflow\Framework\Handler\Presentation;
+use \Neoflow\Framework\Handler\Translator;
+use \Neoflow\Framework\Handler\Validation\ValidationHelper;
 
 abstract class AbstractView
 {
@@ -17,7 +17,7 @@ abstract class AbstractView
     /**
      * App trait.
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * @var Container

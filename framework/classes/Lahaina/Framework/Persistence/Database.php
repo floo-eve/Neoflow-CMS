@@ -1,6 +1,6 @@
 <?php
 
-namespace Lahaina\Framework\Persistence;
+namespace Neoflow\Framework\Persistence;
 
 use PDOStatement;
 
@@ -9,7 +9,7 @@ class Database extends \PDO
     /**
      * Load app.
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * @var int

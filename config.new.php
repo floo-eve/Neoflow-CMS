@@ -1,11 +1,11 @@
 <?php
 return array(
-    'url' => 'http://localhost/lahaina-cms',
+    'url' => 'http://localhost/neoflow-cms',
     'database' => array(
         'host' => 'localhost',
         'username' => 'root',
         'password' => '',
-        'dbname' => 'lahaina',
+        'dbname' => 'neoflow',
         'charset' => 'UTF8',
     ),
     'cache' => false, // auto | apcu | file | apc | false

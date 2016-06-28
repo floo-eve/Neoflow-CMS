@@ -1,6 +1,6 @@
 <?php
 
-namespace Lahaina\Framework\Persistence\Querying;
+namespace Neoflow\Framework\Persistence\Querying;
 
 /**
  * @method InsertQuery where(string $condition, array $parameters) Add WHERE condition

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lahaina\Framework\Persistence\Caching;
+namespace Neoflow\Framework\Persistence\Caching;
 
 class DisabledCache extends AbstractCache
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Lahaina\CMS\Core;
+namespace Neoflow\CMS\Core;
 
-use \Lahaina\Framework\HTTP\Responsing\Response;
+use \Neoflow\Framework\HTTP\Responsing\Response;
 
-abstract class AbstractController extends \Lahaina\Framework\Core\AbstractController
+abstract class AbstractController extends \Neoflow\Framework\Core\AbstractController
 {
 
 }

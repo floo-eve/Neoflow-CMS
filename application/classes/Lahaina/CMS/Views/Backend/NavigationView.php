@@ -1,8 +1,8 @@
 <?php
 
-namespace Lahaina\CMS\Views\Backend;
+namespace Neoflow\CMS\Views\Backend;
 
-class NavigationView extends \Lahaina\CMS\Views\BackendView
+class NavigationView extends \Neoflow\CMS\Views\BackendView
 {
 
     public function renderNavitemNestable(array $navitems)

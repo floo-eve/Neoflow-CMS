@@ -1,9 +1,9 @@
 <?php
 
-namespace Lahaina\CMS\Mapper;
+namespace Neoflow\CMS\Mapper;
 
-use \Lahaina\CMS\Model\UserModel;
-use \Lahaina\Framework\Core\AbstractMapper;
+use \Neoflow\CMS\Model\UserModel;
+use \Neoflow\Framework\Core\AbstractMapper;
 
 class UserMapper extends AbstractMapper
 {
@@ -11,7 +11,7 @@ class UserMapper extends AbstractMapper
     /**
      * @var string
      */
-    public static $modelClassName = '\\Lahaina\\CMS\\Model\\UserModel';
+    public static $modelClassName = '\\Neoflow\\CMS\\Model\\UserModel';
 
     /**
      * Authenticate user with email and password.

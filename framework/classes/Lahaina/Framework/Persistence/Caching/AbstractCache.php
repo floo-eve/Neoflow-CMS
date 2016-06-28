@@ -1,18 +1,18 @@
 <?php
 
-namespace Lahaina\Framework\Persistence\Caching;
+namespace Neoflow\Framework\Persistence\Caching;
 
 abstract class AbstractCache
 {
     /**
      * App trait.
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * Key tagging trait.
      */
-    use \Lahaina\Framework\Common\KeyTaggingTrait;
+    use \Neoflow\Framework\Common\KeyTaggingTrait;
 
     /**
      * Constructor.

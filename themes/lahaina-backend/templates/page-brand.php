@@ -1,3 +1,3 @@
 <span class="brand page-brand">
-    <i class="icon-flower"></i> LAHAINA <strong>CMS</strong>
+    <i class="icon-flower"></i> Neoflow <strong>CMS</strong>
 </span>

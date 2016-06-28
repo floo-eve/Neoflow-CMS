@@ -107,33 +107,33 @@ $alert-danger-border: $brand-danger;*/
     .ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
       background-color: #999; }
 
-.ps-theme-lahaina {
+.ps-theme-neoflow-cms {
   -ms-touch-action: none;
   touch-action: none;
   overflow: hidden !important;
   -ms-overflow-style: none; }
   @supports (-ms-overflow-style: none) {
-    .ps-theme-lahaina {
+    .ps-theme-neoflow-cms {
       overflow: auto !important; } }
   @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-    .ps-theme-lahaina {
+    .ps-theme-neoflow-cms {
       overflow: auto !important; } }
-  .ps-theme-lahaina.ps-active-x > .ps-scrollbar-x-rail, .ps-theme-lahaina.ps-active-y > .ps-scrollbar-y-rail {
+  .ps-theme-neoflow-cms.ps-active-x > .ps-scrollbar-x-rail, .ps-theme-neoflow-cms.ps-active-y > .ps-scrollbar-y-rail {
     display: block;
     background-color: transparent; }
-  .ps-theme-lahaina.ps-in-scrolling {
+  .ps-theme-neoflow-cms.ps-in-scrolling {
     pointer-events: none; }
-    .ps-theme-lahaina.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+    .ps-theme-neoflow-cms.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
       background-color: transparent;
       opacity: 0.9; }
-      .ps-theme-lahaina.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+      .ps-theme-neoflow-cms.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
         background-color: #666; }
-    .ps-theme-lahaina.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+    .ps-theme-neoflow-cms.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
       background-color: transparent;
       opacity: 0.9; }
-      .ps-theme-lahaina.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+      .ps-theme-neoflow-cms.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
         background-color: #666; }
-  .ps-theme-lahaina > .ps-scrollbar-x-rail {
+  .ps-theme-neoflow-cms > .ps-scrollbar-x-rail {
     display: none;
     z-index: 1000;
     position: absolute;
@@ -144,7 +144,7 @@ $alert-danger-border: $brand-danger;*/
     bottom: 3px;
     /* there must be 'bottom' for ps-scrollbar-x-rail */
     height: 8px; }
-    .ps-theme-lahaina > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+    .ps-theme-neoflow-cms > .ps-scrollbar-x-rail > .ps-scrollbar-x {
       position: absolute;
       /* please don't change 'position' */
       background-color: #666;
@@ -153,7 +153,7 @@ $alert-danger-border: $brand-danger;*/
       bottom: 0;
       /* there must be 'bottom' for ps-scrollbar-x */
       height: 3px; }
-  .ps-theme-lahaina > .ps-scrollbar-y-rail {
+  .ps-theme-neoflow-cms > .ps-scrollbar-y-rail {
     display: none;
     z-index: 1000;
     position: absolute;
@@ -164,7 +164,7 @@ $alert-danger-border: $brand-danger;*/
     right: 3px;
     /* there must be 'right' for ps-scrollbar-y-rail */
     width: 8px; }
-    .ps-theme-lahaina > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+    .ps-theme-neoflow-cms > .ps-scrollbar-y-rail > .ps-scrollbar-y {
       position: absolute;
       /* please don't change 'position' */
       background-color: #666;
@@ -173,30 +173,30 @@ $alert-danger-border: $brand-danger;*/
       right: 0;
       /* there must be 'right' for ps-scrollbar-y */
       width: 3px; }
-  .ps-theme-lahaina:hover.ps-in-scrolling {
+  .ps-theme-neoflow-cms:hover.ps-in-scrolling {
     pointer-events: none; }
-    .ps-theme-lahaina:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+    .ps-theme-neoflow-cms:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
       background-color: transparent;
       opacity: 0.9; }
-      .ps-theme-lahaina:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+      .ps-theme-neoflow-cms:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
         background-color: #666; }
-    .ps-theme-lahaina:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+    .ps-theme-neoflow-cms:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
       background-color: transparent;
       opacity: 0.9; }
-      .ps-theme-lahaina:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+      .ps-theme-neoflow-cms:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
         background-color: #666; }
-  .ps-theme-lahaina:hover > .ps-scrollbar-x-rail,
-  .ps-theme-lahaina:hover > .ps-scrollbar-y-rail {
+  .ps-theme-neoflow-cms:hover > .ps-scrollbar-x-rail,
+  .ps-theme-neoflow-cms:hover > .ps-scrollbar-y-rail {
     opacity: 0.6; }
-  .ps-theme-lahaina:hover > .ps-scrollbar-x-rail:hover {
+  .ps-theme-neoflow-cms:hover > .ps-scrollbar-x-rail:hover {
     background-color: transparent;
     opacity: 0.9; }
-    .ps-theme-lahaina:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x {
+    .ps-theme-neoflow-cms:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x {
       background-color: #666; }
-  .ps-theme-lahaina:hover > .ps-scrollbar-y-rail:hover {
+  .ps-theme-neoflow-cms:hover > .ps-scrollbar-y-rail:hover {
     background-color: transparent;
     opacity: 0.9; }
-    .ps-theme-lahaina:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
+    .ps-theme-neoflow-cms:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
       background-color: #666; }
 
 /*# sourceMappingURL=perfect-scrollbar.css.map */

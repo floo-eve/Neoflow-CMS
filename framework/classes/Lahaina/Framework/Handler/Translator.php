@@ -1,6 +1,6 @@
 <?php
 
-namespace Lahaina\Framework\Handler;
+namespace Neoflow\Framework\Handler;
 
 use \DateTime;
 
@@ -10,7 +10,7 @@ class Translator
     /**
      * App trait.
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * @var array

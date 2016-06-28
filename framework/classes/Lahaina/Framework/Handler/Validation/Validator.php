@@ -1,10 +1,10 @@
 <?php
 
-namespace Lahaina\Framework\Handler\Validation;
+namespace Neoflow\Framework\Handler\Validation;
 
 use \InvalidArgumentException;
-use \Lahaina\Framework\Core\AbstractModel;
-use \Lahaina\Framework\Handler\Translator;
+use \Neoflow\Framework\Core\AbstractModel;
+use \Neoflow\Framework\Handler\Translator;
 use \ReflectionFunction;
 use \ReflectionMethod;
 
@@ -14,7 +14,7 @@ class Validator
     /**
      * App trait.
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
 /**
      * Rule trait.

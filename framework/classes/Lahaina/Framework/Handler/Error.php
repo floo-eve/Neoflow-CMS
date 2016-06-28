@@ -1,6 +1,6 @@
 <?php
 
-namespace Lahaina\Framework\Handler;
+namespace Neoflow\Framework\Handler;
 
 class Error
 {

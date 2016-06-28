@@ -1,18 +1,18 @@
 <?php
 
-namespace Lahaina\Framework\Persistence;
+namespace Neoflow\Framework\Persistence;
 
-use Lahaina\Framework\Persistence\Querying\DeleteQuery;
-use Lahaina\Framework\Persistence\Querying\InsertQuery;
-use Lahaina\Framework\Persistence\Querying\SelectQuery;
-use Lahaina\Framework\Persistence\Querying\UpdateQuery;
+use Neoflow\Framework\Persistence\Querying\DeleteQuery;
+use Neoflow\Framework\Persistence\Querying\InsertQuery;
+use Neoflow\Framework\Persistence\Querying\SelectQuery;
+use Neoflow\Framework\Persistence\Querying\UpdateQuery;
 
 class QueryBuilder {
 
     /**
      * Load app
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * Create SELECT FROM query

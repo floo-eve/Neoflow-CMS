@@ -1,12 +1,12 @@
 <?php
 
-namespace Lahaina\Framework\Core;
+namespace Neoflow\Framework\Core;
 
-use \Lahaina\Framework\HTTP\Request;
-use \Lahaina\Framework\HTTP\Responsing\DebugResponse;
-use \Lahaina\Framework\HTTP\Responsing\RedirectResponse;
-use \Lahaina\Framework\HTTP\Responsing\Response;
-use \Lahaina\Framework\HTTP\Session;
+use \Neoflow\Framework\HTTP\Request;
+use \Neoflow\Framework\HTTP\Responsing\DebugResponse;
+use \Neoflow\Framework\HTTP\Responsing\RedirectResponse;
+use \Neoflow\Framework\HTTP\Responsing\Response;
+use \Neoflow\Framework\HTTP\Session;
 use \RuntimeException;
 
 abstract class AbstractController
@@ -20,7 +20,7 @@ abstract class AbstractController
     /**
      * App trait.
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * Constructor.

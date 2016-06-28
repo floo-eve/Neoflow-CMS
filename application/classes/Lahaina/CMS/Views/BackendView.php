@@ -1,8 +1,8 @@
 <?php
 
-namespace Lahaina\CMS\Views;
+namespace Neoflow\CMS\Views;
 
-use \Lahaina\CMS\Core\AbstractView;
+use \Neoflow\CMS\Core\AbstractView;
 
 class BackendView extends AbstractView
 {

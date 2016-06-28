@@ -22,7 +22,7 @@ scrollbar-y-width: $ps-scrollbar-y-width,
     @include ps-container($ps-theme-default);
 }
 
-$ps-theme-lahaina: (
+$ps-theme-neoflow-cms: (
 border-radius: 0,
 bar-bg: transparent,
 bar-container-hover-bg: $gray,
@@ -32,6 +32,6 @@ scrollbar-y-width: 3px,
 scrollbar-x-height: 3px
 );
 
-.ps-theme-lahaina {
-    @include ps-container(map-merge($ps-theme-default, $ps-theme-lahaina));
+.ps-theme-neoflow-cms {
+    @include ps-container(map-merge($ps-theme-default, $ps-theme-neoflow-cms));
 }

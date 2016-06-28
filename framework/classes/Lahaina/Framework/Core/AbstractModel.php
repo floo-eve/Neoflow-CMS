@@ -1,10 +1,10 @@
 <?php
 
-namespace Lahaina\Framework\Core;
+namespace Neoflow\Framework\Core;
 
 use \DomainException;
-use \Lahaina\Framework\Persistence\ORM;
-use \Lahaina\Framework\Persistence\QueryBuilder;
+use \Neoflow\Framework\Persistence\ORM;
+use \Neoflow\Framework\Persistence\QueryBuilder;
 
 abstract class AbstractModel
 {
@@ -12,7 +12,7 @@ abstract class AbstractModel
     /**
      * App trait.
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * @var string

@@ -1,8 +1,8 @@
 <?php
 
-namespace Lahaina\Framework\Handler\Validation;
+namespace Neoflow\Framework\Handler\Validation;
 
-use Lahaina\Framework\HTTP\Session;
+use Neoflow\Framework\HTTP\Session;
 
 class ValidationHelper
 {
@@ -10,7 +10,7 @@ class ValidationHelper
     /**
      * App trait.
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * Check wether validation error exists

@@ -1,9 +1,9 @@
 <?php
 
-namespace Lahaina\CMS\Model;
+namespace Neoflow\CMS\Model;
 
-use Lahaina\Framework\Core\AbstractModel;
-use Lahaina\Framework\Persistence\ORM;
+use Neoflow\Framework\Core\AbstractModel;
+use Neoflow\Framework\Persistence\ORM;
 
 class LanguageModel extends AbstractModel
 {
@@ -30,7 +30,7 @@ class LanguageModel extends AbstractModel
      */
     public function pages()
     {
-        return $this->hasMany('\\Lahaina\\CMS\\Model\\PageModel', 'language_id');
+        return $this->hasMany('\\Neoflow\\CMS\\Model\\PageModel', 'language_id');
     }
 
     /**
@@ -40,7 +40,7 @@ class LanguageModel extends AbstractModel
      */
     public function setting()
     {
-        return $this->hasOne('\\Lahaina\\CMS\\Model\\SettingModel', 'language_id');
+        return $this->hasOne('\\Neoflow\\CMS\\Model\\SettingModel', 'language_id');
     }
 
     /**

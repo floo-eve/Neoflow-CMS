@@ -1,11 +1,11 @@
 <?php
 
-namespace Lahaina\Framework\Persistence;
+namespace Neoflow\Framework\Persistence;
 
 use Exception;
 use InvalidArgumentException;
-use Lahaina\Framework\Core\AbstractModel;
-use Lahaina\Framework\Persistence\Querying\SelectQuery;
+use Neoflow\Framework\Core\AbstractModel;
+use Neoflow\Framework\Persistence\Querying\SelectQuery;
 
 class ORM
 {
@@ -13,7 +13,7 @@ class ORM
     /**
      * Load app.
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * @var string

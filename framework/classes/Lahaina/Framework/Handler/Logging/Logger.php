@@ -1,10 +1,10 @@
 <?php
 
-namespace Lahaina\Framework\Handler\Logging;
+namespace Neoflow\Framework\Handler\Logging;
 
 use \DateTime;
 use \Exception;
-use \Lahaina\Framework\App;
+use \Neoflow\Framework\App;
 use \RuntimeException;
 
 class Logger
@@ -13,7 +13,7 @@ class Logger
     /**
      * App trait.
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * @var string

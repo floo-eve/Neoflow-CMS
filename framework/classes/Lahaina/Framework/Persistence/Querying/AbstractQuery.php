@@ -1,10 +1,10 @@
 <?php
 
-namespace Lahaina\Framework\Persistence\Querying;
+namespace Neoflow\Framework\Persistence\Querying;
 
 use \DateTime;
-use \Lahaina\Framework\Persistence\Caching\AbstractCache;
-use \Lahaina\Framework\Persistence\Database;
+use \Neoflow\Framework\Persistence\Caching\AbstractCache;
+use \Neoflow\Framework\Persistence\Database;
 use \PDO;
 use \PDOStatement;
 use \ReflectionFunction;
@@ -15,7 +15,7 @@ abstract class AbstractQuery
     /**
      * Load app
      */
-    use \Lahaina\Framework\AppTrait;
+    use \Neoflow\Framework\AppTrait;
 
     /**
      * @var bool

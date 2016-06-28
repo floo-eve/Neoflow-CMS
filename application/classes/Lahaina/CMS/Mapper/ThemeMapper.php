@@ -1,8 +1,8 @@
 <?php
 
-namespace Lahaina\CMS\Mapper;
+namespace Neoflow\CMS\Mapper;
 
-use \Lahaina\Framework\Core\AbstractMapper;
+use \Neoflow\Framework\Core\AbstractMapper;
 
 class ThemeMapper extends AbstractMapper
 {
@@ -10,6 +10,6 @@ class ThemeMapper extends AbstractMapper
     /**
      * @var string
      */
-    public static $modelClassName = '\\Lahaina\\CMS\\Model\\ThemeModel';
+    public static $modelClassName = '\\Neoflow\\CMS\\Model\\ThemeModel';
 
 }

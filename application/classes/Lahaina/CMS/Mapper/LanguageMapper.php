@@ -1,9 +1,9 @@
 <?php
 
-namespace Lahaina\CMS\Mapper;
+namespace Neoflow\CMS\Mapper;
 
-use \Lahaina\CMS\Model\LanguageModel;
-use \Lahaina\Framework\Core\AbstractMapper;
+use \Neoflow\CMS\Model\LanguageModel;
+use \Neoflow\Framework\Core\AbstractMapper;
 
 class LanguageMapper extends AbstractMapper
 {
@@ -11,7 +11,7 @@ class LanguageMapper extends AbstractMapper
     /**
      * @var string
      */
-    public static $modelClassName = '\\Lahaina\\CMS\\Model\\LanguageModel';
+    public static $modelClassName = '\\Neoflow\\CMS\\Model\\LanguageModel';
 
     /**
      * Find language by code.

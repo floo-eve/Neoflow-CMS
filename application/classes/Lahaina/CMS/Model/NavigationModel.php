@@ -1,9 +1,9 @@
 <?php
 
-namespace Lahaina\CMS\Model;
+namespace Neoflow\CMS\Model;
 
-use \Lahaina\Framework\Core\AbstractModel;
-use \Lahaina\Framework\Persistence\ORM;
+use \Neoflow\Framework\Core\AbstractModel;
+use \Neoflow\Framework\Persistence\ORM;
 
 class NavigationModel extends AbstractModel
 {
@@ -30,6 +30,6 @@ class NavigationModel extends AbstractModel
      */
     public function navitems()
     {
-        return $this->hasMany('\\Lahaina\\CMS\\Model\\NavitemModel', 'navigation_id');
+        return $this->hasMany('\\Neoflow\\CMS\\Model\\NavitemModel', 'navigation_id');
     }
 }

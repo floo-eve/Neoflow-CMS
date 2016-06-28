@@ -1,8 +1,8 @@
 <?php
 
-namespace Lahaina\CMS\Mapper;
+namespace Neoflow\CMS\Mapper;
 
-use \Lahaina\Framework\Core\AbstractMapper;
+use \Neoflow\Framework\Core\AbstractMapper;
 
 class PageMapper extends AbstractMapper
 {
@@ -10,7 +10,7 @@ class PageMapper extends AbstractMapper
     /**
      * @var string
      */
-    public static $modelClassName = '\\Lahaina\\CMS\\Model\\PageModel';
+    public static $modelClassName = '\\Neoflow\\CMS\\Model\\PageModel';
 
     /**
      * Find all pages by language id.

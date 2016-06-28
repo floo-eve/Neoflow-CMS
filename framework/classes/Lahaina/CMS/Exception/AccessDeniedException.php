@@ -1,1 +1,1 @@
-<?phpnamespace Lahaina\CMS\Exception;class AccessDeniedException extends \Exception{}
+<?phpnamespace Neoflow\CMS\Exception;class AccessDeniedException extends \Exception{}

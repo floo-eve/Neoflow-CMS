@@ -1,16 +1,16 @@
 <?php
 
-namespace Lahaina\CMS\Controller;
+namespace Neoflow\CMS\Controller;
 
-use Lahaina\CMS\App;
-use Lahaina\CMS\Mapper\LanguageMapper;
-use Lahaina\CMS\Mapper\UserMapper;
-use Lahaina\CMS\Views\BackendView;
-use Lahaina\CMS\Core\AbstractController;
-use Lahaina\Framework\HTTP\Responsing\RedirectResponse;
-use Lahaina\Framework\HTTP\Responsing\Response;
-use Lahaina\Helper\Alert\SuccessAlert;
-use Lahaina\Helper\Alert\WarningAlert;
+use Neoflow\CMS\App;
+use Neoflow\CMS\Mapper\LanguageMapper;
+use Neoflow\CMS\Mapper\UserMapper;
+use Neoflow\CMS\Views\BackendView;
+use Neoflow\CMS\Core\AbstractController;
+use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
+use Neoflow\Framework\HTTP\Responsing\Response;
+use Neoflow\Helper\Alert\SuccessAlert;
+use Neoflow\Helper\Alert\WarningAlert;
 
 class BackendController extends AbstractController
 {

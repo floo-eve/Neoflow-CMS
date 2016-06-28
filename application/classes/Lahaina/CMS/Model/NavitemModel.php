@@ -1,9 +1,9 @@
 <?php
 
-namespace Lahaina\CMS\Model;
+namespace Neoflow\CMS\Model;
 
-use \Lahaina\Framework\Core\AbstractModel;
-use \Lahaina\Framework\Persistence\ORM;
+use \Neoflow\Framework\Core\AbstractModel;
+use \Neoflow\Framework\Persistence\ORM;
 
 class NavitemModel extends AbstractModel
 {
@@ -32,7 +32,7 @@ class NavitemModel extends AbstractModel
      */
     public function childNavitems()
     {
-        return $this->hasMany('\\Lahaina\\CMS\\Model\\NavitemModel', 'parent_navitem_id');
+        return $this->hasMany('\\Neoflow\\CMS\\Model\\NavitemModel', 'parent_navitem_id');
     }
 
     /**
@@ -42,7 +42,7 @@ class NavitemModel extends AbstractModel
      */
     public function parentNavitem()
     {
-        return $this->belongsTo('\\Lahaina\\CMS\\Model\\NavitemModel', 'parent_navitem_id');
+        return $this->belongsTo('\\Neoflow\\CMS\\Model\\NavitemModel', 'parent_navitem_id');
     }
 
     /**
@@ -52,7 +52,7 @@ class NavitemModel extends AbstractModel
      */
     public function language()
     {
-        return $this->belongsTo('\\Lahaina\\CMS\\Model\\LanguageModel', 'language_id');
+        return $this->belongsTo('\\Neoflow\\CMS\\Model\\LanguageModel', 'language_id');
     }
 
     /**
@@ -62,7 +62,7 @@ class NavitemModel extends AbstractModel
      */
     public function navigation()
     {
-        return $this->belongsTo('\\Lahaina\\CMS\\Model\\NavigationModel', 'navigation_id');
+        return $this->belongsTo('\\Neoflow\\CMS\\Model\\NavigationModel', 'navigation_id');
     }
 
     /**
@@ -72,7 +72,7 @@ class NavitemModel extends AbstractModel
      */
     public function page()
     {
-        return $this->belongsTo('\\Lahaina\\CMS\\Model\\PageModel', 'page_id');
+        return $this->belongsTo('\\Neoflow\\CMS\\Model\\PageModel', 'page_id');
     }
 
     public function save()

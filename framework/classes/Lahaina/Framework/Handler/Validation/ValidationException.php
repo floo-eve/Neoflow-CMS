@@ -1,6 +1,6 @@
 <?php
 
-namespace Lahaina\Framework\Handler\Validation;
+namespace Neoflow\Framework\Handler\Validation;
 
 use Exception;
 

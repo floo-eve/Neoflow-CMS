@@ -1,22 +1,22 @@
 <?php
 
-namespace Lahaina\Framework;
+namespace Neoflow\Framework;
 
 use \ErrorException;
 use \Exception;
 use \InvalidArgumentException;
-use \Lahaina\Framework\Handler\Config;
-use \Lahaina\Framework\Handler\Logging\Logger;
-use \Lahaina\Framework\Handler\Router;
-use \Lahaina\Framework\Handler\Translator;
-use \Lahaina\Framework\HTTP\Request;
-use \Lahaina\Framework\HTTP\Responsing\Response;
-use \Lahaina\Framework\HTTP\Session;
-use \Lahaina\Framework\Persistence\Caching\ApcCache;
-use \Lahaina\Framework\Persistence\Caching\ApcuCache;
-use \Lahaina\Framework\Persistence\Caching\DisabledCache;
-use \Lahaina\Framework\Persistence\Caching\FileCache;
-use \Lahaina\Framework\Persistence\Database;
+use \Neoflow\Framework\Handler\Config;
+use \Neoflow\Framework\Handler\Logging\Logger;
+use \Neoflow\Framework\Handler\Router;
+use \Neoflow\Framework\Handler\Translator;
+use \Neoflow\Framework\HTTP\Request;
+use \Neoflow\Framework\HTTP\Responsing\Response;
+use \Neoflow\Framework\HTTP\Session;
+use \Neoflow\Framework\Persistence\Caching\ApcCache;
+use \Neoflow\Framework\Persistence\Caching\ApcuCache;
+use \Neoflow\Framework\Persistence\Caching\DisabledCache;
+use \Neoflow\Framework\Persistence\Caching\FileCache;
+use \Neoflow\Framework\Persistence\Database;
 
 class App
 {

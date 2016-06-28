@@ -1,10 +1,10 @@
 <?php
 
-namespace Lahaina\CMS\Core;
+namespace Neoflow\CMS\Core;
 
-use Lahaina\CMS\Model\ThemeModel;
+use Neoflow\CMS\Model\ThemeModel;
 
-abstract class AbstractView extends \Lahaina\Framework\Core\AbstractView
+abstract class AbstractView extends \Neoflow\Framework\Core\AbstractView
 {
 
     /**

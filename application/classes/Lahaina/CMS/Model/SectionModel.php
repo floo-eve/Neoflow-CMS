@@ -1,11 +1,11 @@
 <?php
 
-namespace Lahaina\CMS\Model;
+namespace Neoflow\CMS\Model;
 
 use InvalidArgumentException;
-use Lahaina\CMS\Views\FrontendView;
-use Lahaina\Framework\Core\AbstractModel;
-use Lahaina\Framework\Persistence\ORM;
+use Neoflow\CMS\Views\FrontendView;
+use Neoflow\Framework\Core\AbstractModel;
+use Neoflow\Framework\Persistence\ORM;
 
 class SectionModel extends AbstractModel
 {
@@ -32,7 +32,7 @@ class SectionModel extends AbstractModel
      */
     public function page()
     {
-        return $this->belongsTo('\\Lahaina\\CMS\\Model\\PageModel', 'page_id');
+        return $this->belongsTo('\\Neoflow\\CMS\\Model\\PageModel', 'page_id');
     }
 
     /**
@@ -42,7 +42,7 @@ class SectionModel extends AbstractModel
      */
     public function module()
     {
-        return $this->belongsTo('\\Lahaina\\CMS\\Model\\ModuleModel', 'module_id');
+        return $this->belongsTo('\\Neoflow\\CMS\\Model\\ModuleModel', 'module_id');
     }
 
     /**

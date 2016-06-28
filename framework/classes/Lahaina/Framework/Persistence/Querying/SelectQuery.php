@@ -1,6 +1,6 @@
 <?php
 
-namespace Lahaina\Framework\Persistence\Querying;
+namespace Neoflow\Framework\Persistence\Querying;
 
 use PDOStatement;
 
@@ -16,12 +16,12 @@ class SelectQuery extends AbstractQuery
     /**
      * Use WHERE statements.
      */
-    use \Lahaina\Framework\Persistence\Querying\WhereTrait;
+    use \Neoflow\Framework\Persistence\Querying\WhereTrait;
 
 /**
      * Use JOIN statements.
      */
-    use \Lahaina\Framework\Persistence\Querying\JoinTrait;
+    use \Neoflow\Framework\Persistence\Querying\JoinTrait;
 
     /**
      * @var array
