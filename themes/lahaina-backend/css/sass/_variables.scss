@@ -108,10 +108,11 @@ $panel-danger-link-hover-color: darken($brand-danger, 15%);
 
 
 $navbar-default-bg: #fff;
+$navbar-default-color: $gray;
 $navbar-default-border: $gray-lighter;
 $navbar-default-link-color: $gray;
 $navbar-default-link-active-bg: $gray-lighter;
-$navbar-default-link-active-color: $gray;
+$navbar-default-link-active-color: $gray-dark;
 
 $navbar-inverse-bg: $gray-dark;
 $navbar-inverse-link-color: #fff;

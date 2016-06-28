@@ -2,9 +2,30 @@
 
 namespace Neoflow\CMS\Views\Backend;
 
-class NavigationView extends \Neoflow\CMS\Views\BackendView
+use \Neoflow\CMS\Views\BackendView;
+use \Neoflow\Framework\Common\Container;
+
+class NavigationView extends BackendView
 {
 
+    /**
+     * @var Container
+     */
+    protected $cookies;
+
+    public function __construct()
+    {
+        $this->cookies = $this->app()->get('request')->getCookies();
+        parent::__construct();
+    }
+
+    /**
+     * Render navitems.
+     *
+     * @param array $navitems
+     *
+     * @return string
+     */
     public function renderNavitemNestable(array $navitems)
     {
         $output = '';
@@ -12,39 +33,54 @@ class NavigationView extends \Neoflow\CMS\Views\BackendView
             $output .= '<ol class="nestable-list list-group">';
 
             foreach ($navitems as $navitem) {
-                $output .= '<li class="nestable-item list-group-item" data-id="' . $navitem->id() . '">
-                                <span class="nestable-handle"><i class="fa fa-arrows"></i></span>
-                                <a href="' . $this->generateUrl('navigation_edit', array('id' => $navitem->id())) . '">' . $navitem->title . '</a>
-                                <span class="pull-right">
-                                    <a href="' . $this->generateUrl('navigation_edit', array('id' => $navitem->id())) . '" class="btn btn-default btn-xs">Bearbeiten</a>
-                                    <a href="' . $this->generateUrl('navigation_delete', array('id' => $navitem->id())) . '" class="btn btn-primary btn-xs">Löschen</a>
+                $page = $navitem->page()->fetch();
+
+                $output .= '<li class="nestable-item list-group-item" data-collapsed="' . $this->cookies->exists($navitem->id()) . '" data-id="' . $navitem->id() . '">';
+
+                if (!$page->is_active) {
+                    $output .= ' <i class="fa fa-fw fa-ban"></i>';
+                } elseif ($page->visibility === 'restricted') {
+                    $output .= ' <i class="fa fa-fw fa-eye-slash"></i>';
+                } elseif ($page->visibility === 'hidden') {
+                    $output .= ' <i class="fa fa-fw fa-eye-slash"></i>';
+                } else {
+                    $output .= ' <i class="fa fa-fw fa-eye"></i>';
+                }
+
+                $output .= '<span class="nestable-handle"><i class="fa fa-fw fa-arrows"></i></span>
+                                <a href="' . $this->generateUrl('page_sections', array('id' => $navitem->page_id)) . '">' . $navitem->title . '</a>';
+
+
+
+                $output .= '<span class="pull-right">
+                                    <a href="' . $this->generateUrl('page_sections', array('id' => $navitem->page_id)) . '" class="btn btn-default btn-xs hidden-xs"><i class="fa fa-fw fa-pencil"></i> ' . $this->translate('Edit') . '</a>
+                                    <a href="' . $this->generateUrl('page_delete', array('id' => $navitem->page_id)) . '" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-trash-o"></i><span class="hidden-xs"> ' . $this->translate('Delete') . '</span></a>
                                 </span>';
 
                 $childNavitems = $navitem->childNavitems()
                     ->orderByAsc('position')
                     ->fetchAll();
 
-                $output .= $this->renderNestableList($childNavitems);
+                $output .= $this->renderNavitemNestable($childNavitems);
 
                 $output .= '</li>';
             }
             $output .= '</ol>';
         }
-
         return $output;
     }
 
-    public function renderSelectOption(array $navitems, $level = 0)
+    public function renderNavitemOptions(array $navitems, $level = 0, $selectedNavitemId = 0)
     {
         $output = '';
         foreach ($navitems as $navitem) {
-            $output .= '<option data-level="' . $level . '" value="' . $navitem->page_id . '">' . $navitem->title . '</option>';
+            $output .= '<option ' . ($selectedNavitemId === $navitem->id() ? 'selected' : '') . ' data-level="' . $level . '" value="' . $navitem->id() . '">' . $navitem->title . '</option>';
 
             $childNavitems = $navitem->childNavitems()
                 ->orderByAsc('position')
                 ->fetchAll();
 
-            $output .= $this->renderSelectOption($childNavitems, $level + 1);
+            $output .= $this->renderNavitemOptions($childNavitems, $level + 1, $selectedNavitemId);
         }
 
         return $output;

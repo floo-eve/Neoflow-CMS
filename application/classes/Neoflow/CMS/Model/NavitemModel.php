@@ -23,7 +23,7 @@ class NavitemModel extends AbstractModel
      */
     public static $properties = ['navitem_id', 'title', 'page_id',
         'parent_navitem_id', 'navigation_id', 'language_id',
-        'position', 'collapsed'];
+        'position'];
 
     /**
      * Get child navitems.
@@ -82,16 +82,19 @@ class NavitemModel extends AbstractModel
             $this->title = $page->title;
         }
 
-        $this->position = 1;
-        $navigation = $this->navigation()->fetch();
-        $lastNavitem = $navigation->navitems()
-            ->where('parent_navitem_id', '=', $this->parent_navitem_id)
-            ->orderByDesc('position')
-            ->fetch();
+        if (!$this->position) {
+            $this->position = 1;
+            $navigation = $this->navigation()->fetch();
+            $lastNavitem = $navigation->navitems()
+                ->where('parent_navitem_id', '=', $this->parent_navitem_id)
+                ->orderByDesc('position')
+                ->fetch();
 
-        if ($lastNavitem) {
-            $this->position = $lastNavitem->position + 1;
+            if ($lastNavitem) {
+                $this->position = $lastNavitem->position + 1;
+            }
         }
+
 
         return parent::save();
     }

@@ -97,11 +97,14 @@
         <!-- Metis Menu jQuery Plugin JavaScript -->
         <script src="<?= $this->getThemeUrl('/vendor/metisMenu/metisMenu.js') ?>"></script>
 
-        <!-- Nestable jQuery Plugin JavaScript -->
+        <!-- Nestable jQuery Plugin JavaScript  -->
         <script src="<?= $this->getThemeUrl('/vendor/nestable/jquery.nestable.js') ?>"></script>
 
-        <!-- Perfect Scrollbar jQuery Plugin JavaScript -->
+        <!-- Perfect Scrollbar jQuery Plugin JavaScript  -->
         <script src="<?= $this->getThemeUrl('/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js') ?>"></script>
+
+        <!-- Cookie JavaScript -->
+        <script src="<?= $this->getThemeUrl('/vendor/js-cookie/js.cookie-2.1.2.min.js') ?>"></script>
 
         <!-- Select2 jQuery Plugin JavaScript -->
         <script src="<?= $this->getThemeUrl('/vendor/select2/js/select2.full.js') ?>"></script>

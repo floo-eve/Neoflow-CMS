@@ -128,10 +128,27 @@ class PageController extends BackendController
         $this->getSession()
             ->setFlash('alert', new SuccessAlert('Page successful created'));
 
-        return $this->redirectToRoute('page_edit', array('id' => $page->id(), 'language_id' => $page->language_id));
+        return $this->redirectToRoute('page_sections', array('id' => $page->id(), 'language_id' => $page->language_id));
     }
 
-    public function editAction($args)
+    public function sectionsAction($args)
+    {
+        // Get page by id
+        $page = $this->pageMapper->findById($args['id']);
+
+        if ($page) {
+            return $this->render('backend/page/sections', array(
+                    'page' => $page,
+            ));
+        }
+
+        $this->getSession()
+            ->setFlash('alert', new WarningAlert('Page not found'));
+
+        return $this->redirectToRoute('page_index');
+    }
+
+    public function settingsAction($args)
     {
         // Get page by id
         $page = $this->pageMapper->findById($args['id']);
@@ -154,7 +171,8 @@ class PageController extends BackendController
             if ($parentNavitem) {
                 $parentNavitemId = $parentNavitem->id();
             }
-            return $this->render('backend/page/edit', array(
+
+            return $this->render('backend/page/settings', array(
                     'page' => $page,
                     'navitems' => $navitems,
                     'parentNavitemId' => $parentNavitemId
@@ -211,6 +229,15 @@ class PageController extends BackendController
                 $page->visibility = $postData->get('visibility');
                 $page->save();
 
+                $navitem = $page->navitems()
+                    ->where('navigation_id', '=', 1)
+                    ->fetch();
+
+                if ($navitem) {
+                    $navitem->parent_navitem_id = $postData->parent_navitem_id ? : null;
+                    $navitem->save();
+                }
+
                 $this->getSession()
                     ->setFlash('alert', new SuccessAlert('Page successful updated'));
             } else {
@@ -225,7 +252,7 @@ class PageController extends BackendController
 
             return $this->redirectToRoute('page_index');
         }
-        return $this->redirectToRoute('page_edit', array('id' => $page->id(), 'language_id' => $page->language_id));
+        return $this->redirectToRoute('page_settings', array('id' => $page->id()));
     }
 
     /**

@@ -1,11 +1,11 @@
 <?php if (count($languages) > 1) { ?>
-    <h5 class="text-muted">
-        <?= $this->translate('Choose page language') ?>
-    </h5>
     <nav class="navbar navbar-default">
         <div class="navbar-header">
+            <span class="navbar-text visible-xs-inline-block">
+                <?= $this->translate('Language') ?>
+            </span>
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                <i class="fa fa-bars"></i>
+                <i class="fa fa-fw fa-bars"></i>
             </a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">

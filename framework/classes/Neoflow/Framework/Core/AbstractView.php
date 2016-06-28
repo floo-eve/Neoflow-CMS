@@ -412,10 +412,11 @@ abstract class AbstractView
      *
      * @param array|string  $routeKeys
      * @param mixed $returnValue
+     * @param mixed $returnFailedValue
      *
      * @return mixed
      */
-    public function isCurrentRoute($routeKeys, $returnValue = true)
+    public function isCurrentRoute($routeKeys, $returnValue = true, $returnFailedValue = false)
     {
         $currentRouting = $this->app()->get('router')->getCurrentRouting();
         $currentRouteKey = $currentRouting[0][0];
@@ -429,7 +430,7 @@ abstract class AbstractView
                 return $returnValue;
             }
         }
-        return false;
+        return $returnFailedValue;
     }
 
     /**
