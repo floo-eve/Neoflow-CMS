@@ -33,6 +33,3 @@ RewriteEngine On
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteRule ^.*$ ./index.php
-
-#@__HCP_END__@#
-# Anything after the comment above is left alone
