@@ -50,43 +50,42 @@
 
     </head>
     <body>
-        <div id="wrapper">
+        <div id="body-scroll">
+            <div id="wrapper">
 
-            <?php if ($this->hasBlock(2)) { ?>
+                <?php if ($this->hasBlock(2)) { ?>
 
-                <div id="page-wrapper-fluid">
-                    <?= $this->renderTemplate('navigation/navbar-top') ?>
+                    <div id="page-wrapper-fluid">
+                        <?= $this->renderTemplate('navigation/navbar-top') ?>
 
-                    <div class="page-wrapper">
-                        <div class="container">
-                            <?= $this->renderTemplate('page-brand') ?>
-                            <?= $this->getBlock(2) ?>
+                        <div class="page-wrapper">
+                            <div class="container">
+                                <?= $this->renderTemplate('page-brand') ?>
+                                <?= $this->getBlock(2) ?>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            <?php } else { ?>
-                <div id="page-wrapper-sidebar">
+                <?php } else { ?>
+                    <div id="page-wrapper-sidebar">
 
-                    <?= $this->renderTemplate('navigation/navbar-top') ?>
-                    <?= $this->renderTemplate('navigation/sidebar') ?>
+                        <?= $this->renderTemplate('navigation/navbar-top') ?>
+                        <?= $this->renderTemplate('navigation/sidebar') ?>
 
+                        <div class="page-wrapper">
+                            <div class="container-fluid">
 
-                    <div class="page-wrapper">
-                        <div class="container-fluid">
+                                <?= $this->renderTemplate('page-title') ?>
 
-                            <?= $this->renderTemplate('page-title') ?>
-
-                            <?= $this->renderAlert() ?>
-                            <?= $this->getBlock(1) ?>
+                                <?= $this->renderAlert() ?>
+                                <?= $this->getBlock(1) ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php } ?>
+                <?php } ?>
 
-        </div>
-        <!-- /#wrapper -->
-
+            </div><!-- /#wrapper -->
+        </div><!-- /#body-scroll -->
 
         <!-- jQuery -->
         <script src="<?= $this->getThemeUrl('/vendor/jquery/jquery-2.2.2.min.js') ?>"></script>
@@ -101,7 +100,7 @@
         <script src="<?= $this->getThemeUrl('/vendor/nestable/jquery.nestable.js') ?>"></script>
 
         <!-- Perfect Scrollbar jQuery Plugin JavaScript  -->
-        <script src="<?= $this->getThemeUrl('/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js') ?>"></script>
+        <script src="<?= $this->getThemeUrl('/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js') ?>"></script>
 
         <!-- Cookie JavaScript -->
         <script src="<?= $this->getThemeUrl('/vendor/js-cookie/js.cookie-2.1.2.min.js') ?>"></script>

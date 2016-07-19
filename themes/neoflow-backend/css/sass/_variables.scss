@@ -6,8 +6,8 @@ $gray: #666; // #555
 $gray-light: #E6E6E6; //
 $gray-lighter: #F2F2F2; //
 
-$brand-primary: #333;
-$brand-secondary: #d55d4e;
+$brand-primary: #d55d4e;
+$brand-secondary: #333;
 
 // #F5846B
 $brand-success: #43AC6A;
@@ -16,6 +16,8 @@ $brand-warning: #EA981E;
 $brand-danger: #DB4C4C;
 
 $text-color: $gray-dark;
+
+$link-color: $brand-secondary;
 
 $font-family-sans-serif: 'Roboto', sans-serif;
 $headings-font-family: 'Roboto Condensed', sans-serif;
@@ -37,7 +39,7 @@ $input-color: #555;
 $input-border: #ddd;
 $input-border-focus: $input-border;
 
-$sidebar-bg: $brand-primary;
+$sidebar-bg: $brand-secondary;
 $sidebar-link-color: #fff;
 $sidebar-link-border-color: transparent;
 $sidebar-link-hover-color: #fff;
@@ -45,11 +47,11 @@ $sidebar-link-hover-bg: darken($sidebar-bg, 2.5%);
 $sidebar-link-hover-border-color: transparent;
 $sidebar-link-active-color: #fff;
 $sidebar-link-active-bg: darken($sidebar-bg, 2.5%);
-$sidebar-link-active-border-color: $brand-secondary;
+$sidebar-link-active-border-color: $brand-primary;
 $sidebar-border-color: lighten($sidebar-bg, 5%);
 $sidebar-text-color: #fff;
 
-$sidebar-header-bg: $brand-secondary;
+$sidebar-header-bg: $brand-primary;
 $sidebar-brand-color: #fff;
 $sidebar-brand-hover-color: #fff;
 
@@ -62,7 +64,6 @@ $btn-inverse-bg: $gray-dark;
 $btn-inverse-border: darken($btn-inverse-bg, 5%);
 
 $panel-footer-bg: #fff;
-
 
 $panel-heading-padding: 15px;
 
@@ -118,15 +119,19 @@ $alert-success-border: darken($brand-success, 5%);
 
 $text-muted: $gray;
 
-/*
-$state-info-text: #fff;
-$state-info-bg: $brand-info;
-$alert-info-border: $brand-info;
+$ps-border-radius: 0;
 
-$state-warning-text: #fff;
-$state-warning-bg: $brand-warning;
-$alert-warning-border: $brand-warning;
+$ps-rail-default-opacity: 0;
+$ps-rail-container-hover-opacity: 0.2;
+$ps-rail-hover-opacity: 1;
 
-$state-danger-text: #fff;
-$state-danger-bg: $brand-danger;
-$alert-danger-border: $brand-danger;*/
+$ps-bar-bg: transparent !default;
+$ps-bar-container-hover-bg: $brand-secondary;
+$ps-bar-hover-bg: $brand-secondary;
+$ps-rail-hover-bg: transparent;
+
+$ps-scrollbar-y-rail-right: 0;
+$ps-scrollbar-y-rail-width: 4px;
+$ps-scrollbar-y-right: 2px;
+$ps-scrollbar-y-width: 4px;
+$ps-scrollbar-y-hover-width: 4px;

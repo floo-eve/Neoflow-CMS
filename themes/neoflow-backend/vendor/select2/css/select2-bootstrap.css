@@ -1,16 +1,4 @@
 /*! Select2 Bootstrap Theme v0.1.0-beta.4 | MIT License | github.com/select2/select2-bootstrap-theme */
-/*
-$state-info-text: #fff;
-$state-info-bg: $brand-info;
-$alert-info-border: $brand-info;
-
-$state-warning-text: #fff;
-$state-warning-bg: $brand-warning;
-$alert-warning-border: $brand-warning;
-
-$state-danger-text: #fff;
-$state-danger-bg: $brand-danger;
-$alert-danger-border: $brand-danger;*/
 .select2-container--bootstrap {
   display: block;
   /*------------------------------------*\
@@ -131,7 +119,7 @@ $alert-danger-border: $brand-danger;*/
       .select2-container--bootstrap .select2-results__option[aria-selected=true]::before {
         content: "\f00c"; }
     .select2-container--bootstrap .select2-results__option--highlighted[aria-selected] {
-      background-color: #24262D;
+      background-color: #d55d4e;
       color: #fff; }
     .select2-container--bootstrap .select2-results__option .select2-results__option {
       padding: 6px 12px; }

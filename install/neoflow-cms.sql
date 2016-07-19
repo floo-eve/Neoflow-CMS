@@ -1,20 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Erstellungszeit: 28. Jun 2016 um 15:06
--- Server-Version: 5.7.9
--- PHP-Version: 5.6.16
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Datenbank: `neoflow-cms`
@@ -78,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `navigations` (
   `title` varchar(50) CHARACTER SET utf8 NOT NULL,
   `description` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`navigation_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `navigations`
@@ -86,13 +71,7 @@ CREATE TABLE IF NOT EXISTS `navigations` (
 
 INSERT INTO `navigations` (`navigation_id`, `title`, `description`) VALUES
 (1, 'Default navigation', 'All pages are added to this navigation. You cannot edit or delete the default navigation.'),
-(3, '8i67867', NULL),
-(4, 'Hauptnavigation', NULL),
-(5, 'fasdfasd', NULL),
-(6, '123123', '123123123'),
-(8, 'asd', ''),
-(9, 'asd8', ''),
-(10, '5', NULL);
+(2, 'Footer navigation', NULL);
 
 -- --------------------------------------------------------
 
@@ -110,21 +89,20 @@ CREATE TABLE IF NOT EXISTS `navitems` (
   `language_id` int(11) DEFAULT NULL,
   `position` int(11) DEFAULT NULL,
   PRIMARY KEY (`navitem_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `navitems`
 --
 
 INSERT INTO `navitems` (`navitem_id`, `title`, `page_id`, `parent_navitem_id`, `navigation_id`, `language_id`, `position`) VALUES
-(72, 'Startseite', 72, NULL, 1, 1, 1),
-(73, 'Über uns', 73, NULL, 1, 1, 3),
-(74, 'Beispiele', 74, NULL, 1, 1, 2),
-(75, 'Küche', 75, 74, 1, 1, 1),
-(76, 'Bad', 76, 74, 1, 1, 2),
-(77, 'Garage', 77, 74, 1, 1, 3),
-(78, 'Impressum', 78, NULL, 1, 1, 4),
-(87, 'Test', 87, NULL, 1, 1, 5);
+(1, 'Startseite', 1, NULL, 1, 1, 1),
+(2, 'Über uns', 2, NULL, 1, 1, 3),
+(3, 'Beispiele', 3, NULL, 1, 1, 2),
+(4, 'Küche', 4, 3, 1, 1, 1),
+(5, 'Bad', 5, 3, 1, 1, 2),
+(6, 'Garage', 6, 3, 1, 1, 3),
+(7, 'Impressum', 7, NULL, 1, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -143,21 +121,20 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `language_id` int(11) DEFAULT NULL,
   `visibility` enum('visible','restricted','hidden') DEFAULT 'visible',
   PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `pages`
 --
 
 INSERT INTO `pages` (`page_id`, `title`, `slug`, `description`, `keywords`, `is_active`, `language_id`, `visibility`) VALUES
-(72, 'Küche5687', 'startseite', NULL, NULL, 1, 1, 'restricted'),
-(73, 'Über uns', 'uber-uns', NULL, NULL, 1, 1, 'visible'),
-(74, 'Beispiele', 'beispiele', NULL, NULL, 1, 1, 'visible'),
-(75, 'Küche2', 'kueche', NULL, NULL, 1, 1, 'visible'),
-(76, 'Bad', 'bad', NULL, NULL, 1, 1, 'visible'),
-(77, 'Garage', 'garage', NULL, NULL, 1, 1, 'visible'),
-(78, 'Impressum', 'impressum', NULL, NULL, 1, 1, 'visible'),
-(87, 'Test', 'test', NULL, NULL, 1, 1, 'visible');
+(1, 'Startseite', 'startseite', NULL, NULL, 1, 1, 'restricted'),
+(2, 'Über uns', 'uber-uns', NULL, NULL, 1, 1, 'visible'),
+(3, 'Beispiele', 'beispiele', NULL, NULL, 1, 1, 'visible'),
+(4, 'Küche', 'kueche', NULL, NULL, 1, 1, 'visible'),
+(5, 'Bad', 'bad', NULL, NULL, 1, 1, 'visible'),
+(6, 'Garage', 'garage', NULL, NULL, 1, 1, 'visible'),
+(7, 'Impressum', 'impressum', NULL, NULL, 1, 1, 'visible');
 
 -- --------------------------------------------------------
 
@@ -218,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 --
 
 INSERT INTO `settings` (`setting_id`, `website_title`, `website_description`, `keywords`, `author`, `theme_id`, `backend_theme_id`, `language_id`) VALUES
-(1, 'Dev-page of Neoflow CMS', 'Hello World :) Website description... 7675', 'Keyword, KEYWORDS, bla, Laaina567', 'Jonathan Nessier', 2, 1, 2);
+(1, 'Website title...', 'Website description...', 'Key, words, ...', 'Au Thor...', 2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -267,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `lastname`, `firstname`, `email`, `role_id`) VALUES
-(1, 'admin', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'John', 'Doe', 'john.doe@neoflow.ch', NULL);
+(1, 'admin', sha1('admin'), 'John', 'Doe', 'john.doe@neoflow.ch', NULL);
 
 --
 -- Constraints der exportierten Tabellen
@@ -285,7 +262,3 @@ ALTER TABLE `sections`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `fk_role_id` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
