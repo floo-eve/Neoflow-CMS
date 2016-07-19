@@ -265,7 +265,7 @@ abstract class AbstractModel
             $this->set($primaryKey, $id);
         }
 
-        return $id;
+        return true;
     }
 
     /**
@@ -287,11 +287,13 @@ abstract class AbstractModel
     {
         $queryBuilder = new QueryBuilder();
 
-        return $queryBuilder
-                ->update($this->getTableName())
-                ->setPrimaryKey($this->getPrimaryKey())
-                ->set($this->getModifiedData())
-                ->execute($this->id());
+        $queryBuilder
+            ->update($this->getTableName())
+            ->setPrimaryKey($this->getPrimaryKey())
+            ->set($this->getModifiedData())
+            ->execute($this->id());
+
+        return true;
     }
 
     /**
@@ -303,10 +305,12 @@ abstract class AbstractModel
     {
         $queryBuilder = new QueryBuilder();
 
-        return $queryBuilder
-                ->deleteFrom($this->getTableName())
-                ->setPrimaryKey($this->getPrimaryKey())
-                ->execute($this->id());
+        $queryBuilder
+            ->deleteFrom($this->getTableName())
+            ->setPrimaryKey($this->getPrimaryKey())
+            ->execute($this->id());
+
+        return true;
     }
 
     /**

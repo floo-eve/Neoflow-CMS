@@ -5,8 +5,12 @@ return array(
         'host' => 'localhost',
         'username' => 'root',
         'password' => '',
-        'dbname' => 'neoflow',
+        'dbname' => 'neoflow-cms',
         'charset' => 'UTF8',
+    ),
+    'session' => array(
+        'name' => 'neoflow-cms', // false (system default) | string
+        'lifetime' => 3600 // false (system default) | int (seconds)
     ),
     'cache' => false, // auto | apcu | file | apc | false
     'logger' => array(

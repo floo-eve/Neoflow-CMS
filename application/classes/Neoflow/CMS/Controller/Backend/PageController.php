@@ -7,8 +7,10 @@ use \Neoflow\CMS\Mapper\LanguageMapper;
 use \Neoflow\CMS\Mapper\ModuleMapper;
 use \Neoflow\CMS\Mapper\NavitemMapper;
 use \Neoflow\CMS\Mapper\PageMapper;
+use \Neoflow\CMS\Mapper\SectionMapper;
 use \Neoflow\CMS\Model\NavitemModel;
 use \Neoflow\CMS\Model\PageModel;
+use \Neoflow\CMS\Model\SectionModel;
 use \Neoflow\CMS\Views\Backend\PageView;
 use \Neoflow\Framework\Handler\Validation\ValidationException;
 use \Neoflow\Framework\HTTP\Responsing\Response;
@@ -40,6 +42,11 @@ class PageController extends BackendController
     protected $moduleMapper;
 
     /**
+     * @var SectionMapper
+     */
+    protected $sectionMapper;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -55,6 +62,7 @@ class PageController extends BackendController
         $this->pageMapper = new PageMapper();
         $this->navitemMapper = new NavitemMapper();
         $this->moduleMapper = new ModuleMapper();
+        $this->sectionMapper = new SectionMapper();
     }
 
     public function indexAction($args)
@@ -128,75 +136,79 @@ class PageController extends BackendController
         $this->getSession()
             ->setFlash('alert', new SuccessAlert('Page successful created'));
 
-        return $this->redirectToRoute('page_sections', array('id' => $page->id(), 'language_id' => $page->language_id));
+        return $this->redirectToRoute('page_show_sections', array('id' => $page->id(), 'language_id' => $page->language_id));
     }
 
-    public function sectionsAction($args)
+    public function showSectionsAction($args)
     {
         // Get page by id
-        $page = $this->pageMapper->findById($args['id']);
+        $page = $this->getPageById($args['id']);
 
-        if ($page) {
-            return $this->render('backend/page/sections', array(
-                    'page' => $page,
-            ));
-        }
+        $sections = $page->sections()
+            ->orderByAsc('position')
+            ->fetchAll();
 
-        $this->getSession()
-            ->setFlash('alert', new WarningAlert('Page not found'));
+        $modules = $this->moduleMapper->findAll();
 
-        return $this->redirectToRoute('page_index');
+        return $this->render('backend/page/sections', array(
+                'page' => $page,
+                'modules' => $modules,
+                'sections' => $sections
+        ));
     }
 
-    public function settingsAction($args)
+    public function showSettingsAction($args)
     {
         // Get page by id
-        $page = $this->pageMapper->findById($args['id']);
+        $page = $this->getPageById($args['id']);
 
-        if ($page) {
+        $navitems = $this->navitemMapper->getOrm()
+            ->where('parent_navitem_id', 'IS', null)
+            ->where('language_id', '=', $page->language_id)
+            ->where('navigation_id', '=', 1)
+            ->orderByAsc('position')
+            ->fetchAll();
 
-            $navitems = $this->navitemMapper->getOrm()
-                ->where('parent_navitem_id', 'IS', null)
-                ->where('language_id', '=', $page->language_id)
-                ->where('navigation_id', '=', 1)
-                ->orderByAsc('position')
-                ->fetchAll();
+        $navitem = $page->navitems()
+            ->where('navigation_id', '=', 1)
+            ->fetch();
 
-            $navitem = $page->navitems()
-                ->where('navigation_id', '=', 1)
-                ->fetch();
-
-            $parentNavitemId = false;
-            $parentNavitem = $navitem->parentNavitem()->fetch();
-            if ($parentNavitem) {
-                $parentNavitemId = $parentNavitem->id();
-            }
-
-            return $this->render('backend/page/settings', array(
-                    'page' => $page,
-                    'navitems' => $navitems,
-                    'parentNavitemId' => $parentNavitemId
-            ));
+        $parentNavitemId = false;
+        $parentNavitem = $navitem->parentNavitem()->fetch();
+        if ($parentNavitem) {
+            $parentNavitemId = $parentNavitem->id();
         }
-        $this->getSession()
-            ->setFlash('alert', new WarningAlert('Page not found'));
 
-        return $this->redirectToRoute('page_index');
+        return $this->render('backend/page/settings', array(
+                'page' => $page,
+                'navitems' => $navitems,
+                'parentNavitemId' => $parentNavitemId
+        ));
+    }
+
+    public function updateSectionOrderAction($args)
+    {
+        $json = file_get_contents('php://input');
+        $result = false;
+        if (is_json($json)) {
+            $result = $this->sectionMapper->updateOrder(json_decode($json, true));
+        }
+        return new \Neoflow\Framework\HTTP\Responsing\JsonResponse(array('success' => (bool) $result));
     }
 
     public function deleteAction($args)
     {
         // Get page by id
-        $page = $this->pageMapper->findById($args['id']);
+        $page = $this->getPageById($args['id']);
 
         // Delete page
         try {
-            if ($page && $page->delete()) {
+            if ($page->delete()) {
                 $this->getSession()
                     ->setFlash('alert', new SuccessAlert('Page successful deleted'));
             } else {
                 $this->getSession()
-                    ->setFlash('alert', new WarningAlert('Page not found'));
+                    ->setFlash('alert', new WarningAlert('Delete page failed'));
             }
         } catch (ValidationException $ex) {
             $this->getSession()
@@ -207,12 +219,12 @@ class PageController extends BackendController
     }
 
     /**
-     * Update action
+     * Update settings action
      *
      * @param array $args
      * @return Response
      */
-    public function updateAction($args)
+    public function updateSettingsAction($args)
     {
         try {
 
@@ -220,29 +232,24 @@ class PageController extends BackendController
             $postData = $this->getRequest()->getPostData();
 
             // Get page by id
-            $page = $this->pageMapper->findById($postData->get('page_id'));
+            $page = $this->getPageById($postData->get('page_id'));
 
-            if ($page) {
+            $navitem = $page->navitems()
+                ->where('navigation_id', '=', 1)
+                ->fetch();
 
-                $page->title = $postData->get('title');
-                $page->is_active = $postData->get('is_active');
-                $page->visibility = $postData->get('visibility');
-                $page->save();
+            $page->title = $postData->get('title');
+            $page->is_active = $postData->get('is_active');
+            $page->visibility = $postData->get('visibility');
 
-                $navitem = $page->navitems()
-                    ->where('navigation_id', '=', 1)
-                    ->fetch();
+            $navitem->parent_navitem_id = $postData->parent_navitem_id ? : null;
 
-                if ($navitem) {
-                    $navitem->parent_navitem_id = $postData->parent_navitem_id ? : null;
-                    $navitem->save();
-                }
-
+            if ($page->save() && $navitem->save()) {
                 $this->getSession()
                     ->setFlash('alert', new SuccessAlert('Page successful updated'));
             } else {
                 $this->getSession()
-                    ->setFlash('alert', new WarningAlert('Page not found'));
+                    ->setFlash('alert', new DangerAlert('Update page failed'));
             }
         } catch (ValidationException $ex) {
 
@@ -252,7 +259,60 @@ class PageController extends BackendController
 
             return $this->redirectToRoute('page_index');
         }
-        return $this->redirectToRoute('page_settings', array('id' => $page->id()));
+        return $this->redirectToRoute('page_show_settings', array('id' => $page->id()));
+    }
+
+    /**
+     * Add section action
+     *
+     * @param array $args
+     * @return Response
+     */
+    public function addSectionAction($args)
+    {
+        // Get post data
+        $postData = $this->getRequest()->getPostData();
+
+        // Get page by id
+        $page = $this->getPageById($postData->get('page_id'));
+
+        $section = new SectionModel();
+        $section->page_id = $page->id();
+        $section->module_id = $postData->get('module_id');
+        $section->is_active = $postData->get('is_active');
+        $section->block = 1;
+
+        if ($section->save()) {
+            $this->getSession()
+                ->setFlash('alert', new SuccessAlert('Section successful added'));
+        } else {
+            $this->getSession()
+                ->setFlash('alert', new DangerAlert('Add section failed'));
+        }
+
+        return $this->redirectToRoute('page_show_sections', array('id' => $page->id()));
+    }
+
+    /**
+     * Delete section action
+     *
+     * @param array $args
+     * @return Response
+     */
+    public function deleteSectionAction($args)
+    {
+        // Get post data
+        $section = $this->sectionMapper->findById($args['id']);
+
+        if ($section->delete()) {
+            $this->getSession()
+                ->setFlash('alert', new SuccessAlert('Section successful deleted'));
+        } else {
+            $this->getSession()
+                ->setFlash('alert', new DangerAlert('Delete section failed'));
+        }
+
+        return $this->redirectToRoute('page_show_sections', array('id' => $section->page_id));
     }
 
     /**
@@ -261,5 +321,17 @@ class PageController extends BackendController
     public function setView()
     {
         $this->view = new PageView();
+    }
+
+    public function getPageById($id)
+    {
+        // Get page by id
+        $page = $this->pageMapper->findById($id);
+
+        if ($page) {
+            return $page;
+        }
+
+        throw new \Exception('Page not found');
     }
 }

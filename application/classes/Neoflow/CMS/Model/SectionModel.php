@@ -9,6 +9,7 @@ use Neoflow\Framework\Persistence\ORM;
 
 class SectionModel extends AbstractModel
 {
+
     /**
      * @var string
      */
@@ -23,7 +24,7 @@ class SectionModel extends AbstractModel
      * @var array
      */
     public static $properties = ['section_id', 'page_id', 'module_id',
-        'position', 'block', ];
+        'position', 'block', 'is_active'];
 
     /**
      * Get page.
@@ -61,6 +62,22 @@ class SectionModel extends AbstractModel
         if ($module) {
             return $module->render($view);
         }
-        throw new InvalidArgumentException('Cannot find module with ID: '.$this->module_id);
+        throw new InvalidArgumentException('Cannot find module with ID: ' . $this->module_id);
+    }
+
+    public function save()
+    {
+        if (!$this->position) {
+            $this->position = 1;
+            $page = $this->page()->fetch();
+            $lastSection = $page->sections()
+                ->orderByDesc('position')
+                ->fetch();
+
+            if ($lastSection) {
+                $this->position = $lastSection->position + 1;
+            }
+        }
+        return parent::save();
     }
 }

@@ -95,7 +95,6 @@ class NavitemModel extends AbstractModel
             }
         }
 
-
         return parent::save();
     }
 
@@ -115,6 +114,6 @@ class NavitemModel extends AbstractModel
             }
         }
 
-        parent::delete();
+        return parent::delete();
     }
 }

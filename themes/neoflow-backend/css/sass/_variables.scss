@@ -6,7 +6,7 @@ $gray: #666; // #555
 $gray-light: #E6E6E6; //
 $gray-lighter: #F2F2F2; //
 
-$brand-primary: #24262D;
+$brand-primary: #333;
 $brand-secondary: #d55d4e;
 
 // #F5846B
@@ -49,10 +49,13 @@ $sidebar-link-active-border-color: $brand-secondary;
 $sidebar-border-color: lighten($sidebar-bg, 5%);
 $sidebar-text-color: #fff;
 
+$sidebar-header-bg: $brand-secondary;
+$sidebar-brand-color: #fff;
+$sidebar-brand-hover-color: #fff;
+
 $border-radius-base: 0;
 $border-radius-large: 0;
 $border-radius-small: 0;
-
 
 $btn-inverse-color: #fff;
 $btn-inverse-bg: $gray-dark;

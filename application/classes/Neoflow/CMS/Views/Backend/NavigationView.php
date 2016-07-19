@@ -35,7 +35,7 @@ class NavigationView extends BackendView
             foreach ($navitems as $navitem) {
                 $page = $navitem->page()->fetch();
 
-                $output .= '<li class="nestable-item list-group-item" data-collapsed="' . $this->cookies->exists($navitem->id()) . '" data-id="' . $navitem->id() . '">';
+                $output .= '<li class="nestable-item list-group-item ' . (!$page->is_active ? 'list-groupd-item-disabled' : '') . '" data-collapsed="' . $this->cookies->exists($navitem->id()) . '" data-id="' . $navitem->id() . '">';
 
                 if (!$page->is_active) {
                     $output .= ' <i class="fa fa-fw fa-ban"></i>';
@@ -48,12 +48,10 @@ class NavigationView extends BackendView
                 }
 
                 $output .= '<span class="nestable-handle"><i class="fa fa-fw fa-arrows"></i></span>
-                                <a href="' . $this->generateUrl('page_sections', array('id' => $navitem->page_id)) . '">' . $navitem->title . '</a>';
-
-
+                                <a href="' . $this->generateUrl('page_show_sections', array('id' => $navitem->page_id)) . '">' . $navitem->title . '</a>';
 
                 $output .= '<span class="pull-right">
-                                    <a href="' . $this->generateUrl('page_sections', array('id' => $navitem->page_id)) . '" class="btn btn-default btn-xs hidden-xs"><i class="fa fa-fw fa-pencil"></i> ' . $this->translate('Edit') . '</a>
+                                    <a href="' . $this->generateUrl('page_show_sections', array('id' => $navitem->page_id)) . '" class="btn btn-default btn-xs hidden-xs"><i class="fa fa-fw fa-pencil"></i> ' . $this->translate('Edit') . '</a>
                                     <a href="' . $this->generateUrl('page_delete', array('id' => $navitem->page_id)) . '" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-trash-o"></i><span class="hidden-xs"> ' . $this->translate('Delete') . '</span></a>
                                 </span>';
 

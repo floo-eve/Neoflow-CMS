@@ -184,6 +184,7 @@ CREATE TABLE IF NOT EXISTS `sections` (
   `section_id` int(11) NOT NULL AUTO_INCREMENT,
   `page_id` int(11) NOT NULL,
   `module_id` int(11) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `position` int(11) NOT NULL,
   `block` int(11) NOT NULL,
   PRIMARY KEY (`section_id`),
@@ -217,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 --
 
 INSERT INTO `settings` (`setting_id`, `website_title`, `website_description`, `keywords`, `author`, `theme_id`, `backend_theme_id`, `language_id`) VALUES
-(1, 'Dev-page of Lahaina CMS', 'Hello World :) Website description... 7675', 'Keyword, KEYWORDS, bla, Laaina567', 'Jonathan Nessier', 2, 1, 2);
+(1, 'Dev-page of Neoflow CMS', 'Hello World :) Website description... 7675', 'Keyword, KEYWORDS, bla, Laaina567', 'Jonathan Nessier', 2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -239,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `themes` (
 --
 
 INSERT INTO `themes` (`theme_id`, `title`, `folder`, `type`) VALUES
-(1, ' Lahaina Backend Theme', 'lahaina-backend', 'backend'),
+(1, ' Neoflow Backend Theme', 'neoflow-backend', 'backend'),
 (2, 'Cloudy', 'cloudy', 'frontend');
 
 -- --------------------------------------------------------
