@@ -34,12 +34,12 @@ class PageView extends NavigationView
                     $output .= ' <i class="fa fa-fw fa-eye"></i>';
                 }
 
-                $output .= ' <a href="#">' . $module->title . '</a></li>
+                $output .= ' <a href="' . $this->generateUrl($module->route) . '">' . $module->title . '</a></li>
                                 <li class="small">ID: ' . $section->id() . '</li>
                             </ul>
                             <span class="pull-right">
-                                <a href="#" class="btn btn-default btn-xs hidden-xs"><i class="fa fa-fw fa-pencil"></i> ' . $this->translate('Edit') . '</a>
-                                <a href="' . $this->generateUrl('page_delete_section', array('id' => $section->id())) . '" class="btn btn-primary btn-xs"><i class="fa fa-fw fa-trash-o"></i><span class="hidden-xs"> ' . $this->translate('Delete') . '</span></a>
+                                <a href="#" class="btn btn-default btn-xs hidden-xs btn-icon"><i class="fa fa-fw fa-pencil"></i>' . $this->translate('Edit') . '</a>
+                                <a href="' . $this->generateUrl('page_delete_section', array('id' => $section->id())) . '" class="btn btn-primary btn-xs btn-icon confirm" data-message="' . $this->translate('Are you sure you want to delete this section?') . '"><i class="fa fa-fw fa-trash-o"></i><span class="hidden-xs">' . $this->translate('Delete') . '</span></a>
                             </span>
                         </li>';
             }

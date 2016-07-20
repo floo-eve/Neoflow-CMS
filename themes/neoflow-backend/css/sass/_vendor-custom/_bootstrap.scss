@@ -235,6 +235,86 @@ label {
     @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
 }*/
 
+
+.btn {
+    border: 0;
+
+    &.btn-icon {
+        padding: 6px 12px 6px 30px;
+
+        i {
+            width: 30px;
+            height: 34px;
+            line-height: 34px;
+            background: rgba(0, 0, 0, 0.1);
+            margin: -6px 12px -6px -30px;
+        }
+
+        &.btn-icon-right {
+            padding: 6px 30px 6px 12px;
+
+            i {
+                float: right;
+                margin: -6px -30px -6px 12px;
+            }
+        }
+    }
+
+    &.btn-xs {
+        &.btn-icon {
+            padding: 1px 5px 1px 20px;
+
+            i {
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                margin: -1px 5px -1px -20px;
+            }
+
+            &.btn-icon-right {
+                padding: 1px 20px 1px 5px;
+
+                i {
+                    float: right;
+                    margin: -1px -30px -1px 5px;
+                }
+            }
+        }
+    }
+}
+
+.nav-tabs, .nav-pills {
+    li {
+        a {
+            font-weight: normal;
+            color: $gray;
+
+            &:hover {
+                color: $navbar-default-link-hover-color;
+            }
+        }
+    }
+}
+
+.modal {
+    text-align: center;
+}
+
+@media screen and (min-width: $screen-sm) {
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 80%;
+    }
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
 .alert {
     border-width: 3px 0 0 0;
 }

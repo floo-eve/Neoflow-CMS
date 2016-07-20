@@ -8,6 +8,11 @@
                 <h3 class="panel-title"><?= $this->translate('Page settings') ?></h3>
             </div>
             <div class="panel-body">
+
+                <?= $this->renderTemplate('backend/page/infos', array('page' => $page)) ?>
+
+                <hr />
+
                 <form method="post" action="<?= $this->generateUrl('page_update') ?>" class="form-horizontal">
                     <input value="<?= $page->id() ?>" type="hidden" name="page_id" />
 
@@ -70,10 +75,18 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> <?= $this->translate('Update') ?></button>
+                            <button type="submit" class="btn btn-primary btn-icon">
+                                <i class="fa fa-fw fa-save"></i><?= $this->translate('Update') ?>
+                            </button>
                         </div>
                     </div>
                 </form>
+
+                <hr />
+                <a href="<?= $this->generateUrl('page_index', array('language_id' => $page->language_id)) ?>" class="btn btn-default btn-icon">
+                    <i class="fa fa-chevron-left"></i><?= $this->translate('Back') ?>
+                </a>
+
             </div>
         </div>
 

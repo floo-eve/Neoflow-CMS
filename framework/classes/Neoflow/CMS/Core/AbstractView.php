@@ -22,6 +22,19 @@ abstract class AbstractView extends \Neoflow\Framework\Core\AbstractView
         $this->setTheme();
 
         $this->app()->set('theme', $this->theme);
+
+        $themePath = $this->getThemePath();
+        $this->setTemplateFilePath($themePath . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR);
+        $this->setViewFilePath($themePath . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
+
+        // Set template and view file paths of modules
+        $modules = $this->app()->get('modules');
+        foreach ($modules as $module) {
+            $templateFilePath = $this->getConfig()->getPath(DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $module->folder . DIRECTORY_SEPARATOR . 'templates');
+            $this->setTemplateFilePath($templateFilePath);
+            $viewFilePath = $this->getConfig()->getPath(DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $module->folder . DIRECTORY_SEPARATOR . 'views');
+            $this->setViewFilePath($viewFilePath);
+        }
     }
 
     /**

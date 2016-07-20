@@ -40,11 +40,33 @@ abstract class AbstractView
     protected $parameters = array();
 
     /**
+     * @var array
+     */
+    protected $viewFilePaths = array();
+
+    /**
+     * @var array
+     */
+    protected $templateFilePaths = array();
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->data = new Container();
+
+        $this->viewFilePaths = array(
+            $this->getConfig()->getPath('/application/views/[viewFile]'),
+            $this->getConfig()->getPath('/application/views/[viewFile].php'),
+            $this->getConfig()->getPath('/application/views/[viewFile].html'),
+        );
+
+        $this->templateFilePaths = array(
+            $this->getConfig()->getPath('/application/templates/[templateFile]'),
+            $this->getConfig()->getPath('/application/templates/[templateFile].php'),
+            $this->getConfig()->getPath('/application/templates/[templateFile].html'),
+        );
     }
 
     /**
@@ -238,20 +260,29 @@ abstract class AbstractView
     /**
      * Get view file paths.
      *
-     * @param string $view View name
+     * @param string $viewFile View name
      *
      * @return array
      */
-    protected function getViewFilePaths($view)
+    protected function getViewFilePaths($viewFile)
     {
-        return array(
-            $this->getConfig()->getPath('/application/views/' . $view),
-            $this->getConfig()->getPath('/application/views/' . $view . '.php'),
-            $this->getConfig()->getPath('/application/views/' . $view . '.html'),
-            $this->getThemePath('/views/' . $view),
-            $this->getThemePath('/views/' . $view . '.php'),
-            $this->getThemePath('/views/' . $view . '.html'),
-        );
+        $viewFilePaths = array();
+        foreach ($this->viewFilePaths as $viewFilePath) {
+            $viewFilePaths[] = str_replace('[viewFile]', $viewFile, $viewFilePath);
+        }
+        return $viewFilePaths;
+    }
+
+    /**
+     * Set view file path
+     *
+     * @param string $viewPath
+     */
+    public function setViewFilePath($viewPath)
+    {
+        $this->viewFilePaths[] = $viewPath . DIRECTORY_SEPARATOR . '[viewFile]';
+        $this->viewFilePaths[] = $viewPath . DIRECTORY_SEPARATOR . '[viewFile].php';
+        $this->viewFilePaths[] = $viewPath . DIRECTORY_SEPARATOR . '[viewFile].html';
     }
 
     /**
@@ -290,14 +321,23 @@ abstract class AbstractView
      */
     protected function getTemplateFilePaths($templateFile)
     {
-        return array(
-            $this->getConfig()->getPath('/application/templates/' . $templateFile),
-            $this->getConfig()->getPath('/application/templates/' . $templateFile . '.php'),
-            $this->getConfig()->getPath('/application/templates/' . $templateFile . '.html'),
-            $this->getThemePath('/templates/' . $templateFile),
-            $this->getThemePath('/templates/' . $templateFile . '.php'),
-            $this->getThemePath('/templates/' . $templateFile . '.html'),
-        );
+        $templateFilePaths = array();
+        foreach ($this->templateFilePaths as $templateFilePath) {
+            $templateFilePaths[] = str_replace('[templateFile]', $templateFile, $templateFilePath);
+        }
+        return $templateFilePaths;
+    }
+
+    /**
+     * Set template file path
+     *
+     * @param string $templatePath
+     */
+    public function setTemplateFilePath($templatePath)
+    {
+        $this->templateFilePaths[] = $templatePath . DIRECTORY_SEPARATOR . '[templateFile]';
+        $this->templateFilePaths[] = $templatePath . DIRECTORY_SEPARATOR . '[templateFile].php';
+        $this->templateFilePaths[] = $templatePath . DIRECTORY_SEPARATOR . '[templateFile].html';
     }
 
     /**

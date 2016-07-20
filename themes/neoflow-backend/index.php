@@ -60,7 +60,6 @@
 
                         <div class="page-wrapper">
                             <div class="container">
-                                <?= $this->renderTemplate('page-brand') ?>
                                 <?= $this->getBlock(2) ?>
                             </div>
                         </div>
@@ -87,6 +86,11 @@
             </div><!-- /#wrapper -->
         </div><!-- /#body-scroll -->
 
+        <!-- Neoflow Vars -->
+        <script>
+            var NEOFLOW_LOCALE = '<?= $this->get('currentLanguage')->code ?>';
+        </script>
+
         <!-- jQuery -->
         <script src="<?= $this->getThemeUrl('/vendor/jquery/jquery-2.2.2.min.js') ?>"></script>
 
@@ -95,6 +99,9 @@
 
         <!-- Metis Menu jQuery Plugin JavaScript -->
         <script src="<?= $this->getThemeUrl('/vendor/metisMenu/metisMenu.js') ?>"></script>
+
+        <!-- Bootbox jQuery Plugin JavaScript -->
+        <script src="<?= $this->getThemeUrl('/vendor/bootbox/bootbox.min.js') ?>"></script>
 
         <!-- Nestable jQuery Plugin JavaScript  -->
         <script src="<?= $this->getThemeUrl('/vendor/nestable/jquery.nestable.js') ?>"></script>
@@ -109,7 +116,7 @@
         <script src="<?= $this->getThemeUrl('/vendor/select2/js/select2.full.js') ?>"></script>
         <script src="<?= $this->getThemeUrl('/vendor/select2/js/i18n/' . $this->app()->get('translator')->getCurrentLanguageCode() . '.js') ?>"></script>
 
-        <!-- Custom Theme JavaScript -->
+        <!-- Neoflow Backend Theme JavaScript -->
         <script src="<?= $this->getThemeUrl('/js/script.js') ?>"></script>
 
     </body>

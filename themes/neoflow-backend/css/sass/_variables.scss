@@ -7,7 +7,7 @@ $gray-light: #E6E6E6; //
 $gray-lighter: #F2F2F2; //
 
 $brand-primary: #d55d4e;
-$brand-secondary: #333;
+$brand-secondary: #32323A;
 
 // #F5846B
 $brand-success: #43AC6A;
@@ -40,18 +40,34 @@ $input-border: #ddd;
 $input-border-focus: $input-border;
 
 $sidebar-bg: $brand-secondary;
+
 $sidebar-link-color: #fff;
 $sidebar-link-border-color: transparent;
-$sidebar-link-hover-color: #fff;
+
+$sidebar-link-hover-color: $brand-primary;;
 $sidebar-link-hover-bg: darken($sidebar-bg, 2.5%);
 $sidebar-link-hover-border-color: transparent;
-$sidebar-link-active-color: #fff;
+
+$sidebar-link-active-color: $brand-primary;
 $sidebar-link-active-bg: darken($sidebar-bg, 2.5%);
-$sidebar-link-active-border-color: $brand-primary;
+$sidebar-link-active-border-color: transparent;
+
+$sidebar-sublink-color: $sidebar-link-color;
+$sidebar-sublink-border-color: $sidebar-link-border-color;
+
+$sidebar-sublink-hover-color: $sidebar-link-hover-color;
+$sidebar-sublink-hover-bg: darken($sidebar-bg, 5%);
+$sidebar-sublink-hover-border-color: $sidebar-link-hover-border-color;
+
+$sidebar-sublink-active-color: $brand-primary;
+$sidebar-sublink-active-bg: transparent;
+$sidebar-sublink-active-border-color: transparent;
+
 $sidebar-border-color: lighten($sidebar-bg, 5%);
 $sidebar-text-color: #fff;
 
-$sidebar-header-bg: $brand-primary;
+$sidebar-header-bg: $brand-secondary;
+$sidebar-header-border-color: transparent;
 $sidebar-brand-color: #fff;
 $sidebar-brand-hover-color: #fff;
 
@@ -62,6 +78,15 @@ $border-radius-small: 0;
 $btn-inverse-color: #fff;
 $btn-inverse-bg: $gray-dark;
 $btn-inverse-border: darken($btn-inverse-bg, 5%);
+
+$btn-default-bg: $gray-light;
+
+$nav-pills-active-link-hover-bg: $brand-secondary;
+
+$nav-link-hover-bg: transparent;
+$nav-tabs-border-color: $gray-lighter;
+$nav-tabs-active-link-hover-border-color: $nav-tabs-border-color;
+$nav-tabs-link-hover-border-color: transparent;
 
 $panel-footer-bg: #fff;
 

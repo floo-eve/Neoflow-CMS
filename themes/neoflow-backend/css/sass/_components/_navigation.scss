@@ -39,13 +39,13 @@ nav {
 
             .sidebar-brand {
                 color: $sidebar-brand-color;
-                font-size: 20px;
                 height: 50px;
                 line-height: 50px;
                 display: inline-block;
-                color: #fff;
+                text-transform: uppercase;
                 font-weight: normal;
                 @include transition(color ease .3s);
+
 
                 i {
                     font-size: 30px;
@@ -132,6 +132,26 @@ nav {
                             a {
                                 padding: 6px 25px 6px 57px; // Second-level
                                 height: 36px;
+
+                                &:hover, &:focus {
+                                    background: $sidebar-sublink-hover-bg;
+                                    color: $sidebar-sublink-hover-color;
+                                    border-color: $sidebar-sublink-hover-border-color;
+                                }
+                            }
+
+                            &.active {
+                                background: $sidebar-sublink-active-bg;
+
+                                > a {
+                                    color: $sidebar-sublink-active-color;
+                                    background: $sidebar-sublink-active-bg;
+                                    border-color: $sidebar-sublink-active-border-color;
+
+                                    i {
+                                        color: $sidebar-sublink-active-color;
+                                    }
+                                }
                             }
 
                             ul li a {
@@ -141,9 +161,11 @@ nav {
                     }
 
                     &.active {
+                        background: $sidebar-link-active-bg;
+
                         > a {
-                            color: $sidebar-link-active-color;
                             background: $sidebar-link-active-bg;
+                            color: $sidebar-link-active-color;
                             border-color: $sidebar-link-active-border-color;
 
                             i {
@@ -191,16 +213,28 @@ nav {
             margin: 0;
 
             .sidebar-header {
-                height: $navbar-height;
-                line-height: $navbar-height - 20px;
+                /*                height: $navbar-height;
+                                line-height: $navbar-height - 20px;*/
+                box-shadow: 0 1px 0 $sidebar-header-border-color;
+                height: auto;
+                line-height: 1.5;
 
                 .sidebar-toggle {
                     display: none;
                 }
 
                 .sidebar-brand {
-                    height: 30px;
-                    line-height: 30px;
+                    height: auto;
+                    line-height: 1.5;
+
+                    img {
+                        display: block;
+                    }
+
+                    span {
+                        display: block;
+                        margin: 5px 0 0;
+                    }
                 }
             }
 
