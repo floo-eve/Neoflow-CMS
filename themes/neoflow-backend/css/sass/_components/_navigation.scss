@@ -44,12 +44,16 @@ nav {
                 display: inline-block;
                 text-transform: uppercase;
                 font-weight: normal;
+                float: left;
+
                 @include transition(color ease .3s);
 
-
-                i {
-                    font-size: 30px;
+                img {
+                    max-width: 200px;
+                    max-height: 30px;
+                    display: inline-block;
                 }
+
 
                 &:hover, &:focus {
                     text-decoration: none;
@@ -226,9 +230,12 @@ nav {
                 .sidebar-brand {
                     height: auto;
                     line-height: 1.5;
+                    float: none;
+                    text-align: center;
 
                     img {
-                        display: block;
+                        max-height: inherit;
+                        max-width: 100%;
                     }
 
                     span {

@@ -143,12 +143,15 @@ nav.sidebar .sidebar-header .sidebar-brand {
   display: inline-block;
   text-transform: uppercase;
   font-weight: normal;
+  float: left;
   -webkit-transition: color ease 0.3s;
   -o-transition: color ease 0.3s;
   transition: color ease 0.3s;
 }
-nav.sidebar .sidebar-header .sidebar-brand i {
-  font-size: 30px;
+nav.sidebar .sidebar-header .sidebar-brand img {
+  max-width: 200px;
+  max-height: 30px;
+  display: inline-block;
 }
 nav.sidebar .sidebar-header .sidebar-brand:hover, nav.sidebar .sidebar-header .sidebar-brand:focus {
   text-decoration: none;
@@ -287,9 +290,12 @@ nav.sidebar .sidebar-collapse .sidebar-nav li.active > a .arrow:before {
   nav.sidebar .sidebar-header .sidebar-brand {
     height: auto;
     line-height: 1.5;
+    float: none;
+    text-align: center;
   }
   nav.sidebar .sidebar-header .sidebar-brand img {
-    display: block;
+    max-height: inherit;
+    max-width: 100%;
   }
   nav.sidebar .sidebar-header .sidebar-brand span {
     display: block;
