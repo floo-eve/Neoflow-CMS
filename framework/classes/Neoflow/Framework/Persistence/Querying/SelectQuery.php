@@ -42,7 +42,7 @@ class SelectQuery extends AbstractQuery
     /**
      * @var bool
      */
-    protected $caching = true;
+    protected $caching = false;
 
     /**
      * @var string
@@ -60,7 +60,7 @@ class SelectQuery extends AbstractQuery
 
         $this->addStatement('FROM', $table);
 
-        $this->caching = (bool) $this->app()->get('config')->get('cache');
+        $this->caching = (bool) $this->app()->get('config')->get('queryBuilder')->get('caching');
     }
 
     /**
@@ -73,7 +73,7 @@ class SelectQuery extends AbstractQuery
     public function fetchColumn($column = 0)
     {
         // Generate cache key
-        $cacheKey = $this->generateCacheKey('qb_');
+        $cacheKey = $this->generateCacheKey();
 
         // Fetch from cache
         $result = $this->fetchFromCache($cacheKey);
@@ -92,9 +92,10 @@ class SelectQuery extends AbstractQuery
                 }
             }
 
-            // Store to cahce
+            // Store to cache
             $this->storeToCache($cacheKey, $result);
         }
+
         return $result;
     }
 
@@ -108,6 +109,7 @@ class SelectQuery extends AbstractQuery
         if (count($this->statements['SELECT']) === 0) {
             $this->statements['SELECT'][] = '*';
         }
+
         return parent::execute();
     }
 
@@ -116,7 +118,7 @@ class SelectQuery extends AbstractQuery
      *
      * @param string $column
      *
-     * @return SelectQuery
+     * @return self
      */
     public function select($column)
     {
@@ -128,7 +130,7 @@ class SelectQuery extends AbstractQuery
      *
      * @param string $column
      *
-     * @return SelectQuery
+     * @return self
      */
     public function groupBy($column)
     {
@@ -140,7 +142,7 @@ class SelectQuery extends AbstractQuery
      *
      * @param string $column
      *
-     * @return SelectQuery
+     * @return self
      */
     public function having($column)
     {
@@ -152,7 +154,7 @@ class SelectQuery extends AbstractQuery
      *
      * @param string $column
      *
-     * @return SelectQuery
+     * @return self
      */
     public function orderByAsc($column)
     {
@@ -164,7 +166,7 @@ class SelectQuery extends AbstractQuery
      *
      * @param string $column
      *
-     * @return SelectQuery
+     * @return self
      */
     public function orderByDesc($column)
     {
@@ -176,7 +178,7 @@ class SelectQuery extends AbstractQuery
      *
      * @param string $statement
      *
-     * @return SelectQuery
+     * @return self
      */
     public function orderByRaw($statement)
     {
@@ -188,7 +190,7 @@ class SelectQuery extends AbstractQuery
      *
      * @param string $limit
      *
-     * @return SelectQuery
+     * @return self
      */
     public function limit($limit)
     {
@@ -200,7 +202,7 @@ class SelectQuery extends AbstractQuery
      *
      * @param string $offset
      *
-     * @return SelectQuery
+     * @return self
      */
     public function offset($offset)
     {
@@ -221,7 +223,7 @@ class SelectQuery extends AbstractQuery
         }
 
         // Generate cache key
-        $cacheKey = $this->generateCacheKey('qb_');
+        $cacheKey = $this->generateCacheKey();
 
         // Fetch from cache
         $result = $this->fetchFromCache($cacheKey);
@@ -233,9 +235,10 @@ class SelectQuery extends AbstractQuery
                 $result = $statement->fetch();
             }
 
-            // Store to cahce
+            // Store to cache
             $this->storeToCache($cacheKey, $result);
         }
+
         return $result;
     }
 
@@ -247,7 +250,7 @@ class SelectQuery extends AbstractQuery
     public function fetchAll()
     {
         // Generate cache key
-        $cacheKey = $this->generateCacheKey('qb_');
+        $cacheKey = $this->generateCacheKey();
 
         // Fetch from cache
         $result = $this->fetchFromCache($cacheKey);
@@ -259,9 +262,10 @@ class SelectQuery extends AbstractQuery
                 $result = $statement->fetchAll();
             }
 
-            // Store to cahce
+            // Store to cache
             $this->storeToCache($cacheKey, $result);
         }
+
         return $result;
     }
 
@@ -280,7 +284,7 @@ class SelectQuery extends AbstractQuery
      *
      * @param bool|object $asObject
      *
-     * @return SelectQuery
+     * @return self
      */
     public function asObject($asObject = true)
     {
@@ -292,7 +296,9 @@ class SelectQuery extends AbstractQuery
     /**
      * Enable/disable caching.
      *
-     * @return ORM
+     * @param bool $caching
+     *
+     * @return self
      */
     public function caching($caching = true)
     {
@@ -305,7 +311,7 @@ class SelectQuery extends AbstractQuery
      * Store result to cahce.
      *
      * @param string $cacheKey
-     * @param mixed $result
+     * @param mixed  $result
      *
      * @return bool
      */
@@ -331,6 +337,7 @@ class SelectQuery extends AbstractQuery
             if ($this->getCache()->exists($cacheKey)) {
                 $result = $this->getCache()->fetch($cacheKey);
                 $this->logQueryData('Cached query fetched', $this->getQuery(), $this->getParameters(), count($result));
+
                 return $result;
             }
         }
@@ -356,6 +363,7 @@ class SelectQuery extends AbstractQuery
                             return $parameter;
                         }, $this->getParameters())));
         }
+
         return $this->cacheKey;
     }
 }

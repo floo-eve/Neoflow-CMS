@@ -119,7 +119,7 @@ class FileCache extends AbstractCache
      */
     public function exists($key)
     {
-        return $this->fetch($key);
+        return (bool) $this->fetch($key);
     }
 
     /**

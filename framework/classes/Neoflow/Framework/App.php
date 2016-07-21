@@ -14,7 +14,7 @@ use \Neoflow\Framework\HTTP\Responsing\Response;
 use \Neoflow\Framework\HTTP\Session;
 use \Neoflow\Framework\Persistence\Caching\ApcCache;
 use \Neoflow\Framework\Persistence\Caching\ApcuCache;
-use \Neoflow\Framework\Persistence\Caching\DisabledCache;
+use \Neoflow\Framework\Persistence\Caching\DummyCache;
 use \Neoflow\Framework\Persistence\Caching\FileCache;
 use \Neoflow\Framework\Persistence\Database;
 
@@ -234,14 +234,14 @@ class App
         // Get cache config
         $cacheConfig = $this->get('config')->get('cache');
 
-        if ($cacheConfig === 'apcu' || ($cacheConfig === 'auto' && extension_loaded('apcu') && ini_get('apc.enabled'))) {
+        if ($cacheConfig === 'apcu' || ($cacheConfig === true && extension_loaded('apcu') && ini_get('apc.enabled'))) {
             $cache = new ApcuCache($this);
-        } elseif ($cacheConfig === 'apc' || ($cacheConfig === 'auto' && extension_loaded('apc') && ini_get('apc.enabled'))) {
+        } elseif ($cacheConfig === 'apc' || ($cacheConfig === true && extension_loaded('apc') && ini_get('apc.enabled'))) {
             $cache = new ApcCache($this);
-        } elseif (in_array($cacheConfig, array('auto', 'file'))) {
+        } elseif ($cacheConfig === 'file' || $cacheConfig === true) {
             $cache = new FileCache($this);
         } else {
-            $cache = new DisabledCache();
+            $cache = new DummyCache();
         }
         $this->set('cache', $cache);
     }

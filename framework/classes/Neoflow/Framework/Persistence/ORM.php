@@ -49,6 +49,9 @@ class ORM
                 ->setPrimaryKey($this->getPrimaryKey())
                 ->asObject($modelClassName);
 
+            $ormCaching = (bool) $this->app()->get('config')->get('orm')->get('caching');
+            $this->caching($ormCaching);
+
             return $this;
         }
 
@@ -131,6 +134,18 @@ class ORM
     public function orderByRaw($statement)
     {
         $this->query->orderByRaw($statement);
+
+        return $this;
+    }
+
+    /**
+     * Enable/disable caching.
+     *
+     * @return ORM
+     */
+    public function caching($caching = true)
+    {
+        $this->query->caching($caching);
 
         return $this;
     }

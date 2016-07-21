@@ -12,7 +12,13 @@ return array(
         'name' => 'neoflow-cms', // false (system default) | string
         'lifetime' => 3600 // false (system default) | int (seconds)
     ),
-    'cache' => false, // auto | apcu | file | apc | false
+    'orm' => array(
+        'caching' => false // true | false
+    ),
+    'queryBuilder' => array(
+        'caching' => false // true | false
+    ),
+    'cache' => true, // true (auto detection) | apc | apcu | file | false (disabled)
     'logger' => array(
         'extension' => 'txt', // txt | log | ... | false
         'prefix' => 'log_', // log_ | ... | false

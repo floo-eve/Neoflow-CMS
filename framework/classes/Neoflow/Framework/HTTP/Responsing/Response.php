@@ -75,7 +75,8 @@ class Response
      */
     protected function sendHeader()
     {
-        if ($this->statusCode) {
+
+        if (is_int($this->statusCode)) {
             http_response_code($this->statusCode);
         }
         foreach ($this->headers as $header) {

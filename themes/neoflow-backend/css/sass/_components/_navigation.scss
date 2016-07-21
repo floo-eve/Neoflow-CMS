@@ -219,9 +219,11 @@ nav {
             .sidebar-header {
                 /*                height: $navbar-height;
                                 line-height: $navbar-height - 20px;*/
+                padding: 20px 15px;
                 box-shadow: 0 1px 0 $sidebar-header-border-color;
                 height: auto;
                 line-height: 1.5;
+                font-size: 12px;
 
                 .sidebar-toggle {
                     display: none;

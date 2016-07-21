@@ -281,6 +281,28 @@ label {
             }
         }
     }
+
+    &.btn-lg {
+        &.btn-icon {
+            padding: 10px 16px 10px 40px;
+
+            i {
+                width: 44px;
+                height: 44px;
+                line-height: 44px;
+                margin: -10px 16px -10px -40px;
+            }
+
+            &.btn-icon-right {
+                padding: 10px 40px 10px 16px;
+
+                i {
+                    float: right;
+                    margin: -10px -40px -10px 16px;
+                }
+            }
+        }
+    }
 }
 
 .nav-tabs, .nav-pills {

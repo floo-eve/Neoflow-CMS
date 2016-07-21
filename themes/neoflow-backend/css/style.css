@@ -58,12 +58,12 @@ body > #body-scroll {
 #page-wrapper-fluid {
   background: #32323A;
   height: 100vh;
-  color: #fff;
 }
 #page-wrapper-fluid .page-wrapper .page-brand {
   display: block;
   padding: 25px;
   text-align: center;
+  color: #fff;
 }
 #page-wrapper-fluid .page-wrapper .page-brand img {
   display: block;
@@ -71,6 +71,12 @@ body > #body-scroll {
 #page-wrapper-fluid .page-wrapper .page-brand span {
   display: block;
   margin: 10px 0 0;
+}
+#page-wrapper-fluid .page-wrapper .page-footer {
+  color: #fff;
+}
+#page-wrapper-fluid .page-wrapper .page-footer a {
+  color: #fff;
 }
 
 @media (min-width: 768px) {
@@ -280,9 +286,11 @@ nav.sidebar .sidebar-collapse .sidebar-nav li.active > a .arrow:before {
   nav.sidebar .sidebar-header {
     /*                height: $navbar-height;
                     line-height: $navbar-height - 20px;*/
+    padding: 20px 15px;
     box-shadow: 0 1px 0 transparent;
     height: auto;
     line-height: 1.5;
+    font-size: 12px;
   }
   nav.sidebar .sidebar-header .sidebar-toggle {
     display: none;
@@ -629,6 +637,22 @@ label {
 .btn.btn-xs.btn-icon.btn-icon-right i {
   float: right;
   margin: -1px -30px -1px 5px;
+}
+.btn.btn-lg.btn-icon {
+  padding: 10px 16px 10px 40px;
+}
+.btn.btn-lg.btn-icon i {
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  margin: -10px 16px -10px -40px;
+}
+.btn.btn-lg.btn-icon.btn-icon-right {
+  padding: 10px 40px 10px 16px;
+}
+.btn.btn-lg.btn-icon.btn-icon-right i {
+  float: right;
+  margin: -10px -40px -10px 16px;
 }
 
 .nav-tabs li a, .nav-pills li a {

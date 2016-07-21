@@ -28,13 +28,13 @@
 #page-wrapper-fluid {
     background: $brand-secondary;
     height: 100vh;
-    color: #fff;
 
     .page-wrapper {
         .page-brand {
             display: block;
             padding: 25px;
             text-align: center;
+            color: #fff;
 
             img {
                 display: block;
@@ -43,6 +43,14 @@
             span {
                 display: block;
                 margin: 10px 0 0;
+            }
+        }
+
+        .page-footer {
+            color: #fff;
+
+            a {
+                color: #fff;
             }
         }
     }

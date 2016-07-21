@@ -2,7 +2,7 @@
 
 namespace Neoflow\Framework\Persistence\Caching;
 
-class ApcCache extends AbstractCache
+class DummyCache extends AbstractCache
 {
     /**
      * Fetch cache value.
@@ -13,7 +13,7 @@ class ApcCache extends AbstractCache
      */
     public function fetch($key)
     {
-        return \apc_fetch($key);
+        return false;
     }
 
     /**
@@ -28,10 +28,7 @@ class ApcCache extends AbstractCache
      */
     public function store($key, $data, $ttl = 0, array $tags = array())
     {
-        // Set key to tags
-        $this->setKeyToTags($tags, $key);
-
-        return \apc_store($key, $data, $ttl);
+        return true;
     }
 
     /**
@@ -43,7 +40,7 @@ class ApcCache extends AbstractCache
      */
     public function delete($key)
     {
-        return \apc_delete($key);
+        return true;
     }
 
     /**
@@ -55,7 +52,7 @@ class ApcCache extends AbstractCache
      */
     public function exists($key)
     {
-        return \apc_exists($key);
+        return false;
     }
 
     /**
@@ -65,6 +62,6 @@ class ApcCache extends AbstractCache
      */
     public function clear()
     {
-        return \apc_clear_cache();
+        return true;
     }
 }

@@ -266,11 +266,18 @@ abstract class AbstractView
      */
     protected function getViewFilePaths($viewFile)
     {
-        $viewFilePaths = array();
-        foreach ($this->viewFilePaths as $viewFilePath) {
-            $viewFilePaths[] = str_replace('[viewFile]', $viewFile, $viewFilePath);
+        $cache = $this->app()->get('cache');
+        $cacheKey = sha1($viewFile);
+        if ($cache->exists($cacheKey)) {
+            return $cache->fetch($cacheKey);
+        } else {
+            $viewFilePaths = array();
+            foreach ($this->viewFilePaths as $viewFilePath) {
+                $viewFilePaths[] = str_replace('[viewFile]', $viewFile, $viewFilePath);
+            }
+            $cache->store($cacheKey, $viewFilePaths, 0, array('_view'));
+            return $viewFilePaths;
         }
-        return $viewFilePaths;
     }
 
     /**
@@ -321,11 +328,18 @@ abstract class AbstractView
      */
     protected function getTemplateFilePaths($templateFile)
     {
-        $templateFilePaths = array();
-        foreach ($this->templateFilePaths as $templateFilePath) {
-            $templateFilePaths[] = str_replace('[templateFile]', $templateFile, $templateFilePath);
+        $cache = $this->app()->get('cache');
+        $cacheKey = sha1($templateFile);
+        if ($cache->exists($cacheKey)) {
+            return $cache->fetch($cacheKey);
+        } else {
+            $templateFilePaths = array();
+            foreach ($this->templateFilePaths as $templateFilePath) {
+                $templateFilePaths[] = str_replace('[templateFile]', $templateFile, $templateFilePath);
+            }
+            $cache->store($cacheKey, $templateFilePaths, 0, array('_view'));
+            return $templateFilePaths;
         }
-        return $templateFilePaths;
     }
 
     /**

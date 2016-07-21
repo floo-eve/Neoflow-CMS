@@ -11,9 +11,9 @@
         <meta name="author" content="">
 
         <!-- Favicons -->
-        <link rel="icon" type="image/png" sizes="96x96" href="<?= $this->getThemeUrl('/img/favicon-96x96.png') ?>">
+<!--        <link rel="icon" type="image/png" sizes="96x96" href="<?= $this->getThemeUrl('/img/favicon-96x96.png') ?>">
         <link rel="icon" type="image/png" sizes="32x32" href="<?= $this->getThemeUrl('/img/favicon-32x32.png') ?>">
-        <link rel="icon" type="image/png" sizes="16x16" href="<?= $this->getThemeUrl('/img/favicon-16x16.png') ?>">
+        <link rel="icon" type="image/png" sizes="16x16" href="<?= $this->getThemeUrl('/img/favicon-16x16.png') ?>">-->
 
         <!-- Boostrap CSS -->
         <link href="<?= $this->getThemeUrl('/vendor/bootstrap/css/bootstrap.css') ?>" rel="stylesheet" />
