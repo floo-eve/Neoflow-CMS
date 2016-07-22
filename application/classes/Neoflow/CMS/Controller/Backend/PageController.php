@@ -136,10 +136,10 @@ class PageController extends BackendController
         $this->getSession()
             ->setFlash('alert', new SuccessAlert('Page successful created'));
 
-        return $this->redirectToRoute('page_show_sections', array('id' => $page->id(), 'language_id' => $page->language_id));
+        return $this->redirectToRoute('page_sections', array('id' => $page->id(), 'language_id' => $page->language_id));
     }
 
-    public function showSectionsAction($args)
+    public function sectionsAction($args)
     {
         // Get page by id
         $page = $this->getPageById($args['id']);
@@ -157,7 +157,7 @@ class PageController extends BackendController
         ));
     }
 
-    public function showSettingsAction($args)
+    public function editAction($args)
     {
         // Get page by id
         $page = $this->getPageById($args['id']);
@@ -184,16 +184,6 @@ class PageController extends BackendController
                 'navitems' => $navitems,
                 'parentNavitemId' => $parentNavitemId
         ));
-    }
-
-    public function updateSectionOrderAction($args)
-    {
-        $json = file_get_contents('php://input');
-        $result = false;
-        if (is_json($json)) {
-            $result = $this->sectionMapper->updateOrder(json_decode($json, true));
-        }
-        return new \Neoflow\Framework\HTTP\Responsing\JsonResponse(array('success' => (bool) $result));
     }
 
     public function deleteAction($args)
@@ -259,60 +249,7 @@ class PageController extends BackendController
 
             return $this->redirectToRoute('page_index');
         }
-        return $this->redirectToRoute('page_show_settings', array('id' => $page->id()));
-    }
-
-    /**
-     * Add section action
-     *
-     * @param array $args
-     * @return Response
-     */
-    public function addSectionAction($args)
-    {
-        // Get post data
-        $postData = $this->getRequest()->getPostData();
-
-        // Get page by id
-        $page = $this->getPageById($postData->get('page_id'));
-
-        $section = new SectionModel();
-        $section->page_id = $page->id();
-        $section->module_id = $postData->get('module_id');
-        $section->is_active = $postData->get('is_active');
-        $section->block = 1;
-
-        if ($section->save()) {
-            $this->getSession()
-                ->setFlash('alert', new SuccessAlert('Section successful added'));
-        } else {
-            $this->getSession()
-                ->setFlash('alert', new DangerAlert('Add section failed'));
-        }
-
-        return $this->redirectToRoute('page_show_sections', array('id' => $page->id()));
-    }
-
-    /**
-     * Delete section action
-     *
-     * @param array $args
-     * @return Response
-     */
-    public function deleteSectionAction($args)
-    {
-        // Get post data
-        $section = $this->sectionMapper->findById($args['id']);
-
-        if ($section->delete()) {
-            $this->getSession()
-                ->setFlash('alert', new SuccessAlert('Section successful deleted'));
-        } else {
-            $this->getSession()
-                ->setFlash('alert', new DangerAlert('Delete section failed'));
-        }
-
-        return $this->redirectToRoute('page_show_sections', array('id' => $section->page_id));
+        return $this->redirectToRoute('page_edit', array('id' => $page->id()));
     }
 
     /**

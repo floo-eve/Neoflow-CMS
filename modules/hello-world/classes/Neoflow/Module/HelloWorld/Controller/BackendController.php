@@ -2,10 +2,10 @@
 
 namespace Neoflow\Module\HelloWorld\Controller;
 
-use \Neoflow\CMS\Controller\Backend\PageController;
+use \Neoflow\CMS\Controller\Backend\SectionController;
 use \Neoflow\Framework\HTTP\Responsing\Response;
 
-class BackendController extends PageController
+class BackendController extends SectionController
 {
 
     /**
@@ -17,8 +17,6 @@ class BackendController extends PageController
      */
     public function indexAction($args)
     {
-        $this->view->setTitle('Dashboard');
-
         return $this->render('module/helloworld/index');
     }
 }

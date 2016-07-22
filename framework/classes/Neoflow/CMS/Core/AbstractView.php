@@ -21,35 +21,28 @@ abstract class AbstractView extends \Neoflow\Framework\Core\AbstractView
 
         $this->setTheme();
 
-        $this->app()->set('theme', $this->theme);
-
-        $cache = $this->app()->get('cache');
-        $cacheKey = sha1('_viewAndTemplateFilePaths');
-
-        if ($cache->exists($cacheKey)) {
+        $cacheKey = sha1('_viewAndtemplateFileDirectories');
+        if ($this->getCache()->exists($cacheKey)) {
 
             // Fetch tempalte and view file paths from cahce
-            $viewAndTemplateFilePaths = $cache->fetch($cacheKey);
-            $this->viewFilePaths = $viewAndTemplateFilePaths[0];
-            $this->templateFilePaths = $viewAndTemplateFilePaths[1];
+            $viewAndTemplateFilePaths = $this->getCache()->fetch($cacheKey);
+            $this->viewFileDirectories = $viewAndTemplateFilePaths[0];
+            $this->templateFileDirectories = $viewAndTemplateFilePaths[1];
         } else {
 
             // Set theme template and view file paths
-            $themePath = $this->getThemePath();
-            $this->setTemplateFilePath($themePath . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR);
-            $this->setViewFilePath($themePath . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
+            $this->viewFileDirectories[] = $this->getThemePath(DIRECTORY_SEPARATOR . 'views');
+            $this->templateFileDirectories[] = $this->getThemePath(DIRECTORY_SEPARATOR . 'templates');
 
             // Set template and view file paths of modules
             $modules = $this->app()->get('modules');
             foreach ($modules as $module) {
-                $templateFilePath = $this->getConfig()->getPath(DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $module->folder . DIRECTORY_SEPARATOR . 'templates');
-                $this->setTemplateFilePath($templateFilePath);
-                $viewFilePath = $this->getConfig()->getPath(DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $module->folder . DIRECTORY_SEPARATOR . 'views');
-                $this->setViewFilePath($viewFilePath);
+                $this->viewFileDirectories[] = $module->getPath(DIRECTORY_SEPARATOR . 'views');
+                $this->templateFileDirectories[] = $module->getPath(DIRECTORY_SEPARATOR . 'templates');
             }
 
             // Store template and view file paths to cache
-            $cache->store($cacheKey, array($this->viewFilePaths, $this->templateFilePaths), 0, array('_view'));
+            $this->getCache()->store($cacheKey, array($this->viewFileDirectories, $this->templateFileDirectories), 0, array('_view'));
         }
     }
 

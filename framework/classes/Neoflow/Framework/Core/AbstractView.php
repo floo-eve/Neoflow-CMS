@@ -7,9 +7,9 @@ use \InvalidArgumentException;
 use \Neoflow\CMS\Core\View;
 use \Neoflow\Framework\Common\Container;
 use \Neoflow\Framework\Handler\Config;
-use \Neoflow\Framework\Handler\Presentation;
 use \Neoflow\Framework\Handler\Translator;
 use \Neoflow\Framework\Handler\Validation\ValidationHelper;
+use \Neoflow\Framework\Persistence\Caching\AbstractCache;
 
 abstract class AbstractView
 {
@@ -42,12 +42,12 @@ abstract class AbstractView
     /**
      * @var array
      */
-    protected $viewFilePaths = array();
+    protected $viewFileDirectories = array();
 
     /**
      * @var array
      */
-    protected $templateFilePaths = array();
+    protected $templateFileDirectories = array();
 
     /**
      * Constructor.
@@ -56,17 +56,8 @@ abstract class AbstractView
     {
         $this->data = new Container();
 
-        $this->viewFilePaths = array(
-            $this->getConfig()->getPath('/application/views/[viewFile]'),
-            $this->getConfig()->getPath('/application/views/[viewFile].php'),
-            $this->getConfig()->getPath('/application/views/[viewFile].html'),
-        );
-
-        $this->templateFilePaths = array(
-            $this->getConfig()->getPath('/application/templates/[templateFile]'),
-            $this->getConfig()->getPath('/application/templates/[templateFile].php'),
-            $this->getConfig()->getPath('/application/templates/[templateFile].html'),
-        );
+        $this->viewFileDirectories[] = $this->getConfig()->getPath(DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'views');
+        $this->templateFileDirectories[] = $this->getConfig()->getPath(DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'templates');
     }
 
     /**
@@ -232,64 +223,23 @@ abstract class AbstractView
      *
      * @return string
      *
-     * @throws InvalidArgumentException
+     * @throws Exception
      */
     public function renderView($viewFile, $parameters = array(), $strict = false)
     {
-        // Get view file paths
-        $viewFilePaths = $this->getViewFilePaths($viewFile);
-
         $this->addParameters($parameters);
 
-        // Render first view file which exists
-        foreach ($viewFilePaths as $viewFilePath) {
-            if (is_file($viewFilePath)) {
-                $content = $this->renderFile($viewFilePath, $parameters);
+        $viewFilePath = $this->getFilePath($viewFile, sha1('_view_' . $viewFile), $this->viewFileDirectories);
+        if ($viewFilePath) {
+            $content = $this->renderFile($viewFilePath, $parameters);
 
-                if ($strict && !$this->getBlock(1)) {
-                    $this->addContentToBlock(1, $content);
-                }
-
-                return $content;
+            if ($strict && !$this->getBlock(1)) {
+                $this->addContentToBlock(1, $content);
             }
+
+            return $content;
         }
-
-        throw new InvalidArgumentException('View not found: ' . $viewFile);
-    }
-
-    /**
-     * Get view file paths.
-     *
-     * @param string $viewFile View name
-     *
-     * @return array
-     */
-    protected function getViewFilePaths($viewFile)
-    {
-        $cache = $this->app()->get('cache');
-        $cacheKey = sha1($viewFile);
-        if ($cache->exists($cacheKey)) {
-            return $cache->fetch($cacheKey);
-        } else {
-            $viewFilePaths = array();
-            foreach ($this->viewFilePaths as $viewFilePath) {
-                $viewFilePaths[] = str_replace('[viewFile]', $viewFile, $viewFilePath);
-            }
-            $cache->store($cacheKey, $viewFilePaths, 0, array('_view'));
-            return $viewFilePaths;
-        }
-    }
-
-    /**
-     * Set view file path
-     *
-     * @param string $viewPath
-     */
-    public function setViewFilePath($viewPath)
-    {
-        $this->viewFilePaths[] = $viewPath . DIRECTORY_SEPARATOR . '[viewFile]';
-        $this->viewFilePaths[] = $viewPath . DIRECTORY_SEPARATOR . '[viewFile].php';
-        $this->viewFilePaths[] = $viewPath . DIRECTORY_SEPARATOR . '[viewFile].html';
+        throw new Exception('View not found: ' . $viewFile);
     }
 
     /**
@@ -300,58 +250,46 @@ abstract class AbstractView
      *
      * @return string
      *
-     * @throws InvalidArgumentException
+     * @throws Exception
      */
     public function renderTemplate($templateFile, $parameters = array())
     {
-        // Get template file paths
-        $templateFilePaths = $this->getTemplateFilePaths($templateFile);
-
-        $this->addParameters($parameters);
-
-        // Render first template file which exists
-        foreach ($templateFilePaths as $templateFilePath) {
-            if (is_file($templateFilePath)) {
-                return $this->renderFile($templateFilePath, $parameters);
-            }
+        $templateFilePath = $this->getFilePath($templateFile, sha1('_template_' . $templateFile), $this->templateFileDirectories);
+        if ($templateFilePath) {
+            return $this->renderFile($templateFilePath, $parameters);
         }
-
-        throw new InvalidArgumentException('Template not found: ' . $templateFile);
+        throw new Exception('Template not found: ' . $templateFile);
     }
 
     /**
-     * Get template file paths.
+     * Get file path
      *
-     * @param string $templateFile Template file name
-     *
-     * @return array
+     * @param string $file View or template file name
+     * @param string $cacheKey Cache key
+     * @param array $directories View or template directories
+     * @return boolean
      */
-    protected function getTemplateFilePaths($templateFile)
+    protected function getFilePath($file, $cacheKey, $directories)
     {
-        $cache = $this->app()->get('cache');
-        $cacheKey = sha1($templateFile);
-        if ($cache->exists($cacheKey)) {
-            return $cache->fetch($cacheKey);
+        if ($this->getCache()->exists($cacheKey)) {
+            return $this->getCache()->fetch($cacheKey);
         } else {
-            $templateFilePaths = array();
-            foreach ($this->templateFilePaths as $templateFilePath) {
-                $templateFilePaths[] = str_replace('[templateFile]', $templateFile, $templateFilePath);
-            }
-            $cache->store($cacheKey, $templateFilePaths, 0, array('_view'));
-            return $templateFilePaths;
-        }
-    }
 
-    /**
-     * Set template file path
-     *
-     * @param string $templatePath
-     */
-    public function setTemplateFilePath($templatePath)
-    {
-        $this->templateFilePaths[] = $templatePath . DIRECTORY_SEPARATOR . '[templateFile]';
-        $this->templateFilePaths[] = $templatePath . DIRECTORY_SEPARATOR . '[templateFile].php';
-        $this->templateFilePaths[] = $templatePath . DIRECTORY_SEPARATOR . '[templateFile].html';
+            foreach ($directories as $directory) {
+
+                $filePaths = array_map(function($extension) use ($directory, $file) {
+                    return $directory . DIRECTORY_SEPARATOR . $file . $extension;
+                }, array('', '.php', '.html'));
+
+                foreach ($filePaths as $filePath) {
+                    if (is_file($filePath)) {
+                        $this->getCache()->store($cacheKey, $filePath, 0, array('_view'));
+                        return $filePath;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -366,9 +304,9 @@ abstract class AbstractView
     public function renderTheme($themeFile = 'index')
     {
         $themeFiles = array(
-            $this->getThemePath($themeFile),
-            $this->getThemePath($themeFile . '.php'),
-            $this->getThemePath($themeFile . '.html'),
+            $this->getThemePath(DIRECTORY_SEPARATOR . $themeFile),
+            $this->getThemePath(DIRECTORY_SEPARATOR . $themeFile . '.php'),
+            $this->getThemePath(DIRECTORY_SEPARATOR . $themeFile . '.html'),
         );
 
         // Render theme file and get output
@@ -407,7 +345,7 @@ abstract class AbstractView
      *
      * @return string
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function renderFile($file, array $parameters = array())
     {
@@ -429,7 +367,7 @@ abstract class AbstractView
 
             return $output;
         }
-        throw new \InvalidArgumentException('File not found: ' . $file);
+        throw new InvalidArgumentException('File not found: ' . $file);
     }
 
     /**
@@ -498,13 +436,12 @@ abstract class AbstractView
     }
 
     /**
-     * Get presentation
-     *
-     * @return Presentation
+     * Get cache
+     * @return AbstractCache
      */
-    protected function getPresentation()
+    protected function getCache()
     {
-        return $this->app()->get('presentation');
+        return $this->app()->get('cache');
     }
 
     /**
