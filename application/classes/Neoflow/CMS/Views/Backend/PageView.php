@@ -38,19 +38,19 @@ class PageView extends NavigationView
                                 <li class="small">ID: ' . $section->id() . '</li>
                             </ul>
                             <span class="pull-right">
-                                <a href="' . $this->generateUrl($module->route, array('section_id' => $section->id())) . '" class="btn btn-default btn-xs hidden-xs btn-icon"><i class="fa fa-fw fa-pencil"></i>' . $this->translate('Edit') . '</a>';
+                                <a href="' . $this->generateUrl($module->route, array('section_id' => $section->id())) . '" class="btn btn-default btn-xs hidden-xs btn-icon" title="' . $this->translate('Edit') . '"><i class="fa fa-fw fa-pencil"></i>' . $this->translate('Edit') . '</a>';
 
                 if ($section->is_active) {
-                    $output .= ' <a href="' . $this->generateUrl('section_disable', array('id' => $section->id())) . '" class="btn btn-warning btn-xs btn-icon"><i class="fa fa-fw fa-ban"></i> ' . $this->translate('Disable') . '</a>';
+                    $output .= ' <a href="' . $this->generateUrl('section_disable', array('id' => $section->id())) . '" class="btn btn-warning btn-xs" title="' . $this->translate('Disable') . '"><i class="fa fa-fw fa-ban"></i></a>';
                 } else {
-                    $output .= ' <a href="' . $this->generateUrl('section_activate', array('id' => $section->id())) . '" class="btn btn-success btn-xs btn-icon"><i class="fa fa-fw fa-eye"></i> ' . $this->translate('Activate') . '</a>';
+                    $output .= ' <a href="' . $this->generateUrl('section_activate', array('id' => $section->id())) . '" class="btn btn-success btn-xs" title="' . $this->translate('Activate') . '"><i class="fa fa-fw fa-eye"></i></a>';
                 }
 
 
 
 
 
-                $output .= ' <a href="' . $this->generateUrl('section_delete', array('id' => $section->id())) . '" class="btn btn-danger btn-xs btn-icon confirm" data-message="' . $this->translate('Are you sure you want to delete this section?') . '"><i class="fa fa-fw fa-trash-o"></i>' . $this->translate('Delete') . '</a>
+                $output .= ' <a href="' . $this->generateUrl('section_delete', array('id' => $section->id())) . '" class="btn btn-danger btn-xs confirm" data-message="' . $this->translate('Are you sure you want to delete this section?') . '" title="' . $this->translate('Delete') . '"><i class="fa fa-fw fa-trash-o"></i></a>
                             </span>
                         </li>';
             }

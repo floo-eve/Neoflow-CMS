@@ -837,5 +837,5 @@ small .fa,
 .btn-group-xs .fa,
 .input-group-sm .fa,
 .input-group-xs .fa {
-  font-size: 14px;
+  /*font-size: $font-size-base;*/
 }

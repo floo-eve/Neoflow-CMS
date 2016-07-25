@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
   `module_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `folder` varchar(50) NOT NULL,
+  `route` varchar(50) NOT NULL,
   PRIMARY KEY (`module_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -49,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
 --
 
 INSERT INTO `modules` (`module_id`, `title`, `folder`) VALUES
-(1, 'Hello World', 'hello-world');
+(1, 'Hello World', 'hello-world','mod_hello_world_index');
 
 -- --------------------------------------------------------
 
