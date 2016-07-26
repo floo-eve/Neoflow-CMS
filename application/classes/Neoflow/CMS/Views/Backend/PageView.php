@@ -46,10 +46,6 @@ class PageView extends NavigationView
                     $output .= ' <a href="' . $this->generateUrl('section_activate', array('id' => $section->id())) . '" class="btn btn-success btn-xs" title="' . $this->translate('Activate') . '"><i class="fa fa-fw fa-eye"></i></a>';
                 }
 
-
-
-
-
                 $output .= ' <a href="' . $this->generateUrl('section_delete', array('id' => $section->id())) . '" class="btn btn-danger btn-xs confirm" data-message="' . $this->translate('Are you sure you want to delete this section?') . '" title="' . $this->translate('Delete') . '"><i class="fa fa-fw fa-trash-o"></i></a>
                             </span>
                         </li>';

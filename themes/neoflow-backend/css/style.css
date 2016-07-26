@@ -839,3 +839,7 @@ small .fa,
 .input-group-xs .fa {
   /*font-size: $font-size-base;*/
 }
+
+.fa {
+  line-height: inherit;
+}

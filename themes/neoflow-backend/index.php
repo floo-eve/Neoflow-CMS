@@ -34,12 +34,12 @@
         <!-- Flag icon CSS -->
         <link href="<?= $this->getThemeUrl('/vendor/flag-icon-css/css/flag-icon.css') ?>" rel="stylesheet" />
 
-        <!-- Theme CSS -->
-        <link href="<?= $this->getThemeUrl('/css/style.css') ?>" rel="stylesheet" />
-
         <!-- Vendor Fonts -->
         <link href="<?= $this->getThemeUrl('/vendor/font-awesome-4.5/css/font-awesome.min.css') ?>" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400italic,700|Roboto:400,400italic,500,700,900" rel="stylesheet" type="text/css">
+
+        <!-- Theme CSS -->
+        <link href="<?= $this->getThemeUrl('/css/style.css') ?>" rel="stylesheet" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -51,8 +51,8 @@ class NavigationView extends BackendView
                                 <a href="' . $this->generateUrl('page_sections', array('id' => $navitem->page_id)) . '">' . $navitem->title . '</a>';
 
                 $output .= '<span class="pull-right">
-                                    <a href="' . $this->generateUrl('page_sections', array('id' => $navitem->page_id)) . '" class="btn btn-default btn-xs hidden-xs btn-icon" title="' . $this->translate('Edit') . '"><i class="fa fa-fw fa-pencil"></i>' . $this->translate('Edit') . '</a>
-                                    <a href="' . $this->generateUrl('page_delete', array('id' => $navitem->page_id)) . '" class="btn btn-primary btn-xs confirm" data-message="' . $this->translate('Are you sure you want to delete this page and all of its subpage?') . '" title="' . $this->translate('Delete') . '"><i class="fa fa-fw fa-trash-o"></i></a>
+                                    <a href="' . $this->generateUrl('page_sections', array('id' => $navitem->page_id)) . '" class="btn btn-default btn-xs btn-icon" title="' . $this->translate('Edit') . '"><i class="fa fa-fw fa-pencil"></i>' . $this->translate('Edit') . '</a>
+                                    <a href="' . $this->generateUrl('page_delete', array('id' => $navitem->page_id)) . '" class="btn btn-danger btn-xs confirm" data-message="' . $this->translate('Are you sure you want to delete this page and all of its subpage?') . '" title="' . $this->translate('Delete') . '"><i class="fa fa-fw fa-trash-o"></i></a>
                                 </span>';
 
                 $childNavitems = $navitem->childNavitems()
