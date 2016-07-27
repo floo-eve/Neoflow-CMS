@@ -144,7 +144,7 @@ class BackendController extends AbstractController
     /**
      * Set view.
      */
-    public function setView()
+    protected function setView()
     {
         $this->view = new BackendView();
     }

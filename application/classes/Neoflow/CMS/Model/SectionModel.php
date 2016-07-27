@@ -65,7 +65,7 @@ class SectionModel extends AbstractModel
         throw new InvalidArgumentException('Cannot find module with ID: ' . $this->module_id);
     }
 
-    public function save()
+    public function save($validate = true)
     {
         if (!$this->position) {
             $this->position = 1;
@@ -78,6 +78,16 @@ class SectionModel extends AbstractModel
                 $this->position = $lastSection->position + 1;
             }
         }
-        return parent::save();
+        return parent::save($validate);
+    }
+
+    public function validate()
+    {
+        $validator = new \Neoflow\Framework\Handler\Validation\Validator($this->toArray());
+        $validator
+            ->required()
+            ->set('module_id', 'Module');
+
+        return (bool) $validator->validate();
     }
 }

@@ -38,6 +38,7 @@
         <link href="<?= $this->getThemeUrl('/vendor/font-awesome-4.5/css/font-awesome.min.css') ?>" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400italic,700|Roboto:400,400italic,500,700,900" rel="stylesheet" type="text/css">
 
+
         <!-- Theme CSS -->
         <link href="<?= $this->getThemeUrl('/css/style.css') ?>" rel="stylesheet" />
 

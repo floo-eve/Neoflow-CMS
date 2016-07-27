@@ -220,6 +220,15 @@ abstract class AbstractModel
     }
 
     /**
+     * Validate model entity
+     * @return bool
+     */
+    public function validate()
+    {
+        return true;
+    }
+
+    /**
      * Getter
      *
      * @param string $name
@@ -246,12 +255,16 @@ abstract class AbstractModel
      * Save model entity.
      *
      * @return int|bool
+     *
+     * @throws Exception
      */
-    public function save()
+    public function save($validate = true)
     {
         if ($this->id()) {
-            return $this->update();
+            return $this->update($validate);
         }
+
+        $this->validate();
 
         $queryBuilder = new QueryBuilder();
 
@@ -263,6 +276,8 @@ abstract class AbstractModel
         if ($id) {
             $primaryKey = $this->getPrimaryKey();
             $this->set($primaryKey, $id);
+        } else {
+            throw new Exception('Save model entity failed');
         }
 
         return true;
@@ -285,6 +300,8 @@ abstract class AbstractModel
      */
     public function update()
     {
+        $this->validate();
+
         $queryBuilder = new QueryBuilder();
 
         $queryBuilder

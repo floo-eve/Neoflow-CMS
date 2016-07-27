@@ -1,22 +1,3 @@
-.nestable-handle {
-  position: absolute;
-  left: 0;
-  top: 0;
-  margin-left: -40px;
-  height: 40px;
-  width: 40px;
-  display: block;
-  text-align: center;
-  border: 1px solid #32323A;
-  background: #32323A;
-  cursor: move;
-  line-height: 40px;
-  font-weight: normal;
-  -ms-touch-action: none;
-  touch-action: none;
-  color: #fff;
-}
-
 .nestable-list {
   padding: 0;
   border: 0;
@@ -27,11 +8,43 @@
 .nestable-list .nestable-item {
   border-radius: 0;
   position: relative;
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  /*        height: 42px;*/
+}
+.nestable-list .nestable-item > .nestable-handle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: -40px;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  display: block;
+  text-align: center;
+  background: #32323A;
+  cursor: move;
+  font-weight: normal;
+  -ms-touch-action: none;
+  touch-action: none;
+  color: #fff;
+}
+.nestable-list .nestable-item > .nestable-content {
+  height: 40px;
+  line-height: 20px;
+  padding: 10px 15px 10px 0;
+  display: block;
+  width: 100%;
+}
+.nestable-list .nestable-item > .nestable-content form {
+  display: inline-block;
+  height: 20px;
 }
 .nestable-list button {
-  margin: 0 0 0 -40px;
-  max-height: 19px;
-  line-height: 19px;
+  margin: 11px 0 0 -40px;
+  max-height: 20px;
+  height: 20px;
   position: absolute;
 }
 .nestable-list > .nestable-item {
@@ -39,7 +52,7 @@
   padding-left: 55px;
 }
 .nestable-list > .nestable-item .nestable-list {
-  margin: 10px -15px -10px -55px;
+  margin: 0 0 0 -55px;
 }
 .nestable-list > .nestable-item .nestable-list > .nestable-item {
   margin: 0;
@@ -49,21 +62,21 @@
   padding-left: 85px;
 }
 .nestable-list > .nestable-item .nestable-list > .nestable-item > .nestable-list {
-  margin: 10px -15px -10px -85px;
+  margin-left: -85px;
 }
 .nestable-list > .nestable-item .nestable-list > .nestable-item > .nestable-list > .nestable-item {
   margin: 0;
   padding-left: 115px;
 }
 .nestable-list > .nestable-item .nestable-list > .nestable-item > .nestable-list > .nestable-item > .nestable-list {
-  margin: 10px -15px -10px -115px;
+  margin-left: -115px;
 }
 .nestable-list > .nestable-item .nestable-list > .nestable-item > .nestable-list > .nestable-item > .nestable-list > .nestable-item {
   margin: 0;
   padding-left: 145px;
 }
 .nestable-list > .nestable-item .nestable-list > .nestable-item > .nestable-list > .nestable-item > .nestable-list > .nestable-item > .nestable-list {
-  margin: 10px -15px -10px -145px;
+  margin-left: -145px;
 }
 .nestable-list > .nestable-item .nestable-list > .nestable-item > .nestable-list > .nestable-item > .nestable-list > .nestable-item > .nestable-list > .nestable-item {
   margin: 0;

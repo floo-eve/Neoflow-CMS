@@ -99,16 +99,6 @@ class NavigationController extends BackendController
         ));
     }
 
-    public function updateNavitemOrderAction($args)
-    {
-        $json = file_get_contents('php://input');
-        $result = false;
-        if (is_json($json)) {
-            $result = $this->navitemMapper->updateOrder(json_decode($json, true));
-        }
-        return new JsonResponse(array('success' => (bool) $result));
-    }
-
     /**
      * Create action.
      *
@@ -132,15 +122,13 @@ class NavigationController extends BackendController
         } catch (ValidationException $ex) {
 
             // Fallback if validation fails
-            $this->getSession()
-                ->setFlash('alert', new DangerAlert($ex->getErrors()));
+            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
 
             return $this->redirectToRoute('navigation_index');
         } catch (Exception $ex) {
 
             // Fallback if something got wrong
-            $this->getSession()
-                ->setFlash('alert', new DangerAlert('Something got wrong'));
+            $this->setFlash('alert', new DangerAlert('Something got wrong'));
 
             return $this->redirectToRoute('navigation_index');
         }
@@ -182,7 +170,7 @@ class NavigationController extends BackendController
 
             // Fallback if something get wrong
             $this->getSession()
-                ->setFlash('alert', new DangerAlert('Something get wrong'));
+                ->setFlash('alert', new DangerAlert('Transaction failed'));
 
             return $this->redirectToRoute('navigation_index');
         }
@@ -234,7 +222,7 @@ class NavigationController extends BackendController
     /**
      * Set view.
      */
-    public function setView()
+    protected function setView()
     {
         $this->view = new NavigationView();
     }

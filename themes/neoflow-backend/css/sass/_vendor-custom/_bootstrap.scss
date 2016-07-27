@@ -170,42 +170,6 @@ a {
     }
 }
 
-.has-success {
-    @include form-control-validation($state-success-bg, $state-success-border, $state-success-bg);
-
-    .form-control {
-        border-color: $state-success-border;
-
-        &:focus {
-            border-color: $state-success-border;
-        }
-    }
-}
-
-.has-warning {
-    @include form-control-validation($state-warning-bg, $state-warning-border, $state-warning-bg);
-
-    .form-control {
-        border-color: $state-warning-border;
-
-        &:focus {
-            border-color: $state-warning-border;
-        }
-    }
-}
-
-.has-error {
-    @include form-control-validation($state-danger-bg, $state-danger-border, $state-danger-bg);
-
-    .form-control {
-        border-color: $state-danger-border;
-
-        &:focus {
-            border-color: $state-danger-border;
-        }
-    }
-}
-
 .has-success, .has-warning, .has-error {
     .form-control {
         &, &:focus {
@@ -235,23 +199,40 @@ label {
     @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
 }*/
 
+.form-horizontal {
+    .radio,
+    .checkbox,
+    .radio-inline,
+    .checkbox-inline {
+        padding: 0;
+        min-height: 0;
+    }
+}
+
 
 .btn {
     border: 0;
+    vertical-align: top;
 
     &.btn-icon {
-        padding: 6px 12px 6px 30px;
-
         i {
             width: 30px;
             height: 34px;
             line-height: 34px;
             background: rgba(0, 0, 0, 0.1);
-            margin: -6px 12px -6px -30px;
+        }
+
+        &.btn-icon-left {
+            padding-left: 30px;
+
+            i {
+                margin: -6px 12px -6px -30px;
+            }
         }
 
         &.btn-icon-right {
-            padding: 6px 30px 6px 12px;
+            padding-right: 30px;
+
 
             i {
                 float: right;
@@ -261,22 +242,31 @@ label {
     }
 
     &.btn-xs {
-        &.btn-icon {
-            padding: 1px 5px 1px 20px;
+        height: 20px;
+        line-height: 18px;
 
+        &.btn-icon {
             i {
                 width: 20px;
                 height: 20px;
                 line-height: 20px;
-                margin: -1px 5px -1px -20px;
+            }
+
+            &.btn-icon-left {
+                padding-left: 20px;
+
+                i {
+                    margin: -1px 5px -1px -20px;
+                }
             }
 
             &.btn-icon-right {
-                padding: 1px 20px 1px 5px;
+                padding-right: 20px;
+
 
                 i {
                     float: right;
-                    margin: -1px -30px -1px 5px;
+                    margin: -1px -20px -1px 5px;
                 }
             }
         }
@@ -284,17 +274,23 @@ label {
 
     &.btn-lg {
         &.btn-icon {
-            padding: 10px 16px 10px 40px;
-
             i {
                 width: 44px;
                 height: 44px;
                 line-height: 44px;
-                margin: -10px 16px -10px -40px;
+            }
+
+            &.btn-icon-left {
+                padding-left: 40px;
+
+                i {
+                    margin: -10px 16px -10px -40px;
+                }
             }
 
             &.btn-icon-right {
-                padding: 10px 40px 10px 16px;
+                padding-right: 40px;
+
 
                 i {
                     float: right;

@@ -75,7 +75,7 @@ class NavitemModel extends AbstractModel
         return $this->belongsTo('\\Neoflow\\CMS\\Model\\PageModel', 'page_id');
     }
 
-    public function save()
+    public function save($validate = true)
     {
         if (!$this->title) {
             $page = $this->page()->fetch();
@@ -95,7 +95,7 @@ class NavitemModel extends AbstractModel
             }
         }
 
-        return parent::save();
+        return parent::save($validate);
     }
 
     public function delete()
@@ -115,5 +115,29 @@ class NavitemModel extends AbstractModel
         }
 
         return parent::delete();
+    }
+
+    public function validate()
+    {
+        $validator = new \Neoflow\Framework\Handler\Validation\Validator($this->toArray());
+
+        $validator
+            ->callback(function($parent_navitem_id, $navitem) {
+
+                $childNavitems = $navitem->childNavitems()
+                    ->orderByAsc('position')
+                    ->fetchAll();
+
+                $forbiddenNavitemIds = array_map(function($navitem) {
+                    return $navitem->id();
+                }, $childNavitems);
+
+                $forbiddenNavitemIds[] = $navitem->id();
+
+                return (!in_array($parent_navitem_id, $forbiddenNavitemIds));
+            }, 'The navitem himself or subnavitems cannot be the top navitem', array($this))
+            ->set('parent_navitem_id', 'Top navitem');
+
+        return $validator->validate();
     }
 }

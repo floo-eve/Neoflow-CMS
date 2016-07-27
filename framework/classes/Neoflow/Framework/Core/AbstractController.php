@@ -157,6 +157,17 @@ abstract class AbstractController
     }
 
     /**
+     * Set new session flash value.
+     * @param string $key
+     * @param mixed $value
+     * @return Session
+     */
+    protected function setFlash($key, $value)
+    {
+        return $this->getSession()->setFlash($key, $value);
+    }
+
+    /**
      * Get request
      *
      * @return Request

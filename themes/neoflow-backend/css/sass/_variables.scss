@@ -1,10 +1,10 @@
 // Variables
-$gray-base: #000 !default;
+$gray-base: #000;
 $gray-darker: #222;
-$gray-dark: #444;   // #333
-$gray: #666; // #555
-$gray-light: #E6E6E6; //
-$gray-lighter: #F2F2F2; //
+$gray-dark: #444;
+$gray: #666;
+$gray-light: #E6E6E6;
+$gray-lighter: #F2F2F2;
 
 $brand-primary: #d55d4e;
 $brand-secondary: #32323A;
@@ -143,6 +143,9 @@ $state-success-bg: $brand-success;
 $alert-success-border: darken($brand-success, 5%);
 
 $text-muted: $gray;
+
+$dropdown-link-disabled-color: #ccc;
+
 
 $ps-border-radius: 0;
 

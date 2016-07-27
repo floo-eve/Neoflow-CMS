@@ -12,11 +12,11 @@
         <ul class="nav navbar-nav">
             <li <?= $this->isCurrentRoute(array('page_sections', 'section*', 'mod*'), 'class="active"') ?>>
                 <a href="<?= $this->generateUrl('page_sections', array('id' => $page->id())) ?>">
-                    <i class="fa fa-fw fa-list-alt"></i> <?= $this->translate('Sections') ?>
+                    <i class="fa fa-fw fa-th-list"></i> <?= $this->translate('Sections') ?>
                 </a>
             </li>
-            <li <?= $this->isCurrentRoute('page_edit', 'class="active"') ?>>
-                <a href="<?= $this->generateUrl('page_edit', array('id' => $page->id())) ?>">
+            <li <?= $this->isCurrentRoute('page_settings', 'class="active"') ?>>
+                <a href="<?= $this->generateUrl('page_settings', array('id' => $page->id())) ?>">
                     <i class="fa fa-fw fa-cog"></i><?= $this->translate('Settings') ?>
                 </a>
             </li>

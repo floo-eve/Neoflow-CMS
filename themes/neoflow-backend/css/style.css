@@ -478,105 +478,6 @@ a:focus {
   box-shadow: none;
 }
 
-.has-success .help-block,
-.has-success .control-label,
-.has-success .radio,
-.has-success .checkbox,
-.has-success .radio-inline,
-.has-success .checkbox-inline, .has-success.radio label, .has-success.checkbox label, .has-success.radio-inline label, .has-success.checkbox-inline label {
-  color: #43AC6A;
-}
-.has-success .form-control {
-  border-color: #3c9a4f;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-}
-.has-success .form-control:focus {
-  border-color: #2e753c;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #73c885;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #73c885;
-}
-.has-success .input-group-addon {
-  color: #43AC6A;
-  border-color: #3c9a4f;
-  background-color: #43AC6A;
-}
-.has-success .form-control-feedback {
-  color: #43AC6A;
-}
-.has-success .form-control {
-  border-color: #3c9a4f;
-}
-.has-success .form-control:focus {
-  border-color: #3c9a4f;
-}
-
-.has-warning .help-block,
-.has-warning .control-label,
-.has-warning .radio,
-.has-warning .checkbox,
-.has-warning .radio-inline,
-.has-warning .checkbox-inline, .has-warning.radio label, .has-warning.checkbox label, .has-warning.radio-inline label, .has-warning.checkbox-inline label {
-  color: #fcf8e3;
-}
-.has-warning .form-control {
-  border-color: #faebcc;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-}
-.has-warning .form-control:focus {
-  border-color: #f5d89e;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px white;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px white;
-}
-.has-warning .input-group-addon {
-  color: #fcf8e3;
-  border-color: #faebcc;
-  background-color: #fcf8e3;
-}
-.has-warning .form-control-feedback {
-  color: #fcf8e3;
-}
-.has-warning .form-control {
-  border-color: #faebcc;
-}
-.has-warning .form-control:focus {
-  border-color: #faebcc;
-}
-
-.has-error .help-block,
-.has-error .control-label,
-.has-error .radio,
-.has-error .checkbox,
-.has-error .radio-inline,
-.has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label {
-  color: #f2dede;
-}
-.has-error .form-control {
-  border-color: #ebccd1;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-}
-.has-error .form-control:focus {
-  border-color: #dca7b0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px white;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px white;
-}
-.has-error .input-group-addon {
-  color: #f2dede;
-  border-color: #ebccd1;
-  background-color: #f2dede;
-}
-.has-error .form-control-feedback {
-  color: #f2dede;
-}
-.has-error .form-control {
-  border-color: #ebccd1;
-}
-.has-error .form-control:focus {
-  border-color: #ebccd1;
-}
-
 .has-success .form-control, .has-success .form-control:focus, .has-warning .form-control, .has-warning .form-control:focus, .has-error .form-control, .has-error .form-control:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -602,53 +503,72 @@ label {
 .btn-secondary {
     @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
 }*/
+.form-horizontal .radio,
+.form-horizontal .checkbox,
+.form-horizontal .radio-inline,
+.form-horizontal .checkbox-inline {
+  padding: 0;
+  min-height: 0;
+}
+
 .btn {
   border: 0;
-}
-.btn.btn-icon {
-  padding: 6px 12px 6px 30px;
+  vertical-align: top;
 }
 .btn.btn-icon i {
   width: 30px;
   height: 34px;
   line-height: 34px;
   background: rgba(0, 0, 0, 0.1);
+}
+.btn.btn-icon.btn-icon-left {
+  padding-left: 30px;
+}
+.btn.btn-icon.btn-icon-left i {
   margin: -6px 12px -6px -30px;
 }
 .btn.btn-icon.btn-icon-right {
-  padding: 6px 30px 6px 12px;
+  padding-right: 30px;
 }
 .btn.btn-icon.btn-icon-right i {
   float: right;
   margin: -6px -30px -6px 12px;
 }
-.btn.btn-xs.btn-icon {
-  padding: 1px 5px 1px 20px;
+.btn.btn-xs {
+  height: 20px;
+  line-height: 18px;
 }
 .btn.btn-xs.btn-icon i {
   width: 20px;
   height: 20px;
   line-height: 20px;
+}
+.btn.btn-xs.btn-icon.btn-icon-left {
+  padding-left: 20px;
+}
+.btn.btn-xs.btn-icon.btn-icon-left i {
   margin: -1px 5px -1px -20px;
 }
 .btn.btn-xs.btn-icon.btn-icon-right {
-  padding: 1px 20px 1px 5px;
+  padding-right: 20px;
 }
 .btn.btn-xs.btn-icon.btn-icon-right i {
   float: right;
-  margin: -1px -30px -1px 5px;
-}
-.btn.btn-lg.btn-icon {
-  padding: 10px 16px 10px 40px;
+  margin: -1px -20px -1px 5px;
 }
 .btn.btn-lg.btn-icon i {
   width: 44px;
   height: 44px;
   line-height: 44px;
+}
+.btn.btn-lg.btn-icon.btn-icon-left {
+  padding-left: 40px;
+}
+.btn.btn-lg.btn-icon.btn-icon-left i {
   margin: -10px 16px -10px -40px;
 }
 .btn.btn-lg.btn-icon.btn-icon-right {
-  padding: 10px 40px 10px 16px;
+  padding-right: 40px;
 }
 .btn.btn-lg.btn-icon.btn-icon-right i {
   float: right;
@@ -837,9 +757,9 @@ small .fa,
 .btn-group-xs .fa,
 .input-group-sm .fa,
 .input-group-xs .fa {
-  /*font-size: $font-size-base;*/
+  font-size: 14px;
 }
 
 .fa {
-  line-height: inherit;
+  /*    line-height: inherit;*/
 }

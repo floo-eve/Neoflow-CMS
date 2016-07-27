@@ -47,7 +47,7 @@
                         <div class="col-sm-10">
                             <select class="form-control select2" name="parent_navitem_id" id="selectPage">
                                 <option value=""><?= $this->translate('None') ?></option>
-                                <?= $this->renderNavitemOptions($navitems, 0, $parentNavitemId) ?>
+                                <?= $this->renderNavitemOptions($navitems, 0, $selectedNavitemId, $disabledNavitemIds) ?>
                             </select>
                         </div>
                     </div>
@@ -75,15 +75,15 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary btn-icon">
-                                <i class="fa fa-fw fa-save"></i><?= $this->translate('Update') ?>
+                            <button type="submit" class="btn btn-primary btn-icon btn-icon-left">
+                                <i class="fa fa-save"></i><?= $this->translate('Save') ?>
                             </button>
                         </div>
                     </div>
                 </form>
 
                 <hr />
-                <a href="<?= $this->generateUrl('page_index', array('language_id' => $page->language_id)) ?>" class="btn btn-default btn-icon">
+                <a href="<?= $this->generateUrl('page_index', array('language_id' => $page->language_id)) ?>" class="btn btn-default btn-icon btn-icon-left">
                     <i class="fa fa-chevron-left"></i><?= $this->translate('Back') ?>
                 </a>
 

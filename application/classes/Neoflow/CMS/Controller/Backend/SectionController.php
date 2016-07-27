@@ -2,17 +2,20 @@
 
 namespace Neoflow\CMS\Controller\Backend;
 
+use \Exception;
+use \Neoflow\CMS\Controller\BackendController;
 use \Neoflow\CMS\Mapper\ModuleMapper;
 use \Neoflow\CMS\Mapper\SectionMapper;
 use \Neoflow\CMS\Model\PageModel;
 use \Neoflow\CMS\Model\SectionModel;
+use \Neoflow\Framework\Handler\Validation\ValidationException;
 use \Neoflow\Framework\HTTP\Responsing\JsonResponse;
 use \Neoflow\Framework\HTTP\Responsing\Response;
 use \Neoflow\Helper\Alert\DangerAlert;
 use \Neoflow\Helper\Alert\SuccessAlert;
 use function \is_json;
 
-class SectionController extends PageController
+class SectionController extends BackendController
 {
 
     /**
@@ -57,7 +60,7 @@ class SectionController extends PageController
         }
     }
 
-    public function updateOrderAction($args)
+    public function reorderAction($args)
     {
         $json = file_get_contents('php://input');
         $result = false;
@@ -68,30 +71,33 @@ class SectionController extends PageController
     }
 
     /**
-     * Create section action
+     * New section action
      *
      * @param array $args
      * @return Response
      */
     public function createAction($args)
     {
-        // Get post data
-        $postData = $this->getRequest()->getPostData();
+        try {
+            // Get post data
+            $postData = $this->getRequest()->getPostData();
 
-        $section = new SectionModel();
-        $section->page_id = $postData->get('page_id');
-        $section->module_id = $postData->get('module_id');
-        $section->is_active = $postData->get('is_active');
-        $section->block = 1;
+            $section = new SectionModel();
+            $section->page_id = $postData->get('page_id');
+            $section->module_id = $postData->get('module_id');
+            $section->is_active = $postData->get('is_active');
+            $section->block = 1;
 
-        if ($section->save()) {
-            $this->getSession()
-                ->setFlash('alert', new SuccessAlert('Section successful created'));
-        } else {
-            $this->getSession()
-                ->setFlash('alert', new DangerAlert('Create section failed'));
+            if ($section->validate() && $section->save()) {
+                $this->setFlash('alert', new SuccessAlert('Section successful save'));
+            } else {
+                throw new \Exception('Transaction failed');
+            }
+        } catch (ValidationException $ex) {
+            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+        } catch (Exception $ex) {
+            $this->setFlash('alert', new DangerAlert($ex->getMessage()));
         }
-
         return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
     }
 
@@ -103,17 +109,17 @@ class SectionController extends PageController
      */
     public function deleteAction($args)
     {
-        // Get post data
-        $section = $this->getSectionById($args['id']);
+        try {
+            $section = $this->getSectionById($args['id']);
 
-        if ($section && $section->delete()) {
-            $this->getSession()
-                ->setFlash('alert', new SuccessAlert('Section successful deleted'));
-        } else {
-            $this->getSession()
-                ->setFlash('alert', new DangerAlert('Delete section failed'));
+            if ($section->delete()) {
+                $this->setFlash('alert', new SuccessAlert('Section successful deleted'));
+            } else {
+                throw new Exception('Transcation failed');
+            }
+        } catch (Exception $ex) {
+            $this->setFlash('alert', new DangerAlert($ex->getMessage()));
         }
-
         return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
     }
 
@@ -125,43 +131,21 @@ class SectionController extends PageController
      */
     public function activateAction($args)
     {
-        // Get post data
-        $section = $this->getSectionById($args['id']);
+        try {
+            $section = $this->getSectionById($args['id']);
 
-        $section->is_active = true;
+            $section->is_active = !$section->is_active;
+            $section->save();
 
-        if ($section->save()) {
-            $this->getSession()
-                ->setFlash('alert', new SuccessAlert('Section successful activated'));
-        } else {
-            $this->getSession()
-                ->setFlash('alert', new DangerAlert('Activate section failed'));
+            if ($section->is_active) {
+                $this->setFlash('alert', new SuccessAlert('Section successful activated'));
+            } else {
+                $this->setFlash('alert', new SuccessAlert('Section successful disabled'));
+            }
+        } catch (Exception $ex) {
+            $this->setFlash('alert', new DangerAlert($ex->getMessage()));
+            return $this->redirectToRoute('page_index');
         }
-
-        return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
-    }
-
-    /**
-     * Disable section action
-     *
-     * @param array $args
-     * @return Response
-     */
-    public function disableAction($args)
-    {
-        // Get post data
-        $section = $this->getSectionById($args['id']);
-
-        $section->is_active = false;
-
-        if ($section->save()) {
-            $this->getSession()
-                ->setFlash('alert', new SuccessAlert('Section successful disabled'));
-        } else {
-            $this->getSession()
-                ->setFlash('alert', new DangerAlert('Disable section failed'));
-        }
-
         return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
     }
 
@@ -178,7 +162,7 @@ class SectionController extends PageController
                 ), $response);
     }
 
-    public function getSectionById($id)
+    protected function getSectionById($id)
     {
         // Get page by id
         $section = $this->sectionMapper->findById($id);
@@ -187,6 +171,6 @@ class SectionController extends PageController
             return $section;
         }
 
-        throw new \Exception('Section not found');
+        throw new Exception('Section not found');
     }
 }

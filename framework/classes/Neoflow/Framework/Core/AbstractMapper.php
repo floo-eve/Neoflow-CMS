@@ -67,7 +67,10 @@ abstract class AbstractMapper
      */
     public function findById($id)
     {
-        return $this->getOrm()->fetch($id);
+        if ($id) {
+            return $this->getOrm()->fetch($id);
+        }
+        return false;
     }
 
     /**

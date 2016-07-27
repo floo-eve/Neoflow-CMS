@@ -122,7 +122,7 @@
   padding: 0;
 }
 .select2-container--bootstrap .select2-results__option[aria-disabled=true] {
-  color: #E6E6E6;
+  color: #ccc;
   cursor: not-allowed;
 }
 .select2-container--bootstrap .select2-results__option[aria-selected=true] {
