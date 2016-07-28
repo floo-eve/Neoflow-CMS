@@ -60,6 +60,39 @@ class BackendView extends AbstractView
     }
 
     /**
+     * Set back route as back url
+     *
+     * @param string $routeKey
+     * @param array $args
+     * @return self
+     */
+    public function setBackRoute($routeKey, $args = array())
+    {
+        $backUrl = $this->generateUrl($routeKey, $args);
+        return $this->setBackUrl($backUrl);
+    }
+
+    /**
+     * Get back url
+     * @return mixed
+     */
+    public function getBackUrl()
+    {
+        return $this->get('back_url');
+    }
+
+    /**
+     * Set back url
+     *
+     * @param string $backUrl
+     * @return self
+     */
+    public function setBackUrl($backUrl)
+    {
+        return $this->set('back_url', $backUrl);
+    }
+
+    /**
      * Get title.
      *
      * @return string

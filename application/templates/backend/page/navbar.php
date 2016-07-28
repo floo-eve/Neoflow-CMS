@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-default">
     <div class="navbar-header">
         <span class="navbar-text visible-xs-inline-block">

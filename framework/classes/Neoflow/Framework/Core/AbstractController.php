@@ -70,15 +70,15 @@ abstract class AbstractController
     /**
      * Route to route.
      *
-     * @param string $route
+     * @param string $routeKey
      * @param array  $args
      *
      * @return Response
      */
-    protected function route($route, $args = array())
+    protected function route($routeKey, $args = array())
     {
         return $this->app()->get('router')
-                ->route($route, $args);
+                ->routeByKey($routeKey, $args);
     }
 
     /**

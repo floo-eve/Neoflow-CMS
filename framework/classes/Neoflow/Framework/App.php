@@ -345,7 +345,7 @@ class App
 
         $this->get('logger')->logException($ex);
 
-        $content = str_replace(array('[title]', '[message]', '[exception]', '[time]'), array('Fatal server error', $ex->getMessage(), get_class($ex), $this->get('translator')->formatDateTime(new \DateTime())), '<!DOCTYPE html>
+        $content = str_replace(array('[title]', '[message]', '[exception]', '[time]', '[trace]'), array('Fatal server error', $ex->getMessage(), get_class($ex), $this->get('translator')->formatDateTime(new \DateTime()), nl2br($ex->getTraceAsString())), '<!DOCTYPE html>
                         <html>
                             <head>
                                 <meta charset="UTF-8" />
@@ -354,6 +354,9 @@ class App
                             <body>
                                 <h1>[title]</h1>
                                 <h2>[exception]: [message]</h2>
+                                <hr />
+                                <p><small>[trace]</small></p>
+                                <hr />
                                 <p>[time]</p>
                             </body>
                         </html>');

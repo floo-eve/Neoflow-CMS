@@ -5,13 +5,11 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><?= $this->translate('Page settings') ?></h3>
+                <h3 class="panel-title">
+                    <?= $this->translate('Page settings of {0}', array('<i>' . $page->title . '</i>')) ?>
+                </h3>
             </div>
             <div class="panel-body">
-
-                <?= $this->renderTemplate('backend/page/infos', array('page' => $page)) ?>
-
-                <hr />
 
                 <form method="post" action="<?= $this->generateUrl('page_update') ?>" class="form-horizontal">
                     <input value="<?= $page->id() ?>" type="hidden" name="page_id" />
@@ -81,14 +79,7 @@
                         </div>
                     </div>
                 </form>
-
-                <hr />
-                <a href="<?= $this->generateUrl('page_index', array('language_id' => $page->language_id)) ?>" class="btn btn-default btn-icon btn-icon-left">
-                    <i class="fa fa-chevron-left"></i><?= $this->translate('Back') ?>
-                </a>
-
             </div>
         </div>
-
     </div>
 </div>

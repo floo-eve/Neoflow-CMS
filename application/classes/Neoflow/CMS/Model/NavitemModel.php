@@ -132,7 +132,9 @@ class NavitemModel extends AbstractModel
                     return $navitem->id();
                 }, $childNavitems);
 
-                $forbiddenNavitemIds[] = $navitem->id();
+                if ($navitem->id()) {
+                    $forbiddenNavitemIds[] = $navitem->id();
+                }
 
                 return (!in_array($parent_navitem_id, $forbiddenNavitemIds));
             }, 'The navitem himself or subnavitems cannot be the top navitem', array($this))

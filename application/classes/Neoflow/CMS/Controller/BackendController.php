@@ -6,7 +6,7 @@ use Neoflow\CMS\App;
 use Neoflow\CMS\Mapper\LanguageMapper;
 use Neoflow\CMS\Mapper\UserMapper;
 use Neoflow\CMS\Views\BackendView;
-use Neoflow\CMS\Core\AbstractController;
+use Neoflow\Framework\Core\AbstractController;
 use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Helper\Alert\SuccessAlert;

@@ -52,6 +52,7 @@ class NavigationController extends BackendController
     {
         parent::__construct();
 
+        // Set titles
         $this->view
             ->setSubtitle('Backend / Content')
             ->setTitle('Navigations');

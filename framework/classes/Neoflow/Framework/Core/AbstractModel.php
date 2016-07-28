@@ -128,7 +128,11 @@ abstract class AbstractModel
     public function id()
     {
         $primaryKey = $this->getPrimaryKey();
-        return $this->{$primaryKey};
+        $id = $this->{$primaryKey};
+        if ($id) {
+            return $id;
+        }
+        return false;
     }
 
     /**

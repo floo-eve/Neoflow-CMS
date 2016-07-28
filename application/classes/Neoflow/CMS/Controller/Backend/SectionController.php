@@ -39,14 +39,22 @@ class SectionController extends BackendController
     protected $page;
 
     /**
+     * @var ModuleModel
+     */
+    protected $module;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         parent::__construct();
 
+        $this->view
+            ->setSubtitle('Content')
+            ->setTitle('Pages');
+
         // Create mapper
-        $this->moduleMapper = new ModuleMapper();
         $this->sectionMapper = new SectionMapper();
 
         $section_id = $this->getRequest()->getGet('section_id');
@@ -54,9 +62,14 @@ class SectionController extends BackendController
             $section_id = $this->getRequest()->getPost('section_id');
         }
 
+        // Get section, module and page
         if ($section_id) {
             $this->section = $this->getSectionById($section_id);
+            $this->module = $this->section->module()->fetch();
             $this->page = $this->section->page()->fetch();
+
+            // Set back url
+            $this->view->setBackRoute('page_sections', array('id' => $this->page->id()));
         }
     }
 
@@ -88,15 +101,11 @@ class SectionController extends BackendController
             $section->is_active = $postData->get('is_active');
             $section->block = 1;
 
-            if ($section->validate() && $section->save()) {
+            if ($section->save()) {
                 $this->setFlash('alert', new SuccessAlert('Section successful save'));
-            } else {
-                throw new \Exception('Transaction failed');
             }
         } catch (ValidationException $ex) {
             $this->setFlash('alert', new DangerAlert($ex->getErrors()));
-        } catch (Exception $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getMessage()));
         }
         return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
     }
@@ -109,16 +118,12 @@ class SectionController extends BackendController
      */
     public function deleteAction($args)
     {
-        try {
-            $section = $this->getSectionById($args['id']);
+        // Get section by id
+        $section = $this->getSectionById($args['id']);
 
-            if ($section->delete()) {
-                $this->setFlash('alert', new SuccessAlert('Section successful deleted'));
-            } else {
-                throw new Exception('Transcation failed');
-            }
-        } catch (Exception $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getMessage()));
+        // Delete section
+        if ($section->delete()) {
+            $this->setFlash('alert', new SuccessAlert('Section successful deleted'));
         }
         return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
     }
@@ -131,35 +136,31 @@ class SectionController extends BackendController
      */
     public function activateAction($args)
     {
-        try {
-            $section = $this->getSectionById($args['id']);
+        // Get section by id
+        $section = $this->getSectionById($args['id']);
 
-            $section->is_active = !$section->is_active;
-            $section->save();
+        // Set state
+        $section->is_active = !$section->is_active;
 
+        // Save section
+        if ($section->save()) {
             if ($section->is_active) {
                 $this->setFlash('alert', new SuccessAlert('Section successful activated'));
             } else {
                 $this->setFlash('alert', new SuccessAlert('Section successful disabled'));
             }
-        } catch (Exception $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getMessage()));
-            return $this->redirectToRoute('page_index');
         }
+
         return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
     }
 
     protected function render($viewFile, array $parameters = array(), Response $response = null)
     {
-
         $this->view->startBlock('module');
         echo $this->view->renderView($viewFile, $parameters);
         $this->view->stopBlock();
 
-        return parent::render('backend/section/index', array(
-                'section' => $this->section,
-                'page' => $this->page,
-                ), $response);
+        return parent::render('backend/section/index', array(), $response);
     }
 
     protected function getSectionById($id)

@@ -1,5 +1,20 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.2
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Erstellungszeit: 28. Jul 2016 um 14:29
+-- Server-Version: 5.7.9
+-- PHP-Version: 7.0.9
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Datenbank: `neoflow-cms`
@@ -28,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `languages` (
 INSERT INTO `languages` (`language_id`, `is_active`, `code`, `title`, `flag_code`) VALUES
 (1, 1, 'de', 'German', 'de'),
 (2, 1, 'en', 'English', 'gb'),
-(3, 0, 'fr', 'French', 'fr');
+(3, 1, 'fr', 'French', 'fr');
 
 -- --------------------------------------------------------
 
@@ -49,8 +64,8 @@ CREATE TABLE IF NOT EXISTS `modules` (
 -- Daten für Tabelle `modules`
 --
 
-INSERT INTO `modules` (`module_id`, `title`, `folder`) VALUES
-(1, 'Hello World', 'hello-world','mod_hello_world_index');
+INSERT INTO `modules` (`module_id`, `title`, `folder`, `route`) VALUES
+(1, 'Hello World', 'hello-world', 'mod_hello_world_index');
 
 -- --------------------------------------------------------
 
@@ -89,7 +104,11 @@ CREATE TABLE IF NOT EXISTS `navitems` (
   `navigation_id` int(11) DEFAULT NULL,
   `language_id` int(11) DEFAULT NULL,
   `position` int(11) DEFAULT NULL,
-  PRIMARY KEY (`navitem_id`)
+  PRIMARY KEY (`navitem_id`),
+  KEY `fk_navitems_page_id_idx` (`page_id`),
+  KEY `fk_navitems_navitem_id_idx` (`parent_navitem_id`),
+  KEY `fk_navitems_navigation_id_idx` (`navigation_id`),
+  KEY `fk_navitems_language_id_idx` (`language_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -121,7 +140,8 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `language_id` int(11) DEFAULT NULL,
   `visibility` enum('visible','restricted','hidden') DEFAULT 'visible',
-  PRIMARY KEY (`page_id`)
+  PRIMARY KEY (`page_id`),
+  KEY `fk_pages_language_id_idx` (`language_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
@@ -129,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
 --
 
 INSERT INTO `pages` (`page_id`, `title`, `slug`, `description`, `keywords`, `is_active`, `language_id`, `visibility`) VALUES
-(1, 'Startseite', 'startseite', NULL, NULL, 1, 1, 'restricted'),
+(1, 'Startseite', 'startseite', NULL, NULL, 1, 1, 'visible'),
 (2, 'Über uns', 'uber-uns', NULL, NULL, 1, 1, 'visible'),
 (3, 'Beispiele', 'beispiele', NULL, NULL, 1, 1, 'visible'),
 (4, 'Küche', 'kueche', NULL, NULL, 1, 1, 'visible'),
@@ -140,16 +160,48 @@ INSERT INTO `pages` (`page_id`, `title`, `slug`, `description`, `keywords`, `is_
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `permissions`
+--
+
+DROP TABLE IF EXISTS `permissions`;
+CREATE TABLE IF NOT EXISTS `permissions` (
+  `permission_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) COLLATE utf8_bin NOT NULL,
+  `description` text COLLATE utf8_bin NOT NULL,
+  `tag` varchar(50) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`permission_id`),
+  UNIQUE KEY `tag` (`tag`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `roles`
 --
 
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
-  `role_id` int(11) NOT NULL,
-  `role` varchar(50) NOT NULL,
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL,
   `description` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `roles_permissions`
+--
+
+DROP TABLE IF EXISTS `roles_permissions`;
+CREATE TABLE IF NOT EXISTS `roles_permissions` (
+  `role_permission_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`role_permission_id`),
+  KEY `fk_roles_permissions_role_id_idx` (`role_id`),
+  KEY `fk_roles_permissions_permission_id_idx` (`permission_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -168,7 +220,14 @@ CREATE TABLE IF NOT EXISTS `sections` (
   PRIMARY KEY (`section_id`),
   KEY `fk_page_id_idx` (`page_id`),
   KEY `fk_module_id_idx` (`module_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Daten für Tabelle `sections`
+--
+
+INSERT INTO `sections` (`section_id`, `page_id`, `module_id`, `is_active`, `position`, `block`) VALUES
+(1, 8, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -196,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 --
 
 INSERT INTO `settings` (`setting_id`, `website_title`, `website_description`, `keywords`, `author`, `theme_id`, `backend_theme_id`, `language_id`) VALUES
-(1, 'Website title...', 'Website description...', 'Key, words, ...', 'Au Thor...', 2, 1, 2);
+(1, 'Website title...', 'Website description...4', 'Key, words, ...', 'Au Thor...', 2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -237,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
-  KEY `fk_role_id_idx` (`role_id`)
+  KEY `fk_user_role_id_idx` (`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
@@ -245,21 +304,47 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `lastname`, `firstname`, `email`, `role_id`) VALUES
-(1, 'admin', sha1('admin'), 'John', 'Doe', 'john.doe@neoflow.ch', NULL);
+(1, 'admin', sha1('1234'), 'John', 'Doe', 'john.doe@neoflow.ch', NULL);
 
 --
 -- Constraints der exportierten Tabellen
 --
 
 --
+-- Constraints der Tabelle `navitems`
+--
+ALTER TABLE `navitems`
+  ADD CONSTRAINT `fk_navitems_language_id` FOREIGN KEY (`language_id`) REFERENCES `languages` (`language_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_navitems_navigation_id` FOREIGN KEY (`navigation_id`) REFERENCES `navigations` (`navigation_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_navitems_navitem_id` FOREIGN KEY (`parent_navitem_id`) REFERENCES `navitems` (`navitem_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_navitems_page_id` FOREIGN KEY (`page_id`) REFERENCES `pages` (`page_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints der Tabelle `pages`
+--
+ALTER TABLE `pages`
+  ADD CONSTRAINT `fk_pages_language_id` FOREIGN KEY (`language_id`) REFERENCES `languages` (`language_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints der Tabelle `roles_permissions`
+--
+ALTER TABLE `roles_permissions`
+  ADD CONSTRAINT `fk_roles_permissions_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`permission_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_roles_permissions_role_id` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints der Tabelle `sections`
 --
 ALTER TABLE `sections`
-  ADD CONSTRAINT `fk_module_id` FOREIGN KEY (`module_id`) REFERENCES `modules` (`module_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_page_id` FOREIGN KEY (`page_id`) REFERENCES `pages` (`page_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_sections_module_id` FOREIGN KEY (`module_id`) REFERENCES `modules` (`module_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_sections_page_id` FOREIGN KEY (`page_id`) REFERENCES `pages` (`page_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints der Tabelle `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `fk_role_id` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_users_role_id` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

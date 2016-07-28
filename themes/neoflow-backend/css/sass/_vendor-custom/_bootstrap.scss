@@ -194,10 +194,15 @@ label {
 .text-2x {
     font-size: 24px;
 }
-/*
+
 .btn-secondary {
     @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
-}*/
+}
+
+.btn-inverse {
+    @include button-variant($btn-inverse-color, $btn-inverse-bg, $btn-inverse-border);
+}
+
 
 .form-horizontal {
     .radio,
@@ -335,10 +340,6 @@ label {
 
 .alert {
     border-width: 3px 0 0 0;
-}
-
-.btn-inverse {
-    @include button-variant($btn-inverse-color, $btn-inverse-bg, $btn-inverse-border);
 }
 
 .nav-tabs {

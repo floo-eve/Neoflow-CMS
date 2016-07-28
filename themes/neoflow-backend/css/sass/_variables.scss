@@ -81,6 +81,10 @@ $btn-inverse-border: darken($btn-inverse-bg, 5%);
 
 $btn-default-bg: $gray-light;
 
+$btn-secondary-color: #fff;
+$btn-secondary-bg: $brand-secondary;
+$btn-secondary-border: darken($btn-secondary-bg, 5%);
+
 $nav-pills-active-link-hover-bg: $brand-secondary;
 
 $nav-link-hover-bg: transparent;

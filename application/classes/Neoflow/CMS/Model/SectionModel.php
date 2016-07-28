@@ -84,6 +84,7 @@ class SectionModel extends AbstractModel
     public function validate()
     {
         $validator = new \Neoflow\Framework\Handler\Validation\Validator($this->toArray());
+
         $validator
             ->required()
             ->set('module_id', 'Module');

@@ -13,10 +13,9 @@ body {
     left: 0;
     bottom: 0;
     right: 0;
-
-    > #body-scroll {
-        overflow: auto;
-        height: 100%;
-        position: relative;
-    }
 }
+
+.page-info {
+    margin: 0;
+}
+

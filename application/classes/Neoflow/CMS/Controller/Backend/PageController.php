@@ -52,6 +52,7 @@ class PageController extends BackendController
     {
         parent::__construct();
 
+        // Set titles
         $this->view
             ->setSubtitle('Content')
             ->setTitle('Pages');
@@ -95,10 +96,14 @@ class PageController extends BackendController
             ->orderByAsc('position')
             ->fetchAll();
 
+        // Get modules
+        $modules = $this->moduleMapper->findAll();
+
         return $this->render('backend/page/index', array(
                 'languages' => $languages,
                 'pageLanguage' => $pageLanguage,
-                'navitems' => $navitems
+                'navitems' => $navitems,
+                'modules' => $modules,
         ));
     }
 
@@ -119,6 +124,7 @@ class PageController extends BackendController
             $page = new PageModel();
             $page->title = $postData->get('title');
             $page->language_id = $postData->get('language_id');
+            $page->is_active = $postData->get('is_active');
 
             // Save page
             if ($page->save()) {
@@ -130,8 +136,15 @@ class PageController extends BackendController
                 $navitem->language_id = $page->language_id;
                 $navitem->parent_navitem_id = $postData->parent_navitem_id ? : null;
 
+                // Create section
+                $section = new \Neoflow\CMS\Model\SectionModel();
+                $section->page_id = $page->id();
+                $section->module_id = $postData->get('module_id');
+                $section->is_active = true;
+                $section->block = 1;
+
                 // Save navitem
-                if ($navitem->save()) {
+                if ($navitem->save() && $section->save()) {
                     $this->setFlash('alert', new SuccessAlert('Page successful saved'));
                 }
             }
@@ -153,6 +166,9 @@ class PageController extends BackendController
 
         // Get modules
         $modules = $this->moduleMapper->findAll();
+
+        // Set back url
+        $this->view->setBackRoute('page_index', array('language_id' => $page->language_id));
 
         return $this->render('backend/page/sections', array(
                 'page' => $page,
@@ -190,6 +206,9 @@ class PageController extends BackendController
             ->where('navigation_id', '=', 1)
             ->fetch();
         $parentNavitem = $navitem->parentNavitem()->fetch();
+
+        // Set back url
+        $this->view->setBackRoute('page_index', array('language_id' => $page->language_id));
 
         return $this->render('backend/page/settings', array(
                 'page' => $page,
@@ -261,7 +280,7 @@ class PageController extends BackendController
         // Get page by id
         $page = $this->getPageById($args['id']);
 
-        // Set activation state
+        // Set state
         $page->is_active = !$page->is_active;
 
         // Save page
@@ -272,6 +291,7 @@ class PageController extends BackendController
                 $this->setFlash('alert', new SuccessAlert('Page successful disabled'));
             }
         }
+
         return $this->redirectToRoute('page_index');
     }
 
