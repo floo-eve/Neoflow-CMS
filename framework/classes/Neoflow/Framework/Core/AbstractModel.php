@@ -2,9 +2,9 @@
 
 namespace Neoflow\Framework\Core;
 
-use \DomainException;
-use \Neoflow\Framework\Persistence\ORM;
-use \Neoflow\Framework\Persistence\QueryBuilder;
+use DomainException;
+use Neoflow\Framework\Persistence\ORM;
+use Neoflow\Framework\Persistence\QueryBuilder;
 
 abstract class AbstractModel
 {
@@ -50,11 +50,6 @@ abstract class AbstractModel
     protected $isModified = false;
 
     /**
-     * @var ORM
-     */
-    protected $orm;
-
-    /**
      * Constructor.
      *
      * @param array $data
@@ -70,8 +65,6 @@ abstract class AbstractModel
 
         $this->modifiedProperties = array();
         $this->isModified = false;
-
-        $this->orm = new ORM();
     }
 
     /**
@@ -99,7 +92,7 @@ abstract class AbstractModel
     }
 
     /**
-     * Get properties of model entity
+     * Get properties of model entity.
      *
      * @return string
      */
@@ -132,6 +125,7 @@ abstract class AbstractModel
         if ($id) {
             return $id;
         }
+
         return false;
     }
 
@@ -168,7 +162,7 @@ abstract class AbstractModel
      *
      * @param string $key
      * @param mixed  $value
-     * @param bool $silent
+     * @param bool   $silent
      *
      * @return Model
      *
@@ -210,7 +204,7 @@ abstract class AbstractModel
      * Get model entity value.
      *
      * @param string $key
-     * @param mixed $default
+     * @param mixed  $default
      *
      * @return mixed
      */
@@ -224,7 +218,8 @@ abstract class AbstractModel
     }
 
     /**
-     * Validate model entity
+     * Validate model entity.
+     *
      * @return bool
      */
     public function validate()
@@ -233,7 +228,7 @@ abstract class AbstractModel
     }
 
     /**
-     * Getter
+     * Getter.
      *
      * @param string $name
      *
@@ -245,14 +240,30 @@ abstract class AbstractModel
     }
 
     /**
-     * Setter
+     * Setter.
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function __set($name, $value)
     {
         $this->set($name, $value);
+    }
+
+    /**
+     * Create and save model entity.
+     *
+     * @param array $data
+     *
+     * @return self|bool
+     */
+    public static function create($data)
+    {
+        $entity = new static($data);
+        if ($entity->save()) {
+            return $entity;
+        }
+        return false;
     }
 
     /**
@@ -270,11 +281,9 @@ abstract class AbstractModel
 
         $this->validate();
 
-        $queryBuilder = new QueryBuilder();
-
-        $id = $queryBuilder
+        $id = static::queryBuilder()
             ->insertInto($this->getTableName())
-            ->values($this->getModifiedData())
+            ->values($this->data)
             ->execute();
 
         if ($id) {
@@ -306,9 +315,7 @@ abstract class AbstractModel
     {
         $this->validate();
 
-        $queryBuilder = new QueryBuilder();
-
-        $queryBuilder
+        static::queryBuilder()
             ->update($this->getTableName())
             ->setPrimaryKey($this->getPrimaryKey())
             ->set($this->getModifiedData())
@@ -324,9 +331,7 @@ abstract class AbstractModel
      */
     public function delete()
     {
-        $queryBuilder = new QueryBuilder();
-
-        $queryBuilder
+        static::queryBuilder()
             ->deleteFrom($this->getTableName())
             ->setPrimaryKey($this->getPrimaryKey())
             ->execute($this->id());
@@ -345,7 +350,7 @@ abstract class AbstractModel
      */
     protected function belongsTo($associatedModelClassName, $foreignKeyName)
     {
-        return $this->getOrm($associatedModelClassName)
+        return static::orm($associatedModelClassName)
                 ->belongsTo($this, $associatedModelClassName, $foreignKeyName);
     }
 
@@ -360,7 +365,7 @@ abstract class AbstractModel
      */
     protected function hasOne($associatedModelClassName, $foreignKeyName)
     {
-        return $this->getOrm($associatedModelClassName)
+        return static::orm($associatedModelClassName)
                 ->hasOne($this, $associatedModelClassName, $foreignKeyName);
     }
 
@@ -375,7 +380,7 @@ abstract class AbstractModel
      */
     protected function hasMany($associatedModelClassName, $foreignKeyName)
     {
-        return $this->getOrm($associatedModelClassName)
+        return static::orm($associatedModelClassName)
                 ->hasMany($this, $associatedModelClassName, $foreignKeyName);
     }
 
@@ -391,14 +396,15 @@ abstract class AbstractModel
      */
     protected function hasManyThrough($associatedModelClassName, $joinModelClassName, $foreignKeyToBaseModel, $foreignKeyToAssociatedModel)
     {
-        return $this->getOrm($associatedModelClassName)
+        return static::orm($associatedModelClassName)
                 ->hasManyThrough($this, $associatedModelClassName, $joinModelClassName, $foreignKeyToBaseModel, $foreignKeyToAssociatedModel);
     }
 
     /**
-     * Add additional property to model entity
+     * Add additional property to model entity.
      *
      * @param string $key
+     *
      * @return self
      */
     public function addProperty($key)
@@ -411,18 +417,79 @@ abstract class AbstractModel
     }
 
     /**
-     * Get ORM for model of current mapper.
+     * Get ORM for current model entity
      *
      * @param string $modelClassName
      *
      * @return ORM
      */
-    protected function getOrm($modelClassName = '')
+    protected static function orm($modelClassName = null)
     {
         if (!$modelClassName) {
-            $modelClassName = get_class($this);
+            $modelClassName = get_called_class();
         }
 
-        return $this->orm->forModel($modelClassName);
+        $orm = new ORM();
+        return $orm->forModel($modelClassName);
+    }
+
+    /**
+     * Get query builder
+     *
+     * @return QueryBuilder
+     */
+    protected static function queryBuilder()
+    {
+        return new QueryBuilder();
+    }
+
+    /**
+     * Find model entity by Id.
+     *
+     * @param mixed $id
+     *
+     * @return self
+     */
+    public static function findById($id)
+    {
+        return static::orm()->fetch($id);
+    }
+
+    /**
+     * Find model entity by column
+     * @param string $column
+     * @param mixed $value
+     *
+     * @return self
+     */
+    public static function findByColumn($column, $value)
+    {
+        return static::orm()
+                ->where($column, '=', $value)
+                ->fetch();
+    }
+
+    /**
+     * Find all model entities.
+     *
+     * @return array
+     */
+    public static function findAll()
+    {
+        return static::orm()->fetchAll();
+    }
+
+    /**
+     * Find all by where conditions
+     *
+     * @param string $column
+     * @param mixed $value
+     * @return array
+     */
+    public static function findAllByColumn($column, $value)
+    {
+        return static::orm()
+                ->where($column, '=', $value)
+                ->fetchAll();
     }
 }

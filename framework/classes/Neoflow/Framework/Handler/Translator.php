@@ -226,7 +226,7 @@ class Translator
      *
      * @return string
      */
-    public function translate($key, $values = array(), $errorPrefix = '!')
+    public function translate($key, $values = array(), $errorPrefix = '!', $translateValues = true)
     {
         if (!is_array($values)) {
             $values = array($values);
@@ -246,6 +246,9 @@ class Translator
             }
             if (is_a($value, '\\DateTime')) {
                 $value = $this->formatDate($value);
+            }
+            if ($translateValues) {
+                $value = $this->translate($value, array(), '', false);
             }
             $translation = str_replace('{' . $placeholder . '}', $value, $translation);
         }

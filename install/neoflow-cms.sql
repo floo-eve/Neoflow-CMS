@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 28. Jul 2016 um 14:29
+-- Erstellungszeit: 29. Jul 2016 um 12:38
 -- Server-Version: 5.7.9
 -- PHP-Version: 7.0.9
 
@@ -166,12 +166,28 @@ INSERT INTO `pages` (`page_id`, `title`, `slug`, `description`, `keywords`, `is_
 DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE IF NOT EXISTS `permissions` (
   `permission_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) COLLATE utf8_bin NOT NULL,
-  `description` text COLLATE utf8_bin NOT NULL,
-  `tag` varchar(50) COLLATE utf8_bin NOT NULL,
+  `permission_key` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `title` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `description` text CHARACTER SET utf8,
   PRIMARY KEY (`permission_id`),
-  UNIQUE KEY `tag` (`tag`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  UNIQUE KEY `tag` (`permission_key`),
+  UNIQUE KEY `title_UNIQUE` (`title`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Daten für Tabelle `permissions`
+--
+
+INSERT INTO `permissions` (`permission_id`, `permission_key`, `title`, `description`) VALUES
+(1, 'manage_pages', 'Pages', 'Manage pages and page content'),
+(2, 'manage_navigations', 'Navigations', 'Manage navigations'),
+(3, 'manage_modules', 'Modules', 'Manage modules'),
+(4, 'manage_templates', 'Templates', 'Manage templates'),
+(5, 'manage_media', 'Media', 'Manage media data'),
+(6, 'manage_settings', 'Settings', 'Update website settings'),
+(7, 'manage_users', 'Users', 'Manage user accounts'),
+(8, 'manage_roles', 'Roles', 'Manage roles and permissions'),
+(9, 'maintenance', 'Maintenance', 'Maintain website and system');
 
 -- --------------------------------------------------------
 
@@ -220,14 +236,7 @@ CREATE TABLE IF NOT EXISTS `sections` (
   PRIMARY KEY (`section_id`),
   KEY `fk_page_id_idx` (`page_id`),
   KEY `fk_module_id_idx` (`module_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
---
--- Daten für Tabelle `sections`
---
-
-INSERT INTO `sections` (`section_id`, `page_id`, `module_id`, `is_active`, `position`, `block`) VALUES
-(1, 8, 1, 1, 1, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -255,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 --
 
 INSERT INTO `settings` (`setting_id`, `website_title`, `website_description`, `keywords`, `author`, `theme_id`, `backend_theme_id`, `language_id`) VALUES
-(1, 'Website title...', 'Website description...4', 'Key, words, ...', 'Au Thor...', 2, 1, 2);
+(1, 'Website title...', 'Website description...', 'Key, words, ...', 'Au Thor...', 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -304,7 +313,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `lastname`, `firstname`, `email`, `role_id`) VALUES
-(1, 'admin', sha1('1234'), 'John', 'Doe', 'john.doe@neoflow.ch', NULL);
+(1, 'admin', sha1(1234), 'John', 'Doe', 'john.doe@neoflow.ch', NULL);
 
 --
 -- Constraints der exportierten Tabellen
