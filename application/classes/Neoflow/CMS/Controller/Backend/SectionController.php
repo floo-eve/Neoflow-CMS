@@ -4,29 +4,23 @@ namespace Neoflow\CMS\Controller\Backend;
 
 use \Exception;
 use \Neoflow\CMS\Controller\BackendController;
-use \Neoflow\CMS\Mapper\ModuleMapper;
-use \Neoflow\CMS\Mapper\SectionMapper;
+use \Neoflow\CMS\Model\ModuleModel;
 use \Neoflow\CMS\Model\PageModel;
 use \Neoflow\CMS\Model\SectionModel;
+use \Neoflow\CMS\Service\SectionService;
 use \Neoflow\Framework\Handler\Validation\ValidationException;
 use \Neoflow\Framework\HTTP\Responsing\JsonResponse;
 use \Neoflow\Framework\HTTP\Responsing\Response;
 use \Neoflow\Helper\Alert\DangerAlert;
 use \Neoflow\Helper\Alert\SuccessAlert;
-use function \is_json;
 
 class SectionController extends BackendController
 {
 
     /**
-     * @var ModuleMapper
+     * @var SectionService
      */
-    protected $moduleMapper;
-
-    /**
-     * @var SectionMapper
-     */
-    protected $sectionMapper;
+    protected $sectionService;
 
     /**
      * @var SectionModel
@@ -54,39 +48,34 @@ class SectionController extends BackendController
             ->setSubtitle('Content')
             ->setTitle('Pages');
 
-        // Create mapper
-        $this->sectionMapper = new SectionMapper();
-
-        $section_id = $this->getRequest()->getGet('section_id');
-        if (!$section_id) {
-            $section_id = $this->getRequest()->getPost('section_id');
-        }
-
-        // Get section, module and page
-        if ($section_id) {
-            $this->section = $this->getSectionById($section_id);
-            $this->module = $this->section->module()->fetch();
-            $this->page = $this->section->page()->fetch();
-
-            // Set back url
-            $this->view->setBackRoute('page_sections', array('id' => $this->page->id()));
-        }
+        // Create section service
+        $this->sectionService = new SectionService();
     }
 
+    /**
+     * Reorder sections action.
+     *
+     * @param array $args
+     *
+     * @return JsonResponse
+     */
     public function reorderAction($args)
     {
+        // Get json data and update order of sections
         $json = file_get_contents('php://input');
         $result = false;
         if (is_json($json)) {
-            $result = $this->sectionMapper->updateOrder(json_decode($json, true));
+            $result = $this->sectionService->updateOrder(json_decode($json, true));
         }
+
         return new JsonResponse(array('success' => (bool) $result));
     }
 
     /**
-     * New section action
+     * Create new section action.
      *
      * @param array $args
+     *
      * @return Response
      */
     public function createAction($args)
@@ -95,25 +84,30 @@ class SectionController extends BackendController
             // Get post data
             $postData = $this->getRequest()->getPostData();
 
-            $section = new SectionModel();
-            $section->page_id = $postData->get('page_id');
-            $section->module_id = $postData->get('module_id');
-            $section->is_active = $postData->get('is_active');
-            $section->block = 1;
+            $section = SectionModel::create(array(
+                    'page_id' => $postData->get('page_id'),
+                    'module_id' => $postData->get('module_id'),
+                    'is_active' => $postData->get('is_active'),
+                    'block' => 1
+            ));
 
-            if ($section->save()) {
-                $this->setFlash('alert', new SuccessAlert('Section successful save'));
+            if ($section) {
+                $this->setFlash('alert', new SuccessAlert('{0} successful saved', array('Section')));
+            } else {
+                $this->setFlash('alert', new DangerAlert('Save failed'));
             }
         } catch (ValidationException $ex) {
             $this->setFlash('alert', new DangerAlert($ex->getErrors()));
         }
+
         return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
     }
 
     /**
-     * Delete section action
+     * Delete section action.
      *
      * @param array $args
+     *
      * @return Response
      */
     public function deleteAction($args)
@@ -123,15 +117,19 @@ class SectionController extends BackendController
 
         // Delete section
         if ($section->delete()) {
-            $this->setFlash('alert', new SuccessAlert('Section successful deleted'));
+            $this->setFlash('alert', new SuccessAlert('{0} successful deleted', array('Section')));
+        } else {
+            $this->setFlash('alert', new DangerAlert('Delete failed'));
         }
+
         return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
     }
 
     /**
-     * Activate section action
+     * Activate section action.
      *
      * @param array $args
+     *
      * @return Response
      */
     public function activateAction($args)
@@ -154,19 +152,19 @@ class SectionController extends BackendController
         return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
     }
 
-    protected function render($viewFile, array $parameters = array(), Response $response = null)
-    {
-        $this->view->startBlock('module');
-        echo $this->view->renderView($viewFile, $parameters);
-        $this->view->stopBlock();
-
-        return parent::render('backend/section/index', array(), $response);
-    }
-
+    /**
+     * Get section by id.
+     *
+     * @param int $id
+     *
+     * @return SectionModel
+     *
+     * @throws Exception
+     */
     protected function getSectionById($id)
     {
         // Get page by id
-        $section = $this->sectionMapper->findById($id);
+        $section = SectionModel::findById($id);
 
         if ($section) {
             return $section;

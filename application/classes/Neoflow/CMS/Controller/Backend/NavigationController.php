@@ -66,7 +66,7 @@ class NavigationController extends BackendController
 
     public function indexAction($args)
     {
-        $navigations = $this->navigationMapper->findAll();
+        $navigations = NavigationModel::findAll();
 
         return $this->render('backend/navigation/index', array(
                 'navigations' => $navigations,
@@ -75,7 +75,7 @@ class NavigationController extends BackendController
 
     public function editAction($args)
     {
-        $navigation = $this->navigationMapper->findById($args['id']);
+        $navigation = NavigationModel::findById($args['id']);
         $languages = $this->languageMapper->getOrm()
             ->where('is_active', '=', true)
             ->fetchAll();
@@ -85,7 +85,7 @@ class NavigationController extends BackendController
             $args['language_id'] = $languages[0]->id();
             return $this->redirectToRoute('navigation_edit', $args);
         }
-        $activeLanguage = $this->languageMapper->findById($language_id);
+        $activeLanguage = \Neoflow\CMS\Model\LanguageModel::findById($language_id);
 
         $navitems = $navigation->navitems()
             ->where('parent_navitem_id', 'IS', null)
@@ -156,7 +156,7 @@ class NavigationController extends BackendController
         try {
 
             // Update model entity
-            $navigation = $this->navigationMapper->findById($navigation_id);
+            $navigation = NavigationModel::findById($navigation_id);
             $navigation->title = $postData->get('title');
             $navigation->description = $postData->get('description');
             $navigation->save();

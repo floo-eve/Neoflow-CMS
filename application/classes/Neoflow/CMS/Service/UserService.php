@@ -1,17 +1,21 @@
 <?php
 
-namespace Neoflow\CMS\Mapper;
+namespace Neoflow\CMS\Service;
 
 use \Neoflow\CMS\Model\UserModel;
-use \Neoflow\Framework\Core\AbstractMapper;
+use \Neoflow\CMS\Repository\UserRepository;
+use \Neoflow\Framework\Core\AbstractService;
 
-class UserMapper extends AbstractMapper
+class UserService extends AbstractService
 {
 
     /**
-     * @var string
+     * Constructor.
      */
-    public static $modelClassName = '\\Neoflow\\CMS\\Model\\UserModel';
+    public function __construct()
+    {
+        $this->userRepository = new UserRepository();
+    }
 
     /**
      * Authenticate user with email and password.
@@ -23,7 +27,7 @@ class UserMapper extends AbstractMapper
      */
     public function authenticate($email, $password)
     {
-        return $this->getOrm()
+        return $this->userRepository
                 ->where('email', '=', $email)
                 ->where('password', '=', sha1($password))
                 ->fetch();

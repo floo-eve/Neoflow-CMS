@@ -2,17 +2,16 @@
 
 namespace Neoflow\CMS\Controller\Backend;
 
-use \Neoflow\CMS\Controller\BackendController;
-use \Neoflow\CMS\Mapper\NavitemMapper;
-use \Neoflow\Framework\HTTP\Responsing\JsonResponse;
+use Neoflow\CMS\Controller\BackendController;
+use Neoflow\CMS\Service\NavitemService;
+use Neoflow\Framework\HTTP\Responsing\JsonResponse;
 
 class NavitemController extends BackendController
 {
-
     /**
-     * @var NavitemMapper
+     * @var NavitemService
      */
-    protected $navitemMapper;
+    protected $navitemService;
 
     /**
      * Constructor.
@@ -21,17 +20,25 @@ class NavitemController extends BackendController
     {
         parent::__construct();
 
-        // Create mapper
-        $this->navitemMapper = new NavitemMapper();
+        // Create navitem service
+        $this->navitemService = new NavitemService();
     }
 
+    /**
+     * Reorder navitems action.
+     *
+     * @param array $args
+     *
+     * @return JsonResponse
+     */
     public function reorderAction($args)
     {
         $json = file_get_contents('php://input');
         $result = false;
         if (is_json($json)) {
-            $result = $this->navitemMapper->updateOrder(json_decode($json, true));
+            $result = $this->navitemService->updateOrder(json_decode($json, true));
         }
-        return new JsonResponse(array('success' => (bool) $result));
+
+        return new JsonResponse(array('success' => $result));
     }
 }

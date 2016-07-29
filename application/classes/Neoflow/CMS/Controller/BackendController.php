@@ -2,18 +2,21 @@
 
 namespace Neoflow\CMS\Controller;
 
-use Neoflow\CMS\App;
-use Neoflow\CMS\Mapper\LanguageMapper;
-use Neoflow\CMS\Mapper\UserMapper;
-use Neoflow\CMS\Views\BackendView;
-use Neoflow\Framework\Core\AbstractController;
-use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
-use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\Helper\Alert\SuccessAlert;
-use Neoflow\Helper\Alert\WarningAlert;
+use \Neoflow\CMS\App;
+use \Neoflow\CMS\Model\LanguageModel;
+use \Neoflow\CMS\Repository\LanguageRepository;
+use \Neoflow\CMS\Service\UserService;
+use \Neoflow\CMS\Views\BackendView;
+use \Neoflow\Framework\Core\AbstractController;
+use \Neoflow\Framework\HTTP\Responsing\RedirectResponse;
+use \Neoflow\Framework\HTTP\Responsing\Response;
+use \Neoflow\Helper\Alert\SuccessAlert;
+use \Neoflow\Helper\Alert\WarningAlert;
 
 class BackendController extends AbstractController
 {
+
+    protected $userService;
 
     /**
      * Constrcutor.
@@ -24,13 +27,16 @@ class BackendController extends AbstractController
     {
         parent::__construct();
 
-        $languageMapper = new LanguageMapper();
-        $languages = $languageMapper->getOrm()
+        $this->userService = new UserService;
+
+        $languageRepository = new LanguageRepository();
+        $languages = $languageRepository
             ->where('is_active', '=', true)
             ->fetchAll();
+
         // Get current language
         $currentLanguageCode = $this->app()->get('translator')->getCurrentLanguageCode();
-        $currentLanguage = $languageMapper->findByCode($currentLanguageCode);
+        $currentLanguage = LanguageModel::findByColumn('code', $currentLanguageCode);
 
         $this->view
             ->set('languages', $languages)
@@ -89,20 +95,18 @@ class BackendController extends AbstractController
     public function authAction($args)
     {
         $postData = $this->getRequest()->getPostData();
-        $session = $this->getSession();
-        $userMapper = new UserMapper();
         if ($postData->exists('email') && $postData->exists('password')) {
-            $user = $userMapper->authenticate($postData->get('email'), $postData->get('password'));
+            $user = $this->userService->authenticate($postData->get('email'), $postData->get('password'));
             if ($user) {
                 $alert = new SuccessAlert('Hallo ' . $user->firstname . ' ' . $user->lastname . ', du hast dich erfolgreich eingeloggt');
-                $session
+                $this->getSession()
                     ->set('user_id', $user->id())
                     ->setFlash('alert', $alert);
 
                 return $this->redirectToRoute('dashboard_index');
             }
             $alert = new WarningAlert('E-Mailadresse und/oder Password falsch');
-            $session->setFlash('alert', $alert);
+            $this->setFlash('alert', $alert);
 
             return $this->redirectToRoute('backend_login');
         }

@@ -3,13 +3,10 @@
 namespace Neoflow\CMS\Controller\Backend;
 
 use \Neoflow\CMS\Controller\BackendController;
-use \Neoflow\CMS\Mapper\LanguageMapper;
-use \Neoflow\CMS\Mapper\ModuleMapper;
-use \Neoflow\CMS\Mapper\NavitemMapper;
-use \Neoflow\CMS\Mapper\PageMapper;
-use \Neoflow\CMS\Mapper\SectionMapper;
-use \Neoflow\CMS\Model\NavitemModel;
+use \Neoflow\CMS\Model\LanguageModel;
+use \Neoflow\CMS\Model\ModuleModel;
 use \Neoflow\CMS\Model\PageModel;
+use \Neoflow\CMS\Repository\NavitemRepository;
 use \Neoflow\CMS\Views\Backend\PageView;
 use \Neoflow\Framework\Handler\Validation\ValidationException;
 use \Neoflow\Framework\Handler\Validation\ValidationHelper;
@@ -21,29 +18,9 @@ class PageController extends BackendController
 {
 
     /**
-     * @var LanguageMapper
+     * @var NavitemRepository
      */
-    protected $languageMapper;
-
-    /**
-     * @var PageMapper
-     */
-    protected $pageMapper;
-
-    /**
-     * @var NavitemMapper
-     */
-    protected $navitemMapper;
-
-    /**
-     * @var ModuleMapper
-     */
-    protected $moduleMapper;
-
-    /**
-     * @var SectionMapper
-     */
-    protected $sectionMapper;
+    protected $navitemRepository;
 
     /**
      * Constructor.
@@ -57,20 +34,14 @@ class PageController extends BackendController
             ->setSubtitle('Content')
             ->setTitle('Pages');
 
-        // Create mapper
-        $this->languageMapper = new LanguageMapper();
-        $this->pageMapper = new PageMapper();
-        $this->navitemMapper = new NavitemMapper();
-        $this->moduleMapper = new ModuleMapper();
-        $this->sectionMapper = new SectionMapper();
+        // Create repository
+        $this->navitemRepository = new NavitemRepository();
     }
 
     public function indexAction($args)
     {
         // Get all languages
-        $languages = $this->languageMapper->findAllBy(array(
-            array('is_active', '=', true)
-        ));
+        $languages = LanguageModel::findAllByColumn('is_active', true);
 
         // Get page language id
         $language_id = $this->getRequest()->getGet('language_id');
@@ -86,10 +57,10 @@ class PageController extends BackendController
         $this->getSession()->set('page_language_id', $language_id);
 
         // Get page language
-        $pageLanguage = $this->languageMapper->findById($language_id);
+        $pageLanguage = LanguageModel::findById($language_id);
 
         // Get navitems
-        $navitems = $this->navitemMapper->getOrm()
+        $navitems = $this->navitemRepository
             ->where('parent_navitem_id', 'IS', null)
             ->where('language_id', '=', $pageLanguage->id())
             ->where('navigation_id', '=', 1)
@@ -97,7 +68,7 @@ class PageController extends BackendController
             ->fetchAll();
 
         // Get modules
-        $modules = $this->moduleMapper->findAll();
+        $modules = ModuleModel::findAll();
 
         return $this->render('backend/page/index', array(
                 'languages' => $languages,
@@ -121,37 +92,23 @@ class PageController extends BackendController
             $postData = $this->getRequest()->getPostData();
 
             // Create page
-            $page = new PageModel();
-            $page->title = $postData->get('title');
-            $page->language_id = $postData->get('language_id');
-            $page->is_active = $postData->get('is_active');
+            $page = PageModel::create(array(
+                    'title' => $postData->get('title'),
+                    'language_id' => $postData->get('language_id'),
+                    'is_active' => $postData->get('is_active'),
+                    'parent_navitem_id' => $postData->get('parent_navitem_id'),
+                    'module_id' => $postData->get('module_id'),
+            ));
 
-            // Save page
-            if ($page->save()) {
-
-                // Create navitem
-                $navitem = new NavitemModel();
-                $navitem->navigation_id = 1;
-                $navitem->page_id = $page->id();
-                $navitem->language_id = $page->language_id;
-                $navitem->parent_navitem_id = $postData->parent_navitem_id ? : null;
-
-                // Create section
-                $section = new \Neoflow\CMS\Model\SectionModel();
-                $section->page_id = $page->id();
-                $section->module_id = $postData->get('module_id');
-                $section->is_active = true;
-                $section->block = 1;
-
-                // Save navitem
-                if ($navitem->save() && $section->save()) {
-                    $this->setFlash('alert', new SuccessAlert('Page successful saved'));
-                }
+            if ($page) {
+                $this->setFlash('alert', new SuccessAlert('{0} successful created', array('Page')));
+            } else {
+                $this->setFlash('alert', new DangerAlert('Create failed'));
             }
         } catch (ValidationException $ex) {
             $this->setFlash('alert', new DangerAlert($ex->getErrors()));
         }
-        return $this->redirectToRoute('page_index', array('language_id' => $page->language_id));
+        return $this->redirectToRoute('page_index');
     }
 
     public function sectionsAction($args)
@@ -165,7 +122,7 @@ class PageController extends BackendController
             ->fetchAll();
 
         // Get modules
-        $modules = $this->moduleMapper->findAll();
+        $modules = ModuleModel::findAll();
 
         // Set back url
         $this->view->setBackRoute('page_index', array('language_id' => $page->language_id));
@@ -194,7 +151,7 @@ class PageController extends BackendController
         }
 
         // Get navitems
-        $navitems = $this->navitemMapper->getOrm()
+        $navitems = $this->navitemRepository
             ->where('parent_navitem_id', 'IS', null)
             ->where('language_id', '=', $page->language_id)
             ->where('navigation_id', '=', 1)
@@ -225,7 +182,9 @@ class PageController extends BackendController
 
         // Delete page
         if ($page->delete()) {
-            $this->setFlash('alert', new SuccessAlert('Page successful deleted'));
+            $this->setFlash('alert', new SuccessAlert('{0} successful deleted', array('Page')));
+        } else {
+            $this->setFlash('alert', new DangerAlert('Delete failed'));
         }
         return $this->redirectToRoute('page_index');
     }
@@ -261,7 +220,9 @@ class PageController extends BackendController
 
             // Save page and navitem
             if ($page->save() && $navitem->save()) {
-                $this->setFlash('alert', new SuccessAlert('Page successful saved'));
+                $this->setFlash('alert', new SuccessAlert('{0} successful updated', array('Page')));
+            } else {
+                $this->setFlash('alert', new DangerAlert('Update failed'));
             }
         } catch (ValidationException $ex) {
             $this->setFlash('alert', new DangerAlert($ex->getErrors()));
@@ -306,7 +267,7 @@ class PageController extends BackendController
     protected function getPageById($id)
     {
         // Get page by id
-        $page = $this->pageMapper->findById($id);
+        $page = PageModel::findById($id);
 
         if ($page) {
             return $page;
