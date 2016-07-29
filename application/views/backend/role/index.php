@@ -9,6 +9,34 @@
             </div>
             <div class="panel-body">
 
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th><?= $this->translate('Title') ?></th>
+                            <th><?= $this->translate('Description') ?></th>
+                            <th><?= $this->translate('Permissions') ?></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($roles as $role) { ?>
+                            <tr>
+                                <td><?= $role->title ?></td>
+                                <td><?= nl2br($role->description) ?></td>
+                                <td><?php
+                                    echo implode(', ', array_map(function($role) {
+                                            return $role->getTranslatedTitle();
+                                        }, $role->permissions()->fetchAll()))
+
+                                    ?>
+                                </td>
+                                <td class="text-right">
+                                    DEL, Edit
+                                </td>
+                            </tr>
+                        <?php } ?> 
+                    </tbody>
+                </table>
 
             </div>
         </div>
@@ -21,7 +49,7 @@
                 <h3 class="panel-title"><?= $this->translate('New role') ?></h3>
             </div>
             <div class="panel-body">
-                <form method="post" action="<?= $this->generateUrl('role_save') ?>" class="form-horizontal">
+                <form method="post" action="<?= $this->generateUrl('role_create') ?>" class="form-horizontal">
                     <div class="form-group <?= $this->hasValidationError('title', 'has-error') ?>">
                         <label for="inputTitle" class="col-sm-3 control-label">
                             <?= $this->translate('Title') ?>
@@ -45,7 +73,7 @@
                             <?= $this->translate('Permissions') ?>
                         </label>
                         <div class="col-sm-9">
-                            <select required multiple class="form-control select2" name="permission_ids" id="selectPermissions" data-placeholder="">
+                            <select required multiple class="form-control select2" name="permission_ids[]" id="selectPermissions" data-placeholder="">
                                 <?php
                                 foreach ($permissions as $permission) {
 
