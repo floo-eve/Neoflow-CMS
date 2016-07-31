@@ -34,6 +34,10 @@
         <!-- Flag icon CSS -->
         <link href="<?= $this->getThemeUrl('/vendor/flag-icon-css/css/flag-icon.css') ?>" rel="stylesheet" />
 
+        <!-- DataTables CSS -->
+        <!--<link href="<?= $this->getThemeUrl('/vendor/dataTables/css/jquery.dataTables.min.css') ?>" rel="stylesheet" />-->
+        <link href="<?= $this->getThemeUrl('/vendor/dataTables/css/dataTables.bootstrap.min.css') ?>" rel="stylesheet" />
+
         <!-- Vendor Fonts -->
         <link href="<?= $this->getThemeUrl('/vendor/font-awesome-4.5/css/font-awesome.min.css') ?>" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400italic,700|Roboto:400,400italic,500,700,900" rel="stylesheet" type="text/css">
@@ -89,7 +93,9 @@
 
         <!-- Neoflow Vars -->
         <script>
-            var NEOFLOW_LOCALE = '<?= $this->get('currentLanguage')->code ?>';
+            var NEOFLOW_LOCALE = '<?= $this->get('currentLanguage')->code ?>',
+                    NEOFLOW_URL = '<?= $this->getConfig()->getUrl() ?>',
+                    NEOFLOW_THEME_URL = '<?= $this->getThemeUrl() ?>';
         </script>
 
         <!-- jQuery -->
@@ -112,6 +118,10 @@
 
         <!-- Cookie JavaScript -->
         <script src="<?= $this->getThemeUrl('/vendor/js-cookie/js.cookie-2.1.2.min.js') ?>"></script>
+
+        <!-- Cookie JavaScript -->
+        <script src="<?= $this->getThemeUrl('/vendor/dataTables/js/jquery.dataTables.min.js') ?>"></script>
+        <script src="<?= $this->getThemeUrl('/vendor/dataTables/js/dataTables.bootstrap.js') ?>"></script>
 
         <!-- Select2 jQuery Plugin JavaScript -->
         <script src="<?= $this->getThemeUrl('/vendor/select2/js/select2.full.js') ?>"></script>
