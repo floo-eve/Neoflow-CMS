@@ -15,7 +15,7 @@
                             <th><?= $this->translate('Title') ?></th>
                             <th><?= $this->translate('Description') ?></th>
                             <th><?= $this->translate('Permissions') ?></th>
-                            <th></th>
+                            <th class="no-order no-search"></th>
                         </tr>
                     </thead>
                     <tbody>
