@@ -74,6 +74,7 @@
         <script src="<?= $view->getThemeUrl('/vendor/dataTables/js/jquery.dataTables.min.js') ?>"></script>
         <script src="<?= $view->getThemeUrl('/vendor/dataTables/js/dataTables.bootstrap.min.js') ?>"></script>
         <script src="<?= $view->getThemeUrl('/vendor/select2/js/select2.full.js') ?>"></script>
+
         <script src="<?= $view->getThemeUrl('/vendor/select2/js/i18n/' . $view->app()->get('translator')->getCurrentLanguageCode() . '.js') ?>"></script>
 
         <!-- Additional script -->

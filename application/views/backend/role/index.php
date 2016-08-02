@@ -9,7 +9,7 @@
             </div>
             <div class="panel-body">
 
-                <table class="table table-striped datatable">
+                <table class="table table-striped datatable"  data-toggle="table">
                     <thead>
                         <tr>
                             <th><?= $view->translate('Title') ?></th>
