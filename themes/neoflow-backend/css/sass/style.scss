@@ -1,22 +1,29 @@
 // Vars, mixins & helpers
-@import '_variables';
-@import '_mixins';
-@import '_helpers';
+@import 'variables';
+@import 'mixins';
+@import 'helpers';
 
-// Vendor vars & mixins
-@import '../../vendor/bootstrap/css/sass/bootstrap/_variables';
-@import '../../vendor/bootstrap/css/sass/bootstrap/_mixins';
+// Vendor
+@import '../../vendor/bootstrap/scss/bootstrap';
+@import '../../vendor/font-awesome/scss/font-awesome';
+@import '../../vendor/flag-icon-css/scss/flag-icon-css';
+@import '../../vendor/metisMenu/scss/metisMenu';
+@import '../../vendor/dataTables/scss/dataTables.bootstrap';
+@import '../../vendor/nestable/scss/nestable';
+@import '../../vendor/perfect-scrollbar/scss/perfect-scrollbar';
+@import '../../vendor/select2/scss/select2';
+@import '../../vendor/select2/scss/select2-bootstrap';
 
 // Components
-@import '_components/_base';
-@import '_components/_wrapper';
-@import '_components/_brand';
-@import '_components/_navigation';
-@import '_components/_debugbar';
+@import 'components/base';
+@import 'components/wrapper';
+@import 'components/brand';
+@import 'components/navigation';
+@import 'components/debugbar';
 
 // Vendor customization
-@import '_vendor-custom/bootstrap';
-@import '_vendor-custom/font-awesome';
+@import 'vendor-custom/bootstrap';
+@import 'vendor-custom/font-awesome';
 
 
 

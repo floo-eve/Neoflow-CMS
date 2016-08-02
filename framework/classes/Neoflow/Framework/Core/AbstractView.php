@@ -2,18 +2,17 @@
 
 namespace Neoflow\Framework\Core;
 
-use \Exception;
-use \InvalidArgumentException;
-use \Neoflow\CMS\Core\View;
-use \Neoflow\Framework\Common\Container;
-use \Neoflow\Framework\Handler\Config;
-use \Neoflow\Framework\Handler\Translator;
-use \Neoflow\Framework\Handler\Validation\ValidationHelper;
-use \Neoflow\Framework\Persistence\Caching\AbstractCache;
+use Exception;
+use InvalidArgumentException;
+use Neoflow\CMS\Core\View;
+use Neoflow\Framework\Common\Container;
+use Neoflow\Framework\Handler\Config;
+use Neoflow\Framework\Handler\Translator;
+use Neoflow\Framework\Handler\Validation\ValidationHelper;
+use Neoflow\Framework\Persistence\Caching\AbstractCache;
 
 abstract class AbstractView
 {
-
     /**
      * App trait.
      */
@@ -50,14 +49,218 @@ abstract class AbstractView
     protected $templateFileDirectories = array();
 
     /**
+     * @var array
+     */
+    protected $resources = array(
+        'stylesheets' => array(),
+        'scripts' => array(),
+    );
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->data = new Container();
 
-        $this->viewFileDirectories[] = $this->getConfig()->getPath(DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'views');
-        $this->templateFileDirectories[] = $this->getConfig()->getPath(DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'templates');
+        $this->viewFileDirectories[] = $this->getConfig()->getPath(DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'views');
+        $this->templateFileDirectories[] = $this->getConfig()->getPath(DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'templates');
+    }
+
+    /**
+     * Add resource url.
+     *
+     * @param string $url
+     * @param string $type
+     * @param string $key
+     * @param bool   $isRelative
+     *
+     * @return self
+     *
+     * @throw InvalidArgumentException
+     */
+    protected function addResource($url, $type, $key = 'default', $isRelative = true)
+    {
+        if ($type === 'stylesheets' || $type === 'scripts') {
+            if (!isset($this->resources[$type][$key])) {
+                $this->resources[$type][$key] = array();
+            }
+            if ($isRelative) {
+                $url = $this->getThemeUrl('/'.$url);
+            }
+            $this->resources[$type][$key][] = $url;
+
+            return $this;
+        }
+        throw new InvalidArgumentException('Type of resource has to be "stylesheet" or "script"');
+    }
+
+    /**
+     * Add resource urls.
+     *
+     * @param array  $urls
+     * @param string $type
+     * @param string $key
+     * @param bool   $isRelative
+     *
+     * @return self
+     */
+    protected function addResources(array $urls, $type, $key = 'default', $isRelative = true)
+    {
+        foreach ($urls as $url) {
+            $this->addResource($url, $type, $key, $isRelative);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add stylesheet url.
+     *
+     * @param string $url
+     * @param string $key
+     * @param bool   $isRelative
+     *
+     * @return self
+     */
+    public function addStylesheet($url, $key = 'default', $isRelative = true)
+    {
+        return $this->addResource($url, 'stylesheets', $key, $isRelative);
+    }
+
+    /**
+     * Add stylesheet urls.
+     *
+     * @param string $urls
+     * @param string $key
+     * @param bool   $isRelative
+     *
+     * @return self
+     */
+    public function addStylesheets($urls, $key = 'default', $isRelative = true)
+    {
+        return $this->addResources($urls, 'stylesheets', $key, $isRelative);
+    }
+
+    /**
+     * Add script url.
+     *
+     * @param string $url
+     * @param string $key
+     * @param bool   $isRelative
+     *
+     * @return self
+     */
+    public function addScript($url, $key = 'default', $isRelative = true)
+    {
+        return $this->addResource($url, 'scripts', $key, $isRelative);
+    }
+
+    /**
+     * Add script urls.
+     *
+     * @param string $urls
+     * @param string $key
+     * @param bool   $isRelative
+     *
+     * @return self
+     */
+    public function addScripts($urls, $key = 'default', $isRelative = true)
+    {
+        return $this->addResources($urls, 'scripts', $key, $isRelative);
+    }
+
+    /**
+     * Render resources.
+     *
+     * @param string $type
+     * @param string $template
+     * @param string $key
+     *
+     * @return string
+     *
+     * @throws InvalidArgumentException
+     */
+    protected function renderResources($type, $template, $key = 'default')
+    {
+        $output = '';
+
+        $urls = $this->getResourceUrls($type, $key);
+        foreach ($urls as $url) {
+            $output .= sprintf($template, $url).PHP_EOL;
+        }
+
+        return $output;
+    }
+
+    /**
+     * Get resource urls.
+     *
+     * @param string $type
+     * @param string $key
+     *
+     * @return array
+     *
+     * @throws InvalidArgumentException
+     */
+    protected function getResourceUrls($type, $key = 'default')
+    {
+        if ($type === 'scripts' || $type === 'stylesheets') {
+            if (isset($this->resources[$type][$key])) {
+                return $this->resources[$type][$key];
+            }
+
+            return array();
+        }
+        throw new InvalidArgumentException('Type of resource has to be "stylesheet" or "script"');
+    }
+
+    /**
+     * Get script urls.
+     *
+     * @param string $key
+     *
+     * @return array
+     */
+    public function getScriptUrls($key = 'default')
+    {
+        return $this->getResourceUrls('scripts', $key);
+    }
+
+    /**
+     * Get stylesheet urls.
+     *
+     * @param string $key
+     *
+     * @return array
+     */
+    public function getStylesheetUrls($key = 'default')
+    {
+        return $this->getResourceUrls('stylesheets', $key);
+    }
+
+    /**
+     * Render scripts.
+     *
+     * @param string $key
+     *
+     * @return string
+     */
+    public function renderScripts($key = 'default')
+    {
+        return $this->renderResources('scripts', '<script src="%s"></script>', $key);
+    }
+
+    /**
+     * Render stylesheets.
+     *
+     * @param string $key
+     *
+     * @return string
+     */
+    public function renderStylesheets($key = 'default')
+    {
+        return $this->renderResources('stylesheets', '<link href="%s" rel="stylesheet" type="text/css" />', $key);
     }
 
     /**
@@ -82,7 +285,7 @@ abstract class AbstractView
      */
     public function getThemeUrl($uri = '')
     {
-        return $this->getConfig()->getUrl('/theme/' . $uri);
+        return $this->getConfig()->getUrl('/theme/'.$uri);
     }
 
     /**
@@ -94,7 +297,7 @@ abstract class AbstractView
      */
     protected function getThemePath($uri = '')
     {
-        return $this->getConfig()->getPath('/theme/' . $uri);
+        return $this->getConfig()->getPath('/theme/'.$uri);
     }
 
     /**
@@ -126,7 +329,7 @@ abstract class AbstractView
     public function startBlock($id)
     {
         if (in_array($id, $this->openBlocks)) {
-            throw new Exception('A block already started with this ID: ' . $id);
+            throw new Exception('A block already started with this ID: '.$id);
         }
         $this->openBlocks[] = $id;
         $this->blocks[$id] = '';
@@ -229,7 +432,7 @@ abstract class AbstractView
     {
         $this->addParameters($parameters);
 
-        $viewFilePath = $this->getFilePath($viewFile, sha1('_view_' . $viewFile), $this->viewFileDirectories);
+        $viewFilePath = $this->getFilePath($viewFile, sha1('_view_'.$viewFile), $this->viewFileDirectories);
         if ($viewFilePath) {
             $content = $this->renderFile($viewFilePath, $parameters);
 
@@ -239,7 +442,7 @@ abstract class AbstractView
 
             return $content;
         }
-        throw new Exception('View not found: ' . $viewFile);
+        throw new Exception('View not found: '.$viewFile);
     }
 
     /**
@@ -254,41 +457,42 @@ abstract class AbstractView
      */
     public function renderTemplate($templateFile, $parameters = array())
     {
-        $templateFilePath = $this->getFilePath($templateFile, sha1('_template_' . $templateFile), $this->templateFileDirectories);
+        $templateFilePath = $this->getFilePath($templateFile, sha1('_template_'.$templateFile), $this->templateFileDirectories);
         if ($templateFilePath) {
             return $this->renderFile($templateFilePath, $parameters);
         }
-        throw new Exception('Template not found: ' . $templateFile);
+        throw new Exception('Template not found: '.$templateFile);
     }
 
     /**
-     * Get file path
+     * Get file path.
      *
-     * @param string $file View or template file name
-     * @param string $cacheKey Cache key
-     * @param array $directories View or template directories
-     * @return boolean
+     * @param string $file        View or template file name
+     * @param string $cacheKey    Cache key
+     * @param array  $directories View or template directories
+     *
+     * @return bool
      */
     protected function getFilePath($file, $cacheKey, $directories)
     {
         if ($this->getCache()->exists($cacheKey)) {
             return $this->getCache()->fetch($cacheKey);
         } else {
-
             foreach ($directories as $directory) {
-
-                $filePaths = array_map(function($extension) use ($directory, $file) {
-                    return $directory . DIRECTORY_SEPARATOR . $file . $extension;
+                $filePaths = array_map(function ($extension) use ($directory, $file) {
+                    return $directory.DIRECTORY_SEPARATOR.$file.$extension;
                 }, array('', '.php', '.html'));
 
                 foreach ($filePaths as $filePath) {
                     if (is_file($filePath)) {
                         $this->getCache()->store($cacheKey, $filePath, 0, array('_view'));
+
                         return $filePath;
                     }
                 }
             }
         }
+
         return false;
     }
 
@@ -304,15 +508,16 @@ abstract class AbstractView
     public function renderTheme($themeFile = 'index')
     {
         $themeFiles = array(
-            $this->getThemePath(DIRECTORY_SEPARATOR . $themeFile),
-            $this->getThemePath(DIRECTORY_SEPARATOR . $themeFile . '.php'),
-            $this->getThemePath(DIRECTORY_SEPARATOR . $themeFile . '.html'),
+            $this->getThemePath(DIRECTORY_SEPARATOR.$themeFile),
+            $this->getThemePath(DIRECTORY_SEPARATOR.$themeFile.'.php'),
+            $this->getThemePath(DIRECTORY_SEPARATOR.$themeFile.'.html'),
         );
 
         // Render theme file and get output
         foreach ($themeFiles as $themeFile) {
             if (is_file($themeFile)) {
                 ob_start();
+
                 return $this->renderFile($themeFile, $this->parameters);
             }
         }
@@ -350,24 +555,29 @@ abstract class AbstractView
     public function renderFile($file, array $parameters = array())
     {
         if (is_file($file)) {
-            extract($parameters);
+            $parameters['view'] = $this;
 
-            ob_start();
-            ob_implicit_flush(false);
-            include $file;
-            $output = ob_get_contents();
-            ob_end_clean();
+            $output = call_user_func(function () use ($file, $parameters) {
+                extract($parameters);
+                ob_start();
+                ob_implicit_flush(false);
+                include $file;
+                $output = ob_get_contents();
+                ob_end_clean();
+
+                return $output;
+            });
 
             // Search and replace placeholders
             foreach ($parameters as $key => $value) {
                 if (is_string($value) || is_integer($value)) {
-                    $output = str_replace('[' . $key . ']', $value, $output);
+                    $output = str_replace('['.$key.']', $value, $output);
                 }
             }
 
             return $output;
         }
-        throw new InvalidArgumentException('File not found: ' . $file);
+        throw new InvalidArgumentException('File not found: '.$file);
     }
 
     /**
@@ -384,10 +594,11 @@ abstract class AbstractView
     }
 
     /**
-     * Check wether validation error exists
+     * Check wether validation error exists.
      *
      * @param string $key
-     * @param mixed $returnValue
+     * @param mixed  $returnValue
+     *
      * @return mixed
      */
     public function hasValidationError($key = '', $returnValue = true)
@@ -396,15 +607,16 @@ abstract class AbstractView
         if ($validationHelper->hasError($key)) {
             return $returnValue;
         }
+
         return false;
     }
 
     /**
-     * Check wether route is active
+     * Check wether route is active.
      *
-     * @param array|string  $routeKeys
-     * @param mixed $returnValue
-     * @param mixed $returnFailedValue
+     * @param array|string $routeKeys
+     * @param mixed        $returnValue
+     * @param mixed        $returnFailedValue
      *
      * @return mixed
      */
@@ -422,11 +634,12 @@ abstract class AbstractView
                 return $returnValue;
             }
         }
+
         return $returnFailedValue;
     }
 
     /**
-     * Get config
+     * Get config.
      *
      * @return Config
      */
@@ -436,7 +649,8 @@ abstract class AbstractView
     }
 
     /**
-     * Get cache
+     * Get cache.
+     *
      * @return AbstractCache
      */
     protected function getCache()
@@ -445,7 +659,7 @@ abstract class AbstractView
     }
 
     /**
-     * Get config
+     * Get config.
      *
      * @return Translator
      */

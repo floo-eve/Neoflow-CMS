@@ -1,4 +1,4 @@
-// Variables
+// Bootstrap
 $gray-base: #000;
 $gray-darker: #222;
 $gray-dark: #444;
@@ -8,8 +8,6 @@ $gray-lighter: #F2F2F2;
 
 $brand-primary: #d55d4e;
 $brand-secondary: #32323A;
-
-// #F5846B
 $brand-success: #43AC6A;
 $brand-info: #528FC4;
 $brand-warning: #EA981E;
@@ -129,7 +127,6 @@ $panel-danger-heading-bg: $brand-danger;
 $panel-danger-link-color: $brand-danger;
 $panel-danger-link-hover-color: darken($brand-danger, 15%);
 
-
 $navbar-default-bg: #fff;
 $navbar-default-color: $gray;
 $navbar-default-border: $gray-lighter;
@@ -150,7 +147,9 @@ $text-muted: $gray;
 
 $dropdown-link-disabled-color: #ccc;
 
+$icon-font-path: '../vendor/bootstrap/fonts/';
 
+// Perfect scrollbar
 $ps-border-radius: 0;
 
 $ps-rail-default-opacity: 0;
@@ -167,3 +166,9 @@ $ps-scrollbar-y-rail-width: 4px;
 $ps-scrollbar-y-right: 2px;
 $ps-scrollbar-y-width: 4px;
 $ps-scrollbar-y-hover-width: 4px;
+
+// Font awesome
+$fa-font-path: '../vendor/font-awesome/fonts/';
+
+// Icon flags
+$flag-icon-css-path: '../vendor/flag-icon-css/flags/';

@@ -1,3 +1,3 @@
-<h1>500 - <?= $this->translate('Internal server errror') ?></h1>
+<h1>500 - <?= $view->translate('Internal server errror') ?></h1>
 <h2><?= $message ?></h2>
-<p><?= $this->app()->get('translator')->formatDateTime(new \DateTime()) ?></p>
+<p><?= $view->app()->get('translator')->formatDateTime(new \DateTime()) ?></p>

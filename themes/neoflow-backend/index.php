@@ -10,62 +10,27 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <!-- Favicons -->
-<!--        <link rel="icon" type="image/png" sizes="96x96" href="<?= $this->getThemeUrl('/img/favicon-96x96.png') ?>">
-        <link rel="icon" type="image/png" sizes="32x32" href="<?= $this->getThemeUrl('/img/favicon-32x32.png') ?>">
-        <link rel="icon" type="image/png" sizes="16x16" href="<?= $this->getThemeUrl('/img/favicon-16x16.png') ?>">-->
-
-        <!-- Boostrap CSS -->
-        <link href="<?= $this->getThemeUrl('/vendor/bootstrap/css/bootstrap.css') ?>" rel="stylesheet" />
-
-        <!-- Perfect Scrollbar CSS -->
-        <link href="<?= $this->getThemeUrl('/vendor/perfect-scrollbar/css/perfect-scrollbar.css') ?>" rel="stylesheet" />
-
-        <!-- MetisMenu CSS -->
-        <link href="<?= $this->getThemeUrl('/vendor/metisMenu/metisMenu.min.css') ?>" rel="stylesheet" />
-
-        <!-- Select2 CSS -->
-        <link href="<?= $this->getThemeUrl('/vendor/select2/css/select2.min.css') ?>" rel="stylesheet" />
-        <link href="<?= $this->getThemeUrl('/vendor/select2/css/select2-bootstrap.css') ?>" rel="stylesheet" />
-
-        <!-- Nestable CSS -->
-        <link href="<?= $this->getThemeUrl('/vendor/nestable/css/nestable.css') ?>" rel="stylesheet" />
-
-        <!-- Flag icon CSS -->
-        <link href="<?= $this->getThemeUrl('/vendor/flag-icon-css/css/flag-icon.css') ?>" rel="stylesheet" />
-
-        <!-- DataTables CSS -->
-        <!--<link href="<?= $this->getThemeUrl('/vendor/dataTables/css/jquery.dataTables.min.css') ?>" rel="stylesheet" />-->
-        <link href="<?= $this->getThemeUrl('/vendor/dataTables/css/dataTables.bootstrap.min.css') ?>" rel="stylesheet" />
-
-        <!-- Vendor Fonts -->
-        <link href="<?= $this->getThemeUrl('/vendor/font-awesome-4.5/css/font-awesome.min.css') ?>" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400italic,700|Roboto:400,400italic,500,700,900" rel="stylesheet" type="text/css">
 
+        <!-- Additional stylesheets -->
+        <?= $view->renderStylesheets() ?>
 
-        <!-- Theme CSS -->
-        <link href="<?= $this->getThemeUrl('/css/style.css') ?>" rel="stylesheet" />
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        <!-- Theme stylesheets -->
+        <link href="<?= $view->getThemeUrl('/css/style.css') ?>" rel="stylesheet" />
 
     </head>
     <body>
         <div id="body-scroll">
             <div id="wrapper">
 
-                <?php if ($this->hasBlock(2)) { ?>
+                <?php if ($view->hasBlock(2)) { ?>
 
                     <div id="page-wrapper-fluid">
-                        <?= $this->renderTemplate('navigation/navbar-top') ?>
+                        <?= $view->renderTemplate('navigation/navbar-top') ?>
 
                         <div class="page-wrapper">
                             <div class="container">
-                                <?= $this->getBlock(2) ?>
+                                <?= $view->getBlock(2) ?>
                             </div>
                         </div>
                     </div>
@@ -73,16 +38,16 @@
                 <?php } else { ?>
                     <div id="page-wrapper-sidebar">
 
-                        <?= $this->renderTemplate('navigation/navbar-top') ?>
-                        <?= $this->renderTemplate('navigation/sidebar') ?>
+                        <?= $view->renderTemplate('navigation/navbar-top') ?>
+                        <?= $view->renderTemplate('navigation/sidebar') ?>
 
                         <div class="page-wrapper">
                             <div class="container-fluid">
 
-                                <?= $this->renderTemplate('page-title') ?>
+                                <?= $view->renderTemplate('page-title') ?>
 
-                                <?= $this->renderAlert() ?>
-                                <?= $this->getBlock(1) ?>
+                                <?= $view->renderAlert() ?>
+                                <?= $view->getBlock(1) ?>
                             </div>
                         </div>
                     </div>
@@ -91,44 +56,31 @@
             </div><!-- /#wrapper -->
         </div><!-- /#body-scroll -->
 
-        <!-- Neoflow Vars -->
+        <!-- Theme vars -->
         <script>
-            var NEOFLOW_LOCALE = '<?= $this->get('currentLanguage')->code ?>',
-                    NEOFLOW_URL = '<?= $this->getConfig()->getUrl() ?>',
-                    NEOFLOW_THEME_URL = '<?= $this->getThemeUrl() ?>';
+            var NEOFLOW_LOCALE = '<?= $view->get('currentLanguage')->code ?>',
+                    NEOFLOW_URL = '<?= $view->getConfig()->getUrl() ?>',
+                    NEOFLOW_THEME_URL = '<?= $view->getThemeUrl() ?>';
         </script>
 
-        <!-- jQuery -->
-        <script src="<?= $this->getThemeUrl('/vendor/jquery/jquery-2.2.2.min.js') ?>"></script>
+        <!-- Theme vendor script -->
+        <script src="<?= $view->getThemeUrl('/vendor/jquery/jquery-2.2.2.min.js') ?>"></script>
+        <script src="<?= $view->getThemeUrl('/vendor/bootstrap/js/bootstrap.min.js') ?>"></script>
+        <script src="<?= $view->getThemeUrl('/vendor/metisMenu/js/metisMenu.min.js') ?>"></script>
+        <script src="<?= $view->getThemeUrl('/vendor/nestable/jquery.nestable.js') ?>"></script>
+        <script src="<?= $view->getThemeUrl('/vendor/bootbox/bootbox.min.js') ?>"></script>
+        <script src="<?= $view->getThemeUrl('/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js') ?>"></script>
+        <script src="<?= $view->getThemeUrl('/vendor/js-cookie/js.cookie-2.1.2.min.js') ?>"></script>
+        <script src="<?= $view->getThemeUrl('/vendor/dataTables/js/jquery.dataTables.min.js') ?>"></script>
+        <script src="<?= $view->getThemeUrl('/vendor/dataTables/js/dataTables.bootstrap.min.js') ?>"></script>
+        <script src="<?= $view->getThemeUrl('/vendor/select2/js/select2.full.js') ?>"></script>
+        <script src="<?= $view->getThemeUrl('/vendor/select2/js/i18n/' . $view->app()->get('translator')->getCurrentLanguageCode() . '.js') ?>"></script>
 
-        <!-- Bootstrap JavaScript -->
-        <script src="<?= $this->getThemeUrl('/vendor/bootstrap/js/bootstrap.js') ?>"></script>
+        <!-- Additional script -->
+        <?= $view->renderScripts() ?>
 
-        <!-- Metis Menu jQuery Plugin JavaScript -->
-        <script src="<?= $this->getThemeUrl('/vendor/metisMenu/metisMenu.js') ?>"></script>
-
-        <!-- Bootbox jQuery Plugin JavaScript -->
-        <script src="<?= $this->getThemeUrl('/vendor/bootbox/bootbox.min.js') ?>"></script>
-
-        <!-- Nestable jQuery Plugin JavaScript  -->
-        <script src="<?= $this->getThemeUrl('/vendor/nestable/jquery.nestable.js') ?>"></script>
-
-        <!-- Perfect Scrollbar jQuery Plugin JavaScript  -->
-        <script src="<?= $this->getThemeUrl('/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js') ?>"></script>
-
-        <!-- Cookie JavaScript -->
-        <script src="<?= $this->getThemeUrl('/vendor/js-cookie/js.cookie-2.1.2.min.js') ?>"></script>
-
-        <!-- Cookie JavaScript -->
-        <script src="<?= $this->getThemeUrl('/vendor/dataTables/js/jquery.dataTables.min.js') ?>"></script>
-        <script src="<?= $this->getThemeUrl('/vendor/dataTables/js/dataTables.bootstrap.js') ?>"></script>
-
-        <!-- Select2 jQuery Plugin JavaScript -->
-        <script src="<?= $this->getThemeUrl('/vendor/select2/js/select2.full.js') ?>"></script>
-        <script src="<?= $this->getThemeUrl('/vendor/select2/js/i18n/' . $this->app()->get('translator')->getCurrentLanguageCode() . '.js') ?>"></script>
-
-        <!-- Neoflow Backend Theme JavaScript -->
-        <script src="<?= $this->getThemeUrl('/js/script.js') ?>"></script>
+        <!-- Theme script -->
+        <script src="<?= $view->getThemeUrl('/js/script.js') ?>"></script>
 
     </body>
 </html>

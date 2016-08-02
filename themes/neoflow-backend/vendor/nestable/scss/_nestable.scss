@@ -1,0 +1,157 @@
+.nestable-list {
+    padding: 0;
+    border: 0;
+
+    &:first-of-type {
+        margin-left: 40px;
+    }
+
+    .nestable-item {
+        border-radius: 0;
+        position: relative;
+        padding-top: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        /*        height: 42px;*/
+
+        > .nestable-handle {
+            position: absolute;
+            left: 0;
+            top: 0;
+            margin-left: -40px;
+            height: 40px;
+            width: 40px;
+            line-height: 40px;
+
+            display: block;
+            text-align: center;
+            background: $brand-secondary;
+            cursor: move;
+
+            font-weight: normal;
+            -ms-touch-action: none;
+            touch-action: none;
+            color: #fff;
+        }
+
+        > .nestable-content {
+            height: 40px;
+            line-height: 20px;
+            padding: 10px 15px 10px 0;
+            display: block;
+            width: 100%;
+
+            form {
+                display: inline-block;
+                height: 20px;
+            }
+        }
+    }
+
+    button {
+        margin: 12px 0 0 -40px;
+        max-height: 20px;
+        height: 20px;
+        position: absolute;
+    }
+
+    > .nestable-item {
+        margin: 0 0 5px 0;
+        padding-left: 55px;
+
+        .nestable-list {
+            margin: 0 0 0 -55px;
+
+            > .nestable-item {
+                margin: 0;
+                border-bottom: 0;
+                border-left: 0;
+                border-right: 0;
+                padding-left: 85px;
+
+                > .nestable-list {
+                    margin-left: -85px;
+
+                    > .nestable-item {
+                        margin: 0;
+                        padding-left: 115px;
+
+                        > .nestable-list {
+                            margin-left: -115px;
+
+                            > .nestable-item {
+                                margin: 0;
+                                padding-left: 145px;
+
+                                > .nestable-list {
+                                    margin-left: -145px;
+
+                                    > .nestable-item {
+                                        margin: 0;
+                                        padding-left: 175px;
+                                    }
+
+                                    > .nestable-placeholder {
+                                        margin-left: 175px;
+                                    }
+                                }
+                            }
+
+                            > .nestable-placeholder {
+                                margin-left: 145px;
+                            }
+                        }
+                    }
+
+                    > .nestable-placeholder {
+                        margin-left: 115px;
+                    }
+                }
+            }
+
+            > .nestable-placeholder {
+                margin-left: 75px;
+            }
+        }
+    }
+
+    .nestable-placeholder {
+        margin: 10px 10px 10px 45px;
+        padding: 0;
+        min-height: 30px;
+        background: #f2fbff;
+        border: 1px dashed #b6bcbf;
+    }
+}
+
+.nestable-dragging {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9999;
+    -ms-touch-action: none;
+    touch-action: none;
+    user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    opacity: 0.8;
+
+    &.nestable {
+        .nestable-item {
+            .dd-handle {
+                display: none;
+            }
+        }
+
+        > .nestable-item {
+            &:first-child {
+                > .dd-handle {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+
+

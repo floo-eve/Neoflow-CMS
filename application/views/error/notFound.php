@@ -1,1 +1,1 @@
-<h1>404 <?= $this->translate('Not found') ?></h1>
+<h1>404 <?= $view->translate('Not found') ?></h1>
