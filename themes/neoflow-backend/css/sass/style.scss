@@ -9,10 +9,15 @@
 @import '../../vendor/flag-icon-css/scss/flag-icon-css';
 @import '../../vendor/metisMenu/scss/metisMenu';
 @import '../../vendor/dataTables/scss/dataTables.bootstrap';
+@import '../../vendor/dataTables/scss/responsive.bootstrap';
 @import '../../vendor/nestable/scss/nestable';
 @import '../../vendor/perfect-scrollbar/scss/perfect-scrollbar';
 @import '../../vendor/select2/scss/select2';
 @import '../../vendor/select2/scss/select2-bootstrap';
+
+// Vendor customization
+@import 'vendor-custom/bootstrap';
+@import 'vendor-custom/font-awesome';
 
 // Components
 @import 'components/base';
@@ -21,9 +26,6 @@
 @import 'components/navigation';
 @import 'components/debugbar';
 
-// Vendor customization
-@import 'vendor-custom/bootstrap';
-@import 'vendor-custom/font-awesome';
 
 
 

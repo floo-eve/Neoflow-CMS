@@ -4,12 +4,12 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= $view->translate('All roles') ?>
+                    <?= $view->translate('All {0}', array('Roles')) ?>
                 </h3>
             </div>
             <div class="panel-body">
 
-                <table class="table table-striped datatable"  data-toggle="table">
+                <table class="table table-striped datatable">
                     <thead>
                         <tr>
                             <th><?= $view->translate('Title') ?></th>
@@ -21,7 +21,11 @@
                     <tbody>
                         <?php foreach ($roles as $role) { ?>
                             <tr>
-                                <td><?= $role->title ?></td>
+                                <td>
+                                    <a href="<?= $view->generateUrl('role_edit', array('id' => $role->id())) ?>" title="<?= $view->translate('Edit') ?>">
+                                        <?= $role->title ?>
+                                    </a>
+                                </td>
                                 <td><?= nl2br($role->description) ?></td>
                                 <td><?php
                                     echo implode(', ', array_map(function($role) {
@@ -30,11 +34,16 @@
 
                                     ?>
                                 </td>
-                                <td class="text-right">
-                                    DEL, Edit
+                                <td class="text-right nowrap">
+                                    <a href="<?= $view->generateUrl('role_edit', array('id' => $role->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= $view->translate('Edit') ?>">
+                                        <i class="fa fa-fw fa-pencil"></i> <?= $view->translate('Edit') ?>
+                                    </a>
+                                    <a href="<?= $view->generateUrl('role_delete', array('id' => $role->id())) ?>" class="btn btn-danger btn-xs confirm" data-message="<?= $view->translate('Are you sure you want to delete it?') ?>" title="<?= $view->translate('Delete') ?>">
+                                        <i class="fa fa-fw fa-trash-o"></i>
+                                    </a>
                                 </td>
                             </tr>
-                        <?php } ?> 
+                        <?php } ?>
                     </tbody>
                 </table>
 
@@ -68,7 +77,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group <?= $view->hasValidationError('module_id', 'has-error') ?>">
+                    <div class="form-group <?= $view->hasValidationError('permission_ids', 'has-error') ?>">
                         <label for="selectPermissions" class="col-sm-3 control-label">
                             <?= $view->translate('Permissions') ?>
                         </label>

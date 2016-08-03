@@ -20,29 +20,30 @@ table.dataTable.nowrap td {
     white-space: nowrap;
 }
 
-div.dataTables_wrapper div.dataTables_length label {
-    font-weight: normal;
-    text-align: left;
-    white-space: nowrap;
+.dataTables_wrapper {
+    label {
+        font-weight: normal;
+        white-space: nowrap;
+        text-align: left;
+    }
+
+    select, input {
+        margin-left: 0.5em;
+        display: inline-block;
+        width: auto;
+    }
+
+    .dataTables_length, .dataTables_filter {
+        margin: 0 0 10px 0;
+    }
+
+    .dataTables_filter {
+        text-align: right;
+    }
 }
-div.dataTables_wrapper div.dataTables_length select {
-    width: 75px;
-    display: inline-block;
-    margin-left: 0.5em;
-}
-div.dataTables_wrapper div.dataTables_filter {
-    text-align: right;
-}
-div.dataTables_wrapper div.dataTables_filter label {
-    font-weight: normal;
-    white-space: nowrap;
-    text-align: left;
-}
-div.dataTables_wrapper div.dataTables_filter input {
-    margin-left: 0.5em;
-    display: inline-block;
-    width: auto;
-}
+
+div.dataTables_wrapper div.dataTables_filter
+div.dataTables_wrapper div.dataTables_filter
 div.dataTables_wrapper div.dataTables_info {
     padding-top: 8px;
     white-space: nowrap;
@@ -140,8 +141,8 @@ div.dataTables_scrollFoot table {
 }
 
 @media screen and (max-width: 767px) {
-    div.dataTables_wrapper div.dataTables_length,
-    div.dataTables_wrapper div.dataTables_filter,
+    /*    div.dataTables_wrapper div.dataTables_length,
+        div.dataTables_wrapper div.dataTables_filter,*/
     div.dataTables_wrapper div.dataTables_info,
     div.dataTables_wrapper div.dataTables_paginate {
         text-align: center;
