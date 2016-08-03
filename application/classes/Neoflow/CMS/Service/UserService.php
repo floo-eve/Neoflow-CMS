@@ -3,19 +3,10 @@
 namespace Neoflow\CMS\Service;
 
 use \Neoflow\CMS\Model\UserModel;
-use \Neoflow\CMS\Repository\UserRepository;
 use \Neoflow\Framework\Core\AbstractService;
 
 class UserService extends AbstractService
 {
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->userRepository = new UserRepository();
-    }
 
     /**
      * Authenticate user with email and password.
@@ -27,7 +18,7 @@ class UserService extends AbstractService
      */
     public function authenticate($email, $password)
     {
-        return $this->userRepository
+        return UserModel::orm()
                 ->where('email', '=', $email)
                 ->where('password', '=', sha1($password))
                 ->fetch();

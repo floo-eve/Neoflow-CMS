@@ -22,7 +22,7 @@
                         <?php foreach ($roles as $role) { ?>
                             <tr>
                                 <td>
-                                    <a href="<?= $view->generateUrl('role_edit', array('id' => $role->id())) ?>" title="<?= $view->translate('Edit') ?>">
+                                    <a href="<?= $view->generateUrl('role_edit', array('id' => $role->id())) ?>" title="<?= $view->translate('Edit {0}', array($role->title)) ?>">
                                         <?= $role->title ?>
                                     </a>
                                 </td>
@@ -30,10 +30,10 @@
                                 <td><?= $role->permission_titles ?></td>
                                 </td>
                                 <td class="text-right nowrap">
-                                    <a href="<?= $view->generateUrl('role_edit', array('id' => $role->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= $view->translate('Edit') ?>">
+                                    <a href="<?= $view->generateUrl('role_edit', array('id' => $role->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= $view->translate('Edit {0}', array($role->title)) ?>">
                                         <i class="fa fa-fw fa-pencil"></i> <?= $view->translate('Edit') ?>
                                     </a>
-                                    <a href="<?= $view->generateUrl('role_delete', array('id' => $role->id())) ?>" class="btn btn-danger btn-xs confirm" data-message="<?= $view->translate('Are you sure you want to delete it?') ?>" title="<?= $view->translate('Delete') ?>">
+                                    <a href="<?= $view->generateUrl('role_delete', array('id' => $role->id())) ?>" class="btn btn-danger btn-xs confirm" data-message="<?= $view->translate('Are you sure you want to delete it?') ?>" title="<?= $view->translate('Delete {0}', array($role->title)) ?>">
                                         <i class="fa fa-fw fa-trash-o"></i>
                                     </a>
                                 </td>

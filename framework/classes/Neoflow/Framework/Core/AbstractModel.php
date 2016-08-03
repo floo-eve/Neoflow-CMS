@@ -6,6 +6,7 @@ use \DomainException;
 use \Neoflow\Framework\Common\Collection;
 use \Neoflow\Framework\Persistence\ORM;
 use \Neoflow\Framework\Persistence\QueryBuilder;
+use \Neoflow\Framework\Persistence\Querying\SelectQuery;
 
 abstract class AbstractModel
 {
@@ -282,7 +283,7 @@ abstract class AbstractModel
 
         $this->validate();
 
-        $id = static::queryBuilder()
+        $id = static::query()
             ->insertInto($this->getTableName())
             ->values($this->data)
             ->execute();
@@ -316,7 +317,7 @@ abstract class AbstractModel
     {
         $this->validate();
 
-        static::queryBuilder()
+        static::query()
             ->update($this->getTableName())
             ->setPrimaryKey($this->getPrimaryKey())
             ->set($this->getModifiedData())
@@ -332,7 +333,7 @@ abstract class AbstractModel
      */
     public function delete()
     {
-        static::queryBuilder()
+        $this->app()->get('queryBuilder')
             ->deleteFrom($this->getTableName())
             ->setPrimaryKey($this->getPrimaryKey())
             ->execute($this->id());
@@ -418,20 +419,26 @@ abstract class AbstractModel
     }
 
     /**
-     * Get ORM for current model entity
-     *
-     * @param string $modelClassName
+     * Get ORM for entity model
      *
      * @return ORM
      */
-    protected static function orm($modelClassName = null)
+    public static function orm()
     {
-        if (!$modelClassName) {
-            $modelClassName = get_called_class();
-        }
-
         $orm = new ORM();
-        return $orm->forModel($modelClassName);
+        return $orm->forModel(get_called_class());
+    }
+
+    /**
+     * Create select query for entity model
+     *
+     * @param array $columns
+     *
+     * @return SelectQuery
+     */
+    protected static function selectQuery(array $columns = array())
+    {
+        return static::queryBuilder()->selectFrom(static::$tableName, $columns);
     }
 
     /**

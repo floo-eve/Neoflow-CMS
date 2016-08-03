@@ -4,7 +4,6 @@ namespace Neoflow\CMS\Controller;
 
 use \Neoflow\CMS\App;
 use \Neoflow\CMS\Model\LanguageModel;
-use \Neoflow\CMS\Repository\LanguageRepository;
 use \Neoflow\CMS\Service\UserService;
 use \Neoflow\CMS\Views\BackendView;
 use \Neoflow\Framework\Core\AbstractController;
@@ -29,8 +28,7 @@ class BackendController extends AbstractController
 
         $this->userService = new UserService;
 
-        $languageRepository = new LanguageRepository();
-        $languages = $languageRepository
+        $languages = LanguageModel::orm()
             ->where('is_active', '=', true)
             ->fetchAll();
 

@@ -5,8 +5,8 @@ namespace Neoflow\CMS\Controller\Backend;
 use \Neoflow\CMS\Controller\BackendController;
 use \Neoflow\CMS\Model\LanguageModel;
 use \Neoflow\CMS\Model\ModuleModel;
+use \Neoflow\CMS\Model\NavitemModel;
 use \Neoflow\CMS\Model\PageModel;
-use \Neoflow\CMS\Repository\NavitemRepository;
 use \Neoflow\CMS\Views\Backend\PageView;
 use \Neoflow\Framework\Handler\Validation\ValidationException;
 use \Neoflow\Framework\Handler\Validation\ValidationHelper;
@@ -16,11 +16,6 @@ use \Neoflow\Helper\Alert\SuccessAlert;
 
 class PageController extends BackendController
 {
-
-    /**
-     * @var NavitemRepository
-     */
-    protected $navitemRepository;
 
     /**
      * Constructor.
@@ -33,9 +28,6 @@ class PageController extends BackendController
         $this->view
             ->setSubtitle('Content')
             ->setTitle('Pages');
-
-        // Create repository
-        $this->navitemRepository = new NavitemRepository();
     }
 
     public function indexAction($args)
@@ -60,7 +52,7 @@ class PageController extends BackendController
         $pageLanguage = LanguageModel::findById($language_id);
 
         // Get navitems
-        $navitems = $this->navitemRepository
+        $navitems = NavitemModel::orm()
             ->where('parent_navitem_id', 'IS', null)
             ->where('language_id', '=', $pageLanguage->id())
             ->where('navigation_id', '=', 1)
@@ -151,7 +143,7 @@ class PageController extends BackendController
         }
 
         // Get navitems
-        $navitems = $this->navitemRepository
+        $navitems = NavitemModel::orm()
             ->where('parent_navitem_id', 'IS', null)
             ->where('language_id', '=', $page->language_id)
             ->where('navigation_id', '=', 1)
