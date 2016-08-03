@@ -10,7 +10,7 @@
             <div class="panel-body">
 
                 <form method="post" action="<?= $view->generateUrl('role_update') ?>" class="form-horizontal">
-                    <input value="<?= $role->id() ?>" type="hidden" name="page_id" />
+                    <input value="<?= $role->id() ?>" type="hidden" name="role_id" />
 
                     <div class="form-group <?= $view->hasValidationError('title', 'has-error') ?>">
                         <label for="inputTitle" class="col-sm-2 control-label">

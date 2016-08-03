@@ -124,13 +124,12 @@ class NavitemModel extends AbstractModel
         $validator
             ->callback(function($parent_navitem_id, $navitem) {
 
-                $childNavitems = $navitem->childNavitems()
+                $forbiddenNavitemIds = $navitem->childNavitems()
                     ->orderByAsc('position')
-                    ->fetchAll();
-
-                $forbiddenNavitemIds = array_map(function($navitem) {
+                    ->fetchAll()
+                    ->map(function($navitem) {
                     return $navitem->id();
-                }, $childNavitems);
+                });
 
                 if ($navitem->id()) {
                     $forbiddenNavitemIds[] = $navitem->id();

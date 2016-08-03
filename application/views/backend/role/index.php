@@ -27,12 +27,7 @@
                                     </a>
                                 </td>
                                 <td><?= nl2br($role->description) ?></td>
-                                <td><?php
-                                    echo implode(', ', array_map(function($role) {
-                                            return $role->getTranslatedTitle();
-                                        }, $role->permissions()->fetchAll()))
-
-                                    ?>
+                                <td><?= $role->permission_titles ?></td>
                                 </td>
                                 <td class="text-right nowrap">
                                     <a href="<?= $view->generateUrl('role_edit', array('id' => $role->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= $view->translate('Edit') ?>">
@@ -55,7 +50,9 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><?= $view->translate('New role') ?></h3>
+                <h3 class="panel-title">
+                    <?= $view->translate('Create {0}', array('Role')) ?>
+                </h3>
             </div>
             <div class="panel-body">
                 <form method="post" action="<?= $view->generateUrl('role_create') ?>" class="form-horizontal">

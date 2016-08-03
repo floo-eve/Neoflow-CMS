@@ -2,17 +2,19 @@
 
 namespace Neoflow\CMS\Views\Backend;
 
+use \Neoflow\Framework\Common\Collection;
+
 class PageView extends NavigationView
 {
 
     /**
      * Render navitems.
      *
-     * @param array $navitems
+     * @param Collection $navitems
      *
      * @return string
      */
-    public function renderNavitemNestable(array $navitems)
+    public function renderNavitemNestable(Collection $navitems)
     {
         $output = '';
         if ($navitems) {
@@ -85,7 +87,7 @@ class PageView extends NavigationView
         return $output;
     }
 
-    public function renderNavitemOptions(array $navitems, $level = 0, $selectedNavitemId = null, $disabledNavitemIds = array())
+    public function renderNavitemOptions(Collection $navitems, $level = 0, $selectedNavitemId = null, $disabledNavitemIds = array())
     {
         $output = '';
         foreach ($navitems as $navitem) {
@@ -96,9 +98,9 @@ class PageView extends NavigationView
                 ->fetchAll();
 
             if (in_array($navitem->id(), $disabledNavitemIds)) {
-                $disabledNavitemIds = array_merge($disabledNavitemIds, array_map(function($navitem) {
-                        return $navitem->id();
-                    }, $childNavitems));
+                $disabledNavitemIds = $childNavitems->map(function($navitem) {
+                    return $navitem->id();
+                });
             }
 
             $output .= $this->renderNavitemOptions($childNavitems, $level + 1, $selectedNavitemId, $disabledNavitemIds);

@@ -2,10 +2,11 @@
 
 namespace Neoflow\Framework\Persistence;
 
-use Exception;
-use InvalidArgumentException;
-use Neoflow\Framework\Core\AbstractModel;
-use Neoflow\Framework\Persistence\Querying\SelectQuery;
+use \Exception;
+use \InvalidArgumentException;
+use \Neoflow\Framework\Common\Collection;
+use \Neoflow\Framework\Core\AbstractModel;
+use \Neoflow\Framework\Persistence\Querying\SelectQuery;
 
 class ORM
 {
@@ -212,7 +213,7 @@ class ORM
     /**
      * Find many model entities.
      *
-     * @return array|bool
+     * @return Collection|bool
      */
     public function fetchAll()
     {
@@ -221,6 +222,11 @@ class ORM
 
         // Reset ORM
         $this->reset();
+
+        // Create collection
+        if (is_array($result)) {
+            $result = new Collection($result);
+        }
 
         // Return result
         return $result;
