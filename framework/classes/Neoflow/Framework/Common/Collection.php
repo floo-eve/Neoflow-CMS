@@ -34,14 +34,15 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      * 
      * @param callable $callback
      *
-     * @return bool
+     * @return self;
      *
      * @throws InvalidArgumentException
      */
     public function each($callback)
     {
         if (is_callable($callback)) {
-            return array_map($callback, $this->items);
+            array_walk_recursive($this->items, $callback);
+            return $this;
         }
         throw new InvalidArgumentException('Callback is not callable');
     }
