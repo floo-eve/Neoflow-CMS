@@ -2,6 +2,7 @@
 
 namespace Neoflow\Framework\Persistence\Querying;
 
+use Neoflow\Framework\Common\Collection;
 use PDOStatement;
 
 /**
@@ -245,7 +246,7 @@ class SelectQuery extends AbstractQuery
     /**
      * Fetch all rows.
      *
-     * @return mixed
+     * @return Collection|bool
      */
     public function fetchAll()
     {
@@ -260,6 +261,10 @@ class SelectQuery extends AbstractQuery
             $statement = $this->execute();
             if ($statement) {
                 $result = $statement->fetchAll();
+
+                if (is_array($result)) {
+                    $result = new Collection($result);
+                }
             }
 
             // Store to cache

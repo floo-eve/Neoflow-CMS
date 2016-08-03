@@ -2,11 +2,11 @@
 
 namespace Neoflow\Framework\Core;
 
-use \DomainException;
-use \Neoflow\Framework\Common\Collection;
-use \Neoflow\Framework\Persistence\ORM;
-use \Neoflow\Framework\Persistence\QueryBuilder;
-use \Neoflow\Framework\Persistence\Querying\SelectQuery;
+use DomainException;
+use Neoflow\Framework\Persistence\EntityCollection;
+use Neoflow\Framework\Persistence\ORM;
+use Neoflow\Framework\Persistence\QueryBuilder;
+use Neoflow\Framework\Persistence\Querying\SelectQuery;
 
 abstract class AbstractModel
 {
@@ -480,7 +480,7 @@ abstract class AbstractModel
     /**
      * Find all model entities.
      *
-     * @return Collection
+     * @return EntityCollection
      */
     public static function findAll()
     {
@@ -492,7 +492,7 @@ abstract class AbstractModel
      *
      * @param string $column
      * @param mixed $value
-     * @return Collection
+     * @return EntityCollection
      */
     public static function findAllByColumn($column, $value)
     {

@@ -2,12 +2,14 @@
 
 namespace Neoflow\Framework\Common;
 
+use ArrayAccess;
 use ArrayIterator;
+use Countable;
 use Exception;
+use IteratorAggregate;
 
-class Container implements \IteratorAggregate, \Countable, \ArrayAccess
+class Container implements IteratorAggregate, Countable, ArrayAccess
 {
-
     /**
      * @var array container data
      */
@@ -33,7 +35,7 @@ class Container implements \IteratorAggregate, \Countable, \ArrayAccess
      *
      * @param array $data
      * @param bool  $isReadOnly
-     * @param bool $isMultiDimensional
+     * @param bool  $isMultiDimensional
      */
     public function __construct(array $data = array(), $isReadOnly = false, $isMultiDimensional = false)
     {
