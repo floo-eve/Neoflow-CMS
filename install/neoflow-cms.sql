@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 29. Jul 2016 um 12:38
+-- Erstellungszeit: 03. Aug 2016 um 15:08
 -- Server-Version: 5.7.9
--- PHP-Version: 7.0.9
+-- PHP-Version: 7.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -201,7 +201,14 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `title` varchar(50) NOT NULL,
   `description` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Daten für Tabelle `roles`
+--
+
+INSERT INTO `roles` (`role_id`, `title`, `description`) VALUES
+(1, 'Administrator', '...');
 
 -- --------------------------------------------------------
 
@@ -217,7 +224,22 @@ CREATE TABLE IF NOT EXISTS `roles_permissions` (
   PRIMARY KEY (`role_permission_id`),
   KEY `fk_roles_permissions_role_id_idx` (`role_id`),
   KEY `fk_roles_permissions_permission_id_idx` (`permission_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Daten für Tabelle `roles_permissions`
+--
+
+INSERT INTO `roles_permissions` (`role_permission_id`, `role_id`, `permission_id`) VALUES
+(24, 1, 1),
+(25, 1, 2),
+(26, 1, 3),
+(27, 1, 4),
+(28, 1, 5),
+(29, 1, 6),
+(30, 1, 7),
+(31, 1, 8),
+(32, 1, 9);
 
 -- --------------------------------------------------------
 
@@ -286,7 +308,7 @@ CREATE TABLE IF NOT EXISTS `themes` (
 --
 
 INSERT INTO `themes` (`theme_id`, `title`, `folder`, `type`) VALUES
-(1, ' Neoflow Backend Theme', 'neoflow-backend', 'backend'),
+(1, 'Neoflow Backend Theme', 'neoflow-backend', 'backend'),
 (2, 'Cloudy', 'cloudy', 'frontend');
 
 -- --------------------------------------------------------
@@ -313,7 +335,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `lastname`, `firstname`, `email`, `role_id`) VALUES
-(1, 'admin', sha1(1234), 'John', 'Doe', 'john.doe@neoflow.ch', NULL);
+(1, 'admin', sha1('1234'), 'John', 'Doe', 'john.doe@neoflow.ch', NULL);
 
 --
 -- Constraints der exportierten Tabellen

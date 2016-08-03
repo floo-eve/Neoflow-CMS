@@ -283,7 +283,7 @@ abstract class AbstractModel
 
         $this->validate();
 
-        $id = static::query()
+        $id = static::queryBuilder()
             ->insertInto($this->getTableName())
             ->values($this->data)
             ->execute();
@@ -317,7 +317,7 @@ abstract class AbstractModel
     {
         $this->validate();
 
-        static::query()
+        static::queryBuilder()
             ->update($this->getTableName())
             ->setPrimaryKey($this->getPrimaryKey())
             ->set($this->getModifiedData())
@@ -333,7 +333,7 @@ abstract class AbstractModel
      */
     public function delete()
     {
-        $this->app()->get('queryBuilder')
+        static::queryBuilder()
             ->deleteFrom($this->getTableName())
             ->setPrimaryKey($this->getPrimaryKey())
             ->execute($this->id());
