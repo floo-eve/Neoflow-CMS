@@ -2,10 +2,10 @@
 
 namespace Neoflow\CMS\Model;
 
-use \Neoflow\Framework\Core\AbstractModel;
-use \Neoflow\Framework\Persistence\ORM;
+use \Neoflow\Framework\ORM\AbstractEntityModel;
+use \Neoflow\Framework\ORM\EntityRepository;
 
-class NavigationModel extends AbstractModel
+class NavigationModel extends AbstractEntityModel
 {
 
     /**
@@ -26,7 +26,7 @@ class NavigationModel extends AbstractModel
     /**
      * Get navitems.
      *
-     * @return ORM
+     * @return EntityRepository
      */
     public function navitems()
     {

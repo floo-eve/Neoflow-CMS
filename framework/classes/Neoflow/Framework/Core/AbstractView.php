@@ -435,7 +435,7 @@ abstract class AbstractView
 
         $viewFilePath = $this->getFilePath($viewFile, sha1('_view_' . $viewFile), $this->viewFileDirectories);
         if ($viewFilePath) {
-            $content = $this->renderFile($viewFilePath, $parameters);
+            $content = $this->renderFile($viewFilePath, $this->parameters);
 
             if ($strict && !$this->getBlock(1)) {
                 $this->addContentToBlock(1, $content);
@@ -524,7 +524,12 @@ abstract class AbstractView
         }
     }
 
-    protected function addParameters($parameters)
+    /**
+     * Add parameters
+     *
+     * @param array $parameters
+     */
+    protected function addParameters(array $parameters)
     {
         $this->parameters = array_merge($this->parameters, $parameters);
     }
@@ -538,7 +543,7 @@ abstract class AbstractView
      *
      * @return string
      */
-    public function generateUrl($routeKey, $args = array(), $languageCode = '')
+    public function generateUrl($routeKey, array $args = array(), $languageCode = '')
     {
         return $this->app()->get('router')->generateUrl($routeKey, $args, $languageCode);
     }

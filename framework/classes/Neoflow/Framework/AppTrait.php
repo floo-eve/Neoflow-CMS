@@ -2,11 +2,9 @@
 
 namespace Neoflow\Framework;
 
-use \Neoflow\Framework\Handler\Logging\Logger;
-use \Neoflow\Framework\Handler\Router;
-use \Neoflow\Framework\Persistence\Database;
-use \Neoflow\Framework\Persistence\ORM;
-use \ReflectionClass;
+use Neoflow\Framework\Handler\Logging\Logger;
+use Neoflow\Framework\Handler\Router;
+use ReflectionClass;
 
 trait AppTrait
 {

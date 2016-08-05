@@ -2,9 +2,9 @@
 
 namespace Neoflow\CMS\Model;
 
-use Neoflow\Framework\Core\AbstractModel;
+use Neoflow\Framework\ORM\AbstractEntityModel;
 
-class RolePermissionModel extends AbstractModel
+class RolePermissionModel extends AbstractEntityModel
 {
 
     /**

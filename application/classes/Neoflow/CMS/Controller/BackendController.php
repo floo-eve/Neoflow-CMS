@@ -28,7 +28,7 @@ class BackendController extends AbstractController
 
         $this->userService = new UserService;
 
-        $languages = LanguageModel::orm()
+        $languages = LanguageModel::repo()
             ->where('is_active', '=', true)
             ->fetchAll();
 

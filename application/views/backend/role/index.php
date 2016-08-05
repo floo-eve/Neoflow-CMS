@@ -27,7 +27,7 @@
                                     </a>
                                 </td>
                                 <td><?= nl2br($role->description) ?></td>
-                                <td><?= $role->permission_titles ?></td>
+                                <td><?= $role->getPermissionTitles() ?></td>
                                 </td>
                                 <td class="text-right nowrap">
                                     <a href="<?= $view->generateUrl('role_edit', array('id' => $role->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= $view->translate('Edit {0}', array($role->title)) ?>">

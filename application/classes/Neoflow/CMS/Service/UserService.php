@@ -18,7 +18,7 @@ class UserService extends AbstractService
      */
     public function authenticate($email, $password)
     {
-        return UserModel::orm()
+        return UserModel::repo()
                 ->where('email', '=', $email)
                 ->where('password', '=', sha1($password))
                 ->fetch();

@@ -2,9 +2,9 @@
 
 namespace Neoflow\Module\HelloWorld\Model;
 
-use \Neoflow\Framework\Core\AbstractModel;
+use \Neoflow\Framework\ORM\AbstractEntityModel;
 
-class MessageModel extends AbstractModel
+class MessageModel extends AbstractEntityModel
 {
 
     /**

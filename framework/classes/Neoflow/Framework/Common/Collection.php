@@ -31,7 +31,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
 
     /**
      * Apply callback to collection items.
-     * 
+     *
      * @param callable $callback
      *
      * @return self;
@@ -49,7 +49,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
 
     /**
      * Filter collection items where are matching.
-     * 
+     *
      * @param string $property
      * @param string $value
      *
@@ -64,7 +64,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
 
     /**
      * Filter collection items where are not matching.
-     * 
+     *
      * @param string $property
      * @param string $value
      *

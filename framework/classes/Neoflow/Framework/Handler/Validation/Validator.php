@@ -3,7 +3,7 @@
 namespace Neoflow\Framework\Handler\Validation;
 
 use \InvalidArgumentException;
-use \Neoflow\Framework\Core\AbstractModel;
+use \Neoflow\Framework\ORM\AbstractEntityModel;
 use \Neoflow\Framework\Handler\Translator;
 use \ReflectionFunction;
 use \ReflectionMethod;

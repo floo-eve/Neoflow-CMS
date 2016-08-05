@@ -2,10 +2,10 @@
 
 namespace Neoflow\CMS\Model;
 
-use \Neoflow\Framework\Core\AbstractModel;
-use \Neoflow\Framework\Persistence\ORM;
+use \Neoflow\Framework\ORM\AbstractEntityModel;
+use \Neoflow\Framework\ORM\EntityRepository;
 
-class NavitemModel extends AbstractModel
+class NavitemModel extends AbstractEntityModel
 {
 
     /**
@@ -28,7 +28,7 @@ class NavitemModel extends AbstractModel
     /**
      * Get child navitems.
      *
-     * @return ORM
+     * @return EntityRepository
      */
     public function childNavitems()
     {
@@ -38,7 +38,7 @@ class NavitemModel extends AbstractModel
     /**
      * Get parent navitem.
      *
-     * @return ORM
+     * @return EntityRepository
      */
     public function parentNavitem()
     {
@@ -48,7 +48,7 @@ class NavitemModel extends AbstractModel
     /**
      * Get language
      *
-     * @return ORM
+     * @return EntityRepository
      */
     public function language()
     {
@@ -58,7 +58,7 @@ class NavitemModel extends AbstractModel
     /**
      * Get navigation
      *
-     * @return ORM
+     * @return EntityRepository
      */
     public function navigation()
     {
@@ -68,7 +68,7 @@ class NavitemModel extends AbstractModel
     /**
      * Get page
      *
-     * @return ORM
+     * @return EntityRepository
      */
     public function page()
     {
@@ -128,8 +128,8 @@ class NavitemModel extends AbstractModel
                     ->orderByAsc('position')
                     ->fetchAll()
                     ->map(function($navitem) {
-                    return $navitem->id();
-                });
+                        return $navitem->id();
+                    })->toArray();
 
                 if ($navitem->id()) {
                     $forbiddenNavitemIds[] = $navitem->id();

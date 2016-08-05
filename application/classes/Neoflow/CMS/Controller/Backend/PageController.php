@@ -52,7 +52,7 @@ class PageController extends BackendController
         $pageLanguage = LanguageModel::findById($language_id);
 
         // Get navitems
-        $navitems = NavitemModel::orm()
+        $navitems = NavitemModel::repo()
             ->where('parent_navitem_id', 'IS', null)
             ->where('language_id', '=', $pageLanguage->id())
             ->where('navigation_id', '=', 1)
@@ -143,7 +143,7 @@ class PageController extends BackendController
         }
 
         // Get navitems
-        $navitems = NavitemModel::orm()
+        $navitems = NavitemModel::repo()
             ->where('parent_navitem_id', 'IS', null)
             ->where('language_id', '=', $page->language_id)
             ->where('navigation_id', '=', 1)

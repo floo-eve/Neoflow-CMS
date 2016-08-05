@@ -4,10 +4,10 @@ namespace Neoflow\CMS\Model;
 
 use InvalidArgumentException;
 use Neoflow\CMS\Views\FrontendView;
-use Neoflow\Framework\Core\AbstractModel;
-use Neoflow\Framework\Persistence\ORM;
+use Neoflow\Framework\ORM\AbstractEntityModel;
+use Neoflow\Framework\ORM\EntityRepository;
 
-class SectionModel extends AbstractModel
+class SectionModel extends AbstractEntityModel
 {
 
     /**
@@ -29,7 +29,7 @@ class SectionModel extends AbstractModel
     /**
      * Get page.
      *
-     * @return ORM
+     * @return EntityRepository
      */
     public function page()
     {
@@ -39,7 +39,7 @@ class SectionModel extends AbstractModel
     /**
      * Get module.
      *
-     * @return ORM
+     * @return EntityRepository
      */
     public function module()
     {

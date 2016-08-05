@@ -2,7 +2,8 @@
 
 namespace Neoflow\CMS\Views\Backend;
 
-use \Neoflow\Framework\Common\Collection;
+use Neoflow\Framework\Common\Collection;
+use Neoflow\Framework\ORM\EntityCollection;
 
 class PageView extends NavigationView
 {
@@ -10,14 +11,14 @@ class PageView extends NavigationView
     /**
      * Render navitems.
      *
-     * @param Collection $navitems
+     * @param EntityCollection $navitems
      *
      * @return string
      */
-    public function renderNavitemNestable(Collection $navitems)
+    public function renderNavitemNestable(EntityCollection $navitems)
     {
         $output = '';
-        if ($navitems) {
+        if ($navitems->count()) {
             $output .= '<ol class="nestable-list list-group">';
 
             foreach ($navitems as $navitem) {
@@ -87,7 +88,7 @@ class PageView extends NavigationView
         return $output;
     }
 
-    public function renderNavitemOptions(Collection $navitems, $level = 0, $selectedNavitemId = null, $disabledNavitemIds = array())
+    public function renderNavitemOptions(EntityCollection $navitems, $level = 0, $selectedNavitemId = null, array $disabledNavitemIds = array())
     {
         $output = '';
         foreach ($navitems as $navitem) {

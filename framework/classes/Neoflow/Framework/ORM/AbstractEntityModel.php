@@ -1,14 +1,14 @@
 <?php
 
-namespace Neoflow\Framework\Core;
+namespace Neoflow\Framework\ORM;
 
 use DomainException;
-use Neoflow\Framework\Persistence\EntityCollection;
-use Neoflow\Framework\Persistence\ORM;
+use Neoflow\Framework\ORM\EntityCollection;
+use Neoflow\Framework\ORM\EntityRepository;
 use Neoflow\Framework\Persistence\QueryBuilder;
 use Neoflow\Framework\Persistence\Querying\SelectQuery;
 
-abstract class AbstractModel
+abstract class AbstractEntityModel
 {
 
     /**
@@ -30,6 +30,11 @@ abstract class AbstractModel
      * @var array
      */
     public static $properties;
+
+    /**
+     * @var EntityMapper
+     */
+    protected $mapper;
 
     /**
      * @var array
@@ -62,6 +67,8 @@ abstract class AbstractModel
         foreach ($data as $key => $value) {
             $this->set($key, $value, true);
         }
+
+        $this->mapper = new EntityMapper();
 
         $this->isReadOnly = $isReadOnly;
 
@@ -281,21 +288,18 @@ abstract class AbstractModel
             return $this->update($validate);
         }
 
-        $this->validate();
+        if ($validate) {
+            $this->validate();
+        }
 
-        $id = static::queryBuilder()
-            ->insertInto($this->getTableName())
-            ->values($this->data)
-            ->execute();
+        $id = static::repo()->persist($this);
 
         if ($id) {
             $primaryKey = $this->getPrimaryKey();
             $this->set($primaryKey, $id);
-        } else {
-            throw new Exception('Save model entity failed');
+            return true;
         }
-
-        return true;
+        throw new Exception('Save model entity failed');
     }
 
     /**
@@ -312,18 +316,17 @@ abstract class AbstractModel
      * Update model entity.
      *
      * @return int|bool
+     *
+     * @throws Exception
      */
-    public function update()
+    public function update($validate = true)
     {
-        $this->validate();
+        if ($validate) {
+            $this->validate();
+        }
 
-        static::queryBuilder()
-            ->update($this->getTableName())
-            ->setPrimaryKey($this->getPrimaryKey())
-            ->set($this->getModifiedData())
-            ->execute($this->id());
-
-        return true;
+        return static::repo()
+                ->update($this);
     }
 
     /**
@@ -348,12 +351,11 @@ abstract class AbstractModel
      * @param string $associatedModelClassName
      * @param string $foreignKeyName
      *
-     * @return ORM
+     * @return EntityRepository
      */
     protected function belongsTo($associatedModelClassName, $foreignKeyName)
     {
-        return static::orm($associatedModelClassName)
-                ->belongsTo($this, $associatedModelClassName, $foreignKeyName);
+        return $this->mapper->belongsTo($this, $associatedModelClassName, $foreignKeyName);
     }
 
     /**
@@ -363,12 +365,11 @@ abstract class AbstractModel
      * @param string $associatedModelClassName
      * @param string $foreignKeyName
      *
-     * @return ORM
+     * @return EntityRepository
      */
     protected function hasOne($associatedModelClassName, $foreignKeyName)
     {
-        return static::orm($associatedModelClassName)
-                ->hasOne($this, $associatedModelClassName, $foreignKeyName);
+        return $this->mapper->hasOne($this, $associatedModelClassName, $foreignKeyName);
     }
 
     /**
@@ -378,12 +379,11 @@ abstract class AbstractModel
      * @param string $associatedModelClassName
      * @param string $foreignKeyName
      *
-     * @return ORM
+     * @return EntityRepository
      */
     protected function hasMany($associatedModelClassName, $foreignKeyName)
     {
-        return static::orm($associatedModelClassName)
-                ->hasMany($this, $associatedModelClassName, $foreignKeyName);
+        return $this->mapper->hasMany($this, $associatedModelClassName, $foreignKeyName);
     }
 
     /**
@@ -394,12 +394,11 @@ abstract class AbstractModel
      * @param string $foreignKeyToBaseModel
      * @param string $foreignKeyToAssociatedModel
      *
-     * @return ORM
+     * @return EntityRepository
      */
     protected function hasManyThrough($associatedModelClassName, $joinModelClassName, $foreignKeyToBaseModel, $foreignKeyToAssociatedModel)
     {
-        return static::orm($associatedModelClassName)
-                ->hasManyThrough($this, $associatedModelClassName, $joinModelClassName, $foreignKeyToBaseModel, $foreignKeyToAssociatedModel);
+        return $this->mapper->hasManyThrough($this, $associatedModelClassName, $joinModelClassName, $foreignKeyToBaseModel, $foreignKeyToAssociatedModel);
     }
 
     /**
@@ -419,14 +418,14 @@ abstract class AbstractModel
     }
 
     /**
-     * Get ORM for entity model
+     * Create repository for entity model
      *
-     * @return ORM
+     * @return EntityRepository
      */
-    public static function orm()
+    public static function repo()
     {
-        $orm = new ORM();
-        return $orm->forModel(get_called_class());
+        $repo = new EntityRepository();
+        return $repo->forModel(get_called_class());
     }
 
     /**
@@ -460,7 +459,7 @@ abstract class AbstractModel
      */
     public static function findById($id)
     {
-        return static::orm()->fetch($id);
+        return static::repo()->fetch($id);
     }
 
     /**
@@ -472,7 +471,7 @@ abstract class AbstractModel
      */
     public static function findByColumn($column, $value)
     {
-        return static::orm()
+        return static::repo()
                 ->where($column, '=', $value)
                 ->fetch();
     }
@@ -484,7 +483,7 @@ abstract class AbstractModel
      */
     public static function findAll()
     {
-        return static::orm()->fetchAll();
+        return static::repo()->fetchAll();
     }
 
     /**
@@ -496,7 +495,7 @@ abstract class AbstractModel
      */
     public static function findAllByColumn($column, $value)
     {
-        return static::orm()
+        return static::repo()
                 ->where($column, '=', $value)
                 ->fetchAll();
     }

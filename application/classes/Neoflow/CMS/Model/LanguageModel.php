@@ -2,10 +2,10 @@
 
 namespace Neoflow\CMS\Model;
 
-use Neoflow\Framework\Core\AbstractModel;
-use Neoflow\Framework\Persistence\ORM;
+use Neoflow\Framework\ORM\AbstractEntityModel;
+use Neoflow\Framework\ORM\EntityRepository;
 
-class LanguageModel extends AbstractModel
+class LanguageModel extends AbstractEntityModel
 {
 
     /**
@@ -26,7 +26,7 @@ class LanguageModel extends AbstractModel
     /**
      * Get sections.
      *
-     * @return ORM
+     * @return EntityRepository
      */
     public function pages()
     {
@@ -36,7 +36,7 @@ class LanguageModel extends AbstractModel
     /**
      * Get setting.
      *
-     * @return ORM
+     * @return EntityRepository
      */
     public function setting()
     {

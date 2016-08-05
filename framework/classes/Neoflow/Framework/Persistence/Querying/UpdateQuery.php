@@ -67,7 +67,11 @@ class UpdateQuery extends AbstractQuery
         $result = parent::execute();
         if ($result) {
             $this->getCache()->deleteByTag('_query');
-            return $result->rowCount();
+            $rowCount = $result->rowCount();
+            if ($rowCount) {
+                return $rowCount;
+            }
+            return true;
         }
 
         return false;
