@@ -1,2 +1,2 @@
 # Neoflow CMS
-## Einfaches und MVC-basierendes Content Management System
+Einfaches und MVC-basierendes Content Management System
