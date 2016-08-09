@@ -1,10 +1,10 @@
 <?php
 
-namespace Neoflow\Framework\Handler\Validation;
+namespace Neoflow\Support\Validation;
 
 use \InvalidArgumentException;
 use \Neoflow\Framework\ORM\AbstractEntityModel;
-use \Neoflow\Framework\Handler\Translator;
+use \Neoflow\Support\Translator;
 use \ReflectionFunction;
 use \ReflectionMethod;
 

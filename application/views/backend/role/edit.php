@@ -38,7 +38,7 @@
                                 foreach ($permissions as $permission) {
 
                                     ?>
-                                    <option value="<?= $permission->id() ?>" <?= (in_array($permission->id(), $role->permission_ids) ? 'selected' : '') ?> data-description="<?= $permission->getTranslatedDescription() ?>" ><?= $permission->getTranslatedTitle() ?></option>
+                                    <option value="<?= $permission->id() ?>" <?= (in_array($permission->id(), $role->permission_ids) ? 'selected' : '') ?> data-description="<?= $permission->translated('description') ?>" ><?= $permission->translated('title') ?></option>
                                     <?php
                                 }
 

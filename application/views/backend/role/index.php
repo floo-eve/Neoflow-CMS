@@ -27,7 +27,7 @@
                                     </a>
                                 </td>
                                 <td><?= nl2br($role->description) ?></td>
-                                <td><?= $role->getPermissionTitles() ?></td>
+                                <td><?= $role->permissions()->fetchAll()->implode('title', ', ') ?></td>
                                 </td>
                                 <td class="text-right nowrap">
                                     <a href="<?= $view->generateUrl('role_edit', array('id' => $role->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= $view->translate('Edit {0}', array($role->title)) ?>">
@@ -84,7 +84,7 @@
                                 foreach ($permissions as $permission) {
 
                                     ?>
-                                    <option value="<?= $permission->id() ?>" data-description="<?= $permission->getTranslatedDescription() ?>" ><?= $permission->getTranslatedTitle() ?></option>
+                                    <option value="<?= $permission->id() ?>" data-description="<?= $permission->translated('description') ?>" ><?= $permission->translated('title') ?></option>
                                     <?php
                                 }
 

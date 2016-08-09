@@ -1,10 +1,11 @@
 <?php
 
-namespace Neoflow\Framework\Handler\Validation;
+namespace Neoflow\Support\Validation;
 
+use Neoflow\Framework\Core\AbstractService;
 use Neoflow\Framework\HTTP\Session;
 
-class ValidationHelper
+class ValidationService extends AbstractService
 {
 
     /**
@@ -43,5 +44,14 @@ class ValidationHelper
     protected function getSession()
     {
         return $this->app()->get('session');
+    }
+
+    /**
+     * Get service name
+     * @return string
+     */
+    public function getServiceName()
+    {
+        return 'validation';
     }
 }

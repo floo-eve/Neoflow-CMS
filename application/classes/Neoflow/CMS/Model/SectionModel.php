@@ -83,7 +83,7 @@ class SectionModel extends AbstractEntityModel
 
     public function validate()
     {
-        $validator = new \Neoflow\Framework\Handler\Validation\Validator($this->toArray());
+        $validator = new \Neoflow\Support\Validation\Validator($this->toArray());
 
         $validator
             ->required()

@@ -8,7 +8,7 @@ use \Neoflow\CMS\Model\ModuleModel;
 use \Neoflow\CMS\Model\PageModel;
 use \Neoflow\CMS\Model\SectionModel;
 use \Neoflow\CMS\Service\SectionService;
-use \Neoflow\Framework\Handler\Validation\ValidationException;
+use \Neoflow\Support\Validation\ValidationException;
 use \Neoflow\Framework\HTTP\Responsing\JsonResponse;
 use \Neoflow\Framework\HTTP\Responsing\Response;
 use \Neoflow\Helper\Alert\DangerAlert;

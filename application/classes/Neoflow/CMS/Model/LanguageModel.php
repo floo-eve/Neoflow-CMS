@@ -44,16 +44,6 @@ class LanguageModel extends AbstractEntityModel
     }
 
     /**
-     * Get translated language title.
-     *
-     * @return string
-     */
-    public function getTranslatedTitle()
-    {
-        return $this->app()->get('translator')->translate($this->title);
-    }
-
-    /**
      * Render flag icon to html output.
      *
      * @return string

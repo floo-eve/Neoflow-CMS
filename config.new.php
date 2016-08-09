@@ -27,4 +27,7 @@ return array(
     'debugging' => array(
         'debugBar' => true, // true | false
     ),
+    'services' => array(
+        '\\Neoflow\\Support\\Validation\\ValidationService',
+    )
 );

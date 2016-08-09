@@ -2,21 +2,23 @@
 
 namespace Neoflow\Framework;
 
-use \ErrorException;
-use \Exception;
-use \InvalidArgumentException;
-use \Neoflow\Framework\Handler\Config;
-use \Neoflow\Framework\Handler\Logging\Logger;
-use \Neoflow\Framework\Handler\Router;
-use \Neoflow\Framework\Handler\Translator;
-use \Neoflow\Framework\HTTP\Request;
-use \Neoflow\Framework\HTTP\Responsing\Response;
-use \Neoflow\Framework\HTTP\Session;
-use \Neoflow\Framework\Persistence\Caching\ApcCache;
-use \Neoflow\Framework\Persistence\Caching\ApcuCache;
-use \Neoflow\Framework\Persistence\Caching\DummyCache;
-use \Neoflow\Framework\Persistence\Caching\FileCache;
-use \Neoflow\Framework\Persistence\Database;
+use DateTime;
+use ErrorException;
+use Exception;
+use InvalidArgumentException;
+use Neoflow\Framework\Core\AbstractService;
+use Neoflow\Framework\Handler\Config;
+use Neoflow\Framework\Handler\Logging\Logger;
+use Neoflow\Framework\Handler\Router;
+use Neoflow\Framework\Handler\Translator;
+use Neoflow\Framework\HTTP\Request;
+use Neoflow\Framework\HTTP\Responsing\Response;
+use Neoflow\Framework\HTTP\Session;
+use Neoflow\Framework\Persistence\Caching\ApcCache;
+use Neoflow\Framework\Persistence\Caching\ApcuCache;
+use Neoflow\Framework\Persistence\Caching\DummyCache;
+use Neoflow\Framework\Persistence\Caching\FileCache;
+use Neoflow\Framework\Persistence\Database;
 
 class App
 {
@@ -31,7 +33,7 @@ class App
      */
     protected $readonly = ['config', 'logger', 'cache',
         'database', 'pdo', 'db', 'router',
-        'session', 'request', 'router', 'translator',];
+        'session', 'request', 'router', 'translator', 'services'];
 
     /**
      * @var App
@@ -89,6 +91,8 @@ class App
         $this->setRequest();
         $this->setRouter();
         $this->setTranslator();
+
+        $this->setServices();
 
         $this->get('logger')->info('Application initialized');
     }
@@ -196,6 +200,43 @@ class App
         $this->get('logger')->info('Application executed');
 
         return $response;
+    }
+
+    /**
+     * Create and set services
+     *
+     * @throws Exception
+     */
+    public function setServices()
+    {
+        $serviceClassNames = $this->get('config')->get('services');
+        $services = array();
+        foreach ($serviceClassNames as $serviceClassName) {
+            if (is_subclass_of($serviceClassName, '\\Neoflow\\Framework\\Core\\AbstractService')) {
+                $service = new $serviceClassName();
+                $serviceName = $service->getServiceName();
+                $services[$serviceName] = $service;
+            } else {
+                throw new Exception($serviceClassName . ' is not subclass of AbstractService');
+            }
+        }
+        $this->set('services', $services);
+    }
+
+    /**
+     * Get service
+     *
+     * @param string $name
+     * @return AbstractService
+     * @throws Exception
+     */
+    public function getService($name)
+    {
+        $services = $this->get('services');
+        if (isset($services[$name])) {
+            return $services[$name];
+        }
+        throw new Exception('Service not found: ' . $name);
     }
 
     /**
@@ -345,7 +386,7 @@ class App
 
         $this->get('logger')->logException($ex);
 
-        $content = str_replace(array('[title]', '[message]', '[exception]', '[time]', '[trace]'), array('Fatal server error', $ex->getMessage(), get_class($ex), $this->get('translator')->formatDateTime(new \DateTime()), nl2br($ex->getTraceAsString())), '<!DOCTYPE html>
+        $content = str_replace(array('[title]', '[message]', '[exception]', '[time]', '[trace]'), array('Fatal server error', $ex->getMessage(), get_class($ex), $this->get('translator')->formatDateTime(new DateTime()), nl2br($ex->getTraceAsString())), '<!DOCTYPE html>
                         <html>
                             <head>
                                 <meta charset="UTF-8" />

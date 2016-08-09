@@ -22,6 +22,23 @@ class BackendView extends AbstractView
     }
 
     /**
+     * Check wether validation error exists.
+     *
+     * @param string $key
+     * @param mixed  $returnValue
+     *
+     * @return mixed
+     */
+    public function hasValidationError($key = '', $returnValue = true)
+    {
+        if ($this->app()->getService('validation')->hasError($key)) {
+            return $returnValue;
+        }
+
+        return false;
+    }
+
+    /**
      * Set title.
      *
      * @param string $title

@@ -1,8 +1,8 @@
 <?php
 
-namespace Neoflow\Helper\Image\Exceptions;
+namespace Neoflow\Support\Image\Exceptions;
 
-use \Neoflow\Helper\Filesystem\Exceptions\FileException;
+use \Neoflow\Support\Filesystem\Exceptions\FileException;
 
 class ImageFileException extends FileException
 {

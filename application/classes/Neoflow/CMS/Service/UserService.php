@@ -23,4 +23,9 @@ class UserService extends AbstractService
                 ->where('password', '=', sha1($password))
                 ->fetch();
     }
+
+    public function getServiceName()
+    {
+
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Neoflow\Helper\Minify;
+namespace Neoflow\Support\Minify;
 
 class CssMinifier extends AbstractMinifier
 {

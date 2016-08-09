@@ -2,17 +2,16 @@
 
 namespace Neoflow\CMS\Controller\Backend;
 
-use \Neoflow\CMS\Controller\BackendController;
-use \Neoflow\CMS\Model\LanguageModel;
-use \Neoflow\CMS\Model\ModuleModel;
-use \Neoflow\CMS\Model\NavitemModel;
-use \Neoflow\CMS\Model\PageModel;
-use \Neoflow\CMS\Views\Backend\PageView;
-use \Neoflow\Framework\Handler\Validation\ValidationException;
-use \Neoflow\Framework\Handler\Validation\ValidationHelper;
-use \Neoflow\Framework\HTTP\Responsing\Response;
-use \Neoflow\Helper\Alert\DangerAlert;
-use \Neoflow\Helper\Alert\SuccessAlert;
+use Neoflow\CMS\Controller\BackendController;
+use Neoflow\CMS\Model\LanguageModel;
+use Neoflow\CMS\Model\ModuleModel;
+use Neoflow\CMS\Model\NavitemModel;
+use Neoflow\CMS\Model\PageModel;
+use Neoflow\CMS\Views\Backend\PageView;
+use Neoflow\Framework\HTTP\Responsing\Response;
+use Neoflow\Helper\Alert\DangerAlert;
+use Neoflow\Helper\Alert\SuccessAlert;
+use Neoflow\Support\Validation\ValidationException;
 
 class PageController extends BackendController
 {
@@ -128,13 +127,9 @@ class PageController extends BackendController
 
     public function settingsAction($args)
     {
-
-        // Create validation helper
-        $validationHelper = new ValidationHelper();
-
         // Get page data if validation has failed)
-        if ($validationHelper->hasError()) {
-            $pageData = $validationHelper->getData();
+        if ($this->validationService->hasError()) {
+            $pageData = $this->validationService->getData();
             $page = new PageModel($pageData);
         } else {
 

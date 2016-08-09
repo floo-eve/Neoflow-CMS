@@ -27,8 +27,18 @@ abstract class AbstractController
      */
     public function __construct()
     {
-
         $this->setView();
+    }
+
+    /**
+     * Get service
+     *
+     * @param string $name
+     * @return AbstractService
+     */
+    public function getService($name)
+    {
+        return $this->app()->getService($name);
     }
 
     /**

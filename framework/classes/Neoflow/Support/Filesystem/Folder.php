@@ -1,8 +1,8 @@
 <?php
 
-namespace Neoflow\Helper\Filesystem;
+namespace Neoflow\Support\Filesystem;
 
-use \Neoflow\Helper\Filesystem\Exceptions\FolderException;
+use \Neoflow\Support\Filesystem\Exceptions\FolderException;
 
 class Folder
 {

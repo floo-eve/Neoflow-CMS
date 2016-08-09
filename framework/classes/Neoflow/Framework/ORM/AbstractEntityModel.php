@@ -167,6 +167,17 @@ abstract class AbstractEntityModel
     }
 
     /**
+     * Get get translated value
+     *
+     * @param string $key
+     * @return string
+     */
+    public function translated($key)
+    {
+        return $this->app()->get('translator')->translate($this->$key);
+    }
+
+    /**
      * Set model entity value.
      *
      * @param string $key
@@ -263,14 +274,38 @@ abstract class AbstractEntityModel
      * Create and save model entity.
      *
      * @param array $data
+     * @param bool $validate
      *
      * @return self|bool
      */
-    public static function create($data)
+    public static function create($data, $validate = true)
     {
         $entity = new static($data);
-        if ($entity->save()) {
+        if ($entity->save($validate)) {
             return $entity;
+        }
+        return false;
+    }
+
+    /**
+     * Update and save model entity.
+     *
+     * @param array $data
+     * @param int|string $id
+     * @param bool $validate
+     *
+     * @return self|bool
+     */
+    public static function update($data, $id, $validate = true)
+    {
+        $entity = static::findById($id);
+        if ($entity) {
+            foreach ($data as $key => $value) {
+                $entity->$key = $value;
+            }
+            if ($entity->save($validate)) {
+                return $entity;
+            }
         }
         return false;
     }
@@ -278,18 +313,16 @@ abstract class AbstractEntityModel
     /**
      * Save model entity.
      *
-     * @return int|bool
-     *
-     * @throws Exception
+     * @return bool
      */
     public function save($validate = true)
     {
-        if ($this->id()) {
-            return $this->update($validate);
-        }
-
         if ($validate) {
             $this->validate();
+        }
+
+        if ($this->id()) {
+            return static::repo()->update($this);
         }
 
         $id = static::repo()->persist($this);
@@ -299,7 +332,7 @@ abstract class AbstractEntityModel
             $this->set($primaryKey, $id);
             return true;
         }
-        throw new Exception('Save model entity failed');
+        return false;
     }
 
     /**
@@ -310,23 +343,6 @@ abstract class AbstractEntityModel
     public function getModifiedData()
     {
         return array_intersect_key($this->data, array_flip($this->modifiedProperties));
-    }
-
-    /**
-     * Update model entity.
-     *
-     * @return int|bool
-     *
-     * @throws Exception
-     */
-    public function update($validate = true)
-    {
-        if ($validate) {
-            $this->validate();
-        }
-
-        return static::repo()
-                ->update($this);
     }
 
     /**
@@ -451,9 +467,35 @@ abstract class AbstractEntityModel
     }
 
     /**
-     * Find model entity by Id.
+     * Delete model entity by id
+     * @param int|string $id
+     * @return boolean
+     */
+    public static function deleteById($id)
+    {
+        $entity = static::findById($id);
+        if ($entity) {
+            return $entity->delete();
+        }
+        return false;
+    }
+
+    /**
+     * Find all model entities by column.
      *
-     * @param mixed $id
+     * @param string $column
+     * @param mixed $value
+     * @return EntityCollection
+     */
+    public static function deleteAllByColumn($column, $value)
+    {
+        return static::findAllByColumn($column, $value)->delete();
+    }
+
+    /**
+     * Find model entity by id.
+     *
+     * @param int|string $id
      *
      * @return self
      */
@@ -487,7 +529,7 @@ abstract class AbstractEntityModel
     }
 
     /**
-     * Find all by where conditions
+     * Find all model entities by column.
      *
      * @param string $column
      * @param mixed $value

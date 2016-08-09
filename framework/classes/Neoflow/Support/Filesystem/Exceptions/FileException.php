@@ -1,6 +1,6 @@
 <?php
 
-namespace Neoflow\Helper\Filesystem\Exceptions;
+namespace Neoflow\Support\Filesystem\Exceptions;
 
 class FileException extends FilesystemException
 {

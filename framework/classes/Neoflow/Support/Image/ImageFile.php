@@ -1,9 +1,9 @@
 <?php
 
-namespace Neoflow\Helper\Image;
+namespace Neoflow\Support\Image;
 
-use \Neoflow\Helper\Filesystem\File;
-use \Neoflow\Helper\Image\Exceptions\ImageFileException;
+use \Neoflow\Support\Filesystem\File;
+use \Neoflow\Support\Image\Exceptions\ImageFileException;
 
 class ImageFile extends File
 {
@@ -65,7 +65,7 @@ class ImageFile extends File
     }
 
     /**
-     * Helper method: Set required memory
+     * Support method: Set required memory
      *
      * @return int
      */
@@ -230,7 +230,7 @@ class ImageFile extends File
     }
 
     /**
-     * Helper method: Create image file.
+     * Support method: Create image file.
      *
      * @param string $imageFilePath File path of image
      * @param int    $imageType     Type of image
@@ -267,7 +267,7 @@ class ImageFile extends File
     }
 
     /**
-     * Helper method: Convert file extension to image type.
+     * Support method: Convert file extension to image type.
      *
      * @param string $fileExtension
      *
@@ -293,7 +293,7 @@ class ImageFile extends File
     }
 
     /**
-     * Helper method: Preserve transparency of new image resource.
+     * Support method: Preserve transparency of new image resource.
      *
      * @param resource $newImage New image resource
      *
@@ -322,7 +322,7 @@ class ImageFile extends File
     }
 
     /**
-     * Helper method: Fix image orientation.
+     * Support method: Fix image orientation.
      *
      * @return bool
      */

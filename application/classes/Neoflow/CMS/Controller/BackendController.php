@@ -2,20 +2,29 @@
 
 namespace Neoflow\CMS\Controller;
 
-use \Neoflow\CMS\App;
-use \Neoflow\CMS\Model\LanguageModel;
-use \Neoflow\CMS\Service\UserService;
-use \Neoflow\CMS\Views\BackendView;
-use \Neoflow\Framework\Core\AbstractController;
-use \Neoflow\Framework\HTTP\Responsing\RedirectResponse;
-use \Neoflow\Framework\HTTP\Responsing\Response;
-use \Neoflow\Helper\Alert\SuccessAlert;
-use \Neoflow\Helper\Alert\WarningAlert;
+use Neoflow\CMS\App;
+use Neoflow\CMS\Model\LanguageModel;
+use Neoflow\CMS\Service\UserService;
+use Neoflow\CMS\Views\BackendView;
+use Neoflow\Framework\Core\AbstractController;
+use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
+use Neoflow\Framework\HTTP\Responsing\Response;
+use Neoflow\Helper\Alert\SuccessAlert;
+use Neoflow\Helper\Alert\WarningAlert;
+use Neoflow\Support\Validation\ValidationService;
 
 class BackendController extends AbstractController
 {
 
+    /**
+     * @var UserService
+     */
     protected $userService;
+
+    /**
+     * @var ValidationService
+     */
+    protected $validationService;
 
     /**
      * Constrcutor.
@@ -27,6 +36,9 @@ class BackendController extends AbstractController
         parent::__construct();
 
         $this->userService = new UserService;
+
+        // Get validation service
+        $this->validationService = $this->getService('validation');
 
         $languages = LanguageModel::repo()
             ->where('is_active', '=', true)

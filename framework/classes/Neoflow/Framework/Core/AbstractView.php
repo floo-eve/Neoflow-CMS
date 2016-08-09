@@ -8,8 +8,8 @@ use Neoflow\CMS\Core\View;
 use Neoflow\Framework\Common\Container;
 use Neoflow\Framework\Handler\Config;
 use Neoflow\Framework\Handler\Translator;
-use Neoflow\Framework\Handler\Validation\ValidationHelper;
 use Neoflow\Framework\Persistence\Caching\AbstractCache;
+use Neoflow\Support\Validation\ValidationService;
 
 abstract class AbstractView
 {
@@ -597,24 +597,6 @@ abstract class AbstractView
     public function translate($key, $values = array())
     {
         return $this->getTranslator()->translate($key, $values);
-    }
-
-    /**
-     * Check wether validation error exists.
-     *
-     * @param string $key
-     * @param mixed  $returnValue
-     *
-     * @return mixed
-     */
-    public function hasValidationError($key = '', $returnValue = true)
-    {
-        $validationHelper = new ValidationHelper();
-        if ($validationHelper->hasError($key)) {
-            return $returnValue;
-        }
-
-        return false;
     }
 
     /**
