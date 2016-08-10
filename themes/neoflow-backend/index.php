@@ -23,7 +23,9 @@
         <div id="body-scroll">
             <div id="wrapper">
 
-                <?php if ($view->hasBlock(2)) { ?>
+                <?php if ($view->hasBlock(2)) {
+
+                    ?>
 
                     <div id="page-wrapper-fluid">
                         <?= $view->renderTemplate('navigation/navbar-top') ?>
@@ -35,7 +37,10 @@
                         </div>
                     </div>
 
-                <?php } else { ?>
+                    <?php
+                } else {
+
+                    ?>
                     <div id="page-wrapper-sidebar">
 
                         <?= $view->renderTemplate('navigation/navbar-top') ?>
@@ -51,7 +56,9 @@
                             </div>
                         </div>
                     </div>
-                <?php } ?>
+                <?php }
+
+                ?>
 
             </div><!-- /#wrapper -->
         </div><!-- /#body-scroll -->

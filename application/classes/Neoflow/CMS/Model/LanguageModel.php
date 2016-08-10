@@ -7,7 +7,6 @@ use Neoflow\Framework\ORM\EntityRepository;
 
 class LanguageModel extends AbstractEntityModel
 {
-
     /**
      * @var string
      */
@@ -24,7 +23,7 @@ class LanguageModel extends AbstractEntityModel
     public static $properties = ['language_id', 'is_active', 'code', 'title'];
 
     /**
-     * Get sections.
+     * Get repository to fetch pages.
      *
      * @return EntityRepository
      */
@@ -34,7 +33,7 @@ class LanguageModel extends AbstractEntityModel
     }
 
     /**
-     * Get setting.
+     * Get repository to fetch setting.
      *
      * @return EntityRepository
      */
@@ -50,6 +49,6 @@ class LanguageModel extends AbstractEntityModel
      */
     public function renderFlagIcon()
     {
-        return '<i class="flag-icon flag-icon-' . $this->flag_code . '"></i>';
+        return '<i class="flag-icon flag-icon-'.$this->flag_code.'"></i>';
     }
 }

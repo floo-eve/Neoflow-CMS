@@ -25,7 +25,7 @@
                             <?= $view->translate('Description') ?>
                         </label>
                         <div class="col-sm-10">
-                            <textarea name="description" class="form-control vresize" maxlength="255" id="textareaDescription" rows="3"><?= $role->description ?></textarea>
+                            <textarea name="description" class="form-control vresize" maxlength="150" id="textareaDescription" rows="3"><?= $role->description ?></textarea>
                         </div>
                     </div>
                     <div class="form-group <?= $view->hasValidationError('permission_ids', 'has-error') ?>">

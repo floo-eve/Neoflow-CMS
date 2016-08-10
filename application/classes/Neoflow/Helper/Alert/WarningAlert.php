@@ -1,1 +1,0 @@
-<?phpnamespace Neoflow\Helper\Alert;class WarningAlert extends AbstractAlert{    protected $type = 'warning';}

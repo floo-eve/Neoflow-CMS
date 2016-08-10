@@ -6,10 +6,10 @@ use InvalidArgumentException;
 use Neoflow\CMS\Views\FrontendView;
 use Neoflow\Framework\ORM\AbstractEntityModel;
 use Neoflow\Framework\ORM\EntityRepository;
+use Neoflow\Support\Validation\Validator;
 
 class SectionModel extends AbstractEntityModel
 {
-
     /**
      * @var string
      */
@@ -24,10 +24,10 @@ class SectionModel extends AbstractEntityModel
      * @var array
      */
     public static $properties = ['section_id', 'page_id', 'module_id',
-        'position', 'block', 'is_active'];
+        'position', 'block', 'is_active', ];
 
     /**
-     * Get page.
+     * Get repository to fetch page.
      *
      * @return EntityRepository
      */
@@ -37,7 +37,7 @@ class SectionModel extends AbstractEntityModel
     }
 
     /**
-     * Get module.
+     * Get repository to fetch module.
      *
      * @return EntityRepository
      */
@@ -47,7 +47,7 @@ class SectionModel extends AbstractEntityModel
     }
 
     /**
-     * Render section module view to html output.
+     * Render module view of section to html output.
      *
      * @param FrontendView $view
      *
@@ -62,9 +62,14 @@ class SectionModel extends AbstractEntityModel
         if ($module) {
             return $module->render($view);
         }
-        throw new InvalidArgumentException('Cannot find module with ID: ' . $this->module_id);
+        throw new InvalidArgumentException('Cannot find module with ID: '.$this->module_id);
     }
 
+    /**
+     * Save section.
+     *
+     * @return bool
+     */
     public function save($validate = true)
     {
         if (!$this->position) {
@@ -78,17 +83,23 @@ class SectionModel extends AbstractEntityModel
                 $this->position = $lastSection->position + 1;
             }
         }
+
         return parent::save($validate);
     }
 
+    /**
+     * Validate setting.
+     *
+     * @return bool
+     */
     public function validate()
     {
-        $validator = new \Neoflow\Support\Validation\Validator($this->toArray());
+        $validator = new Validator($this->toArray());
 
         $validator
             ->required()
             ->set('module_id', 'Module');
 
-        return (bool) $validator->validate();
+        return $validator->validate();
     }
 }

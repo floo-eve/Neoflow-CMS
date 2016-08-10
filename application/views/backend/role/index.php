@@ -70,7 +70,7 @@
                             <?= $view->translate('Description') ?>
                         </label>
                         <div class="col-sm-9">
-                            <textarea name="description" class="form-control vresize" id="textareaDescription" rows="3"></textarea>
+                            <textarea name="description" class="form-control vresize" maxlength="150" id="textareaDescription" rows="3"></textarea>
                         </div>
                     </div>
 

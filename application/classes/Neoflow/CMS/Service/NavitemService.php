@@ -2,17 +2,18 @@
 
 namespace Neoflow\CMS\Service;
 
-use \Neoflow\CMS\Model\NavitemModel;
+use Neoflow\CMS\Model\NavitemModel;
+use Neoflow\Framework\Core\AbstractService;
 
-class NavitemService
+class NavitemService extends AbstractService
 {
-
     /**
-     * Update navitem order
+     * Update navitem order.
      *
      * @param array $order
-     * @param int $parent_id
-     * @return boolean
+     * @param int   $parent_id
+     *
+     * @return bool
      */
     public function updateOrder(array $order, $parent_id = null)
     {
@@ -26,6 +27,12 @@ class NavitemService
                 $this->updateOrder($item['children'], $item['id']);
             }
         }
+
         return true;
+    }
+
+    public function getServiceName()
+    {
+        return 'navitem';
     }
 }

@@ -2,12 +2,11 @@
 
 namespace Neoflow\CMS\Model;
 
-use \Neoflow\Framework\ORM\AbstractEntityModel;
-use \Neoflow\Framework\ORM\EntityRepository;
+use Neoflow\Framework\ORM\AbstractEntityModel;
+use Neoflow\Framework\ORM\EntityRepository;
 
 class NavigationModel extends AbstractEntityModel
 {
-
     /**
      * @var string
      */
@@ -24,7 +23,7 @@ class NavigationModel extends AbstractEntityModel
     public static $properties = ['navigation_id', 'title', 'description'];
 
     /**
-     * Get navitems.
+     * Get repository to fetch navitems.
      *
      * @return EntityRepository
      */

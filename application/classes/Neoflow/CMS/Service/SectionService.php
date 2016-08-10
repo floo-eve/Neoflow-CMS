@@ -3,10 +3,10 @@
 namespace Neoflow\CMS\Service;
 
 use Neoflow\CMS\Model\SectionModel;
+use Neoflow\Framework\Core\AbstractService;
 
-class SectionService
+class SectionService extends AbstractService
 {
-
     /**
      * Update section order.
      *
@@ -23,5 +23,10 @@ class SectionService
         }
 
         return true;
+    }
+
+    public function getServiceName()
+    {
+        return 'section';
     }
 }

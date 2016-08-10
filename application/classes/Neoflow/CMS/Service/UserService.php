@@ -2,12 +2,11 @@
 
 namespace Neoflow\CMS\Service;
 
-use \Neoflow\CMS\Model\UserModel;
-use \Neoflow\Framework\Core\AbstractService;
+use Neoflow\CMS\Model\UserModel;
+use Neoflow\Framework\Core\AbstractService;
 
 class UserService extends AbstractService
 {
-
     /**
      * Authenticate user with email and password.
      *
@@ -26,6 +25,5 @@ class UserService extends AbstractService
 
     public function getServiceName()
     {
-
     }
 }

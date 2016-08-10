@@ -1,6 +1,6 @@
 <?php
-$this->addNamespace('\\Neoflow\\Module\\');
 
+$this->addNamespace('\\Neoflow\\Module\\');
 
 // Backend routes
 $this->addRoutes(array(

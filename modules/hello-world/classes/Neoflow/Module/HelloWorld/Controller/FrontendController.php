@@ -2,11 +2,10 @@
 
 namespace Neoflow\Module\HelloWorld\Controller;
 
-use \Neoflow\Framework\HTTP\Responsing\Response;
+use Neoflow\Framework\HTTP\Responsing\Response;
 
 class FrontendController extends \Neoflow\CMS\Controller\FrontendController
 {
-
     /**
      * Index action.
      *

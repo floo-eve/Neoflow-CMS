@@ -9,7 +9,6 @@ use Neoflow\Framework\Common\Container;
 use Neoflow\Framework\Handler\Config;
 use Neoflow\Framework\Handler\Translator;
 use Neoflow\Framework\Persistence\Caching\AbstractCache;
-use Neoflow\Support\Validation\ValidationService;
 
 abstract class AbstractView
 {

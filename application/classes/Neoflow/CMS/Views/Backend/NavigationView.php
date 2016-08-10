@@ -2,12 +2,11 @@
 
 namespace Neoflow\CMS\Views\Backend;
 
-use \Neoflow\CMS\Views\BackendView;
-use \Neoflow\Framework\Common\Container;
+use Neoflow\CMS\Views\BackendView;
+use Neoflow\Framework\Common\Container;
 
 class NavigationView extends BackendView
 {
-
     /**
      * @var Container
      */

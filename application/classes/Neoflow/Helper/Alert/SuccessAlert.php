@@ -1,1 +1,0 @@
-<?phpnamespace Neoflow\Helper\Alert;class SuccessAlert extends AbstractAlert{    protected $type = 'success';}

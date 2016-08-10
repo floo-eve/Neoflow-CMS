@@ -9,13 +9,12 @@ use Neoflow\CMS\Views\BackendView;
 use Neoflow\Framework\Core\AbstractController;
 use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\Helper\Alert\SuccessAlert;
-use Neoflow\Helper\Alert\WarningAlert;
+use Neoflow\Support\Alert\SuccessAlert;
+use Neoflow\Support\Alert\WarningAlert;
 use Neoflow\Support\Validation\ValidationService;
 
 class BackendController extends AbstractController
 {
-
     /**
      * @var UserService
      */
@@ -35,7 +34,7 @@ class BackendController extends AbstractController
     {
         parent::__construct();
 
-        $this->userService = new UserService;
+        $this->userService = new UserService();
 
         // Get validation service
         $this->validationService = $this->getService('validation');
@@ -92,7 +91,7 @@ class BackendController extends AbstractController
     {
         return $this->render('backend/login', array(
                 'message' => 'Login',
-                'pageHeaderTitle' => 'Dashboard',));
+                'pageHeaderTitle' => 'Dashboard', ));
     }
 
     /**
@@ -108,7 +107,7 @@ class BackendController extends AbstractController
         if ($postData->exists('email') && $postData->exists('password')) {
             $user = $this->userService->authenticate($postData->get('email'), $postData->get('password'));
             if ($user) {
-                $alert = new SuccessAlert('Hallo ' . $user->firstname . ' ' . $user->lastname . ', du hast dich erfolgreich eingeloggt');
+                $alert = new SuccessAlert('Hallo '.$user->firstname.' '.$user->lastname.', du hast dich erfolgreich eingeloggt');
                 $this->getSession()
                     ->set('user_id', $user->id())
                     ->setFlash('alert', $alert);

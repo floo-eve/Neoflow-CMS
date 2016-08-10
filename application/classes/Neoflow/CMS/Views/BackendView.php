@@ -2,11 +2,10 @@
 
 namespace Neoflow\CMS\Views;
 
-use \Neoflow\CMS\Core\AbstractView;
+use Neoflow\CMS\Core\AbstractView;
 
 class BackendView extends AbstractView
 {
-
     protected $title = '';
     protected $subtitle = '';
 
@@ -77,20 +76,23 @@ class BackendView extends AbstractView
     }
 
     /**
-     * Set back route as back url
+     * Set back route as back url.
      *
      * @param string $routeKey
-     * @param array $args
+     * @param array  $args
+     *
      * @return self
      */
     public function setBackRoute($routeKey, $args = array())
     {
         $backUrl = $this->generateUrl($routeKey, $args);
+
         return $this->setBackUrl($backUrl);
     }
 
     /**
-     * Get back url
+     * Get back url.
+     *
      * @return mixed
      */
     public function getBackUrl()
@@ -99,9 +101,10 @@ class BackendView extends AbstractView
     }
 
     /**
-     * Set back url
+     * Set back url.
      *
      * @param string $backUrl
+     *
      * @return self
      */
     public function setBackUrl($backUrl)

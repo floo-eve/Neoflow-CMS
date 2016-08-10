@@ -1,1 +1,162 @@
-<?phpnamespace Neoflow\CMS\Controller\Backend;use Neoflow\CMS\Controller\BackendController;use Neoflow\CMS\Model\RoleModel;use Neoflow\CMS\Model\UserModel;use Neoflow\Framework\HTTP\Responsing\Response;use Neoflow\Helper\Alert\DangerAlert;use Neoflow\Helper\Alert\SuccessAlert;use Neoflow\Support\Validation\ValidationException;class UserController extends BackendController{    /**     * Constructor     */    public function __construct()    {        parent::__construct();        $this->view            ->setTitle('Accounts')            ->setSubtitle('Users');    }    /**     * Index action     *     * @param array $args     * @return Response     */    public function indexAction($args)    {        return $this->render('backend/user/index', array(                'roles' => RoleModel::findAll(),                'users' => UserModel::findAll(),        ));    }    /**     * Create user action     *     * @param array $args     * @return Response     */    public function createAction($args)    {        try {            // Get post data            $postData = $this->getRequest()->getPostData();            // Create user            $user = UserModel::create(array(                    'email' => $postData->get('email'),                    'firstname' => $postData->get('firstname'),                    'lastname' => $postData->get('lastname'),                    'role_id' => $postData->get('role_id')            ));            if ($user) {                $this->setFlash('alert', new SuccessAlert('{0} successful created', array('User')));            } else {                $this->setFlash('alert', new DangerAlert('Create failed'));            }        } catch (ValidationException $ex) {            $this->setFlash('alert', new DangerAlert($ex->getErrors()));        }        return $this->redirectToRoute('user_index');    }    /**     * Edit user action     *     * @param array $args     * @return Response     */    public function editAction($args)    {        // Get user or create user with inva        if ($this->validationService->hasError()) {            $data = $this->validationService->getData();            $user = new UserModel($data);        } else {            // Get user by id            $user = UserModel::findById($args['id']);            if (!$user) {                $this->setFlash('alert', new DangerAlert('{0} not found', array('User')));                return $this->redirectToRoute('user_index');            }        }        // Set back url        $this->view->setBackRoute('user_index');        return $this->render('backend/user/edit', array(                'user' => $user,                'roles' => RoleModel::findAll(),        ));    }    /**     * Update user action     *     * @param array $args     * @return Response     */    public function updateAction($args)    {        try {            // Get post data            $postData = $this->getRequest()->getPostData();            // Update user            $user = UserModel::update(array(                    'email' => $postData->get('email'),                    'firstname' => $postData->get('firstname'),                    'lastname' => $postData->get('lastname'),                    'role_id' => $postData->get('role_id')                    ), $postData->get('user_id'));            if ($user) {                $this->setFlash('alert', new SuccessAlert('{0} successful updated', array('User')));            } else {                $this->setFlash('alert', new DangerAlert('Update failed'));            }        } catch (ValidationException $ex) {            $this->setFlash('alert', new DangerAlert($ex->getErrors()));        }        return $this->redirectToRoute('user_edit', array('id' => $user->id()));    }    /**     * Delete user action     *     * @param array $args     * @return Response     */    public function deleteAction($args)    {        // Get user by id        $user = $this->getUserById($args['id']);        // Delete user        if ($user->delete()) {            $this->setFlash('alert', new SuccessAlert('{0} successful deleted', array('User')));        } else {            $this->setFlash('alert', new DangerAlert('Delete failed'));        }        return $this->redirectToRoute('user_index');    }    /**     * Get user by id     *     * @param string|int $id     * @return UserModel     * @throws Exception     */    protected function getUserById($id)    {        // Get user by id        $user = UserModel::findById($id);        if ($user) {            return $user;        }        throw new Exception('User not found');    }}
+<?php
+
+namespace Neoflow\CMS\Controller\Backend;
+
+use Neoflow\CMS\Controller\BackendController;
+use Neoflow\CMS\Model\RoleModel;
+use Neoflow\CMS\Model\UserModel;
+use Neoflow\Framework\HTTP\Responsing\Response;
+use Neoflow\Support\Alert\DangerAlert;
+use Neoflow\Support\Alert\SuccessAlert;
+use Neoflow\Support\Validation\ValidationException;
+
+class UserController extends BackendController
+{
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->view
+            ->setTitle('Accounts')
+            ->setSubtitle('Users');
+    }
+
+    /**
+     * Index action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     */
+    public function indexAction($args)
+    {
+        return $this->render('backend/user/index', array(
+                'roles' => RoleModel::findAll(),
+                'users' => UserModel::findAll(),));
+    }
+
+    /**
+     * Create user action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     */
+    public function createAction($args)
+    {
+        try {
+
+            // Get post data
+            $postData = $this->getRequest()->getPostData();
+
+            // Create user
+            $user = UserModel::create(array(
+                    'email' => $postData->get('email'),
+                    'firstname' => $postData->get('firstname'),
+                    'lastname' => $postData->get('lastname'),
+                    'role_id' => $postData->get('role_id'),
+            ));
+
+            if ($user) {
+                $this->setFlash('alert', new SuccessAlert('{0} successful created', array('User')));
+            } else {
+                $this->setFlash('alert', new DangerAlert('Create failed'));
+            }
+        } catch (ValidationException $ex) {
+            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+        }
+
+        return $this->redirectToRoute('user_index');
+    }
+
+    /**
+     * Edit user action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     */
+    public function editAction($args)
+    {
+        // Get user or create user with inva
+        if ($this->validationService->hasError()) {
+            $data = $this->validationService->getData();
+            $user = new UserModel($data);
+        } else {
+
+            // Get user by id
+            $user = UserModel::findById($args['id']);
+            if (!$user) {
+                $this->setFlash('alert', new DangerAlert('{0} not found', array('User')));
+
+                return $this->redirectToRoute('user_index');
+            }
+        }
+
+        // Set back url
+        $this->view->setBackRoute('user_index');
+
+        return $this->render('backend/user/edit', array(
+                'user' => $user,
+                'roles' => RoleModel::findAll(),));
+    }
+
+    /**
+     * Update user action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     */
+    public function updateAction($args)
+    {
+        try {
+
+            // Get post data
+            $postData = $this->getRequest()->getPostData();
+
+            // Update user
+            $user = UserModel::update(array(
+                    'email' => $postData->get('email'),
+                    'firstname' => $postData->get('firstname'),
+                    'lastname' => $postData->get('lastname'),
+                    'role_id' => $postData->get('role_id'),
+                    ), $postData->get('user_id'));
+
+            if ($user) {
+                $this->setFlash('alert', new SuccessAlert('{0} successful updated', array('User')));
+            } else {
+                $this->setFlash('alert', new DangerAlert('Update failed'));
+            }
+        } catch (ValidationException $ex) {
+            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+        }
+
+        return $this->redirectToRoute('user_edit', array('id' => $postData->get('user_id')));
+    }
+
+    /**
+     * Delete user action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     */
+    public function deleteAction($args)
+    {
+        // Delete user
+        $result = UserModel::deleteById($args['id']);
+
+        if ($result) {
+            $this->setFlash('alert', new SuccessAlert('{0} successful deleted', array('User')));
+        } else {
+            $this->setFlash('alert', new DangerAlert('Delete failed'));
+        }
+
+        return $this->redirectToRoute('user_index');
+    }
+}

@@ -2,12 +2,11 @@
 
 namespace Neoflow\CMS\Model;
 
-use \Neoflow\Framework\ORM\AbstractEntityModel;
-use \Neoflow\Framework\ORM\EntityRepository;
+use Neoflow\Framework\ORM\AbstractEntityModel;
+use Neoflow\Framework\ORM\EntityRepository;
 
 class NavitemModel extends AbstractEntityModel
 {
-
     /**
      * @var string
      */
@@ -23,10 +22,10 @@ class NavitemModel extends AbstractEntityModel
      */
     public static $properties = ['navitem_id', 'title', 'page_id',
         'parent_navitem_id', 'navigation_id', 'language_id',
-        'position'];
+        'position', ];
 
     /**
-     * Get child navitems.
+     * Get repository to fetch child navitems.
      *
      * @return EntityRepository
      */
@@ -36,7 +35,7 @@ class NavitemModel extends AbstractEntityModel
     }
 
     /**
-     * Get parent navitem.
+     * Get repository to fetch parent navitem.
      *
      * @return EntityRepository
      */
@@ -46,7 +45,7 @@ class NavitemModel extends AbstractEntityModel
     }
 
     /**
-     * Get language
+     * Get repository to fetch language.
      *
      * @return EntityRepository
      */
@@ -56,7 +55,7 @@ class NavitemModel extends AbstractEntityModel
     }
 
     /**
-     * Get navigation
+     * Get repository to fetch navigation.
      *
      * @return EntityRepository
      */
@@ -66,7 +65,7 @@ class NavitemModel extends AbstractEntityModel
     }
 
     /**
-     * Get page
+     * Get repository to fetch page.
      *
      * @return EntityRepository
      */
@@ -75,6 +74,13 @@ class NavitemModel extends AbstractEntityModel
         return $this->belongsTo('\\Neoflow\\CMS\\Model\\PageModel', 'page_id');
     }
 
+    /**
+     * Save navitem.
+     *
+     * @param bool $validate
+     *
+     * @return bool
+     */
     public function save($validate = true)
     {
         if (!$this->title) {
@@ -98,6 +104,11 @@ class NavitemModel extends AbstractEntityModel
         return parent::save($validate);
     }
 
+    /**
+     * Save delete.
+     *
+     * @return bool
+     */
     public function delete()
     {
         if ($this->navigation_id === 1) {
@@ -117,17 +128,22 @@ class NavitemModel extends AbstractEntityModel
         return parent::delete();
     }
 
+    /**
+     * Validate page.
+     *
+     * @return bool
+     */
     public function validate()
     {
         $validator = new \Neoflow\Support\Validation\Validator($this->toArray());
 
         $validator
-            ->callback(function($parent_navitem_id, $navitem) {
+            ->callback(function ($parent_navitem_id, $navitem) {
 
                 $forbiddenNavitemIds = $navitem->childNavitems()
                     ->orderByAsc('position')
                     ->fetchAll()
-                    ->map(function($navitem) {
+                    ->map(function ($navitem) {
                         return $navitem->id();
                     })->toArray();
 
@@ -135,7 +151,7 @@ class NavitemModel extends AbstractEntityModel
                     $forbiddenNavitemIds[] = $navitem->id();
                 }
 
-                return (!in_array($parent_navitem_id, $forbiddenNavitemIds));
+                return !in_array($parent_navitem_id, $forbiddenNavitemIds);
             }, 'The navitem himself or subnavitems cannot be the top navitem', array($this))
             ->set('parent_navitem_id', 'Top navitem');
 

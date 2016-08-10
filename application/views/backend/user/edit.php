@@ -14,10 +14,26 @@
 
                     <div class="form-group <?= $view->hasValidationError('email', 'has-error') ?>">
                         <label for="inputEmail" class="col-sm-2 control-label">
-                            <?= $view->translate('Title') ?>
+                            <?= $view->translate('Email address') ?>
                         </label>
                         <div class="col-sm-10">
                             <input id="inputEmail" value="<?= $user->email ?>" type="email" required class="form-control" name="email" maxlength="50" minlength="3" />
+                        </div>
+                    </div>
+                    <div class="form-group <?= $view->hasValidationError('firstname', 'has-error') ?>">
+                        <label for="inputFirstname" class="col-sm-2 control-label">
+                            <?= $view->translate('Firstname') ?>
+                        </label>
+                        <div class="col-sm-10">
+                            <input id="inputFirstname" value="<?= $user->firstname ?>" type="text" maxlength="50" class="form-control" name="firstname" maxlength="50" minlength="3" />
+                        </div>
+                    </div>
+                    <div class="form-group <?= $view->hasValidationError('lastname', 'has-error') ?>">
+                        <label for="inputLastname" class="col-sm-2 control-label">
+                            <?= $view->translate('Lastname') ?>
+                        </label>
+                        <div class="col-sm-10">
+                            <input id="inputLastname" value="<?= $user->lastname ?>" type="text" maxlength="50" class="form-control" name="lastname" maxlength="50" minlength="3" />
                         </div>
                     </div>
                     <div class="form-group <?= $view->hasValidationError('role_id', 'has-error') ?>">
