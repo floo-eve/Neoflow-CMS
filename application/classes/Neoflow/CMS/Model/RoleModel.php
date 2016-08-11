@@ -9,6 +9,7 @@ use Neoflow\Support\Validation\Validator;
 
 class RoleModel extends AbstractEntityModel
 {
+
     /**
      * @var string
      */
@@ -45,7 +46,7 @@ class RoleModel extends AbstractEntityModel
 
         $validator
             ->required()
-            ->betweenLength(3, 50)
+            ->betweenLength(3, 20)
             ->callback(function ($title, $role) {
                 $roles = RoleModel::repo()
                     ->where('title', '=', $title)
@@ -71,12 +72,10 @@ class RoleModel extends AbstractEntityModel
      * Save role.
      *
      * @return bool
-     *
-     * @throws Exception
      */
-    public function save($validate = true)
+    public function save()
     {
-        if ($this->id() != 1 && parent::save($validate)) {
+        if ($this->id() !== 1 && parent::save()) {
 
             // Delete old role permissions
             RolePermissionModel::deleteAllByColumn('role_id', $this->id());
@@ -86,12 +85,11 @@ class RoleModel extends AbstractEntityModel
                 RolePermissionModel::create(array(
                     'role_id' => $this->id(),
                     'permission_id' => $permission_id,
-                ));
+                ))->save();
             }
 
             return true;
         }
-
         return false;
     }
 
@@ -102,7 +100,7 @@ class RoleModel extends AbstractEntityModel
      */
     public function delete()
     {
-        if ($this->id() != 1) {
+        if ($this->id() !== 1) {
             $rolePermissions = RolePermissionModel::findAllByColumn('role_id', $this->id());
 
             if ($rolePermissions->delete()) {

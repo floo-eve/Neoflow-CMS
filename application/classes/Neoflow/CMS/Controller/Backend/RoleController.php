@@ -12,6 +12,7 @@ use Neoflow\Support\Validation\ValidationException;
 
 class RoleController extends BackendController
 {
+
     /**
      * Constructor.
      */
@@ -65,7 +66,7 @@ class RoleController extends BackendController
                     'permission_ids' => $postData->get('permission_ids'),
             ));
 
-            if ($role) {
+            if ($role->validate() && $role->save()) {
                 $this->setFlash('alert', new SuccessAlert('{0} successful created', array('Role')));
             } else {
                 $this->setFlash('alert', new DangerAlert('Create failed'));
@@ -118,7 +119,7 @@ class RoleController extends BackendController
                     'permission_ids' => $postData->get('permission_ids'),
                     ), $postData->get('role_id'));
 
-            if ($role) {
+            if ($role->validate() && $role->save()) {
                 $this->setFlash('alert', new SuccessAlert('{0} successful updated', array('Role')));
             } else {
                 $this->setFlash('alert', new DangerAlert('Update failed'));

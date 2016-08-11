@@ -15,6 +15,7 @@ use Neoflow\Support\Alert\SuccessAlert;
 
 class SectionController extends BackendController
 {
+
     /**
      * @var SectionModel
      */
@@ -38,35 +39,30 @@ class SectionController extends BackendController
         parent::__construct();
 
         $this->view
-
             ->setSubtitle('Content')
-
             ->setTitle('Pages');
     }
 
     /**
      * Reorder sections action.
-     
+
      *
-     
+
      * @param array $args
-     
+
      * @return JsonResponse
      */
     public function reorderAction($args)
     {
 
         // Get json data and update order of sections
-
         $json = file_get_contents('php://input');
 
         $result = false;
 
         if (is_json($json)) {
             $result = $this
-
                 ->getService('section')
-
                 ->updateOrder(json_decode($json, true));
         }
 
@@ -75,11 +71,11 @@ class SectionController extends BackendController
 
     /**
      * Create new section action.
-     
+
      *
-     
+
      * @param array $args
-     
+
      * @return Response
      */
     public function createAction($args)
@@ -91,18 +87,13 @@ class SectionController extends BackendController
             $postData = $this->getRequest()->getPostData();
 
             $section = SectionModel::create(array(
-
                     'page_id' => $postData->get('page_id'),
-
                     'module_id' => $postData->get('module_id'),
-
                     'is_active' => $postData->get('is_active'),
-
                     'block' => 1,
-
             ));
 
-            if ($section) {
+            if ($section->validate() && $section->save()) {
                 $this->setFlash('alert', new SuccessAlert('{0} successful saved', array('Section')));
             } else {
                 $this->setFlash('alert', new DangerAlert('Save failed'));
@@ -116,11 +107,11 @@ class SectionController extends BackendController
 
     /**
      * Delete section action.
-     
+
      *
-     
+
      * @param array $args
-     
+
      * @return Response
      */
     public function deleteAction($args)
@@ -143,11 +134,11 @@ class SectionController extends BackendController
 
     /**
      * Activate section action.
-     
+
      *
-     
+
      * @param array $args
-     
+
      * @return Response
      */
     public function activateAction($args)
@@ -176,13 +167,13 @@ class SectionController extends BackendController
 
     /**
      * Get section by id.
-     
+
      *
-     
+
      * @param int $id
-     
+
      * @return SectionModel
-     
+
      * @throws Exception
      */
     protected function getSectionById($id)

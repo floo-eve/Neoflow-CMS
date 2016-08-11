@@ -10,6 +10,7 @@ use Neoflow\Support\Validation\Validator;
 
 class SectionModel extends AbstractEntityModel
 {
+
     /**
      * @var string
      */
@@ -24,7 +25,7 @@ class SectionModel extends AbstractEntityModel
      * @var array
      */
     public static $properties = ['section_id', 'page_id', 'module_id',
-        'position', 'block', 'is_active', ];
+        'position', 'block', 'is_active',];
 
     /**
      * Get repository to fetch page.
@@ -62,7 +63,7 @@ class SectionModel extends AbstractEntityModel
         if ($module) {
             return $module->render($view);
         }
-        throw new InvalidArgumentException('Cannot find module with ID: '.$this->module_id);
+        throw new InvalidArgumentException('Cannot find module with ID: ' . $this->module_id);
     }
 
     /**
@@ -70,7 +71,7 @@ class SectionModel extends AbstractEntityModel
      *
      * @return bool
      */
-    public function save($validate = true)
+    public function save()
     {
         if (!$this->position) {
             $this->position = 1;
@@ -84,7 +85,7 @@ class SectionModel extends AbstractEntityModel
             }
         }
 
-        return parent::save($validate);
+        return parent::save();
     }
 
     /**

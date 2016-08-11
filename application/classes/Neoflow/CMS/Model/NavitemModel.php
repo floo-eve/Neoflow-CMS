@@ -7,6 +7,7 @@ use Neoflow\Framework\ORM\EntityRepository;
 
 class NavitemModel extends AbstractEntityModel
 {
+
     /**
      * @var string
      */
@@ -22,7 +23,7 @@ class NavitemModel extends AbstractEntityModel
      */
     public static $properties = ['navitem_id', 'title', 'page_id',
         'parent_navitem_id', 'navigation_id', 'language_id',
-        'position', ];
+        'position',];
 
     /**
      * Get repository to fetch child navitems.
@@ -77,11 +78,9 @@ class NavitemModel extends AbstractEntityModel
     /**
      * Save navitem.
      *
-     * @param bool $validate
-     *
      * @return bool
      */
-    public function save($validate = true)
+    public function save()
     {
         if (!$this->title) {
             $page = $this->page()->fetch();
@@ -101,7 +100,7 @@ class NavitemModel extends AbstractEntityModel
             }
         }
 
-        return parent::save($validate);
+        return parent::save();
     }
 
     /**

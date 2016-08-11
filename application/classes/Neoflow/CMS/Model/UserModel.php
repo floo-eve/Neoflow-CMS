@@ -3,12 +3,12 @@
 namespace Neoflow\CMS\Model;
 
 use Neoflow\Framework\ORM\AbstractEntityModel;
-use Neoflow\Framework\ORM\EntityCollection;
 use Neoflow\Framework\ORM\EntityRepository;
 use Neoflow\Support\Validation\Validator;
 
 class UserModel extends AbstractEntityModel
 {
+
     /**
      * @var string
      */
@@ -22,7 +22,7 @@ class UserModel extends AbstractEntityModel
     /**
      * @var array
      */
-    public static $properties = ['user_id', 'email', 'firstname', 'lastname', 'role_id'];
+    public static $properties = ['user_id', 'email', 'firstname', 'lastname', 'role_id', 'password', 'password2'];
 
     /**
      * Get repository to fetch role.
@@ -35,29 +35,7 @@ class UserModel extends AbstractEntityModel
     }
 
     /**
-     * Get user permissions by his role.
-     *
-     * @return EntityCollection
-     */
-    public function getPermissions()
-    {
-        $role = $this->role()->fetch();
-
-        return $role->permissions()->fetchAll();
-    }
-
-    /**
-     * Get fullname (firstname lastname).
-     *
-     * @return string
-     */
-    public function getFullname()
-    {
-        return $this->firstname.' '.$this->lastname;
-    }
-
-    /**
-     * Validate setting entity.
+     * Validate user entity.
      *
      * @return bool
      */
@@ -91,5 +69,64 @@ class UserModel extends AbstractEntityModel
             ->set('role_id', 'Role');
 
         return $validator->validate();
+    }
+
+    public function validatePassword()
+    {
+        $validator = new Validator($this->toArray());
+
+        $validator
+            ->required()
+            ->set('password2', 'Confirm password');
+
+        $validator
+            ->required()
+            ->minLength(6)
+            ->callback(function($password, $password2) {
+                return $password === $password2;
+            }, 'Password is not matching confirm password', array($this->password2))
+            ->set('password', 'Password');
+
+        return $validator->validate();
+    }
+
+    /**
+     * Get fullname (firstname lastname).
+     *
+     * @return string
+     */
+    public function getFullname()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+    /**
+     * Save user entity.
+     *
+     * @return bool
+     */
+    public function save()
+    {
+        // Remove role_id roperty to prevent role change of initial user
+        if ($this->id() === 1) {
+            $this->removeProperty('role_id');
+        }
+
+        // Remove confirm password property
+        $this->removeProperty('password2');
+
+        if ($this->password) {
+            $this->password = sha1($this->password);
+        }
+
+        return parent::save();
+    }
+
+    public function delete()
+    {
+        if ($this->id() !== 1) {
+            return parent::delete();
+        }
+        return false;
     }
 }

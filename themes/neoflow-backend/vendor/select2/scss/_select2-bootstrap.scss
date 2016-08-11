@@ -82,6 +82,9 @@ $clear-selection-color: $dropdown-arrow-color !default;
     }
 }
 
+.select2 {
+    width: 100% !important;
+}
 
 .select2-container--bootstrap {
     display: block;

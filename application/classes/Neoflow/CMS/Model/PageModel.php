@@ -9,6 +9,7 @@ use Neoflow\Framework\ORM\EntityRepository;
 
 class PageModel extends AbstractEntityModel
 {
+
     /**
      * @var string
      */
@@ -24,7 +25,7 @@ class PageModel extends AbstractEntityModel
      */
     public static $properties = ['page_id', 'title', 'slug',
         'description', 'keywords', 'is_active', 'visibility',
-        'is_active', 'language_id', ];
+        'is_active', 'language_id',];
 
     /**
      * Get repository to fetch sections.
@@ -55,7 +56,7 @@ class PageModel extends AbstractEntityModel
 
         return $this
                 ->getConfig()
-                ->getUrl('/'.implode('/', array_reverse($uriParts)));
+                ->getUrl('/' . implode('/', array_reverse($uriParts)));
     }
 
     /**
@@ -104,50 +105,34 @@ class PageModel extends AbstractEntityModel
     /**
      * Save page.
      *
-     * @param bool $validate
-     *
      * @return bool
      */
-    public function save($validate = true)
+    public function save()
     {
         if (!$this->slug) {
             $this->slug = slugify($this->title);
         }
 
-        return parent::save($validate);
-    }
+        $result = parent::save();
 
-    /**
-     * Create and save page.
-     *
-     * @param array $data
-     * @param bool  $validate
-     *
-     * @return self|bool
-     */
-    public static function create($data, $validate = true)
-    {
-        $page = parent::create($data, $validate);
-
-        if ($page) {
+        if ($result) {
             NavitemModel::create(array(
                 'navigation_id' => 1,
-                'page_id' => $page->id(),
-                'language_id' => $page->language_id,
-                'parent_navitem_id' => $page->parent_navitem_id ?: null,
-                ), $validate);
+                'page_id' => $this->id(),
+                'language_id' => $this->language_id,
+                'parent_navitem_id' => $this->parent_navitem_id ? : null,
+            ))->save();
 
-            if ($page->module_id) {
+            if ($this->module_id) {
                 SectionModel::create(array(
-                    'page_id' => $page->id(),
-                    'module_id' => $page->module_id,
+                    'page_id' => $this->id(),
+                    'module_id' => $this->module_id,
                     'is_active' => true,
                     'block' => 1,
-                    ), $validate);
+                ))->save();
             }
         }
-
-        return $page;
+        return $result;
     }
 
     /**

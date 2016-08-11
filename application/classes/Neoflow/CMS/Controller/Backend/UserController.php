@@ -59,9 +59,11 @@ class UserController extends BackendController
                     'firstname' => $postData->get('firstname'),
                     'lastname' => $postData->get('lastname'),
                     'role_id' => $postData->get('role_id'),
+                    'password' => $postData->get('password'),
+                    'password2' => $postData->get('password2'),
             ));
 
-            if ($user) {
+            if ($user->validate() && $user->validatePassword() && $user->save()) {
                 $this->setFlash('alert', new SuccessAlert('{0} successful created', array('User')));
             } else {
                 $this->setFlash('alert', new DangerAlert('Create failed'));
@@ -127,8 +129,40 @@ class UserController extends BackendController
                     'role_id' => $postData->get('role_id'),
                     ), $postData->get('user_id'));
 
-            if ($user) {
+            if ($user->validate() && $user->save()) {
                 $this->setFlash('alert', new SuccessAlert('{0} successful updated', array('User')));
+            } else {
+                $this->setFlash('alert', new DangerAlert('Update failed'));
+            }
+        } catch (ValidationException $ex) {
+            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+        }
+
+        return $this->redirectToRoute('user_edit', array('id' => $postData->get('user_id')));
+    }
+
+    /**
+     * Update user password action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     */
+    public function updatePasswordAction($args)
+    {
+        try {
+
+            // Get post data
+            $postData = $this->getRequest()->getPostData();
+
+            // Update user
+            $user = UserModel::update(array(
+                    'password' => $postData->get('password'),
+                    'password2' => $postData->get('password2'),
+                    ), $postData->get('user_id'));
+
+            if ($user->validatePassword() && $user->save()) {
+                $this->setFlash('alert', new SuccessAlert('{0} successful updated', array('Password')));
             } else {
                 $this->setFlash('alert', new DangerAlert('Update failed'));
             }

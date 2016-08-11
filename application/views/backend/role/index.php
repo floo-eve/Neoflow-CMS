@@ -61,7 +61,7 @@
                             <?= $view->translate('Title') ?>
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="title" id="inputTitle" maxlength="50" required class="form-control" />
+                            <input type="text" name="title" id="inputTitle" maxlength="20" required class="form-control" />
                         </div>
                     </div>
 

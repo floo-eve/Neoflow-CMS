@@ -17,7 +17,7 @@
                             <?= $view->translate('Title') ?>
                         </label>
                         <div class="col-sm-10">
-                            <input id="inputTitle" value="<?= $role->title ?>" type="text" required class="form-control" name="title" maxlength="50" minlength="3" />
+                            <input id="inputTitle" value="<?= $role->title ?>" type="text" required class="form-control" name="title" maxlength="20" />
                         </div>
                     </div>
                     <div class="form-group <?= $view->hasValidationError('description', 'has-error') ?>">

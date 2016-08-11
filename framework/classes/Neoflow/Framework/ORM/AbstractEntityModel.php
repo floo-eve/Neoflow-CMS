@@ -57,6 +57,11 @@ abstract class AbstractEntityModel
     protected $isModified = false;
 
     /**
+     * @var bool
+     */
+    protected $isNew = true;
+
+    /**
      * Constructor.
      *
      * @param array $data
@@ -74,6 +79,10 @@ abstract class AbstractEntityModel
 
         $this->modifiedProperties = array();
         $this->isModified = false;
+
+        if ($this->id()) {
+            $this->isNew = false;
+        }
     }
 
     /**
@@ -132,7 +141,7 @@ abstract class AbstractEntityModel
         $primaryKey = $this->getPrimaryKey();
         $id = $this->{$primaryKey};
         if ($id) {
-            return $id;
+            return (int) $id;
         }
 
         return false;
@@ -184,11 +193,11 @@ abstract class AbstractEntityModel
      * @param mixed  $value
      * @param bool   $silent
      *
-     * @return Model
+     * @return self
      *
      * @throws DomainException
      */
-    public function set($key, $value = null, $silent = false)
+    protected function set($key, $value = null, $silent = false)
     {
         if ($this->isReadOnly()) {
             throw new DomainException('Model entity is read only and cannot set value');
@@ -215,7 +224,7 @@ abstract class AbstractEntityModel
      *
      * @return bool
      */
-    public function exists($key)
+    protected function exists($key)
     {
         return isset($this->data[$key]);
     }
@@ -228,13 +237,34 @@ abstract class AbstractEntityModel
      *
      * @return mixed
      */
-    public function get($key, $default = null)
+    protected function get($key, $default = null)
     {
         if ($this->exists($key)) {
             return $this->data[$key];
         }
 
         return $default;
+    }
+
+    /**
+     * Remove model entity value.
+     *
+     * @param string $key
+     * @param mixed  $default
+     *
+     * @return self
+     */
+    protected function remove($key)
+    {
+        if ($this->exists($key)) {
+            unset($this->data[$key]);
+        }
+
+        if (($index = array_search($key, $this->modifiedProperties)) !== false) {
+            unset($this->modifiedProperties[$index]);
+        }
+
+        return $this;
     }
 
     /**
@@ -271,43 +301,37 @@ abstract class AbstractEntityModel
     }
 
     /**
-     * Create and save model entity.
+     * Create model entity.
      *
      * @param array $data
-     * @param bool $validate
      *
-     * @return self|bool
+     * @return self
      */
-    public static function create($data, $validate = true)
+    public static function create($data)
     {
-        $entity = new static($data);
-        if ($entity->save($validate)) {
-            return $entity;
-        }
-        return false;
+        return new static($data);
     }
 
     /**
-     * Update and save model entity.
+     * Update model entity.
      *
      * @param array $data
      * @param int|string $id
-     * @param bool $validate
      *
-     * @return self|bool
+     * @return self
+     *
+     * @throws Exception
      */
-    public static function update($data, $id, $validate = true)
+    public static function update($data, $id)
     {
         $entity = static::findById($id);
         if ($entity) {
             foreach ($data as $key => $value) {
-                $entity->$key = $value;
+                $entity->set($key, $value);
             }
-            if ($entity->save($validate)) {
-                return $entity;
-            }
+            return $entity;
         }
-        return false;
+        throw new Exception('Model entity not found');
     }
 
     /**
@@ -315,12 +339,8 @@ abstract class AbstractEntityModel
      *
      * @return bool
      */
-    public function save($validate = true)
+    public function save()
     {
-        if ($validate) {
-            $this->validate();
-        }
-
         if ($this->id()) {
             return static::repo()->update($this);
         }
@@ -330,6 +350,7 @@ abstract class AbstractEntityModel
         if ($id) {
             $primaryKey = $this->getPrimaryKey();
             $this->set($primaryKey, $id);
+            $this->isNew = false;
             return true;
         }
         return false;
@@ -431,6 +452,24 @@ abstract class AbstractEntityModel
         $modelClassName::$properties[] = $key;
 
         return $this;
+    }
+
+    /**
+     * Remove property from model entity.
+     *
+     * @param string $key
+     *
+     * @return self
+     */
+    public function removeProperty($key)
+    {
+        $modelClassName = get_class($this);
+
+        if (($index = array_search($key, $modelClassName::$properties)) !== false) {
+            unset($modelClassName::$properties[$index]);
+        }
+
+        return $this->remove($key);
     }
 
     /**
