@@ -135,13 +135,17 @@ class RoleController extends BackendController
 
     public function deleteAction($args)
     {
-        // Delete role
-        $result = RoleModel::deleteById($args['id']);
+        try {
+            // Delete role
+            $result = RoleModel::deleteById($args['id']);
 
-        if ($result) {
-            $this->setFlash('alert', new SuccessAlert('{0} successful deleted', array('Role')));
-        } else {
-            $this->setFlash('alert', new DangerAlert('Delete failed'));
+            if ($result) {
+                $this->setFlash('alert', new SuccessAlert('{0} successful deleted', array('Role')));
+            } else {
+                $this->setFlash('alert', new DangerAlert('Delete failed'));
+            }
+        } catch (ValidationException $ex) {
+            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
         }
 
         return $this->redirectToRoute('role_index');

@@ -22,7 +22,12 @@ class UserModel extends AbstractEntityModel
     /**
      * @var array
      */
-    public static $properties = ['user_id', 'email', 'firstname', 'lastname', 'role_id', 'password', 'password2'];
+    public static $properties = ['user_id', 'email', 'firstname', 'lastname', 'role_id'];
+
+    /**
+     * @var array
+     */
+    public static $saveProperties = ['user_id', 'email', 'firstname', 'lastname', 'role_id', 'password'];
 
     /**
      * Get repository to fetch role.
@@ -41,7 +46,7 @@ class UserModel extends AbstractEntityModel
      */
     public function validate()
     {
-        $validator = new Validator($this->toArray());
+        $validator = new Validator($this->data);
 
         $validator
             ->required()
@@ -68,12 +73,19 @@ class UserModel extends AbstractEntityModel
             ->required()
             ->set('role_id', 'Role');
 
+        if ($this->password && $this->password2) {
+            $this->validatePassword();
+        }
+
         return $validator->validate();
     }
 
     public function validatePassword()
     {
-        $validator = new Validator($this->toArray());
+        $validator = new Validator(array(
+            'password' => $this->password,
+            'password2' => $this->password2
+        ));
 
         $validator
             ->required()
@@ -107,16 +119,20 @@ class UserModel extends AbstractEntityModel
      */
     public function save()
     {
-        // Remove role_id roperty to prevent role change of initial user
+        // Prevent role change of initial user by removing role_id
         if ($this->id() === 1) {
-            $this->removeProperty('role_id');
+            $this->remove('role_id');
         }
 
         // Remove confirm password property
-        $this->removeProperty('password2');
+        $this->remove('password2');
 
+        // Calculate password to sha1 hash
         if ($this->password) {
-            $this->password = sha1($this->password);
+            $password = sha1($this->password);
+            $this
+                ->addProperty('password')
+                ->set('password', $password);
         }
 
         return parent::save();
@@ -124,6 +140,7 @@ class UserModel extends AbstractEntityModel
 
     public function delete()
     {
+        // Prevent delete of initial user
         if ($this->id() !== 1) {
             return parent::delete();
         }

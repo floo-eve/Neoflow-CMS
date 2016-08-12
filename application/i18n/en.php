@@ -58,6 +58,7 @@ $this->addTranslation(array(
     'No result found' => 'No result found',
     'No results found' => 'No results found',
     '{0} not found' => '{0} not found',
+    'No {0} found' => 'No {0} found',
     'Disabled' => 'Disabled',
     'Disable' => 'Disable',
     'Inactive' => 'Inactive',
@@ -182,15 +183,22 @@ $this->addTranslation(array(
 
 // Users
 $this->addTranslation(array(
+    'All users' => 'All users',
+    'Edit user' => 'Edit user',
+    'Create user' => 'Create user',
+    'Change password' => 'Change password',
     'Lastname' => 'Lastname',
     'Firstname' => 'Firstname',
     'Confirm password' => 'Confirm password',
     'Password is not matching confirm password' => 'Password is not matching confirm password',
-    'New password' => 'New password',
 ));
 
 // Role
 $this->addTranslation(array(
+    'All roles' => 'All roles',
+    'Edit role' => 'Edit role',
+    'Create role' => 'Create role',
+    'Role is in use and cannot be deleted' => 'Role is in use and cannot be deleted'
 ));
 
 

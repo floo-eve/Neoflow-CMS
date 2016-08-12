@@ -2,9 +2,9 @@
 
 namespace Neoflow\CMS\Model;
 
-use Exception;
 use Neoflow\Framework\ORM\AbstractEntityModel;
 use Neoflow\Framework\ORM\EntityRepository;
+use Neoflow\Support\Validation\ValidationException;
 use Neoflow\Support\Validation\Validator;
 
 class RoleModel extends AbstractEntityModel
@@ -36,13 +36,23 @@ class RoleModel extends AbstractEntityModel
     }
 
     /**
+     * Get repository to fetch users.
+     *
+     * @return EntityRepository
+     */
+    public function users()
+    {
+        return $this->hasMany('\\Neoflow\\CMS\\Model\\UserModel', 'role_id');
+    }
+
+    /**
      * Validate setting entity.
      *
      * @return bool
      */
     public function validate()
     {
-        $validator = new Validator($this->toArray());
+        $validator = new Validator($this->data);
 
         $validator
             ->required()
@@ -101,10 +111,15 @@ class RoleModel extends AbstractEntityModel
     public function delete()
     {
         if ($this->id() !== 1) {
-            $rolePermissions = RolePermissionModel::findAllByColumn('role_id', $this->id());
+            if (!$this->users()->fetchAll()->count()) {
 
-            if ($rolePermissions->delete()) {
-                return parent::delete();
+                $rolePermissions = RolePermissionModel::findAllByColumn('role_id', $this->id());
+
+                if ($rolePermissions->delete()) {
+                    return parent::delete();
+                }
+            } else {
+                throw new ValidationException('Role is in use and cannot be deleted');
             }
         }
 

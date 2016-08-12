@@ -357,7 +357,17 @@ abstract class AbstractEntityModel
     }
 
     /**
-     * Get modified data.
+     * Get data of model entity.
+     *
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->toArray();
+    }
+
+    /**
+     * Get modified data of model entity.
      *
      * @return array
      */

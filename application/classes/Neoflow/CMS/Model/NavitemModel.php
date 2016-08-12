@@ -134,7 +134,7 @@ class NavitemModel extends AbstractEntityModel
      */
     public function validate()
     {
-        $validator = new \Neoflow\Support\Validation\Validator($this->toArray());
+        $validator = new \Neoflow\Support\Validation\Validator($this->data);
 
         $validator
             ->callback(function ($parent_navitem_id, $navitem) {

@@ -43,8 +43,8 @@
                             <?= $view->translate('Top page') ?>
                         </label>
                         <div class="col-sm-10">
-                            <select class="form-control select2" name="parent_navitem_id" id="selectPage">
-                                <option value=""><?= $view->translate('None') ?></option>
+                            <select data-placeholder="<?= $view->translate('None') ?>" class="form-control select2" name="parent_navitem_id" id="selectPage">
+                                <option></option>
                                 <?= $view->renderNavitemOptions($navitems, 0, $selectedNavitemId, $disabledNavitemIds) ?>
                             </select>
                         </div>

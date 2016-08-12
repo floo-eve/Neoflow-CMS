@@ -97,6 +97,7 @@ class PageController extends BackendController
                     'language_id' => $postData->get('language_id'),
                     'is_active' => $postData->get('is_active'),
                     'parent_navitem_id' => $postData->get('parent_navitem_id'),
+                    'visibility' => $postData->get('visibility'),
                     'module_id' => $postData->get('module_id'),
             ));
 

@@ -4,7 +4,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= $view->translate('Edit {0}', array('Role')) ?>
+                    <?= $view->translate('Edit role') ?>
                 </h3>
             </div>
             <div class="panel-body">

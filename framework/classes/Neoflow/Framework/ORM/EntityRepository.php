@@ -123,7 +123,7 @@ class EntityRepository
 
         return $this->query
                 ->insertInto($this->getTableName())
-                ->values($entity->toArray())
+                ->values($entity->getData())
                 ->execute();
     }
 

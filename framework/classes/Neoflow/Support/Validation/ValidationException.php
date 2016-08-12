@@ -12,7 +12,12 @@ class ValidationException extends Exception
     public function __construct($message, array $errors = array())
     {
         parent::__construct($message);
-        $this->errors = $errors;
+
+        if (count($errors)) {
+            $this->errors = $errors;
+        } else {
+            $this->errors = array($message);
+        }
     }
 
     public function getErrors()

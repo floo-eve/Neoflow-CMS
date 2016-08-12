@@ -142,7 +142,7 @@ class PageModel extends AbstractEntityModel
      */
     public function validate()
     {
-        $validator = new Validator($this->toArray());
+        $validator = new Validator($this->data);
 
         $validator
             ->required()

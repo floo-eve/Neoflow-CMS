@@ -96,7 +96,6 @@
             }
             return item.text;
         },
-        placeholder: '',
     }).focus(function () {
         $(this).select2('open');
     });

@@ -4,7 +4,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= $view->translate('All {0}', array('Roles')) ?>
+                    <?= $view->translate('All roles') ?>
                 </h3>
             </div>
             <div class="panel-body">
@@ -33,7 +33,7 @@
                                     <a href="<?= $view->generateUrl('role_edit', array('id' => $role->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= $view->translate('Edit {0}', array($role->title)) ?>">
                                         <i class="fa fa-fw fa-pencil"></i> <?= $view->translate('Edit') ?>
                                     </a>
-                                    <a href="<?= $view->generateUrl('role_delete', array('id' => $role->id())) ?>" class="btn btn-danger btn-xs confirm" data-message="<?= $view->translate('Are you sure you want to delete it?') ?>" title="<?= $view->translate('Delete {0}', array($role->title)) ?>">
+                                    <a href="<?= $view->generateUrl('role_delete', array('id' => $role->id())) ?>" class="btn btn-primary btn-xs confirm" data-message="<?= $view->translate('Are you sure you want to delete it?') ?>" title="<?= $view->translate('Delete {0}', array($role->title)) ?>">
                                         <i class="fa fa-fw fa-trash-o"></i>
                                     </a>
                                 </td>
@@ -51,7 +51,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= $view->translate('Create {0}', array('Role')) ?>
+                    <?= $view->translate('Create role') ?>
                 </h3>
             </div>
             <div class="panel-body">

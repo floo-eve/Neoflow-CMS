@@ -4,7 +4,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= $view->translate('All {0}', array('Users')) ?>
+                    <?= $view->translate('All users') ?>
                 </h3>
             </div>
             <div class="panel-body">
@@ -35,7 +35,7 @@
                                     <a href="<?= $view->generateUrl('user_edit', array('id' => $user->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= $view->translate('Edit {0}', array($user->getFullName())) ?>">
                                         <i class="fa fa-fw fa-pencil"></i> <?= $view->translate('Edit') ?>
                                     </a>
-                                    <a <?= ($user->id() === 1 ? 'disabled' : '') ?> href="<?= $view->generateUrl('user_delete', array('id' => $user->id())) ?>" class="btn btn-danger btn-xs confirm" data-message="<?= $view->translate('Are you sure you want to delete it?') ?>" title="<?= $view->translate('Delete {0}', array($user->getFullName())) ?>">
+                                    <a <?= ($user->id() === 1 ? 'disabled' : '') ?> href="<?= $view->generateUrl('user_delete', array('id' => $user->id())) ?>" class="btn btn-primary btn-xs confirm" data-message="<?= $view->translate('Are you sure you want to delete it?') ?>" title="<?= $view->translate('Delete {0}', array($user->getFullName())) ?>">
                                         <i class="fa fa-fw fa-trash-o"></i>
                                     </a>
                                 </td>
@@ -53,7 +53,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= $view->translate('Create {0}', array('User')) ?>
+                    <?= $view->translate('Create user') ?>
                 </h3>
             </div>
             <div class="panel-body">

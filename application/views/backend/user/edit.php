@@ -4,7 +4,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= $view->translate('Edit {0}', array('User')) ?>
+                    <?= $view->translate('Edit user') ?>
                 </h3>
             </div>
             <div class="panel-body">
@@ -71,7 +71,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= $view->translate('Change {0}', array('password')) ?>
+                    <?= $view->translate('Change password') ?>
                 </h3>
             </div>
             <div class="panel-body">

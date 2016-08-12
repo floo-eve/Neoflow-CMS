@@ -87,7 +87,7 @@ class UserController extends BackendController
         // Get user or create user with inva
         if ($this->validationService->hasError()) {
             $data = $this->validationService->getData();
-            $user = new UserModel($data);
+            $user = UserModel::update($data, $data['user_id']);
         } else {
 
             // Get user by id
