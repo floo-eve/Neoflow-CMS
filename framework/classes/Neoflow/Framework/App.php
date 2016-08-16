@@ -211,13 +211,11 @@ class App
     {
         $serviceClassNames = $this->get('config')->get('services');
         $services = array();
-        foreach ($serviceClassNames as $serviceClassName) {
-            if (is_subclass_of($serviceClassName, '\\Neoflow\\Framework\\Core\\AbstractService')) {
-                $service = new $serviceClassName();
-                $serviceName = $service->getServiceName();
-                $services[$serviceName] = $service;
+        foreach ($serviceClassNames as $serviceName => $serviceClassName) {
+            if (class_exists($serviceClassName)) {
+                $services[$serviceName] = new $serviceClassName();
             } else {
-                throw new Exception($serviceClassName . ' is not subclass of AbstractService');
+                throw new Exception($serviceClassName . ' is not a service class');
             }
         }
         $this->set('services', $services);
@@ -230,7 +228,7 @@ class App
      * @return AbstractService
      * @throws Exception
      */
-    public function getService($name)
+    public function service($name)
     {
         $services = $this->get('services');
         if (isset($services[$name])) {

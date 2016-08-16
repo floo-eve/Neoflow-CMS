@@ -62,7 +62,7 @@ class SectionController extends BackendController
 
         if (is_json($json)) {
             $result = $this
-                ->getService('section')
+                ->service('section')
                 ->updateOrder(json_decode($json, true));
         }
 

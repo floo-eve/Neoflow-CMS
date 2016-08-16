@@ -7,6 +7,7 @@ use Neoflow\Framework\Core\AbstractService;
 
 class NavitemService extends AbstractService
 {
+
     /**
      * Update navitem order.
      *
@@ -29,10 +30,5 @@ class NavitemService extends AbstractService
         }
 
         return true;
-    }
-
-    public function getServiceName()
-    {
-        return 'navitem';
     }
 }

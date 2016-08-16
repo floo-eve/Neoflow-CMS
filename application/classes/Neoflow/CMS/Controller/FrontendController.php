@@ -1,4 +1,6 @@
-<?phpnamespace Neoflow\CMS\Controller;
+<?php
+
+namespace Neoflow\CMS\Controller;
 
 use Neoflow\CMS\Mapper\PageMapper;
 use Neoflow\CMS\Views\FrontendView;
@@ -8,76 +10,100 @@ use Neoflow\Framework\HTTP\Responsing\Response;
 class FrontendController extends AbstractController
 {
 
-    /**     * Index action.     *     * @param array $args
-     */    public function indexAction($args)
-    {
-        $page = false;
-        $parentPages = array();
+    /**
+     * Index action.
+     *
+     * @param array $args
+     */
+    public function indexAction($args)
+    {
 
-        $pageMapper = new PageMapper();
-        $pageOrm = $pageMapper->getOrm();
+        $page = false;
 
-        if (isset($args['slug'])) {
-            $slugParts = array_values(array_filter(explode('/', $args['slug'])));
-            foreach ($slugParts as $slugPart) {
-                if ($page) {
-                    $page->setReadonly();
-                    $parentPages[] = $page;
-                    $pageOrm = $page->childPages();
+        $parentPages = array();
 
-                }
-                $page = $pageOrm->where('slug', '=', $slugPart)->fetch();
 
-            }
+        $pageMapper = new PageMapper();
 
-        } else {
-            $page = $pageOrm->fetch();
-            $page->setReadonly();
+        $pageOrm = $pageMapper->getOrm();
 
-        }
-        if (!$page) {
-            return $this->notFoundAction($args);
 
-        }
+        if (isset($args['slug'])) {
 
-        $this->app()            ->set('page', $page)            ->set('parentPages', $parentPages);
+            $slugParts = array_values(array_filter(explode('/', $args['slug'])));
 
-        $this->view = $page->renderToView($this->view);
+            foreach ($slugParts as $slugPart) {
 
-        return $this->render('index');
+                if ($page) {
 
-    }
+                    $page->setReadonly();
 
-    /**     * Not found action.     *     * @return Response
-     */    public function notFoundAction($args)
-    {
-        return $this->render('error/notFound')                ->setStatusCode(404);
+                    $parentPages[] = $page;
 
-    }
+                    $pageOrm = $page->childPages();
+                }
 
-    /**     * Error action.     *     * @return Response
-     */    public function errorAction($args)
-    {
-        $message = '';
-        if (isset($args[0])) {
-            if (is_a($args[0], '\\Exception')) {
-                $message = $args[0]->getMessage();
+                $page = $pageOrm->where('slug', '=', $slugPart)->fetch();
+            }
+        } else {
+            $page = $pageOrm->fetch();
 
-            } elseif (is_string($args[0])) {
-                $message = $args[0];
+            $page->setReadonly();
+        }
 
-            }
+        if (!$page) {
+            return $this->notFoundAction($args);
+        }
 
-        }
+        $this->app()
+            ->set('page', $page)
+            ->set('parentPages', $parentPages);
 
-        return $this->render('error/internalServerError', array(                'code' => 500,                'title' => 'Internal server error',                'message' => $message))->setStatusCode(500);
+        $this->view = $page->renderToView($this->view);
 
-    }
+        return $this->render('index');
+    }
 
-    /**     * Set view.
-     */    protected function setView()
-    {
-        $this->view = new FrontendView();
+    /**
+     * Not found action.
+     *
+     * @return Response
+     */
+    public function notFoundAction($args)
+    {
+        return $this->render('error/notFound')
+                ->setStatusCode(404);
+    }
 
-    }
+    /**
+     * Error action.
+     *
+     * @return Response
+     */
+    public function errorAction($args)
+    {
+        $message = '';
+
+        if (isset($args[0])) {
+            if (is_a($args[0], '\\Exception')) {
+                $message = $args[0]->getMessage();
+            } elseif (is_string($args[0])) {
+
+                $message = $args[0];
+            }
+        }
+
+        return $this->render('error/internalServerError', array(
+                'code' => 500,
+                'title' => 'Internal server error',
+                'message' => $message))->setStatusCode(500);
+    }
+
+    /**
+     * Set view.
+     */
+    protected function setView()
+    {
+        $this->view = new FrontendView();
+    }
 }

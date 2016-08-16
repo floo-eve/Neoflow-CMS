@@ -31,17 +31,6 @@ abstract class AbstractController
     }
 
     /**
-     * Get service
-     *
-     * @param string $name
-     * @return AbstractService
-     */
-    public function getService($name)
-    {
-        return $this->app()->getService($name);
-    }
-
-    /**
      * Render view as content of response.
      *
      * @param string   $viewFile

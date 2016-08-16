@@ -7,6 +7,7 @@ use Neoflow\Framework\Core\AbstractService;
 
 class SectionService extends AbstractService
 {
+
     /**
      * Update section order.
      *
@@ -23,10 +24,5 @@ class SectionService extends AbstractService
         }
 
         return true;
-    }
-
-    public function getServiceName()
-    {
-        return 'section';
     }
 }

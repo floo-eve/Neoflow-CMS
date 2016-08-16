@@ -30,7 +30,7 @@ class BackendView extends AbstractView
      */
     public function hasValidationError($key = '', $returnValue = true)
     {
-        if ($this->app()->getService('validation')->hasError($key)) {
+        if ($this->service('validation')->hasError($key)) {
             return $returnValue;
         }
 

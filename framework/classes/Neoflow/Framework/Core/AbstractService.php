@@ -9,6 +9,4 @@ abstract class AbstractService
      * App trait.
      */
     use \Neoflow\Framework\AppTrait;
-
-    public abstract function getServiceName();
 }

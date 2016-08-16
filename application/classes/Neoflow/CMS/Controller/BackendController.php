@@ -15,15 +15,6 @@ use Neoflow\Support\Validation\ValidationService;
 
 class BackendController extends AbstractController
 {
-    /**
-     * @var UserService
-     */
-    protected $userService;
-
-    /**
-     * @var ValidationService
-     */
-    protected $validationService;
 
     /**
      * Constrcutor.
@@ -33,11 +24,6 @@ class BackendController extends AbstractController
     public function __construct()
     {
         parent::__construct();
-
-        $this->userService = new UserService();
-
-        // Get validation service
-        $this->validationService = $this->getService('validation');
 
         $languages = LanguageModel::repo()
             ->where('is_active', '=', true)
@@ -89,9 +75,7 @@ class BackendController extends AbstractController
      */
     public function loginAction($args)
     {
-        return $this->render('backend/login', array(
-                'message' => 'Login',
-                'pageHeaderTitle' => 'Dashboard', ));
+        return $this->render('backend/login');
     }
 
     /**
@@ -103,11 +87,13 @@ class BackendController extends AbstractController
      */
     public function authAction($args)
     {
+        // Get post data
         $postData = $this->getRequest()->getPostData();
+
         if ($postData->exists('email') && $postData->exists('password')) {
-            $user = $this->userService->authenticate($postData->get('email'), $postData->get('password'));
+            $user = $this->service('authentication')->authenticate($postData->get('email'), $postData->get('password'));
             if ($user) {
-                $alert = new SuccessAlert('Hallo '.$user->firstname.' '.$user->lastname.', du hast dich erfolgreich eingeloggt');
+                $alert = new SuccessAlert('Hallo ' . $user->firstname . ' ' . $user->lastname . ', du hast dich erfolgreich eingeloggt');
                 $this->getSession()
                     ->set('user_id', $user->id())
                     ->setFlash('alert', $alert);
@@ -121,6 +107,21 @@ class BackendController extends AbstractController
         }
 
         return $this->redirectToRoute('backend_login');
+    }
+
+    public function forgotAction($args)
+    {
+        $result = $this->service('authentication')->resetPassword('jonathan.nessier@outlook.com');
+
+        if ($result) {
+            'yeah';
+        } else {
+            'nope';
+        }
+        exit;
+
+
+        //return $this->render('backend/login');
     }
 
     /**
@@ -145,9 +146,9 @@ class BackendController extends AbstractController
     {
         $currentRouting = $this->app()->get('router')->getCurrentRouting();
         $currentRoute = $currentRouting[0];
-        if (!$this->checkAccess() && !in_array($currentRoute[0], array('backend_login', 'backend_auth'))) {
+        if (!$this->checkAccess() && !in_array($currentRoute[0], array('backend_login', 'backend_auth', 'backend_forgot'))) {
             return $this->redirectToRoute('backend_login');
-        } elseif ($this->checkAccess() && in_array($currentRoute[0], array('backend_login', 'backend_auth'))) {
+        } elseif ($this->checkAccess() && in_array($currentRoute[0], array('backend_login', 'backend_auth', 'backend_forgot'))) {
             return $this->redirectToRoute('dashboard_index');
         }
 

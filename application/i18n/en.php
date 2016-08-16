@@ -134,7 +134,14 @@ $this->addTranslation(array(
 
 // Login
 $this->addTranslation(array(
-    'Reset password' => 'Reset password'
+    'Reset password' => 'Reset password',
+    'Password reset' => 'Password reset',
+    'Password reset message' => 'Hi {0},
+
+                                    Need to reset your password? No problem. Just click <a href="{1}">here</a> to get started.
+
+                                    If you didn\'t request to change your password, you don\'t have to do anything.
+   '
 ));
 
 // Settings

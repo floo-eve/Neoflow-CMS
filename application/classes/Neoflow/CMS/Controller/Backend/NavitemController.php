@@ -25,7 +25,7 @@ class NavitemController extends BackendController
         if (is_json($json)) {
             $result = $this
 
-                ->getService('navitem')
+                ->service('navitem')
 
                 ->updateOrder(json_decode($json, true));
         }

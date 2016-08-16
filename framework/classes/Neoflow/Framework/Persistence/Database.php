@@ -28,7 +28,7 @@ class Database extends \PDO
     {
         parent::__construct($dsn, $username, $password, $options);
 
-        $this->getLogger()->info('Database connected');
+        $this->logger()->info('Database connected');
     }
 
     /**

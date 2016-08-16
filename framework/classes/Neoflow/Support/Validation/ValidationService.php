@@ -9,11 +9,6 @@ class ValidationService extends AbstractService
 {
 
     /**
-     * App trait.
-     */
-    use \Neoflow\Framework\AppTrait;
-
-    /**
      * Check wether validation error exists
      *
      * @param string $key
@@ -44,14 +39,5 @@ class ValidationService extends AbstractService
     protected function getSession()
     {
         return $this->app()->get('session');
-    }
-
-    /**
-     * Get service name
-     * @return string
-     */
-    public function getServiceName()
-    {
-        return 'validation';
     }
 }

@@ -84,7 +84,7 @@ class UserModel extends AbstractEntityModel
     {
         $validator = new Validator(array(
             'password' => $this->password,
-            'password2' => $this->password2
+            'password2' => $this->password2,
         ));
 
         $validator
@@ -94,7 +94,7 @@ class UserModel extends AbstractEntityModel
         $validator
             ->required()
             ->minLength(6)
-            ->callback(function($password, $password2) {
+            ->callback(function ($password, $password2) {
                 return $password === $password2;
             }, 'Password is not matching confirm password', array($this->password2))
             ->set('password', 'Password');
@@ -135,6 +135,11 @@ class UserModel extends AbstractEntityModel
                 ->set('password', $password);
         }
 
+        if ($this->reset_key) {
+            $this->addProperty('reset_key')
+                ->set('reset_key', $this->reset_key);
+        }
+
         return parent::save();
     }
 
@@ -144,6 +149,19 @@ class UserModel extends AbstractEntityModel
         if ($this->id() !== 1) {
             return parent::delete();
         }
+
         return false;
+    }
+
+    /**
+     * Generate and set reset key
+     *
+     * @return self
+     */
+    public function setResetKey()
+    {
+        $this->reset_key = sha1(uniqid());
+
+        return $this;
     }
 }

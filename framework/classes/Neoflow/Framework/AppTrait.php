@@ -2,6 +2,7 @@
 
 namespace Neoflow\Framework;
 
+use Neoflow\Framework\Core\AbstractService;
 use Neoflow\Framework\Handler\Logging\Logger;
 use Neoflow\Framework\Handler\Router;
 use ReflectionClass;
@@ -24,7 +25,7 @@ trait AppTrait
      *
      * @return Logger
      */
-    public function getLogger()
+    public function logger()
     {
         return $this->app()->get('logger');
     }
@@ -47,5 +48,16 @@ trait AppTrait
     public function getReflection()
     {
         return new ReflectionClass($this);
+    }
+
+    /**
+     * Get service
+     *
+     * @param string $name
+     * @return AbstractService
+     */
+    public function service($name)
+    {
+        return $this->app()->service($name);
     }
 }

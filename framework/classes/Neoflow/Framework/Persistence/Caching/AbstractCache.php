@@ -20,7 +20,7 @@ abstract class AbstractCache
     public function __construct()
     {
         $this->tags = $this->fetch('cacheTags');
-        $this->getLogger()->info($this->getReflection()->getShortName().' created');
+        $this->logger()->info($this->getReflection()->getShortName().' created');
     }
 
     /**

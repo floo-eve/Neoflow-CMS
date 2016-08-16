@@ -1,5 +1,4 @@
 <?php
-
 return array(
     'url' => 'http://localhost/neoflow-cms',
     'database' => array(
@@ -9,6 +8,7 @@ return array(
         'dbname' => 'neoflow-cms',
         'charset' => 'UTF8',
     ),
+    'email' => 'jonathan.nessier@outlook.com',
     'session' => array(
         'name' => 'neoflow-cms', // false (system default) | string
         'lifetime' => 3600, // false (system default) | int (seconds)
@@ -29,6 +29,9 @@ return array(
         'debugBar' => true, // true | false
     ),
     'services' => array(
-        '\\Neoflow\\Support\\Validation\\ValidationService',
+        'validation' => '\\Neoflow\\Support\\Validation\\ValidationService',
+        'navitem' => '\\Neoflow\\CMS\\Service\\NavitemService',
+        'section' => '\\Neoflow\\CMS\\Service\\SectionService',
+        'authentication' => '\\Neoflow\\CMS\\Service\\AuthenticationService',
     ),
 );
