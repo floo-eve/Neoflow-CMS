@@ -6,9 +6,9 @@ use Neoflow\CMS\Controller\BackendController;
 use Neoflow\CMS\Model\PermissionModel;
 use Neoflow\CMS\Model\RoleModel;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\Support\Alert\DangerAlert;
-use Neoflow\Support\Alert\SuccessAlert;
-use Neoflow\Support\Validation\ValidationException;
+use Neoflow\CMS\Support\Alert\DangerAlert;
+use Neoflow\CMS\Support\Alert\SuccessAlert;
+use Neoflow\Framework\Support\Validation\ValidationException;
 
 class RoleController extends BackendController
 {
@@ -82,8 +82,8 @@ class RoleController extends BackendController
     {
 
         // Get role if validation has failed
-        if ($this->validationService->hasError()) {
-            $data = $this->validationService->getData();
+        if ($this->service('validation')->hasError()) {
+            $data = $this->service('validation')->getData();
             $role = new RoleModel($data);
         } else {
 

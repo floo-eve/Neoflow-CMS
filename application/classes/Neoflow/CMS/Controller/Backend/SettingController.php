@@ -7,9 +7,9 @@ use Neoflow\CMS\Model\LanguageModel;
 use Neoflow\CMS\Model\SettingModel;
 use Neoflow\CMS\Model\ThemeModel;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\Support\Alert\DangerAlert;
-use Neoflow\Support\Alert\SuccessAlert;
-use Neoflow\Support\Validation\ValidationException;
+use Neoflow\CMS\Support\Alert\DangerAlert;
+use Neoflow\CMS\Support\Alert\SuccessAlert;
+use Neoflow\Framework\Support\Validation\ValidationException;
 
 class SettingController extends BackendController
 {
@@ -33,8 +33,8 @@ class SettingController extends BackendController
     public function indexAction($args)
     {
         // Get setting entity (from database or self-made if validation has failed)
-        if ($this->validationService->hasError()) {
-            $data = $this->validationService->getData();
+        if ($this->service('validation')->hasError()) {
+            $data = $this->service('validation')->getData();
             $setting = new SettingModel($data);
         } else {
             $setting = SettingModel::findById(1);

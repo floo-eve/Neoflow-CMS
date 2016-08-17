@@ -183,7 +183,7 @@ abstract class AbstractEntityModel
      */
     public function translated($key)
     {
-        return $this->app()->get('translator')->translate($this->$key);
+        return $this->translator()->translate($this->$key);
     }
 
     /**

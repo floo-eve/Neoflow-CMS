@@ -8,6 +8,7 @@ use Neoflow\Framework\ORM\EntityRepository;
 
 class ModuleModel extends AbstractEntityModel
 {
+
     /**
      * @var string
      */
@@ -43,7 +44,7 @@ class ModuleModel extends AbstractEntityModel
         $moduleFilePath = $this->getPath('/frontend.php');
 
         return $view->renderFile($moduleFilePath, array(
-                'app' => $this->app(), ));
+                'app' => $this->app(),));
     }
 
     /**
@@ -56,8 +57,8 @@ class ModuleModel extends AbstractEntityModel
     public function getUrl($uri = '')
     {
         return $this
-                ->getConfig()
-                ->getModulesUrl('/'.$this->folder.'/'.$uri);
+                ->config()
+                ->getModulesUrl('/' . $this->folder . '/' . $uri);
     }
 
     /**
@@ -70,17 +71,7 @@ class ModuleModel extends AbstractEntityModel
     public function getPath($uri = '')
     {
         return $this
-                ->getConfig()
-                ->getModulesPath('/'.$this->folder.'/'.$uri);
-    }
-
-    /**
-     * Get config.
-     *
-     * @return Config
-     */
-    protected function getConfig()
-    {
-        return $this->app()->get('config');
+                ->config()
+                ->getModulesPath('/' . $this->folder . '/' . $uri);
     }
 }

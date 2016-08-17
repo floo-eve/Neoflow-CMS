@@ -7,11 +7,11 @@ use Neoflow\CMS\Controller\BackendController;
 use Neoflow\CMS\Model\ModuleModel;
 use Neoflow\CMS\Model\PageModel;
 use Neoflow\CMS\Model\SectionModel;
-use Neoflow\Support\Validation\ValidationException;
+use Neoflow\Framework\Support\Validation\ValidationException;
 use Neoflow\Framework\HTTP\Responsing\JsonResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\Support\Alert\DangerAlert;
-use Neoflow\Support\Alert\SuccessAlert;
+use Neoflow\CMS\Support\Alert\DangerAlert;
+use Neoflow\CMS\Support\Alert\SuccessAlert;
 
 class SectionController extends BackendController
 {

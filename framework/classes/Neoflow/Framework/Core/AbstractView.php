@@ -63,8 +63,8 @@ abstract class AbstractView
     {
         $this->data = new Container();
 
-        $this->viewFileDirectories[] = $this->getConfig()->getPath(DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'views');
-        $this->templateFileDirectories[] = $this->getConfig()->getPath(DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'templates');
+        $this->viewFileDirectories[] = $this->config()->getPath(DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'views');
+        $this->templateFileDirectories[] = $this->config()->getPath(DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'templates');
     }
 
     /**
@@ -285,7 +285,7 @@ abstract class AbstractView
      */
     public function getThemeUrl($uri = '')
     {
-        return $this->getConfig()->getUrl('/theme/' . $uri);
+        return $this->config()->getUrl('/theme/' . $uri);
     }
 
     /**
@@ -297,7 +297,7 @@ abstract class AbstractView
      */
     protected function getThemePath($uri = '')
     {
-        return $this->getConfig()->getPath('/theme/' . $uri);
+        return $this->config()->getPath('/theme/' . $uri);
     }
 
     /**
@@ -544,7 +544,7 @@ abstract class AbstractView
      */
     public function generateUrl($routeKey, array $args = array(), $languageCode = '')
     {
-        return $this->app()->get('router')->generateUrl($routeKey, $args, $languageCode);
+        return $this->router()->generateUrl($routeKey, $args, $languageCode);
     }
 
     /**
@@ -595,7 +595,7 @@ abstract class AbstractView
      */
     public function translate($key, $values = array())
     {
-        return $this->getTranslator()->translate($key, $values);
+        return $this->translator()->translate($key, $values);
     }
 
     /**
@@ -609,8 +609,8 @@ abstract class AbstractView
      */
     public function isCurrentRoute($routeKeys, $returnValue = true, $returnFailedValue = false)
     {
-        $currentRouting = $this->app()->get('router')->getCurrentRouting();
-        $currentRouteKey = $currentRouting[0][0];
+        $currentRoute = $this->router()->getCurrentRouting('route');
+        $currentRouteKey = $currentRoute[0];
 
         if (is_string($routeKeys)) {
             $routeKeys = array($routeKeys);
@@ -626,16 +626,6 @@ abstract class AbstractView
     }
 
     /**
-     * Get config.
-     *
-     * @return Config
-     */
-    protected function getConfig()
-    {
-        return $this->app()->get('config');
-    }
-
-    /**
      * Get cache.
      *
      * @return AbstractCache
@@ -643,15 +633,5 @@ abstract class AbstractView
     protected function getCache()
     {
         return $this->app()->get('cache');
-    }
-
-    /**
-     * Get config.
-     *
-     * @return Translator
-     */
-    public function getTranslator()
-    {
-        return $this->app()->get('translator');
     }
 }

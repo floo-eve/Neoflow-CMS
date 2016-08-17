@@ -64,7 +64,7 @@ class EntityRepository
                     ->setPrimaryKey($this->getPrimaryKey())
                     ->asObject($modelClassName);
 
-                $caching = $this->app()->get('config')->get('orm')->get('caching');
+                $caching = $this->config()->get('orm')->get('caching');
                 $this->caching($caching);
             }
 

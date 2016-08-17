@@ -61,7 +61,7 @@ class SelectQuery extends AbstractQuery
 
         $this->addStatement('FROM', $table);
 
-        $this->caching = (bool) $this->app()->get('config')->get('queryBuilder')->get('caching');
+        $this->caching = (bool) $this->config()->get('queryBuilder')->get('caching');
     }
 
     /**

@@ -14381,6 +14381,7 @@ label {
 }
 .panel .panel-body .alert {
   border: 0;
+  margin: 0 0 10px 0;
 }
 .panel .panel-heading {
   /*border-bottom: 0;*/

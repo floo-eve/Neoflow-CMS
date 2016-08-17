@@ -139,7 +139,7 @@ class BackendView extends AbstractView
      */
     public function renderAlert()
     {
-        $session = $this->app()->get('session');
+        $session = $this->session();
 
         if ($session->hasFlash('alert')) {
             return $this->renderTemplate('alert', array(

@@ -3,7 +3,7 @@
 namespace Neoflow\CMS\Service;
 
 use Neoflow\Framework\Core\AbstractService;
-use Neoflow\Support\Mailer\Mail;
+use Neoflow\Framework\Support\Mailer\Mail;
 
 class MailService extends AbstractService
 {

@@ -4,7 +4,7 @@ namespace Neoflow\CMS\Model;
 
 use Neoflow\Framework\ORM\AbstractEntityModel;
 use Neoflow\Framework\ORM\EntityRepository;
-use Neoflow\Support\Validation\Validator;
+use Neoflow\Framework\Support\Validation\Validator;
 
 class UserModel extends AbstractEntityModel
 {
@@ -22,12 +22,7 @@ class UserModel extends AbstractEntityModel
     /**
      * @var array
      */
-    public static $properties = ['user_id', 'email', 'firstname', 'lastname', 'role_id'];
-
-    /**
-     * @var array
-     */
-    public static $saveProperties = ['user_id', 'email', 'firstname', 'lastname', 'role_id', 'password'];
+    public static $properties = ['user_id', 'email', 'firstname', 'lastname', 'role_id', 'reset_when'];
 
     /**
      * Get repository to fetch role.
@@ -128,15 +123,16 @@ class UserModel extends AbstractEntityModel
         $this->remove('password2');
 
         // Calculate password to sha1 hash
-        if ($this->password) {
+        if (property_exists($this, 'password')) {
             $password = sha1($this->password);
             $this
                 ->addProperty('password')
                 ->set('password', $password);
         }
 
-        if ($this->reset_key) {
-            $this->addProperty('reset_key')
+        if (property_exists($this, 'reset_key')) {
+            $this
+                ->addProperty('reset_key')
                 ->set('reset_key', $this->reset_key);
         }
 
@@ -161,6 +157,7 @@ class UserModel extends AbstractEntityModel
     public function setResetKey()
     {
         $this->reset_key = sha1(uniqid());
+        $this->reset_when = microtime(true);
 
         return $this;
     }

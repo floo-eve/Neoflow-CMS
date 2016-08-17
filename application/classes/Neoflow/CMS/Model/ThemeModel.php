@@ -7,6 +7,7 @@ use Neoflow\Framework\ORM\AbstractEntityModel;
 
 class ThemeModel extends AbstractEntityModel
 {
+
     /**
      * @var string
      */
@@ -32,8 +33,8 @@ class ThemeModel extends AbstractEntityModel
     public function getUrl($uri = '')
     {
         return $this
-                ->getConfig()
-                ->getThemesUrl('/'.$this->folder.'/'.$uri);
+                ->config()
+                ->getThemesUrl('/' . $this->folder . '/' . $uri);
     }
 
     /**
@@ -46,17 +47,7 @@ class ThemeModel extends AbstractEntityModel
     public function getPath($uri = '')
     {
         return $this
-                ->getConfig()
-                ->getThemesPath('/'.$this->folder.'/'.$uri);
-    }
-
-    /**
-     * Get config.
-     *
-     * @return Config
-     */
-    public function getConfig()
-    {
-        return $this->app()->get('config');
+                ->config()
+                ->getThemesPath('/' . $this->folder . '/' . $uri);
     }
 }

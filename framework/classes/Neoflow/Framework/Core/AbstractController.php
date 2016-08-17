@@ -50,7 +50,7 @@ abstract class AbstractController
 
             if ($response === null) {
 
-                if ($this->app()->get('config')->get('debugging')->get('debugBar')) {
+                if ($this->config()->get('debugging')->get('debugBar')) {
 
                     $response = new DebugResponse();
                 } else {
@@ -76,7 +76,7 @@ abstract class AbstractController
      */
     protected function route($routeKey, $args = array())
     {
-        return $this->app()->get('router')
+        return $this->router()
                 ->routeByKey($routeKey, $args);
     }
 
@@ -91,7 +91,7 @@ abstract class AbstractController
      */
     protected function redirectToRoute($routeKey, $args = array(), $statusCode = 302)
     {
-        $url = $this->app()->get('router')
+        $url = $this->router()
             ->generateUrl($routeKey, $args);
 
         return $this->redirect($url, $statusCode);
@@ -146,16 +146,6 @@ abstract class AbstractController
     abstract protected function setView();
 
     /**
-     * Get session
-     *
-     * @return Session
-     */
-    protected function getSession()
-    {
-        return $this->app()->get('session');
-    }
-
-    /**
      * Set new session flash value.
      * @param string $key
      * @param mixed $value
@@ -163,7 +153,7 @@ abstract class AbstractController
      */
     protected function setFlash($key, $value)
     {
-        return $this->getSession()->setFlash($key, $value);
+        return $this->session()->setFlash($key, $value);
     }
 
     /**

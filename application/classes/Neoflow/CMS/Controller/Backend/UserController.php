@@ -6,9 +6,9 @@ use Neoflow\CMS\Controller\BackendController;
 use Neoflow\CMS\Model\RoleModel;
 use Neoflow\CMS\Model\UserModel;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\Support\Alert\DangerAlert;
-use Neoflow\Support\Alert\SuccessAlert;
-use Neoflow\Support\Validation\ValidationException;
+use Neoflow\CMS\Support\Alert\DangerAlert;
+use Neoflow\CMS\Support\Alert\SuccessAlert;
+use Neoflow\Framework\Support\Validation\ValidationException;
 
 class UserController extends BackendController
 {
@@ -85,8 +85,8 @@ class UserController extends BackendController
     public function editAction($args)
     {
         // Get user or create user with inva
-        if ($this->validationService->hasError()) {
-            $data = $this->validationService->getData();
+        if ($this->service('validation')->hasError()) {
+            $data = $this->service('validation')->getData();
             $user = UserModel::update($data, $data['user_id']);
         } else {
 
@@ -160,6 +160,9 @@ class UserController extends BackendController
                     'password' => $postData->get('password'),
                     'password2' => $postData->get('password2'),
                     ), $postData->get('user_id'));
+
+            $user->reset_when = null;
+            $user->reset_key = null;
 
             if ($user->validatePassword() && $user->save()) {
                 $this->setFlash('alert', new SuccessAlert('{0} successful updated', array('Password')));

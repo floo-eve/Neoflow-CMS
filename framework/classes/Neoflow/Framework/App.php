@@ -33,7 +33,7 @@ class App
      */
     protected $readonly = ['config', 'logger', 'cache',
         'database', 'pdo', 'db', 'router',
-        'session', 'request', 'router', 'translator', 'services'];
+        'session', 'request', 'router', 'translator', 'services',];
 
     /**
      * @var App
@@ -203,7 +203,7 @@ class App
     }
 
     /**
-     * Create and set services
+     * Create and set services.
      *
      * @throws Exception
      */
@@ -213,6 +213,9 @@ class App
         $services = array();
         foreach ($serviceClassNames as $serviceName => $serviceClassName) {
             if (class_exists($serviceClassName)) {
+                if (!is_string($serviceName)) {
+                    $serviceName = str_replace('service', '', strtolower(basename($serviceClassName)));
+                }
                 $services[$serviceName] = new $serviceClassName();
             } else {
                 throw new Exception($serviceClassName . ' is not a service class');
@@ -222,10 +225,12 @@ class App
     }
 
     /**
-     * Get service
+     * Get service.
      *
      * @param string $name
+     *
      * @return AbstractService
+     *
      * @throws Exception
      */
     public function service($name)
@@ -348,7 +353,7 @@ class App
      */
     protected function setError()
     {
-//        set_error_handler(array($this, 'errorHandler'), E_ALL);
+        //        set_error_handler(array($this, 'errorHandler'), E_ALL);
 //        register_shutdown_function(array($this, 'shutdownFunction'));
 //
 //        set_exception_handler(array($this, 'exceptionHandler'));

@@ -53,7 +53,7 @@ class Logger
      */
     public function __construct()
     {
-        $config = $this->app()->get('config');
+        $config = $this->config();
 
         $logConfig = $config->get('logger');
         $this->logLevelThreshold = strtoupper($logConfig->get('level'));

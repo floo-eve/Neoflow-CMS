@@ -134,14 +134,23 @@ $this->addTranslation(array(
 
 // Login
 $this->addTranslation(array(
-    'Reset password' => 'Reset password',
-    'Password reset' => 'Password reset',
-    'Password reset message' => 'Hi {0},
+    'Lost your password?' => 'Lost your password?',
+    'Password reset email subject' => 'Create new password',
+    'Password reset email message' => 'Hi {0},
 
-                                    Need to reset your password? No problem. Just click <a href="{1}">here</a> to get started.
+                                    Forgot your password? No problem. Just click <a href="{1}">here</a> to create a new password.
 
-                                    If you didn\'t request to change your password, you don\'t have to do anything.
-   '
+                                    If you didn\'t request to new your password, you don\'t have to do anything.
+   ',
+    'Email address and/or password are invalid' => 'Email address and/or password are invalid',
+    'Logout successful' => 'Logout successful',
+    'Logout failed' => 'Logout failed',
+    'Create new password' => 'Create new password',
+    'Email successful sent' => 'Email successful sent',
+    'User not found' => 'User not found',
+    'Email already sent, you can reset your password once per hour' => 'Email already sent, you can reset your password once per hour',
+    'Please enter the email address of your user account. You will receive a link to create a new password via email.' => 'Please enter the email address of your user account. You will receive a link to create a new password via email.',
+    'Please enter the new password for your user account, registered under the email address {0}.' => 'Please enter the new password for your user account, registered under the email address {0}.',
 ));
 
 // Settings
@@ -194,6 +203,7 @@ $this->addTranslation(array(
     'Edit user' => 'Edit user',
     'Create user' => 'Create user',
     'Change password' => 'Change password',
+    'New password' => 'New password',
     'Lastname' => 'Lastname',
     'Firstname' => 'Firstname',
     'Confirm password' => 'Confirm password',

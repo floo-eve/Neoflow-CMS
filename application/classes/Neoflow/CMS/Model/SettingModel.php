@@ -4,7 +4,7 @@ namespace Neoflow\CMS\Model;
 
 use Neoflow\Framework\ORM\AbstractEntityModel;
 use Neoflow\Framework\ORM\EntityRepository;
-use Neoflow\Support\Validation\Validator;
+use Neoflow\Framework\Support\Validation\Validator;
 
 class SettingModel extends AbstractEntityModel
 {

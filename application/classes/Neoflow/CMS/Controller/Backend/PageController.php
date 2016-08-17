@@ -9,9 +9,9 @@ use Neoflow\CMS\Model\NavitemModel;
 use Neoflow\CMS\Model\PageModel;
 use Neoflow\CMS\Views\Backend\PageView;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\Support\Alert\DangerAlert;
-use Neoflow\Support\Alert\SuccessAlert;
-use Neoflow\Support\Validation\ValidationException;
+use Neoflow\CMS\Support\Alert\DangerAlert;
+use Neoflow\CMS\Support\Alert\SuccessAlert;
+use Neoflow\Framework\Support\Validation\ValidationException;
 
 class PageController extends BackendController
 {
@@ -40,18 +40,18 @@ class PageController extends BackendController
         $language_id = $this->getRequest()->getGet('language_id');
 
         if (!$language_id) {
-            if ($this->getSession()->has('page_language_id')) {
-                $language_id = $this->getSession()->get('page_language_id');
+            if ($this->session()->has('page_language_id')) {
+                $language_id = $this->session()->get('page_language_id');
             } else {
                 $language_id = $languages[0]->id();
 
-                $this->getSession()->reflash();
+                $this->session()->reflash();
 
                 return $this->redirectToRoute('page_index', array('language_id' => $language_id));
             }
         }
 
-        $this->getSession()->set('page_language_id', $language_id);
+        $this->session()->set('page_language_id', $language_id);
 
         // Get page language
         $pageLanguage = LanguageModel::findById($language_id);
@@ -141,8 +141,8 @@ class PageController extends BackendController
     {
 
         // Get page data if validation has failed)
-        if ($this->validationService->hasError()) {
-            $pageData = $this->validationService->getData();
+        if ($this->service('validation')->hasError()) {
+            $pageData = $this->service('validation')->getData();
 
             $page = new PageModel($pageData);
         } else {

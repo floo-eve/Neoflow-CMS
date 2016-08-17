@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Neoflow\CMS\Views\FrontendView;
 use Neoflow\Framework\ORM\AbstractEntityModel;
 use Neoflow\Framework\ORM\EntityRepository;
-use Neoflow\Support\Validation\Validator;
+use Neoflow\Framework\Support\Validation\Validator;
 
 class SectionModel extends AbstractEntityModel
 {

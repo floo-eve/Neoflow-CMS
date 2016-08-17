@@ -10,10 +10,10 @@ use Neoflow\CMS\Mapper\PageMapper;
 use Neoflow\CMS\Model\NavigationModel;
 use Neoflow\CMS\Model\NavitemModel;
 use Neoflow\CMS\Views\Backend\NavigationView;
-use Neoflow\Support\Validation\ValidationException;
+use Neoflow\Framework\Support\Validation\ValidationException;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\Support\Alert\DangerAlert;
-use Neoflow\Support\Alert\SuccessAlert;
+use Neoflow\CMS\Support\Alert\DangerAlert;
+use Neoflow\CMS\Support\Alert\SuccessAlert;
 
 class NavigationController extends BackendController
 {
@@ -165,7 +165,7 @@ class NavigationController extends BackendController
             return $this->redirectToRoute('navigation_index');
         }
 
-        $this->getSession()
+        $this->session()
 
             ->setFlash('alert', new SuccessAlert('Successful saved'));
 
@@ -205,7 +205,7 @@ class NavigationController extends BackendController
 
             // Fallback if validation fails
 
-            $this->getSession()
+            $this->session()
 
                 ->setFlash('alert', new DangerAlert($ex->getErrors()));
 
@@ -214,14 +214,14 @@ class NavigationController extends BackendController
 
             // Fallback if something get wrong
 
-            $this->getSession()
+            $this->session()
 
                 ->setFlash('alert', new DangerAlert('Transaction failed'));
 
             return $this->redirectToRoute('navigation_index');
         }
 
-        $this->getSession()
+        $this->session()
 
             ->setFlash('alert', new SuccessAlert('Successful saved'));
 
@@ -265,14 +265,14 @@ class NavigationController extends BackendController
 
             // Fallback if validation fails
 
-            $this->getSession()
+            $this->session()
 
                 ->setFlash('alert', new DangerAlert($ex->getErrors()));
 
             return $this->redirectToRoute('navigation_index');
         }
 
-        $this->getSession()
+        $this->session()
 
             ->setFlash('alert', new SuccessAlert('Successful added'));
 

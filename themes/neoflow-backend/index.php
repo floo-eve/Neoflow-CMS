@@ -66,7 +66,7 @@
         <!-- Theme vars -->
         <script>
             var NEOFLOW_LOCALE = '<?= $view->get('currentLanguage')->code ?>',
-                    NEOFLOW_URL = '<?= $view->getConfig()->getUrl() ?>',
+                    NEOFLOW_URL = '<?= $view->config()->getUrl() ?>',
                     NEOFLOW_THEME_URL = '<?= $view->getThemeUrl() ?>';
         </script>
 
@@ -84,7 +84,7 @@
         <script src="<?= $view->getThemeUrl('/vendor/dataTables/js/responsive.bootstrap.min.js') ?>"></script>
         <script src="<?= $view->getThemeUrl('/vendor/select2/js/select2.full.js') ?>"></script>
 
-        <script src="<?= $view->getThemeUrl('/vendor/select2/js/i18n/' . $view->app()->get('translator')->getCurrentLanguageCode() . '.js') ?>"></script>
+        <script src="<?= $view->getThemeUrl('/vendor/select2/js/i18n/' . $view->translator()->getCurrentLanguageCode() . '.js') ?>"></script>
 
         <!-- Additional script -->
         <?= $view->renderScripts() ?>

@@ -4,8 +4,8 @@ namespace Neoflow\CMS\Controller\Backend;
 
 use Neoflow\CMS\Controller\BackendController;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\Support\Alert\SuccessAlert;
-use Neoflow\Support\Alert\WarningAlert;
+use Neoflow\CMS\Support\Alert\SuccessAlert;
+use Neoflow\CMS\Support\Alert\WarningAlert;
 
 class MaintenanceController extends BackendController
 {
@@ -43,10 +43,10 @@ class MaintenanceController extends BackendController
         //header("Content-Type: " . $mime);
         //header('Content-Disposition: attachment; filename="' . $filename . '"');
 
-        $db = $this->app()->get('config')->get('database')->get('dbname');
-        $user = $this->app()->get('config')->get('database')->get('username');
-        $pw = $this->app()->get('config')->get('database')->get('password');
-        $host = $this->app()->get('config')->get('database')->get('host');
+        $db = $this->config()->get('database')->get('dbname');
+        $user = $this->config()->get('database')->get('username');
+        $pw = $this->config()->get('database')->get('password');
+        $host = $this->config()->get('database')->get('host');
 
         echo "mysqldump --user=$user --host=$host $db";
 

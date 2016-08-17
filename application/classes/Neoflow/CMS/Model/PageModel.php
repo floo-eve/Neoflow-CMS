@@ -4,7 +4,7 @@ namespace Neoflow\CMS\Model;
 
 use Neoflow\CMS\Views\FrontendView;
 use Neoflow\Framework\ORM\AbstractEntityModel;
-use Neoflow\Support\Validation\Validator;
+use Neoflow\Framework\Support\Validation\Validator;
 use Neoflow\Framework\ORM\EntityRepository;
 
 class PageModel extends AbstractEntityModel
@@ -55,7 +55,7 @@ class PageModel extends AbstractEntityModel
         }
 
         return $this
-                ->getConfig()
+                ->config()
                 ->getUrl('/' . implode('/', array_reverse($uriParts)));
     }
 
@@ -192,15 +192,5 @@ class PageModel extends AbstractEntityModel
         }
 
         return parent::delete();
-    }
-
-    /**
-     * Get config.
-     *
-     * @return Config
-     */
-    protected function getConfig()
-    {
-        return $this->app()->get('config');
     }
 }

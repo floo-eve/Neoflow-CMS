@@ -74,7 +74,7 @@ class Translator
      */
     public function getDefaultLanguageCode()
     {
-        return $this->getConfig()->get('languages')[0];
+        return $this->config()->get('languages')[0];
     }
 
     /**
@@ -85,12 +85,12 @@ class Translator
     public function loadTranslation()
     {
         // Load translation file
-        $translationFile = $this->getConfig()
+        $translationFile = $this->config()
             ->getPath('/application/i18n/' . $this->currentLanguageCode . '.php');
         $this->runTranslationFile($translationFile);
 
         // Load fallback translation file
-        $fallbackTranslationFile = $this->getConfig()
+        $fallbackTranslationFile = $this->config()
             ->getPath('/application/i18n/' . $this->fallbackLanguageCode . '.php');
         $this->runTranslationFile($fallbackTranslationFile, true);
 
@@ -104,7 +104,7 @@ class Translator
      */
     public function identifyLanguage()
     {
-        $session = $this->app()->get('session');
+        $session = $this->session();
         $request = $this->app()->get('request');
 
         // Set default language code as current
@@ -120,11 +120,11 @@ class Translator
         $sessionLanguage = $session->get('_language');
 
         // Set current language code
-        if ($uriLanguage && in_array($uriLanguage, $this->getConfig()->get('languages'))) {
+        if ($uriLanguage && in_array($uriLanguage, $this->config()->get('languages'))) {
             $this->currentLanguageCode = $uriLanguage;
-        } elseif ($sessionLanguage && in_array($sessionLanguage, $this->getConfig()->get('languages'))) {
+        } elseif ($sessionLanguage && in_array($sessionLanguage, $this->config()->get('languages'))) {
             $this->currentLanguageCode = $sessionLanguage;
-        } elseif ($httpLanguage && in_array($httpLanguage, $this->getConfig()->get('languages'))) {
+        } elseif ($httpLanguage && in_array($httpLanguage, $this->config()->get('languages'))) {
             $this->currentLanguageCode = $httpLanguage;
         }
 
@@ -290,15 +290,5 @@ class Translator
     public function formatDateTime(DateTime $dateTime)
     {
         return $dateTime->format($this->dateTimeFormat);
-    }
-
-    /**
-     * Get config.
-     *
-     * @return Config
-     */
-    public function getConfig()
-    {
-        return $this->app()->get('config');
     }
 }

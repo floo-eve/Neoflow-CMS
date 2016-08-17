@@ -43,7 +43,7 @@ class Router
      */
     public function loadRoutes()
     {
-        $routeFiles = $this->getConfig()->getPath('/application/routes.php');
+        $routeFiles = $this->config()->getPath('/application/routes.php');
         $this->runRouteFile($routeFiles);
 
         return $this;
@@ -123,7 +123,7 @@ class Router
         // Remove end-slash from URL
         if (substr($requestUri, -1) === '/') {
             $requestUri = rtrim($requestUri, '/');
-            return new RedirectResponse($this->getConfig()->getUrl($requestUri));
+            return new RedirectResponse($this->config()->getUrl($requestUri));
         }
 
         $cacheKey = sha1($requestUri);
@@ -142,9 +142,9 @@ class Router
                     $routeUriArgs = $this->getRouteUriArgs($routeUri);
 
                     // Create regexCode of routeUri
-                    $routeUriRegex = preg_replace('/\(([a-zA-Z0-9]+)\:[string|any]+\)/', '([a-zA-Z0-9\-\.\_\~\:\?\#\[\]\@\!\$\&\'\(\)\*\<\+\,\;\=]+)', $routeUri);
-                    $routeUriRegex = preg_replace('/\(([a-zA-Z0-9]+)\:[num]+\)/', '([0-9\.\,]+)', $routeUriRegex);
-                    $routeUriRegex = preg_replace('/\(([a-zA-Z0-9]+)\:[uri]+\)/', '(.*)', $routeUriRegex);
+                    $routeUriRegex = preg_replace('/\(([a-zA-Z0-9\-\_]+)\:[string|any]+\)/', '([a-zA-Z0-9\-\.\_\~\:\?\#\[\]\@\!\$\&\'\(\)\*\<\+\,\;\=]+)', $routeUri);
+                    $routeUriRegex = preg_replace('/\(([a-zA-Z0-9\-\_]+)\:[num]+\)/', '([0-9\.\,]+)', $routeUriRegex);
+                    $routeUriRegex = preg_replace('/\(([a-zA-Z0-9\-\_]+)\:[uri]+\)/', '(.*)', $routeUriRegex);
                     $routeUriRegex = str_replace(array('/'), array('\/'), $routeUriRegex);
                     $routeUriRegex = '/^' . $routeUriRegex . '$/';
 
@@ -194,7 +194,7 @@ class Router
 
         // Check wether language code not found, not sent if needed or sent if not needed
         $uriLanguageCode = $this->getRequest()->getUriLanguage();
-        $languageCodes = $this->getConfig()->get('languages');
+        $languageCodes = $this->config()->get('languages');
         if (($uriLanguageCode && !in_array($uriLanguageCode, $languageCodes)) ||
             (count($languageCodes) > 1 && !$uriLanguageCode) ||
             (count($languageCodes) === 1 && $uriLanguageCode)) {
@@ -250,7 +250,7 @@ class Router
      */
     public function route(array $route, array $args)
     {
-        $this->currentRouting = array($route, $args);
+        $this->currentRouting = array('route' => $route, 'args' => $args);
 
         $routePathParts = $this->getRoutePathParts($route[3]);
 
@@ -278,10 +278,13 @@ class Router
     /**
      * Get active route.
      *
-     * @return array
+     * @return mixed
      */
-    public function getCurrentRouting()
+    public function getCurrentRouting($key = null)
     {
+        if (isset($this->currentRouting[$key])) {
+            return $this->currentRouting[$key];
+        }
         return $this->currentRouting;
     }
 
@@ -322,8 +325,8 @@ class Router
         if ($routeKey) {
             $route = $this->getRouteByKey($routeKey);
         } else {
-            $route = $this->getCurrentRouting()[0];
-            $args = $this->getCurrentRouting()[1];
+            $route = $this->getCurrentRouting('route');
+            $args = $this->getCurrentRouting('args');
         }
         if ($route) {
             $routeUri = $route[2];
@@ -352,11 +355,11 @@ class Router
 
         if ($languageCode) {
             $routeUri = '/' . $languageCode . $routeUri;
-        } elseif (count($this->getConfig()->get('languages')) > 1) {
-            $routeUri = '/' . $this->app()->get('translator')->getCurrentLanguageCode() . $routeUri;
+        } elseif (count($this->config()->get('languages')) > 1) {
+            $routeUri = '/' . $this->translator()->getCurrentLanguageCode() . $routeUri;
         }
 
-        return $this->getConfig()->getUrl($routeUri);
+        return $this->config()->getUrl($routeUri);
     }
 
     /**
@@ -371,16 +374,6 @@ class Router
         preg_match_all($this->routeUriRegexPattern, $routeUri, $matches);
 
         return $matches;
-    }
-
-    /**
-     * Get config
-     *
-     * @return Config
-     */
-    public function getConfig()
-    {
-        return $this->app()->get('config');
     }
 
     /**

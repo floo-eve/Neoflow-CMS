@@ -15,7 +15,7 @@ class FileCache extends AbstractCache
      */
     public function __construct()
     {
-        $this->fileCacheFolder = $this->app()->get('config')->getTempPath(DIRECTORY_SEPARATOR . 'cache');
+        $this->fileCacheFolder = $this->config()->getTempPath(DIRECTORY_SEPARATOR . 'cache');
         if (!is_dir($this->fileCacheFolder)) {
             mkdir($this->fileCacheFolder);
         }

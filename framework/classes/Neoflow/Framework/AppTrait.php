@@ -3,8 +3,11 @@
 namespace Neoflow\Framework;
 
 use Neoflow\Framework\Core\AbstractService;
+use Neoflow\Framework\Handler\Config;
 use Neoflow\Framework\Handler\Logging\Logger;
 use Neoflow\Framework\Handler\Router;
+use Neoflow\Framework\Handler\Translator;
+use Neoflow\Framework\HTTP\Session;
 use ReflectionClass;
 
 trait AppTrait
@@ -31,6 +34,16 @@ trait AppTrait
     }
 
     /**
+     * Get session.
+     *
+     * @return Session
+     */
+    public function session()
+    {
+        return $this->app()->get('session');
+    }
+
+    /**
      * Get router.
      *
      * @return Router
@@ -38,6 +51,26 @@ trait AppTrait
     public function router()
     {
         return $this->app()->get('router');
+    }
+
+    /**
+     * Get translator
+     *
+     * @return Translator
+     */
+    public function translator()
+    {
+        return $this->app()->get('translator');
+    }
+
+    /**
+     * Get config
+     *
+     * @return Config
+     */
+    public function config()
+    {
+        return $this->app()->get('config');
     }
 
     /**

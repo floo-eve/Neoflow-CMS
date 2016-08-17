@@ -8,8 +8,10 @@ $this->addRoutes(array(
     array('backend_login', 'get', '/backend/login', 'Backend@login'),
     array('backend_logout', 'get', '/backend/logout', 'Backend@logout'),
     array('backend_auth', 'post', '/backend/auth', 'Backend@auth'),
-    array('backend_forgot', 'get', '/backend/forgot', 'Backend@forgot'),
-    array('backend_reset_password', 'get', '/backend/reset-password/(reset_key:num)', 'Backend@resetPassword'),
+    array('backend_lost_password', 'get', '/backend/lost-password', 'Backend@lostPassword'),
+    array('backend_reset_password', 'post', '/backend/reset-password', 'Backend@resetPassword'),
+    array('backend_new_password', 'get', '/backend/new-password/(reset_key:string)', 'Backend@newPassword'),
+    array('backend_update_password', 'post', '/backend/update-password', 'Backend@updatePassword'),
 ));
 
 

@@ -36,7 +36,7 @@
 
                     <hr />
 
-                    <a href="<?= $view->generateUrl('backend_forgot') ?>"><?= $view->translate('Reset password') ?></a>
+                    <a href="<?= $view->generateUrl('backend_lost_password') ?>"><?= $view->translate('Lost your password?') ?></a>
                 </div>
             </div>
 

@@ -3,15 +3,13 @@
 namespace Neoflow\CMS\Controller;
 
 use Neoflow\CMS\App;
+use Neoflow\CMS\Core\AbstractController;
 use Neoflow\CMS\Model\LanguageModel;
-use Neoflow\CMS\Service\UserService;
+use Neoflow\CMS\Model\UserModel;
 use Neoflow\CMS\Views\BackendView;
-use Neoflow\Framework\Core\AbstractController;
 use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\Support\Alert\SuccessAlert;
-use Neoflow\Support\Alert\WarningAlert;
-use Neoflow\Support\Validation\ValidationService;
+use Neoflow\Framework\Support\Validation\ValidationException;
 
 class BackendController extends AbstractController
 {
@@ -30,7 +28,7 @@ class BackendController extends AbstractController
             ->fetchAll();
 
         // Get current language
-        $currentLanguageCode = $this->app()->get('translator')->getCurrentLanguageCode();
+        $currentLanguageCode = $this->translator()->getCurrentLanguageCode();
         $currentLanguage = LanguageModel::findByColumn('code', $currentLanguageCode);
 
         $this->view
@@ -59,11 +57,15 @@ class BackendController extends AbstractController
      */
     public function logoutAction($args)
     {
-        $this->getSession()
-            ->restart()
-            ->setFlash('alert', new SuccessAlert('Erfolgreich ausgeloggt'));
+        if ($this->service('auth')->logout()) {
+            return $this
+                    ->setSuccessAlert('Logout successful')
+                    ->redirectToRoute('backend_login');
+        }
 
-        return $this->redirectToRoute('backend_login');
+        return $this
+                ->setDangerAlert('Logout failed')
+                ->redirectToRoute('dashboard_index');
     }
 
     /**
@@ -79,7 +81,7 @@ class BackendController extends AbstractController
     }
 
     /**
-     * Authentication action.
+     * Authentication and authorization action.
      *
      * @param array $args
      *
@@ -87,52 +89,125 @@ class BackendController extends AbstractController
      */
     public function authAction($args)
     {
+
         // Get post data
-        $postData = $this->getRequest()->getPostData();
+        $email = $this->getRequest()->getPost('email');
+        $password = $this->getRequest()->getPost('password');
 
-        if ($postData->exists('email') && $postData->exists('password')) {
-            $user = $this->service('authentication')->authenticate($postData->get('email'), $postData->get('password'));
-            if ($user) {
-                $alert = new SuccessAlert('Hallo ' . $user->firstname . ' ' . $user->lastname . ', du hast dich erfolgreich eingeloggt');
-                $this->getSession()
-                    ->set('user_id', $user->id())
-                    ->setFlash('alert', $alert);
+        // Authenticate and authorize user
+        if ($this->service('auth')->login($email, $password)) {
+            return $this
+                    ->setSuccessAlert('Login successful')
+                    ->redirectToRoute('dashboard_index');
+        }
 
-                return $this->redirectToRoute('dashboard_index');
+        return $this
+                ->setWarningAlert('Email address and/or password are invalid')
+                ->redirectToRoute('backend_login');
+    }
+
+    /**
+     * Lost password Action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     */
+    public function lostPasswordAction($args)
+    {
+        return $this->render('backend/lost-password');
+    }
+
+    /**
+     * New password Action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     */
+    public function newPasswordAction($args)
+    {
+        $user = UserModel::findByColumn('reset_key', $args['reset_key']);
+
+        if ($user) {
+
+            return $this->render('backend/new-password', array(
+                    'user' => $user
+            ));
+        }
+        return $this
+                ->setDangerAlert('User not found')
+                ->redirectToRoute('backend_login');
+    }
+
+    public function updatePasswordAction($args)
+    {
+        try {
+
+            // Get post data
+            $postData = $this->getRequest()->getPostData();
+
+            // Update user
+            $user = UserModel::update(array(
+                    'password' => $postData->get('password'),
+                    'password2' => $postData->get('password2'),
+                    ), $postData->get('user_id'));
+
+            if ($user->validatePassword() && $user->save()) {
+
+                $user->reset_when = null;
+                $user->reset_key = null;
+                $user->save();
+
+                $this->setSuccessAlert('{0} successful updated', array('Password'));
+            } else {
+                $this->setDangerAlert('Update failed');
             }
-            $alert = new WarningAlert('E-Mailadresse und/oder Password falsch');
-            $this->setFlash('alert', $alert);
-
-            return $this->redirectToRoute('backend_login');
+        } catch (ValidationException $ex) {
+            return $this
+                    ->setDangerAlert($ex->getErrors())
+                    ->redirectToRoute('backend_new_password', array('reset_key' => $user->reset_key));
         }
 
         return $this->redirectToRoute('backend_login');
     }
 
-    public function forgotAction($args)
-    {
-        $result = $this->service('authentication')->resetPassword('jonathan.nessier@outlook.com');
-
-        if ($result) {
-            'yeah';
-        } else {
-            'nope';
-        }
-        exit;
-
-
-        //return $this->render('backend/login');
-    }
-
     /**
-     * Check user access.
+     * Forgot password action.
      *
-     * @return bool
+     * @param array $args
+     *
+     * @return Response
      */
-    protected function checkAccess()
+    public function resetPasswordAction($args)
     {
-        // Actually only check if user is logged in (user_id exists)
-        return $this->getSession()->has('user_id');
+        $email = $this->getRequest()->getPost('email');
+
+        $user = UserModel::repo()
+            ->where('email', '=', $email)
+            ->fetch();
+
+        if ($user) {
+            if (1 === 1 || !$user->reset_key || $user->reset_when < microtime(true) - 60 * 60) {
+                if ($user->setResetKey() && $user->save()) {
+                    $link = $this->router()->generateUrl('backend_new_password', array('reset_key' => $user->reset_key));
+                    $message = $this->translator()->translate('Password reset email message', array($user->getFullName(), $link));
+                    $subject = $this->translator()->translate('Password reset email subject');
+
+                    $this
+                        ->service('mail')
+                        ->create($user->email, $subject, $message)
+                        ->send();
+
+                    $this->setSuccessAlert('Email successful sent');
+                }
+            } else {
+                $this->setInfoAlert('Email already sent, you can reset your password once per hour');
+            }
+        } else {
+            $this->setWarningAlert('User not found');
+        }
+        return $this->redirectToRoute('backend_lost_password');
     }
 
     /**
@@ -144,13 +219,18 @@ class BackendController extends AbstractController
      */
     public function preHook($args)
     {
-        $currentRouting = $this->app()->get('router')->getCurrentRouting();
-        $currentRoute = $currentRouting[0];
-        if (!$this->checkAccess() && !in_array($currentRoute[0], array('backend_login', 'backend_auth', 'backend_forgot'))) {
+        $currentRoute = $this->router()->getCurrentRouting('route');
+
+        $anonymousRoutes = array('backend_login', 'backend_auth', 'backend_lost_password', 'backend_reset_password', 'backend_new_password', 'backend_update_password');
+
+        if (!$this->service('auth')->isAuthenticated() && !in_array($currentRoute[0], $anonymousRoutes)) {
             return $this->redirectToRoute('backend_login');
-        } elseif ($this->checkAccess() && in_array($currentRoute[0], array('backend_login', 'backend_auth', 'backend_forgot'))) {
-            return $this->redirectToRoute('dashboard_index');
         }
+
+//        if (!$this->checkAccess() && !in_array($currentRoute[0], array('backend_login', 'backend_auth', 'backend_forgot'))) {
+//        } elseif ($this->checkAccess() && in_array($currentRoute[0], array('backend_login', 'backend_auth', 'backend_forgot'))) {
+//            return $this->redirectToRoute('dashboard_index');
+//        }
 
         return false;
     }
