@@ -94,12 +94,12 @@ class SectionController extends BackendController
             ));
 
             if ($section->validate() && $section->save()) {
-                $this->setFlash('alert', new SuccessAlert('{0} successful saved', array('Section')));
+                $this->setSuccessAlert(translate('{0} successful saved', array('Section')));
             } else {
-                $this->setFlash('alert', new DangerAlert('Save failed'));
+                $this->setDangerAlert(translate('Create failed'));
             }
         } catch (ValidationException $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+            $this->setDangerAlert($ex->getErrors());
         }
 
         return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
@@ -124,9 +124,9 @@ class SectionController extends BackendController
         // Delete section
 
         if ($section->delete()) {
-            $this->setFlash('alert', new SuccessAlert('{0} successful deleted', array('Section')));
+            $this->setSuccessAlert(translate('{0} successful deleted', array('Section')));
         } else {
-            $this->setFlash('alert', new DangerAlert('Delete failed'));
+            $this->setDangerAlert(translate('Delete failed'));
         }
 
         return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
@@ -156,9 +156,9 @@ class SectionController extends BackendController
 
         if ($section->save()) {
             if ($section->is_active) {
-                $this->setFlash('alert', new SuccessAlert('Section successful activated'));
+                $this->setSuccessAlert(translate('Section successful activated'));
             } else {
-                $this->setFlash('alert', new SuccessAlert('Section successful disabled'));
+                $this->setSuccessAlert(translate('Section successful disabled'));
             }
         }
 

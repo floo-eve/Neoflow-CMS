@@ -6,60 +6,63 @@ use Neoflow\CMS\Support\Alert\DangerAlert;
 use Neoflow\CMS\Support\Alert\InfoAlert;
 use Neoflow\CMS\Support\Alert\SuccessAlert;
 use Neoflow\CMS\Support\Alert\WarningAlert;
-use Neoflow\Framework\Core\AbstractController;
 
-abstract class AbstractController extends AbstractController
+abstract class AbstractController extends \Neoflow\Framework\Core\AbstractController
 {
 
     /**
-     * Create danger alert and set as session flash
+     * Create danger alert and set as session flash.
+     *
      * @param string $message
-     * @param array $values
      *
      * @return self
      */
-    protected function setDangerAlert($message, array $values = array())
+    protected function setDangerAlert($message)
     {
-        $this->setFlash('alert', new DangerAlert($message, $values));
+        $this->setFlash('alert', new DangerAlert($message));
+
         return $this;
     }
 
     /**
-     * Create info alert and set as session flash
+     * Create info alert and set as session flash.
+     *
      * @param string $message
-     * @param array $values
      *
      * @return self
      */
-    protected function setInfoAlert($message, array $values = array())
+    protected function setInfoAlert($message)
     {
-        $this->setFlash('alert', new InfoAlert($message, $values));
+        $this->setFlash('alert', new InfoAlert($message));
+
         return $this;
     }
 
     /**
-     * Create success alert and set as session flash
+     * Create success alert and set as session flash.
+     *
      * @param string $message
-     * @param array $values
      *
      * @return self
      */
-    protected function setSuccessAlert($message, array $values = array())
+    protected function setSuccessAlert($message)
     {
-        $this->setFlash('alert', new SuccessAlert($message, $values));
+        $this->setFlash('alert', new SuccessAlert($message));
+
         return $this;
     }
 
     /**
-     * Create success alert and set as session flash
+     * Create warning alert and set as session flash.
+     *
      * @param string $message
-     * @param array $values
      *
      * @return self
      */
-    protected function setWarningAlert($message, array $values = array())
+    protected function setWarningAlert($message)
     {
-        $this->setFlash('alert', new WarningAlert($message, $values));
+        $this->setFlash('alert', new WarningAlert($message));
+
         return $this;
     }
 }

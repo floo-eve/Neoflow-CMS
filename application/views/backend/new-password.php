@@ -12,7 +12,7 @@
                 </div>
                 <div class="panel-body">
 
-                    <p class="alert alert-info">
+                    <p>
                         <?= $view->translate('Please enter the new password for your user account, registered under the email address {0}.', array($user->email)) ?>
                     </p>
 
@@ -20,6 +20,7 @@
 
                     <form role="form" method="post" action="<?= $view->generateUrl('backend_update_password') ?>">
                         <input type="hidden" name="user_id" value="<?= $user->id() ?>" />
+                        <input type="hidden" name="reset_key" value="<?= $user->reset_key ?>" />
                         <div class="form-group">
                             <label for="inputPassword">
                                 <?= $view->translate('Password') ?>

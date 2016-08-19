@@ -67,12 +67,12 @@ class RoleController extends BackendController
             ));
 
             if ($role->validate() && $role->save()) {
-                $this->setFlash('alert', new SuccessAlert('{0} successful created', array('Role')));
+                $this->setSuccessAlert(translate('{0} successful created', array('Role')));
             } else {
-                $this->setFlash('alert', new DangerAlert('Create failed'));
+                $this->setDangerAlert(translate('Create failed'));
             }
         } catch (ValidationException $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+            $this->setDangerAlert($ex->getErrors());
         }
 
         return $this->redirectToRoute('role_index');
@@ -90,7 +90,7 @@ class RoleController extends BackendController
             // Get role by id
             $role = RoleModel::findById($args['id']);
             if (!$role) {
-                $this->setFlash('alert', new DangerAlert('{0} not found', array('Role')));
+                $this->setDangerAlert(translate('{0} not found', array('Role')));
 
                 return $this->redirectToRoute('role_index');
             }
@@ -120,14 +120,14 @@ class RoleController extends BackendController
                     ), $postData->get('role_id'));
 
             if ($role->validate() && $role->save()) {
-                $this->setFlash('alert', new SuccessAlert('{0} successful updated', array('Role')));
+                $this->setSuccessAlert(translate('{0} successful updated', array('Role')));
             } else {
-                $this->setFlash('alert', new DangerAlert('Update failed'));
+                $this->setDangerAlert(translate('Update failed'));
 
                 return $this->redirectToRoute('role_index');
             }
         } catch (ValidationException $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+            $this->setDangerAlert($ex->getErrors());
         }
 
         return $this->redirectToRoute('role_edit', array('id' => $postData->get('role_id')));
@@ -140,12 +140,12 @@ class RoleController extends BackendController
             $result = RoleModel::deleteById($args['id']);
 
             if ($result) {
-                $this->setFlash('alert', new SuccessAlert('{0} successful deleted', array('Role')));
+                $this->setSuccessAlert(translate('{0} successful deleted', array('Role')));
             } else {
-                $this->setFlash('alert', new DangerAlert('Delete failed'));
+                $this->setDangerAlert(translate('Delete failed'));
             }
         } catch (ValidationException $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+            $this->setDangerAlert($ex->getErrors());
         }
 
         return $this->redirectToRoute('role_index');

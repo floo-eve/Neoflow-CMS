@@ -29,9 +29,10 @@ return array(
         'debugBar' => true, // true | false
     ),
     'services' => array(
-        'validation' => '\\Neoflow\\Support\\Validation\\ValidationService',
-        'navitem' => '\\Neoflow\\CMS\\Service\\NavitemService',
-        'section' => '\\Neoflow\\CMS\\Service\\SectionService',
-        'authentication' => '\\Neoflow\\CMS\\Service\\AuthenticationService',
+        '\\Neoflow\\CMS\\Service\\MailService',
+        '\\Neoflow\\CMS\\Service\\NavitemService',
+        '\\Neoflow\\CMS\\Service\\SectionService',
+        '\\Neoflow\\CMS\\Service\\AuthService',
+        '\\Neoflow\\Framework\\Support\\Validation\\ValidationService',
     ),
 );

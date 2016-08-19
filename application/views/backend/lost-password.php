@@ -12,7 +12,7 @@
                 </div>
                 <div class="panel-body">
 
-                    <p class="alert alert-info">
+                    <p>
                         <?= $view->translate('Please enter the email address of your user account. You will receive a link to create a new password via email.') ?>
                     </p>
 

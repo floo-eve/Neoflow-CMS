@@ -14660,9 +14660,11 @@ nav.sidebar .sidebar-collapse .sidebar-content {
   color: #fff;
   display: none;
   background: #383841;
-}
-nav.sidebar .sidebar-collapse .sidebar-content ul:last-of-type, nav.sidebar .sidebar-collapse .sidebar-content p:last-of-type {
-  margin-bottom: 0;
+  /*                ul, p {
+                      &:last-of-type {
+                          margin-bottom: 0;
+                      }
+                  }*/
 }
 nav.sidebar .sidebar-collapse .sidebar-nav {
   background: #32323A;

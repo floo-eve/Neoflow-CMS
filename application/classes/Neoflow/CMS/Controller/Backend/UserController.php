@@ -36,7 +36,8 @@ class UserController extends BackendController
     {
         return $this->render('backend/user/index', array(
                 'roles' => RoleModel::findAll(),
-                'users' => UserModel::findAll(),));
+                'users' => UserModel::findAll(),
+        ));
     }
 
     /**
@@ -64,12 +65,12 @@ class UserController extends BackendController
             ));
 
             if ($user->validate() && $user->validatePassword() && $user->save()) {
-                $this->setFlash('alert', new SuccessAlert('{0} successful created', array('User')));
+                $this->setSuccessAlert(translate('{0} successful created', array('User')));
             } else {
-                $this->setFlash('alert', new DangerAlert('Create failed'));
+                $this->setDangerAlert(translate('Create failed'));
             }
         } catch (ValidationException $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+            $this->setDangerAlert($ex->getErrors());
         }
 
         return $this->redirectToRoute('user_index');
@@ -93,7 +94,7 @@ class UserController extends BackendController
             // Get user by id
             $user = UserModel::findById($args['id']);
             if (!$user) {
-                $this->setFlash('alert', new DangerAlert('{0} not found', array('User')));
+                $this->setDangerAlert(translate('{0} not found', array('User')));
 
                 return $this->redirectToRoute('user_index');
             }
@@ -130,12 +131,12 @@ class UserController extends BackendController
                     ), $postData->get('user_id'));
 
             if ($user->validate() && $user->save()) {
-                $this->setFlash('alert', new SuccessAlert('{0} successful updated', array('User')));
+                $this->setSuccessAlert(translate('{0} successful updated', array('User')));
             } else {
-                $this->setFlash('alert', new DangerAlert('Update failed'));
+                $this->setDangerAlert(translate('Update failed'));
             }
         } catch (ValidationException $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+            $this->setDangerAlert($ex->getErrors());
         }
 
         return $this->redirectToRoute('user_edit', array('id' => $postData->get('user_id')));
@@ -165,12 +166,12 @@ class UserController extends BackendController
             $user->reset_key = null;
 
             if ($user->validatePassword() && $user->save()) {
-                $this->setFlash('alert', new SuccessAlert('{0} successful updated', array('Password')));
+                $this->setSuccessAlert(translate('{0} successful updated', array('Password')));
             } else {
-                $this->setFlash('alert', new DangerAlert('Update failed'));
+                $this->setDangerAlert(translate('Update failed'));
             }
         } catch (ValidationException $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+            $this->setDangerAlert($ex->getErrors());
         }
 
         return $this->redirectToRoute('user_edit', array('id' => $postData->get('user_id')));
@@ -189,9 +190,9 @@ class UserController extends BackendController
         $result = UserModel::deleteById($args['id']);
 
         if ($result) {
-            $this->setFlash('alert', new SuccessAlert('{0} successful deleted', array('User')));
+            $this->setSuccessAlert(translate('{0} successful deleted', array('User')));
         } else {
-            $this->setFlash('alert', new DangerAlert('Delete failed'));
+            $this->setDangerAlert(translate('Delete failed'));
         }
 
         return $this->redirectToRoute('user_index');

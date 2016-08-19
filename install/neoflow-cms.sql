@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 03. Aug 2016 um 15:08
--- Server-Version: 5.7.9
--- PHP-Version: 7.0.0
+-- Erstellungszeit: 19. Aug 2016 um 14:04
+-- Server-Version: 5.7.11
+-- PHP-Version: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,15 +26,13 @@ SET time_zone = "+00:00";
 -- Tabellenstruktur für Tabelle `languages`
 --
 
-DROP TABLE IF EXISTS `languages`;
-CREATE TABLE IF NOT EXISTS `languages` (
-  `language_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `languages` (
+  `language_id` int(11) NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '0',
   `code` varchar(2) CHARACTER SET utf8 NOT NULL,
   `title` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `flag_code` varchar(2) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`language_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `flag_code` varchar(2) COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `languages`
@@ -51,14 +49,12 @@ INSERT INTO `languages` (`language_id`, `is_active`, `code`, `title`, `flag_code
 -- Tabellenstruktur für Tabelle `modules`
 --
 
-DROP TABLE IF EXISTS `modules`;
-CREATE TABLE IF NOT EXISTS `modules` (
-  `module_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `modules` (
+  `module_id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `folder` varchar(50) NOT NULL,
-  `route` varchar(50) NOT NULL,
-  PRIMARY KEY (`module_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `route` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `modules`
@@ -73,13 +69,11 @@ INSERT INTO `modules` (`module_id`, `title`, `folder`, `route`) VALUES
 -- Tabellenstruktur für Tabelle `navigations`
 --
 
-DROP TABLE IF EXISTS `navigations`;
-CREATE TABLE IF NOT EXISTS `navigations` (
-  `navigation_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `navigations` (
+  `navigation_id` int(11) NOT NULL,
   `title` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `description` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`navigation_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `description` varchar(255) COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `navigations`
@@ -95,21 +89,15 @@ INSERT INTO `navigations` (`navigation_id`, `title`, `description`) VALUES
 -- Tabellenstruktur für Tabelle `navitems`
 --
 
-DROP TABLE IF EXISTS `navitems`;
-CREATE TABLE IF NOT EXISTS `navitems` (
-  `navitem_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `navitems` (
+  `navitem_id` int(11) NOT NULL,
   `title` varchar(150) COLLATE utf8_bin DEFAULT NULL,
   `page_id` int(11) DEFAULT NULL,
   `parent_navitem_id` int(11) DEFAULT NULL,
   `navigation_id` int(11) DEFAULT NULL,
   `language_id` int(11) DEFAULT NULL,
-  `position` int(11) DEFAULT NULL,
-  PRIMARY KEY (`navitem_id`),
-  KEY `fk_navitems_page_id_idx` (`page_id`),
-  KEY `fk_navitems_navitem_id_idx` (`parent_navitem_id`),
-  KEY `fk_navitems_navigation_id_idx` (`navigation_id`),
-  KEY `fk_navitems_language_id_idx` (`language_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `position` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `navitems`
@@ -117,12 +105,12 @@ CREATE TABLE IF NOT EXISTS `navitems` (
 
 INSERT INTO `navitems` (`navitem_id`, `title`, `page_id`, `parent_navitem_id`, `navigation_id`, `language_id`, `position`) VALUES
 (1, 'Startseite', 1, NULL, 1, 1, 1),
-(2, 'Über uns', 2, NULL, 1, 1, 3),
+(2, 'Über uns', 2, 3, 1, 1, 4),
 (3, 'Beispiele', 3, NULL, 1, 1, 2),
 (4, 'Küche', 4, 3, 1, 1, 1),
 (5, 'Bad', 5, 3, 1, 1, 2),
 (6, 'Garage', 6, 3, 1, 1, 3),
-(7, 'Impressum', 7, NULL, 1, 1, 4);
+(7, 'Impressum', 7, NULL, 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -130,19 +118,16 @@ INSERT INTO `navitems` (`navitem_id`, `title`, `page_id`, `parent_navitem_id`, `
 -- Tabellenstruktur für Tabelle `pages`
 --
 
-DROP TABLE IF EXISTS `pages`;
-CREATE TABLE IF NOT EXISTS `pages` (
-  `page_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pages` (
+  `page_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `slug` varchar(100) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `keywords` varchar(255) DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `language_id` int(11) DEFAULT NULL,
-  `visibility` enum('visible','restricted','hidden') DEFAULT 'visible',
-  PRIMARY KEY (`page_id`),
-  KEY `fk_pages_language_id_idx` (`language_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `visibility` enum('visible','restricted','hidden') DEFAULT 'visible'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `pages`
@@ -163,16 +148,12 @@ INSERT INTO `pages` (`page_id`, `title`, `slug`, `description`, `keywords`, `is_
 -- Tabellenstruktur für Tabelle `permissions`
 --
 
-DROP TABLE IF EXISTS `permissions`;
-CREATE TABLE IF NOT EXISTS `permissions` (
-  `permission_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `permissions` (
+  `permission_id` int(11) NOT NULL,
   `permission_key` varchar(50) CHARACTER SET utf8 NOT NULL,
   `title` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `description` text CHARACTER SET utf8,
-  PRIMARY KEY (`permission_id`),
-  UNIQUE KEY `tag` (`permission_key`),
-  UNIQUE KEY `title_UNIQUE` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `description` text CHARACTER SET utf8
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `permissions`
@@ -195,20 +176,19 @@ INSERT INTO `permissions` (`permission_id`, `permission_key`, `title`, `descript
 -- Tabellenstruktur für Tabelle `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) NOT NULL,
-  `description` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+CREATE TABLE `roles` (
+  `role_id` int(11) NOT NULL,
+  `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `description` varchar(150) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `roles`
 --
 
 INSERT INTO `roles` (`role_id`, `title`, `description`) VALUES
-(1, 'Administrator', '...');
+(1, 'Administrator', '...'),
+(4, 'Süperüser', 'No description');
 
 -- --------------------------------------------------------
 
@@ -216,30 +196,27 @@ INSERT INTO `roles` (`role_id`, `title`, `description`) VALUES
 -- Tabellenstruktur für Tabelle `roles_permissions`
 --
 
-DROP TABLE IF EXISTS `roles_permissions`;
-CREATE TABLE IF NOT EXISTS `roles_permissions` (
-  `role_permission_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `roles_permissions` (
+  `role_permission_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL,
-  PRIMARY KEY (`role_permission_id`),
-  KEY `fk_roles_permissions_role_id_idx` (`role_id`),
-  KEY `fk_roles_permissions_permission_id_idx` (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `permission_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `roles_permissions`
 --
 
 INSERT INTO `roles_permissions` (`role_permission_id`, `role_id`, `permission_id`) VALUES
-(24, 1, 1),
-(25, 1, 2),
-(26, 1, 3),
-(27, 1, 4),
-(28, 1, 5),
-(29, 1, 6),
-(30, 1, 7),
-(31, 1, 8),
-(32, 1, 9);
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 1, 6),
+(7, 1, 7),
+(8, 1, 8),
+(9, 1, 9),
+(10, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -247,17 +224,13 @@ INSERT INTO `roles_permissions` (`role_permission_id`, `role_id`, `permission_id
 -- Tabellenstruktur für Tabelle `sections`
 --
 
-DROP TABLE IF EXISTS `sections`;
-CREATE TABLE IF NOT EXISTS `sections` (
-  `section_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sections` (
+  `section_id` int(11) NOT NULL,
   `page_id` int(11) NOT NULL,
   `module_id` int(11) NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `position` int(11) NOT NULL,
-  `block` int(11) NOT NULL,
-  PRIMARY KEY (`section_id`),
-  KEY `fk_page_id_idx` (`page_id`),
-  KEY `fk_module_id_idx` (`module_id`)
+  `block` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -266,20 +239,16 @@ CREATE TABLE IF NOT EXISTS `sections` (
 -- Tabellenstruktur für Tabelle `settings`
 --
 
-DROP TABLE IF EXISTS `settings`;
-CREATE TABLE IF NOT EXISTS `settings` (
-  `setting_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `settings` (
+  `setting_id` int(11) NOT NULL,
   `website_title` varchar(50) DEFAULT NULL,
   `website_description` varchar(150) DEFAULT NULL,
   `keywords` varchar(255) DEFAULT NULL,
   `author` varchar(50) DEFAULT NULL,
   `theme_id` int(11) NOT NULL,
   `backend_theme_id` int(11) NOT NULL,
-  `language_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`setting_id`),
-  KEY `fk_theme_id_idx` (`theme_id`),
-  KEY `fk_backend_theme_id_idx` (`backend_theme_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `language_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `settings`
@@ -294,14 +263,12 @@ INSERT INTO `settings` (`setting_id`, `website_title`, `website_description`, `k
 -- Tabellenstruktur für Tabelle `themes`
 --
 
-DROP TABLE IF EXISTS `themes`;
-CREATE TABLE IF NOT EXISTS `themes` (
-  `theme_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `themes` (
+  `theme_id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `folder` varchar(50) NOT NULL,
-  `type` enum('frontend','backend') NOT NULL DEFAULT 'frontend',
-  PRIMARY KEY (`theme_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='	';
+  `type` enum('frontend','backend') NOT NULL DEFAULT 'frontend'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='	';
 
 --
 -- Daten für Tabelle `themes`
@@ -317,26 +284,179 @@ INSERT INTO `themes` (`theme_id`, `title`, `folder`, `type`) VALUES
 -- Tabellenstruktur für Tabelle `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `lastname` varchar(50) DEFAULT NULL,
-  `firstname` varchar(50) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `role_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`user_id`),
-  KEY `fk_user_role_id_idx` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `lastname` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `firstname` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `reset_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `reset_when` int(11) DEFAULT NULL,
+  `role_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `lastname`, `firstname`, `email`, `role_id`) VALUES
-(1, 'admin', sha1('1234'), 'John', 'Doe', 'john.doe@neoflow.ch', NULL);
+INSERT INTO `users` (`user_id`, `email`, `password`, `lastname`, `firstname`, `reset_key`, `reset_when`, `role_id`) VALUES
+(1, 'john.doe@neoflow.ch', sha('123456'), 'Doe', 'John', NULL, NULL, 1),
+(2, 'jonathan.nessier@outlook.com', 'sha('123456')', 'Nessier', 'Jonathan', NULL, NULL, 4);
 
+--
+-- Indizes der exportierten Tabellen
+--
+
+--
+-- Indizes für die Tabelle `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`language_id`);
+
+--
+-- Indizes für die Tabelle `modules`
+--
+ALTER TABLE `modules`
+  ADD PRIMARY KEY (`module_id`);
+
+--
+-- Indizes für die Tabelle `navigations`
+--
+ALTER TABLE `navigations`
+  ADD PRIMARY KEY (`navigation_id`);
+
+--
+-- Indizes für die Tabelle `navitems`
+--
+ALTER TABLE `navitems`
+  ADD PRIMARY KEY (`navitem_id`),
+  ADD KEY `fk_navitems_page_id_idx` (`page_id`),
+  ADD KEY `fk_navitems_navitem_id_idx` (`parent_navitem_id`),
+  ADD KEY `fk_navitems_navigation_id_idx` (`navigation_id`),
+  ADD KEY `fk_navitems_language_id_idx` (`language_id`);
+
+--
+-- Indizes für die Tabelle `pages`
+--
+ALTER TABLE `pages`
+  ADD PRIMARY KEY (`page_id`),
+  ADD KEY `fk_pages_language_id_idx` (`language_id`);
+
+--
+-- Indizes für die Tabelle `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`permission_id`),
+  ADD UNIQUE KEY `tag` (`permission_key`),
+  ADD UNIQUE KEY `title_UNIQUE` (`title`);
+
+--
+-- Indizes für die Tabelle `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`role_id`);
+
+--
+-- Indizes für die Tabelle `roles_permissions`
+--
+ALTER TABLE `roles_permissions`
+  ADD PRIMARY KEY (`role_permission_id`),
+  ADD KEY `fk_roles_permissions_role_id_idx` (`role_id`),
+  ADD KEY `fk_roles_permissions_permission_id_idx` (`permission_id`);
+
+--
+-- Indizes für die Tabelle `sections`
+--
+ALTER TABLE `sections`
+  ADD PRIMARY KEY (`section_id`),
+  ADD KEY `fk_page_id_idx` (`page_id`),
+  ADD KEY `fk_module_id_idx` (`module_id`);
+
+--
+-- Indizes für die Tabelle `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`setting_id`),
+  ADD KEY `fk_theme_id_idx` (`theme_id`),
+  ADD KEY `fk_backend_theme_id_idx` (`backend_theme_id`);
+
+--
+-- Indizes für die Tabelle `themes`
+--
+ALTER TABLE `themes`
+  ADD PRIMARY KEY (`theme_id`);
+
+--
+-- Indizes für die Tabelle `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `fk_user_role_id_idx` (`role_id`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
+--
+
+--
+-- AUTO_INCREMENT für Tabelle `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT für Tabelle `modules`
+--
+ALTER TABLE `modules`
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT für Tabelle `navigations`
+--
+ALTER TABLE `navigations`
+  MODIFY `navigation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT für Tabelle `navitems`
+--
+ALTER TABLE `navitems`
+  MODIFY `navitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT für Tabelle `pages`
+--
+ALTER TABLE `pages`
+  MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT für Tabelle `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT für Tabelle `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT für Tabelle `roles_permissions`
+--
+ALTER TABLE `roles_permissions`
+  MODIFY `role_permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT für Tabelle `sections`
+--
+ALTER TABLE `sections`
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT für Tabelle `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `setting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT für Tabelle `themes`
+--
+ALTER TABLE `themes`
+  MODIFY `theme_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT für Tabelle `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints der exportierten Tabellen
 --

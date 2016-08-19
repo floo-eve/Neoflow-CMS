@@ -83,11 +83,11 @@ nav {
                 display: none;
                 background: lighten($sidebar-bg, 2.5%);
 
-                ul, p {
-                    &:last-of-type {
-                        margin-bottom: 0;
-                    }
-                }
+                /*                ul, p {
+                                    &:last-of-type {
+                                        margin-bottom: 0;
+                                    }
+                                }*/
 
             }
 

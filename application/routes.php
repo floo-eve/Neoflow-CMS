@@ -76,8 +76,8 @@ $this->addRoutes(array(
 
 // Backend setting routes
 $this->addRoutes(array(
-    array('setting_index', 'get', '/backend/setting', 'Setting'),
-    array('setting_save', 'post', '/backend/setting/save', 'Setting@save'),
+    array('setting_index', 'get', '/backend/settings', 'Setting'),
+    array('setting_update', 'post', '/backend/settings/update', 'Setting@update'),
 ));
 
 // Backend maintenance routes

@@ -13,6 +13,7 @@ use Neoflow\Framework\Support\Validation\ValidationException;
 
 class SettingController extends BackendController
 {
+
     /**
      * Constructor.
      */
@@ -52,13 +53,13 @@ class SettingController extends BackendController
     }
 
     /**
-     * Save action.
+     * Update action.
      *
      * @param array $args
      *
      * @return Response
      */
-    public function saveAction($args)
+    public function updateAction($args)
     {
         // Get post data
         $postData = $this->getRequest()->getPostData();
@@ -66,37 +67,38 @@ class SettingController extends BackendController
         $languagePostData = $settingPostData->get('language');
 
         // Get model entities
-        $setting = SettingModel::findById(1);
         $languages = LanguageModel::findAll();
 
         try {
 
-            // Save setting
-            $setting->language_id = $settingPostData->get('language_id');
-            $setting->website_title = $settingPostData->get('website_title');
-            $setting->website_description = $settingPostData->get('website_description');
-            $setting->keywords = $settingPostData->get('keywords');
-            $setting->author = $settingPostData->get('author');
-            $setting->theme_id = $settingPostData->get('theme_id');
-            $setting->backend_theme_id = $settingPostData->get('backend_theme_id');
+            // Update settings
+            $settings = SettingModel::update(array(
+                    'language_id' => $settingPostData->get('language_id'),
+                    'website_title' => $settingPostData->get('website_title'),
+                    'website_description' => $settingPostData->get('website_description'),
+                    'keywords' => $settingPostData->get('keywords'),
+                    'author' => $settingPostData->get('author'),
+                    'theme_id' => $settingPostData->get('theme_id'),
+                    'backend_theme_id' => $settingPostData->get('backend_theme_id'),
+                    ), '1');
 
-            if ($setting->validate() && $setting->save()) {
+            if ($settings->validate() && $settings->save()) {
 
                 // Save active languages
                 $activeLanguageIds = $languagePostData->get('active_language_ids');
                 foreach ($languages as $language) {
                     $language->is_active = false;
-                    if ($setting->language_id === $language->id() || in_array($language->id(), $activeLanguageIds)) {
+                    if ($settings->language_id === $language->id() || in_array($language->id(), $activeLanguageIds)) {
                         $language->is_active = true;
                     }
                     $language->save();
                 }
-                $this->setFlash('alert', new SuccessAlert('{0} successful saved', array('Settings')));
+                $this->setSuccessAlert(translate('{0} successful updated', array('Settings')));
             } else {
-                $this->setFlash('alert', new DangerAlert('Save failed'));
+                $this->setDangerAlert(translate('Update failed'));
             }
         } catch (ValidationException $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+            $this->setDangerAlert($ex->getErrors());
         }
 
         return $this->redirectToRoute('setting_index');

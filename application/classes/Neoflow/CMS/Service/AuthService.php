@@ -87,6 +87,7 @@ class AuthService extends AbstractService
             ->fetch();
 
         if ($user) {
+            $user->setReadOnly();
             $this->session()->set('_USER', $user);
 
             return true;

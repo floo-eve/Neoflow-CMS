@@ -2,7 +2,6 @@
 
 namespace Neoflow\CMS\Controller;
 
-use Neoflow\CMS\App;
 use Neoflow\CMS\Core\AbstractController;
 use Neoflow\CMS\Model\LanguageModel;
 use Neoflow\CMS\Model\UserModel;
@@ -15,9 +14,7 @@ class BackendController extends AbstractController
 {
 
     /**
-     * Constrcutor.
-     *
-     * @param App $app
+     * Constructor.
      */
     public function __construct()
     {
@@ -59,12 +56,12 @@ class BackendController extends AbstractController
     {
         if ($this->service('auth')->logout()) {
             return $this
-                    ->setSuccessAlert('Logout successful')
+                    ->setSuccessAlert(translate('Logout successful'))
                     ->redirectToRoute('backend_login');
         }
 
         return $this
-                ->setDangerAlert('Logout failed')
+                ->setDangerAlert(translate('Logout failed'))
                 ->redirectToRoute('dashboard_index');
     }
 
@@ -97,12 +94,12 @@ class BackendController extends AbstractController
         // Authenticate and authorize user
         if ($this->service('auth')->login($email, $password)) {
             return $this
-                    ->setSuccessAlert('Login successful')
+                    ->setSuccessAlert(translate('Login successful'))
                     ->redirectToRoute('dashboard_index');
         }
 
         return $this
-                ->setWarningAlert('Email address and/or password are invalid')
+                ->setWarningAlert(translate('Email address and/or password are invalid'))
                 ->redirectToRoute('backend_login');
     }
 
@@ -123,23 +120,28 @@ class BackendController extends AbstractController
      *
      * @param array $args
      *
-     * @return Response
+     * @return Response|RedirectResponse
      */
     public function newPasswordAction($args)
     {
         $user = UserModel::findByColumn('reset_key', $args['reset_key']);
 
         if ($user) {
-
             return $this->render('backend/new-password', array(
                     'user' => $user
             ));
         }
         return $this
-                ->setDangerAlert('User not found')
+                ->setDangerAlert(translate('User not found'))
                 ->redirectToRoute('backend_login');
     }
 
+    /**
+     * Update password action
+     *
+     * @param array $args
+     * @return RedirectResponse
+     */
     public function updatePasswordAction($args)
     {
         try {
@@ -153,15 +155,15 @@ class BackendController extends AbstractController
                     'password2' => $postData->get('password2'),
                     ), $postData->get('user_id'));
 
-            if ($user->validatePassword() && $user->save()) {
+            if ($user->reset_key === $postData->get('reset_key') && $user->validatePassword() && $user->save()) {
 
                 $user->reset_when = null;
                 $user->reset_key = null;
                 $user->save();
 
-                $this->setSuccessAlert('{0} successful updated', array('Password'));
+                $this->setSuccessAlert(translate('{0} successful updated', array('Password')));
             } else {
-                $this->setDangerAlert('Update failed');
+                $this->setDangerAlert(translate('Update failed'));
             }
         } catch (ValidationException $ex) {
             return $this
@@ -173,7 +175,7 @@ class BackendController extends AbstractController
     }
 
     /**
-     * Forgot password action.
+     * Reset password action.
      *
      * @param array $args
      *
@@ -191,21 +193,21 @@ class BackendController extends AbstractController
             if (1 === 1 || !$user->reset_key || $user->reset_when < microtime(true) - 60 * 60) {
                 if ($user->setResetKey() && $user->save()) {
                     $link = $this->router()->generateUrl('backend_new_password', array('reset_key' => $user->reset_key));
-                    $message = $this->translator()->translate('Password reset email message', array($user->getFullName(), $link));
-                    $subject = $this->translator()->translate('Password reset email subject');
+                    $message = translate('Password reset email message', array($user->getFullName(), $link));
+                    $subject = translate('Password reset email subject');
 
                     $this
                         ->service('mail')
                         ->create($user->email, $subject, $message)
                         ->send();
 
-                    $this->setSuccessAlert('Email successful sent');
+                    $this->setSuccessAlert(translate('Email successful sent'));
                 }
             } else {
-                $this->setInfoAlert('Email already sent, you can reset your password once per hour');
+                $this->setInfoAlert(translate('Email already sent, you can reset your password once per hour'));
             }
         } else {
-            $this->setWarningAlert('User not found');
+            $this->setWarningAlert(translate('User not found'));
         }
         return $this->redirectToRoute('backend_lost_password');
     }
@@ -225,12 +227,9 @@ class BackendController extends AbstractController
 
         if (!$this->service('auth')->isAuthenticated() && !in_array($currentRoute[0], $anonymousRoutes)) {
             return $this->redirectToRoute('backend_login');
+        } elseif ($this->service('auth')->isAuthenticated() && in_array($currentRoute[0], $anonymousRoutes)) {
+            return $this->redirectToRoute('dashboard_index');
         }
-
-//        if (!$this->checkAccess() && !in_array($currentRoute[0], array('backend_login', 'backend_auth', 'backend_forgot'))) {
-//        } elseif ($this->checkAccess() && in_array($currentRoute[0], array('backend_login', 'backend_auth', 'backend_forgot'))) {
-//            return $this->redirectToRoute('dashboard_index');
-//        }
 
         return false;
     }

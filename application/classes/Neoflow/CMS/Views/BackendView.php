@@ -3,11 +3,29 @@
 namespace Neoflow\CMS\Views;
 
 use Neoflow\CMS\Core\AbstractView;
+use Neoflow\CMS\Model\UserModel;
 
 class BackendView extends AbstractView
 {
+    /**
+     * @var string
+     */
     protected $title = '';
+
+    /**
+     * @var string
+     */
     protected $subtitle = '';
+
+    /**
+     * Get authenticated user.
+     *
+     * @return UserModel
+     */
+    public function getAuthenticatedUser()
+    {
+        return $this->service('auth')->getAuthenticatedUser();
+    }
 
     /**
      * Set theme.

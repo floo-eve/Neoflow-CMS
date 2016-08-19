@@ -102,12 +102,12 @@ class PageController extends BackendController
             ));
 
             if ($page->validate() && $page->save()) {
-                $this->setFlash('alert', new SuccessAlert('{0} successful created', array('Page')));
+                $this->setSuccessAlert(translate('{0} successful created', array('Page')));
             } else {
-                $this->setFlash('alert', new DangerAlert('Create failed'));
+                $this->setDangerAlert(translate('Create failed'));
             }
         } catch (ValidationException $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+            $this->setDangerAlert($ex->getErrors());
         }
 
         return $this->redirectToRoute('page_index');
@@ -186,9 +186,9 @@ class PageController extends BackendController
 
         // Delete page
         if ($page->delete()) {
-            $this->setFlash('alert', new SuccessAlert('{0} successful deleted', array('Page')));
+            $this->setSuccessAlert(translate('{0} successful deleted', array('Page')));
         } else {
-            $this->setFlash('alert', new DangerAlert('Delete failed'));
+            $this->setDangerAlert(translate('Delete failed'));
         }
 
         return $this->redirectToRoute('page_index');
@@ -225,12 +225,12 @@ class PageController extends BackendController
 
             // Save page and navitem
             if ($page->validate() && $page->save() && $navitem->save()) {
-                $this->setFlash('alert', new SuccessAlert('{0} successful updated', array('Page')));
+                $this->setSuccessAlert(translate('{0} successful updated', array('Page')));
             } else {
-                $this->setFlash('alert', new DangerAlert('Update failed'));
+                $this->setDangerAlert(translate('Update failed'));
             }
         } catch (ValidationException $ex) {
-            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+            $this->setDangerAlert($ex->getErrors());
         }
 
         return $this->redirectToRoute('page_settings', array('id' => $page->id()));
@@ -257,9 +257,9 @@ class PageController extends BackendController
         // Save page
         if ($page->validate() && $page->save()) {
             if ($page->is_active) {
-                $this->setFlash('alert', new SuccessAlert('Page successful activated'));
+                $this->setSuccessAlert(translate('Page successful activated'));
             } else {
-                $this->setFlash('alert', new SuccessAlert('Page successful disabled'));
+                $this->setSuccessAlert(translate('Page successful disabled'));
             }
         }
 

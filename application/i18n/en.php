@@ -136,21 +136,27 @@ $this->addTranslation(array(
 $this->addTranslation(array(
     'Lost your password?' => 'Lost your password?',
     'Password reset email subject' => 'Create new password',
-    'Password reset email message' => 'Hi {0},
+    'Password reset email message' => 'Hi, {0}!
 
-                                    Forgot your password? No problem. Just click <a href="{1}">here</a> to create a new password.
+                                    Forgot your password? No problem.
 
-                                    If you didn\'t request to new your password, you don\'t have to do anything.
-   ',
+                                    Just click here to create a new password for your user account:
+                                    <a href="{1}">{1}</a>
+
+                                    If you didn\'t request password change, you don\'t have to do anything.
+
+                                    Best regards.',
     'Email address and/or password are invalid' => 'Email address and/or password are invalid',
     'Logout successful' => 'Logout successful',
     'Logout failed' => 'Logout failed',
+    'Login successful' => 'Login successful',
     'Create new password' => 'Create new password',
     'Email successful sent' => 'Email successful sent',
     'User not found' => 'User not found',
     'Email already sent, you can reset your password once per hour' => 'Email already sent, you can reset your password once per hour',
     'Please enter the email address of your user account. You will receive a link to create a new password via email.' => 'Please enter the email address of your user account. You will receive a link to create a new password via email.',
     'Please enter the new password for your user account, registered under the email address {0}.' => 'Please enter the new password for your user account, registered under the email address {0}.',
+    'Logged in as' => 'Logged in as',
 ));
 
 // Settings

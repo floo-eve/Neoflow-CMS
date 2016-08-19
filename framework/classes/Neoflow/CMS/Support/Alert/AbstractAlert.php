@@ -6,11 +6,6 @@ abstract class AbstractAlert
 {
 
     /**
-     * App trait
-     */
-    use \Neoflow\Framework\AppTrait;
-
-    /**
      * @var string
      */
     protected $type;
@@ -18,23 +13,40 @@ abstract class AbstractAlert
     /**
      * @var array
      */
-    protected $message = array();
+    protected $messages = array();
 
     /**
      * Constructor.
      *
-     * @param string $message
-     * @param array  $values
+     * @param string|array $messages
      */
-    public function __construct($message, array $values = array())
+    public function __construct($messages)
     {
-        if (is_array($message)) {
-            array_map(function ($messageItem) use ($values) {
-                $this->message[] = $this->translator()->translate($messageItem, $values);
-            }, $message);
+        if (is_string($messages)) {
+            $this->addMessage($messages);
         } else {
-            $this->message[] = $this->translator()->translate($message, $values);
+            $this->setMessages($messages);
         }
+    }
+
+    /**
+     * Set messages.
+     *
+     * @param array $messages
+     */
+    public function setMessages(array $messages)
+    {
+        $this->messages = $messages;
+    }
+
+    /**
+     * Add message.
+     *
+     * @param string $message
+     */
+    public function addMessage($message)
+    {
+        $this->messages[] = $message;
     }
 
     /**
@@ -48,12 +60,12 @@ abstract class AbstractAlert
     }
 
     /**
-     * Get alert message.
+     * Get messages.
      *
      * @return array
      */
-    public function getMessage()
+    public function getMessages()
     {
-        return $this->message;
+        return $this->messages;
     }
 }

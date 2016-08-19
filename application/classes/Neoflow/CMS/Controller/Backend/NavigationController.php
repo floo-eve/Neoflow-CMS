@@ -17,6 +17,7 @@ use Neoflow\CMS\Support\Alert\SuccessAlert;
 
 class NavigationController extends BackendController
 {
+
     /**
      * @var LanguageMapper
      */
@@ -52,9 +53,7 @@ class NavigationController extends BackendController
         // Set titles
 
         $this->view
-
             ->setSubtitle('Backend / Content')
-
             ->setTitle('Navigations');
 
         // Create mapper
@@ -73,9 +72,7 @@ class NavigationController extends BackendController
         $navigations = NavigationModel::findAll();
 
         return $this->render('backend/navigation/index', array(
-
                 'navigations' => $navigations,
-
         ));
     }
 
@@ -84,9 +81,7 @@ class NavigationController extends BackendController
         $navigation = NavigationModel::findById($args['id']);
 
         $languages = $this->languageMapper->getOrm()
-
             ->where('is_active', '=', true)
-
             ->fetchAll();
 
         $language_id = $this->getRequest()->getGet('language_id');
@@ -100,33 +95,25 @@ class NavigationController extends BackendController
         $activeLanguage = \Neoflow\CMS\Model\LanguageModel::findById($language_id);
 
         $navitems = $navigation->navitems()
-
             ->where('parent_navitem_id', 'IS', null)
-
             ->where('language_id', '=', $language_id)
-
             ->fetchAll();
 
         return $this->render('backend/navigation/edit', array(
-
                 'languages' => $languages,
-
                 'navigation' => $navigation,
-
                 'navitems' => $navitems,
-
                 'activeLanguage' => $activeLanguage,
-
         ));
     }
 
     /**
      * Create action.
-     
+
      *
-     
+
      * @param array $args
-     
+
      * @return Response
      */
     public function createAction($args)
@@ -153,32 +140,31 @@ class NavigationController extends BackendController
 
             // Fallback if validation fails
 
-            $this->setFlash('alert', new DangerAlert($ex->getErrors()));
+            $this->setDangerAlert($ex->getErrors());
 
             return $this->redirectToRoute('navigation_index');
         } catch (Exception $ex) {
 
             // Fallback if something got wrong
 
-            $this->setFlash('alert', new DangerAlert('Something got wrong'));
+            $this->setDangerAlert(translate('Something got wrong'));
 
             return $this->redirectToRoute('navigation_index');
         }
 
         $this->session()
-
-            ->setFlash('alert', new SuccessAlert('Successful saved'));
+            ->setSuccessAlert(translate('Successful saved'));
 
         return $this->redirectToRoute('navigation_index');
     }
 
     /**
      * Update action.
-     
+
      *
-     
+
      * @param array $args
-     
+
      * @return Response
      */
     public function updateAction($args)
@@ -206,8 +192,7 @@ class NavigationController extends BackendController
             // Fallback if validation fails
 
             $this->session()
-
-                ->setFlash('alert', new DangerAlert($ex->getErrors()));
+                ->setDangerAlert($ex->getErrors());
 
             return $this->redirectToRoute('navigation_edit', array('id' => $navigation_id));
         } catch (Exception $ex) {
@@ -215,26 +200,24 @@ class NavigationController extends BackendController
             // Fallback if something get wrong
 
             $this->session()
-
-                ->setFlash('alert', new DangerAlert('Transaction failed'));
+                ->setDangerAlert(translate('Transaction failed'));
 
             return $this->redirectToRoute('navigation_index');
         }
 
         $this->session()
-
-            ->setFlash('alert', new SuccessAlert('Successful saved'));
+            ->setSuccessAlert(translate('Successful saved'));
 
         return $this->redirectToRoute('navigation_edit', array('id' => $navigation->id()));
     }
 
     /**
      * Add item action.
-     
+
      *
-     
+
      * @param array $args
-     
+
      * @return Response
      */
     public function addItemAction($args)
@@ -266,15 +249,13 @@ class NavigationController extends BackendController
             // Fallback if validation fails
 
             $this->session()
-
-                ->setFlash('alert', new DangerAlert($ex->getErrors()));
+                ->setDangerAlert($ex->getErrors());
 
             return $this->redirectToRoute('navigation_index');
         }
 
         $this->session()
-
-            ->setFlash('alert', new SuccessAlert('Successful added'));
+            ->setSuccessAlert(translate('Successful added'));
 
         return $this->redirectToRoute('navigation_edit', array('id' => $navitem->navigation_id, 'language_id' => $navitem->language_id));
     }

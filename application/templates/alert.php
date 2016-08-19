@@ -1,3 +1,3 @@
 <p class="alert alert-<?= $alert->getType() ?>">
-    <?= implode('<br />', $alert->getMessage()) ?>
+    <?= implode('<br />', $alert->getMessages()) ?>
 </p>
