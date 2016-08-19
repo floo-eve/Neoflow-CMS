@@ -1,7 +1,7 @@
 <nav class="navbar navbar-top navbar-default" role="navigation">
     <div class="container-fluid">
         <p class="nav navbar-text brand">
-            <?= $view->translate('Backend') ?>
+            <?= translate('Backend') ?>
         </p>
 
         <ul class="nav navbar-nav navbar-right">
@@ -17,7 +17,7 @@
 
                             ?>
                             <li <?= ($language->code === $view->translator()->getCurrentLanguageCode() ? 'class="active"' : '') ?>>
-                                <a href="<?= $view->generateUrl('', array(), $language->code) ?>">
+                                <a href="<?= generate_url('', array(), $language->code) ?>">
                                     <?= $language->renderFlagIcon() ?>
                                 </a>
                             </li>
@@ -39,13 +39,13 @@
 
             ?>
             <li>
-                <a href="<?= $view->generateUrl('frontend_index') ?>" title="Zum Frontend"><i class="fa fa-fw fa-desktop fa-fw"></i> <span class="visible-lg-inline">Zum Frontend</span></a>
+                <a href="<?= generate_url('frontend_index') ?>" title="Zum Frontend"><i class="fa fa-fw fa-desktop fa-fw"></i> <span class="visible-lg-inline">Zum Frontend</span></a>
             </li>
             <?php if ($view->app()->service('auth')->isAuthenticated()) {
 
                 ?>
                 <li>
-                    <a href="<?= $view->generateUrl('backend_logout') ?>" title="Logout"><i class="fa fa-fw fa-sign-out fa-fw"></i><span class="hidden-xs"> Logout</span></a>
+                    <a href="<?= generate_url('backend_logout') ?>" title="Logout"><i class="fa fa-fw fa-sign-out fa-fw"></i><span class="hidden-xs"> Logout</span></a>
                 </li>
                 <?php
             }

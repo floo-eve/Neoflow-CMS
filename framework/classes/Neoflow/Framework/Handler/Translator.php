@@ -218,7 +218,7 @@ class Translator
     }
 
     /**
-     * Translate given key.
+     * Translate key and values
      *
      * @param string $key
      * @param array  $values

@@ -301,7 +301,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `lastname`, `firstname`, `reset_key`, `reset_when`, `role_id`) VALUES
 (1, 'john.doe@neoflow.ch', sha('123456'), 'Doe', 'John', NULL, NULL, 1),
-(2, 'jonathan.nessier@outlook.com', 'sha('123456')', 'Nessier', 'Jonathan', NULL, NULL, 4);
+(2, 'jonathan.nessier@outlook.com', sha('123456'), 'Nessier', 'Jonathan', NULL, NULL, 4);
 
 --
 -- Indizes der exportierten Tabellen

@@ -4,17 +4,17 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= $view->translate('Edit role') ?>
+                    <?= translate('Edit role') ?>
                 </h3>
             </div>
             <div class="panel-body">
 
-                <form method="post" action="<?= $view->generateUrl('role_update') ?>" class="form-horizontal">
+                <form method="post" action="<?= generate_url('role_update') ?>" class="form-horizontal">
                     <input value="<?= $role->id() ?>" type="hidden" name="role_id" />
 
                     <div class="form-group <?= $view->hasValidationError('title', 'has-error') ?>">
                         <label for="inputTitle" class="col-sm-2 control-label">
-                            <?= $view->translate('Title') ?>
+                            <?= translate('Title') ?>
                         </label>
                         <div class="col-sm-10">
                             <input id="inputTitle" value="<?= $role->title ?>" type="text" required class="form-control" name="title" maxlength="20" />
@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group <?= $view->hasValidationError('description', 'has-error') ?>">
                         <label for="textareaDescription" class="col-sm-2 control-label">
-                            <?= $view->translate('Description') ?>
+                            <?= translate('Description') ?>
                         </label>
                         <div class="col-sm-10">
                             <textarea name="description" class="form-control vresize" maxlength="150" id="textareaDescription" rows="3"><?= $role->description ?></textarea>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="form-group <?= $view->hasValidationError('permission_ids', 'has-error') ?>">
                         <label for="selectPermissions" class="col-sm-2 control-label">
-                            <?= $view->translate('Permissions') ?>
+                            <?= translate('Permissions') ?>
                         </label>
                         <div class="col-sm-10">
                             <select required multiple class="form-control select2" name="permission_ids[]" id="selectPermissions" data-placeholder="">
@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary btn-icon btn-icon-left">
-                                <i class="fa fa-save"></i><?= $view->translate('Save') ?>
+                                <i class="fa fa-save"></i><?= translate('Save') ?>
                             </button>
                         </div>
                     </div>

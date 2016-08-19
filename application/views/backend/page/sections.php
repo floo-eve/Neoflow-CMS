@@ -6,21 +6,21 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= $view->translate('Page sections of {0}', array('<i>' . $page->title . '</i>')) ?>
+                    <?= translate('Page sections of {0}', array('<i>' . $page->title . '</i>')) ?>
                 </h3>
             </div>
             <div class="panel-body">
 
                 <?php if ($sections->count()) { ?>
-                    <div class="nestable"  data-max-depth="1" data-save-url="<?= $view->generateUrl('section_reorder') ?>" id="nestable">
+                    <div class="nestable"  data-max-depth="1" data-save-url="<?= generate_url('section_reorder') ?>" id="nestable">
                         <?= $view->renderSectionNestable($sections) ?>
                     </div>
                     <ul class="list-inline">
-                        <li><i class="fa fa-eye"></i> = <?= $view->translate('Active') ?></li>
-                        <li><i class="fa fa-ban"></i> = <?= $view->translate('Disabled') ?></li>
+                        <li><i class="fa fa-eye"></i> = <?= translate('Active') ?></li>
+                        <li><i class="fa fa-ban"></i> = <?= translate('Disabled') ?></li>
                     </ul>
                 <?php } else { ?>
-                    <p class="alert alert-warning"><?= $view->translate('No sections found') ?></p>
+                    <p class="alert alert-warning"><?= translate('No sections found') ?></p>
                 <?php } ?>
             </div>
         </div>
@@ -30,15 +30,15 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><?= $view->translate('New section') ?></h3>
+                <h3 class="panel-title"><?= translate('New section') ?></h3>
             </div>
             <div class="panel-body">
-                <form method="post" action="<?= $view->generateUrl('section_create') ?>" class="form-horizontal">
+                <form method="post" action="<?= generate_url('section_create') ?>" class="form-horizontal">
                     <input value="<?= $page->id() ?>" type="hidden" name="page_id" />
 
                     <div class="form-group <?= $view->hasValidationError('module_id', 'has-error') ?>">
                         <label for="selectModule" class="col-sm-3 control-label">
-                            <?= $view->translate('Module') ?>
+                            <?= translate('Module') ?>
                         </label>
                         <div class="col-sm-9">
                             <select required="" class="form-control select2" name="module_id" id="selectModule" data-placeholder="">
@@ -60,7 +60,7 @@
                             <div class="checkbox">
                                 <label>
                                     <input name="is_active" value="0" type="hidden" />
-                                    <input name="is_active" value="1" type="checkbox" checked /> <?= $view->translate('Section is active') ?>
+                                    <input name="is_active" value="1" type="checkbox" checked /> <?= translate('Section is active') ?>
                                 </label>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
                             <button type="submit" class="btn btn-primary btn-icon btn-icon-left">
-                                <i class="fa fa-save"></i><?= $view->translate('Save') ?>
+                                <i class="fa fa-save"></i><?= translate('Save') ?>
                             </button>
                         </div>
                     </div>

@@ -68,7 +68,7 @@ class BackendView extends AbstractView
     {
         $this->title = $title;
         if ($translate) {
-            $this->title = $this->translate($title, $values);
+            $this->title = translate($title, $values);
         }
 
         return $this;
@@ -87,7 +87,7 @@ class BackendView extends AbstractView
     {
         $this->subtitle = $subtitle;
         if ($translate) {
-            $this->subtitle = $this->translate($subtitle, $values);
+            $this->subtitle = translate($subtitle, $values);
         }
 
         return $this;
@@ -103,7 +103,7 @@ class BackendView extends AbstractView
      */
     public function setBackRoute($routeKey, $args = array())
     {
-        $backUrl = $this->generateUrl($routeKey, $args);
+        $backUrl = generate_url($routeKey, $args);
 
         return $this->setBackUrl($backUrl);
     }

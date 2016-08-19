@@ -1,5 +1,5 @@
 <?php
-// Include framework functions
+// Include common functions
 require_once 'functions/is_assoc.php';
 require_once 'functions/is_json.php';
 require_once 'functions/is_url.php';
@@ -7,8 +7,9 @@ require_once 'functions/slugify.php';
 require_once 'functions/normalize_directory.php';
 require_once 'functions/normalize_url.php';
 
+// Include framework functions
 require_once 'functions/framework/translate.php';
-
+require_once 'functions/framework/generate_url.php';
 
 
 // Register autoload for application and framework classes

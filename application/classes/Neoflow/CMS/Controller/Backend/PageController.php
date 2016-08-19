@@ -9,8 +9,6 @@ use Neoflow\CMS\Model\NavitemModel;
 use Neoflow\CMS\Model\PageModel;
 use Neoflow\CMS\Views\Backend\PageView;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\CMS\Support\Alert\DangerAlert;
-use Neoflow\CMS\Support\Alert\SuccessAlert;
 use Neoflow\Framework\Support\Validation\ValidationException;
 
 class PageController extends BackendController
@@ -24,12 +22,18 @@ class PageController extends BackendController
         parent::__construct();
 
         // Set titles
-
         $this->view
             ->setSubtitle('Content')
             ->setTitle('Pages');
     }
 
+    /**
+     * Index page action.
+     *
+     * @param array $args
+     *
+     * @return Response|RediretResponse
+     */
     public function indexAction($args)
     {
 
@@ -77,11 +81,8 @@ class PageController extends BackendController
 
     /**
      * Create action.
-
      *
-
-     * @param array $args
-
+     * @param  array    $args
      * @return Response
      */
     public function createAction($args)
@@ -198,6 +199,7 @@ class PageController extends BackendController
      * Update page action.
      *
      * @param array $args
+     *
      * @return Response
      */
     public function updateAction($args)
@@ -241,8 +243,7 @@ class PageController extends BackendController
 
      *
 
-     * @param array $args
-
+     * @param  array    $args
      * @return Response
      */
     public function activateAction($args)

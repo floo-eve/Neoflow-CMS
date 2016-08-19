@@ -312,7 +312,7 @@ abstract class AbstractView
     public function set($key, $value, $translate = false)
     {
         if ($translate) {
-            $value = $this->translate($value);
+            $value = translate($value);
         }
         $this->data->set($key, $value);
 
@@ -534,20 +534,6 @@ abstract class AbstractView
     }
 
     /**
-     * Generate url of route.
-     *
-     * @param string $routeKey
-     * @param array  $args
-     * @param string $languageCode
-     *
-     * @return string
-     */
-    public function generateUrl($routeKey, array $args = array(), $languageCode = '')
-    {
-        return $this->router()->generateUrl($routeKey, $args, $languageCode);
-    }
-
-    /**
      * Render file to output html.
      *
      * @param string $file
@@ -583,19 +569,6 @@ abstract class AbstractView
             return $output;
         }
         throw new InvalidArgumentException('File not found: ' . $file);
-    }
-
-    /**
-     * Translate key.
-     *
-     * @param string $key
-     * @param array  $values
-     *
-     * @return string
-     */
-    public function translate($key, $values = array())
-    {
-        return $this->translator()->translate($key, $values);
     }
 
     /**

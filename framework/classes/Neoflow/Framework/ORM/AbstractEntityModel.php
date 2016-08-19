@@ -350,7 +350,6 @@ abstract class AbstractEntityModel
         if ($id) {
             $primaryKey = $this->getPrimaryKey();
             $this->set($primaryKey, $id);
-            $this->isNew = false;
             return true;
         }
         return false;
@@ -530,7 +529,7 @@ abstract class AbstractEntityModel
     }
 
     /**
-     * Find all model entities by column.
+     * Delete all model entities by column.
      *
      * @param string $column
      * @param mixed $value

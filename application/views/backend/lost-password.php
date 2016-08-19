@@ -8,33 +8,33 @@
         <div class="login-panel">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?= $view->translate('Login') ?></h3>
+                    <h3 class="panel-title"><?= translate('Login') ?></h3>
                 </div>
                 <div class="panel-body">
 
                     <p>
-                        <?= $view->translate('Please enter the email address of your user account. You will receive a link to create a new password via email.') ?>
+                        <?= translate('Please enter the email address of your user account. You will receive a link to create a new password via email.') ?>
                     </p>
 
                     <?= $view->renderAlert() ?>
 
-                    <form role="form" method="post" action="<?= $view->generateUrl('backend_reset_password') ?>">
+                    <form role="form" method="post" action="<?= generate_url('backend_reset_password') ?>">
                         <div class="form-group">
                             <label for="inputEmail">
-                                <?= $view->translate('Email address') ?>
+                                <?= translate('Email address') ?>
                             </label>
                             <input id="inputEmail" class="form-control" name="email" type="text" autofocus>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-icon btn-icon-left">
-                                <i class="fa fa-key"></i><?= $view->translate('Create new password') ?>
+                                <i class="fa fa-key"></i><?= translate('Create new password') ?>
                             </button>
                         </div>
                     </form>
 
                     <hr />
 
-                    <a href="<?= $view->generateUrl('backend_login') ?>"><?= $view->translate('Login') ?></a>
+                    <a href="<?= generate_url('backend_login') ?>"><?= translate('Login') ?></a>
                 </div>
             </div>
 

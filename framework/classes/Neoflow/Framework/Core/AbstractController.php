@@ -38,31 +38,25 @@ abstract class AbstractController
      * @param Response $response
      *
      * @return Response
+     *
+     * @throws RuntimeException
      */
     protected function render($viewFile, array $parameters = array(), Response $response = null)
     {
-
         if ($this->view instanceof AbstractView) {
 
             $this->view->renderView($viewFile, $parameters, true);
-
             $content = $this->view->renderTheme();
 
             if ($response === null) {
-
                 if ($this->config()->get('debugging')->get('debugBar')) {
-
                     $response = new DebugResponse();
                 } else {
-
                     $response = new Response();
                 }
             }
-
-
             return $response->setContent($content);
         }
-
         throw new RuntimeException('View not set or wrong type');
     }
 
@@ -91,10 +85,7 @@ abstract class AbstractController
      */
     protected function redirectToRoute($routeKey, $args = array(), $statusCode = 302)
     {
-        $url = $this->router()
-            ->generateUrl($routeKey, $args);
-
-        return $this->redirect($url, $statusCode);
+        return $this->redirect(generate_url($routeKey, $args), $statusCode);
     }
 
     /**

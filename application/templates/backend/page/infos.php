@@ -1,6 +1,6 @@
 
 <ul class="list-inline">
-    <li><strong><?= $view->translate('Current page') ?>: <?= $page->title ?></strong></li>
+    <li><strong><?= translate('Current page') ?>: <?= $page->title ?></strong></li>
     <li class="small">ID: <?= $page->id() ?></li>
 </ul>
-<p><?= $view->translate('Last change by {0} on {1}', array('John Doe', '20.07.2016, 12:45')) ?></p>
+<p><?= translate('Last change by {0} on {1}', array('John Doe', '20.07.2016, 12:45')) ?></p>

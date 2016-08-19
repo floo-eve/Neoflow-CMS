@@ -42,7 +42,7 @@ class PageView extends NavigationView
                 }
                 $output .= '</li>
                                 <li>
-                                    <a href="' . $this->generateUrl('page_sections', array('id' => $navitem->page_id)) . '">
+                                    <a href="' . generate_url('page_sections', array('id' => $navitem->page_id)) . '">
                                         ' . $navitem->title . '
                                     </a>
                                 </li>
@@ -51,24 +51,24 @@ class PageView extends NavigationView
                                 </li>
                             </ul>
                             <span class="pull-right">
-                                    <a href="' . $this->generateUrl('page_sections', array('id' => $page->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . $this->translate('Sections') . '">
+                                    <a href="' . generate_url('page_sections', array('id' => $page->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . translate('Sections') . '">
                                         <i class="fa fa-fw fa-th-list"></i>
                                     </a>
-                                    <a href="' . $this->generateUrl('page_settings', array('id' => $page->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . $this->translate('Settings') . '">
+                                    <a href="' . generate_url('page_settings', array('id' => $page->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . translate('Settings') . '">
                                         <i class="fa fa-fw fa-cog"></i>
                                     </a>';
 
                 if ($page->is_active) {
-                    $output .= ' <a href="' . $this->generateUrl('page_activate', array('id' => $page->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . $this->translate('Are you sure you want to disable it?') . '" title="' . $this->translate('Disable') . '">
+                    $output .= ' <a href="' . generate_url('page_activate', array('id' => $page->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to disable it?') . '" title="' . translate('Disable') . '">
                                     <i class="fa fa-fw fa-ban"></i>
                                 </a>';
                 } else {
-                    $output .= ' <a href="' . $this->generateUrl('page_activate', array('id' => $page->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . $this->translate('Are you sure you want to activate it?') . '" title="' . $this->translate('Activate') . '">
+                    $output .= ' <a href="' . generate_url('page_activate', array('id' => $page->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to activate it?') . '" title="' . translate('Activate') . '">
                                     <i class="fa fa-fw fa-eye"></i>
                                 </a>';
                 }
 
-                $output .= ' <a href="' . $this->generateUrl('page_delete', array('id' => $page->id())) . '" class="btn btn-primary btn-xs confirm" data-message="' . $this->translate('Are you sure you want to delete this page and all of its subpage?') . '" title="' . $this->translate('Delete') . '">
+                $output .= ' <a href="' . generate_url('page_delete', array('id' => $page->id())) . '" class="btn btn-primary btn-xs confirm" data-message="' . translate('Are you sure you want to delete this page and all of its subpage?') . '" title="' . translate('Delete') . '">
                                         <i class="fa fa-fw fa-trash-o"></i>
                                     </a>
                             </span>
@@ -142,7 +142,7 @@ class PageView extends NavigationView
 
                 $output .= '</li>
                                 <li>
-                                    <a href="' . $this->generateUrl($module->route, array('section_id' => $section->id())) . '">
+                                    <a href="' . generate_url($module->route, array('section_id' => $section->id())) . '">
                                         ' . $module->title . '
                                     </a>
                                 </li>
@@ -151,21 +151,21 @@ class PageView extends NavigationView
                                 </li>
                             </ul>
                             <span class="pull-right">
-                                    <a href="' . $this->generateUrl($module->route, array('section_id' => $section->id())) . '" class="btn btn-default btn-xs hidden-xs btn-icon btn-icon-left" title="' . $this->translate('Edit') . '">
-                                        <i class="fa fa-fw fa-pencil"></i>' . $this->translate('Edit') . '
+                                    <a href="' . generate_url($module->route, array('section_id' => $section->id())) . '" class="btn btn-default btn-xs hidden-xs btn-icon btn-icon-left" title="' . translate('Edit') . '">
+                                        <i class="fa fa-fw fa-pencil"></i>' . translate('Edit') . '
                                     </a>';
 
                 if ($section->is_active) {
-                    $output .= ' <a href="' . $this->generateUrl('section_activate', array('id' => $section->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . $this->translate('Are you sure you want to disable it?') . '"" title="' . $this->translate('Disable') . '">
+                    $output .= ' <a href="' . generate_url('section_activate', array('id' => $section->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to disable it?') . '"" title="' . translate('Disable') . '">
                                     <i class="fa fa-fw fa-ban"></i>
                                 </a>';
                 } else {
-                    $output .= ' <a href="' . $this->generateUrl('section_activate', array('id' => $section->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . $this->translate('Are you sure you want to activate it?') . '"" title="' . $this->translate('Activate') . '">
+                    $output .= ' <a href="' . generate_url('section_activate', array('id' => $section->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to activate it?') . '"" title="' . translate('Activate') . '">
                                     <i class="fa fa-fw fa-eye"></i>
                                 </a>';
                 }
 
-                $output .= ' <a href="' . $this->generateUrl('section_delete', array('id' => $section->id())) . '" class="btn btn-primary btn-xs confirm" data-message="' . $this->translate('Are you sure you want to delete this section and all of its content?') . '" title="' . $this->translate('Delete') . '">
+                $output .= ' <a href="' . generate_url('section_delete', array('id' => $section->id())) . '" class="btn btn-primary btn-xs confirm" data-message="' . translate('Are you sure you want to delete this section and all of its content?') . '" title="' . translate('Delete') . '">
                                         <i class="fa fa-fw fa-trash-o"></i>
                                     </a>
                             </span>
