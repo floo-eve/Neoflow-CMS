@@ -7,13 +7,13 @@ use Neoflow\CMS\Mapper\LanguageMapper;
 use Neoflow\CMS\Mapper\NavigationMapper;
 use Neoflow\CMS\Mapper\NavitemMapper;
 use Neoflow\CMS\Mapper\PageMapper;
+use Neoflow\CMS\Model\LanguageModel;
 use Neoflow\CMS\Model\NavigationModel;
 use Neoflow\CMS\Model\NavitemModel;
 use Neoflow\CMS\Views\Backend\NavigationView;
-use Neoflow\Framework\Support\Validation\ValidationException;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\CMS\Support\Alert\DangerAlert;
-use Neoflow\CMS\Support\Alert\SuccessAlert;
+use Neoflow\Framework\Support\Validation\ValidationException;
+use function translate;
 
 class NavigationController extends BackendController
 {
@@ -92,7 +92,7 @@ class NavigationController extends BackendController
             return $this->redirectToRoute('navigation_edit', $args);
         }
 
-        $activeLanguage = \Neoflow\CMS\Model\LanguageModel::findById($language_id);
+        $activeLanguage = LanguageModel::findById($language_id);
 
         $navitems = $navigation->navitems()
             ->where('parent_navitem_id', 'IS', null)

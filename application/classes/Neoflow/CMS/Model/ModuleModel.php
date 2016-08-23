@@ -22,7 +22,7 @@ class ModuleModel extends AbstractEntityModel
     /**
      * @var array
      */
-    public static $properties = ['module_id', 'name', 'folder'];
+    public static $properties = ['module_id', 'name', 'folder', 'route', 'title'];
 
     /**
      * Get repository to fetch section.

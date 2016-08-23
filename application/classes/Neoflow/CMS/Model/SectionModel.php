@@ -89,6 +89,21 @@ class SectionModel extends AbstractEntityModel
     }
 
     /**
+     * Toggle activation
+     * 
+     * @return self
+     */
+    public function toggleActivation()
+    {
+        if ($this->is_active) {
+            $this->is_active = false;
+        } else {
+            $this->is_active = true;
+        }
+        return $this;
+    }
+
+    /**
      * Validate setting.
      *
      * @return bool

@@ -104,7 +104,6 @@
                         </label>
                         <div class="col-sm-9">
                             <select required class="form-control select2" name="role_id" id="selectRole">
-                                <option></option>
                                 <?php
                                 foreach ($roles as $role) {
 

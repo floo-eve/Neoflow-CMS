@@ -44,7 +44,7 @@
                         </label>
                         <div class="col-sm-10">
                             <select data-placeholder="<?= translate('None') ?>" class="form-control select2" name="parent_navitem_id" id="selectPage">
-                                <option></option>
+                                <option value="0"><?= translate('None') ?></option>
                                 <?= $view->renderNavitemOptions($navitems, 0, $selectedNavitemId, $disabledNavitemIds) ?>
                             </select>
                         </div>

@@ -116,9 +116,13 @@ class PageController extends BackendController
 
     public function sectionsAction($args)
     {
-
         // Get page by id
-        $page = $this->getPageById($args['id']);
+        $page = PageModel::findById($args['id']);
+        if (!$page) {
+            $this->setDangerAlert(translate('{0} not found', array('User')));
+
+            return $this->redirectToRoute('page_index');
+        }
 
         // Get sections
         $sections = $page->sections()
@@ -149,7 +153,12 @@ class PageController extends BackendController
         } else {
 
             // Get page by id
-            $page = $this->getPageById($args['id']);
+            $page = PageModel::findById($args['id']);
+            if (!$page) {
+                $this->setDangerAlert(translate('{0} not found', array('User')));
+
+                return $this->redirectToRoute('page_index');
+            }
         }
 
         // Get navitems
@@ -179,14 +188,19 @@ class PageController extends BackendController
         ));
     }
 
+    /**
+     * Delete page action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     */
     public function deleteAction($args)
     {
-
-        // Get page by id
-        $page = $this->getPageById($args['id']);
-
         // Delete page
-        if ($page->delete()) {
+        $result = PageModel::deleteById($args['id']);
+
+        if ($result) {
             $this->setSuccessAlert(translate('{0} successful deleted', array('Page')));
         } else {
             $this->setDangerAlert(translate('Delete failed'));
@@ -210,23 +224,16 @@ class PageController extends BackendController
             $postData = $this->getRequest()->getPostData();
 
             // Get page by id
-            $page = $this->getPageById($postData->get('page_id'));
-
-            // Get navitem of page
-            $navitem = $page->navitems()
-                ->where('navigation_id', '=', 1)
-                ->fetch();
-
-            // Update page
-            $page->title = $postData->get('title');
-            $page->is_active = $postData->get('is_active');
-            $page->visibility = $postData->get('visibility');
-
-            // Update navitem
-            $navitem->parent_navitem_id = $postData->parent_navitem_id ? : null;
+            $page = PageModel::update(array(
+                    'title' => $postData->get('title'),
+                    'is_active' => $postData->get('is_active'),
+                    'parent_navitem_id' => $postData->get('parent_navitem_id'),
+                    'visibility' => $postData->get('visibility'),
+                    'module_id' => $postData->get('module_id'),
+                    ), $postData->get('page_id'));
 
             // Save page and navitem
-            if ($page->validate() && $page->save() && $navitem->save()) {
+            if ($page->validate() && $page->save()) {
                 $this->setSuccessAlert(translate('{0} successful updated', array('Page')));
             } else {
                 $this->setDangerAlert(translate('Update failed'));
@@ -249,21 +256,22 @@ class PageController extends BackendController
     public function activateAction($args)
     {
 
-        // Get page by id
-        $page = $this->getPageById($args['id']);
+        // Get page
+        $page = PageModel::findById($args['id']);
 
-        // Set state
-        $page->is_active = !$page->is_active;
+        if ($page) {
+            $page
+                ->toggleActivation()
+                ->save();
 
-        // Save page
-        if ($page->validate() && $page->save()) {
             if ($page->is_active) {
                 $this->setSuccessAlert(translate('Page successful activated'));
             } else {
                 $this->setSuccessAlert(translate('Page successful disabled'));
             }
+        } else {
+            $this->setDangerAlert(translate('{0} not found', array('Page')));
         }
-
         return $this->redirectToRoute('page_index');
     }
 
@@ -273,18 +281,5 @@ class PageController extends BackendController
     protected function setView()
     {
         $this->view = new PageView();
-    }
-
-    protected function getPageById($id)
-    {
-
-        // Get page by id
-        $page = PageModel::findById($id);
-
-        if ($page) {
-            return $page;
-        }
-
-        throw new \Exception('Page not found');
     }
 }

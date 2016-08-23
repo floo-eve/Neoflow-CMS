@@ -2,6 +2,7 @@
 
 namespace Neoflow\CMS\Controller;
 
+use Exception;
 use Neoflow\CMS\Mapper\PageMapper;
 use Neoflow\CMS\Views\FrontendView;
 use Neoflow\Framework\Core\AbstractController;
@@ -83,12 +84,13 @@ class FrontendController extends AbstractController
     public function errorAction($args)
     {
         $message = '';
+        $exception = false;
 
         if (isset($args[0])) {
-            if (is_a($args[0], '\\Exception')) {
+            if (is_a($args[0], '\\Exception') || is_a($args[0], '\\Error')) {
                 $message = $args[0]->getMessage();
+                $exception = $args[0];
             } elseif (is_string($args[0])) {
-
                 $message = $args[0];
             }
         }
@@ -96,7 +98,9 @@ class FrontendController extends AbstractController
         return $this->render('error/internalServerError', array(
                 'code' => 500,
                 'title' => 'Internal server error',
-                'message' => $message))->setStatusCode(500);
+                'message' => $message,
+                'exception' => $exception
+            ))->setStatusCode(500);
     }
 
     /**

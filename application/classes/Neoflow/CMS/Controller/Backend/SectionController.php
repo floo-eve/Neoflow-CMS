@@ -2,20 +2,17 @@
 
 namespace Neoflow\CMS\Controller\Backend;
 
-use Exception;
 use Neoflow\CMS\Controller\BackendController;
 use Neoflow\CMS\Model\ModuleModel;
 use Neoflow\CMS\Model\PageModel;
 use Neoflow\CMS\Model\SectionModel;
-use Neoflow\Framework\Support\Validation\ValidationException;
 use Neoflow\Framework\HTTP\Responsing\JsonResponse;
+use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\CMS\Support\Alert\DangerAlert;
-use Neoflow\CMS\Support\Alert\SuccessAlert;
+use Neoflow\Framework\Support\Validation\ValidationException;
 
 class SectionController extends BackendController
 {
-
     /**
      * @var SectionModel
      */
@@ -45,11 +42,9 @@ class SectionController extends BackendController
 
     /**
      * Reorder sections action.
-
      *
-
      * @param array $args
-
+     *
      * @return JsonResponse
      */
     public function reorderAction($args)
@@ -71,11 +66,9 @@ class SectionController extends BackendController
 
     /**
      * Create new section action.
-
      *
-
      * @param array $args
-
+     *
      * @return Response
      */
     public function createAction($args)
@@ -107,86 +100,61 @@ class SectionController extends BackendController
 
     /**
      * Delete section action.
-
      *
-
      * @param array $args
-
+     *
      * @return Response
      */
     public function deleteAction($args)
     {
 
-        // Get section by id
+        // Get section
+        $section = SectionModel::findById($args['id']);
 
-        $section = $this->getSectionById($args['id']);
+        if ($section) {
+            if ($section->delete()) {
+                $this->setSuccessAlert(translate('{0} successful deleted', array('Section')));
+            } else {
+                $this->setDangerAlert(translate('Delete failed'));
+            }
 
-        // Delete section
-
-        if ($section->delete()) {
-            $this->setSuccessAlert(translate('{0} successful deleted', array('Section')));
-        } else {
-            $this->setDangerAlert(translate('Delete failed'));
+            return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
         }
 
-        return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
+        $this->setDangerAlert(translate('{0} not found', array('Section')));
+
+        return $this->redirectToRoute('page_index');
     }
 
     /**
      * Activate section action.
-
      *
-
      * @param array $args
-
-     * @return Response
+     *
+     * @return RedirectResponse|Response
      */
     public function activateAction($args)
     {
 
-        // Get section by id
+        // Get section
+        $section = SectionModel::findById($args['id']);
 
-        $section = $this->getSectionById($args['id']);
+        if ($section) {
+            $section
+                ->toggleActivation()
+                ->save();
 
-        // Set state
-
-        $section->is_active = !$section->is_active;
-
-        // Save section
-
-        if ($section->save()) {
             if ($section->is_active) {
                 $this->setSuccessAlert(translate('Section successful activated'));
             } else {
                 $this->setSuccessAlert(translate('Section successful disabled'));
             }
+
+            return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
         }
 
-        return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
-    }
+        $this->setDangerAlert(translate('{0} not found', array('Section')));
 
-    /**
-     * Get section by id.
-
-     *
-
-     * @param int $id
-
-     * @return SectionModel
-
-     * @throws Exception
-     */
-    protected function getSectionById($id)
-    {
-
-        // Get page by id
-
-        $section = SectionModel::findById($id);
-
-        if ($section) {
-            return $section;
-        }
-
-        throw new Exception('Section not found');
+        return $this->redirectToRoute('page_index');
     }
 }

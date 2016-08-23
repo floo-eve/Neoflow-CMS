@@ -116,14 +116,22 @@ class PageModel extends AbstractEntityModel
         $result = parent::save();
 
         if ($result) {
-            if ($this->isNew) {
-                NavitemModel::create(array(
-                    'navigation_id' => 1,
-                    'page_id' => $this->id(),
-                    'language_id' => $this->language_id,
-                    'parent_navitem_id' => $this->parent_navitem_id ? : null,
-                ))->save();
+
+            $navitem = NavitemModel::repo()
+                ->where('navigation_id', '=', 1)
+                ->where('page_id', '=', $this->id())
+                ->fetch();
+
+            if ($navitem) {
+                $navitem->delete();
             }
+
+            NavitemModel::create(array(
+                'navigation_id' => 1,
+                'page_id' => $this->id(),
+                'language_id' => $this->language_id,
+                'parent_navitem_id' => $this->parent_navitem_id ? : null,
+            ))->save();
 
             if ($this->module_id) {
                 SectionModel::create(array(

@@ -5,14 +5,12 @@ namespace Neoflow\CMS\Controller\Backend;
 use Neoflow\CMS\Controller\BackendController;
 use Neoflow\CMS\Model\PermissionModel;
 use Neoflow\CMS\Model\RoleModel;
+use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\CMS\Support\Alert\DangerAlert;
-use Neoflow\CMS\Support\Alert\SuccessAlert;
 use Neoflow\Framework\Support\Validation\ValidationException;
 
 class RoleController extends BackendController
 {
-
     /**
      * Constructor.
      */
@@ -50,7 +48,7 @@ class RoleController extends BackendController
      *
      * @param array $args
      *
-     * @return Response
+     * @return RedirectResponse
      */
     public function createAction($args)
     {
@@ -78,6 +76,13 @@ class RoleController extends BackendController
         return $this->redirectToRoute('role_index');
     }
 
+    /**
+     * Edit role action.
+     *
+     * @param array $args
+     *
+     * @return Response|RedirectResponse
+     */
     public function editAction($args)
     {
 
@@ -105,6 +110,13 @@ class RoleController extends BackendController
         ));
     }
 
+    /**
+     * Update role action.
+     *
+     * @param array $args
+     *
+     * @return RedirectResponse
+     */
     public function updateAction($args)
     {
         try {
@@ -112,7 +124,7 @@ class RoleController extends BackendController
             // Get post data
             $postData = $this->getRequest()->getPostData();
 
-            // Update role
+            // Get and update role
             $role = RoleModel::update(array(
                     'title' => $postData->get('title'),
                     'description' => $postData->get('description'),
@@ -133,6 +145,13 @@ class RoleController extends BackendController
         return $this->redirectToRoute('role_edit', array('id' => $postData->get('role_id')));
     }
 
+    /**
+     * Delete role action.
+     *
+     * @param array $args
+     *
+     * @return RedirectResponse
+     */
     public function deleteAction($args)
     {
         try {

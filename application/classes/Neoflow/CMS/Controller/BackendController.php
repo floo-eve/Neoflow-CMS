@@ -157,7 +157,7 @@ class BackendController extends AbstractController
 
             if ($user->reset_key === $postData->get('reset_key') && $user->validatePassword() && $user->save()) {
 
-                $user->reset_when = null;
+                $user->reseted_when = null;
                 $user->reset_key = null;
                 $user->save();
 
@@ -190,7 +190,7 @@ class BackendController extends AbstractController
             ->fetch();
 
         if ($user) {
-            if (1 === 1 || !$user->reset_key || $user->reset_when < microtime(true) - 60 * 60) {
+            if (1 === 1 || !$user->reset_key || $user->reseted_when < microtime(true) - 60 * 60) {
                 if ($user->setResetKey() && $user->save()) {
                     $link = generate_url('backend_new_password', array('reset_key' => $user->reset_key));
                     $message = translate('Password reset email message', array($user->getFullName(), $link));

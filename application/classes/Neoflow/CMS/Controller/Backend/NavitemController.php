@@ -9,11 +9,9 @@ class NavitemController extends BackendController
 {
     /**
      * Reorder navitems action.
-     
      *
-     
      * @param array $args
-     
+     *
      * @return JsonResponse
      */
     public function reorderAction($args)
@@ -24,9 +22,7 @@ class NavitemController extends BackendController
 
         if (is_json($json)) {
             $result = $this
-
                 ->service('navitem')
-
                 ->updateOrder(json_decode($json, true));
         }
 

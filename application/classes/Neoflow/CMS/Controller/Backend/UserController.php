@@ -6,8 +6,6 @@ use Neoflow\CMS\Controller\BackendController;
 use Neoflow\CMS\Model\RoleModel;
 use Neoflow\CMS\Model\UserModel;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\CMS\Support\Alert\DangerAlert;
-use Neoflow\CMS\Support\Alert\SuccessAlert;
 use Neoflow\Framework\Support\Validation\ValidationException;
 
 class UserController extends BackendController
@@ -157,13 +155,7 @@ class UserController extends BackendController
             $postData = $this->getRequest()->getPostData();
 
             // Update user
-            $user = UserModel::update(array(
-                    'password' => $postData->get('password'),
-                    'password2' => $postData->get('password2'),
-                    ), $postData->get('user_id'));
-
-            $user->reset_when = null;
-            $user->reset_key = null;
+            $user = UserModel::updatePassword($postData->get('password'), $postData->get('password2'), $postData->get('user_id'));
 
             if ($user->validatePassword() && $user->save()) {
                 $this->setSuccessAlert(translate('{0} successful updated', array('Password')));

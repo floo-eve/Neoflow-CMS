@@ -22,7 +22,12 @@ class UserModel extends AbstractEntityModel
     /**
      * @var array
      */
-    public static $properties = ['user_id', 'email', 'firstname', 'lastname', 'role_id', 'reset_when'];
+    public static $properties = ['user_id', 'email', 'firstname', 'lastname', 'role_id'];
+
+    /**
+     * @var array
+     */
+    public static $hiddenProperties = ['password', 'reset_key', 'reseted_when'];
 
     /**
      * Get repository to fetch role.
@@ -119,23 +124,6 @@ class UserModel extends AbstractEntityModel
             $this->remove('role_id');
         }
 
-        // Remove confirm password property
-        $this->remove('password2');
-
-        // Calculate password to sha1 hash
-        if (property_exists($this, 'password')) {
-            $password = sha1($this->password);
-            $this
-                ->addProperty('password')
-                ->set('password', $password);
-        }
-
-        if (property_exists($this, 'reset_key')) {
-            $this
-                ->addProperty('reset_key')
-                ->set('reset_key', $this->reset_key);
-        }
-
         return parent::save();
     }
 
@@ -152,13 +140,58 @@ class UserModel extends AbstractEntityModel
     /**
      * Generate and set reset key
      *
+     * @param bool $reset
+     *
      * @return self
      */
-    public function setResetKey()
+    public function setResetKey($reset = false)
     {
-        $this->reset_key = sha1(uniqid());
-        $this->reset_when = microtime(true);
+        if ($reset) {
+            $this->reset_key = null;
+            $this->reseted_when = null;
+        } else {
+            $this->reset_key = sha1(uniqid());
+            $this->reseted_when = microtime(true);
+        }
 
         return $this;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @param string $password2
+     * @return self
+     */
+    public function setPassword($password, $password2)
+    {
+        return $this
+                ->addProperty('password')
+                ->set('password', $password)
+                ->addProperty('password2')
+                ->set('password2', $password2);
+    }
+
+    /**
+     * Update password of user entity
+     *
+     * @param string $password
+     * @param string $password2
+     * @param int|string $id
+     *
+     * @return self
+     *
+     * @throws Exception
+     */
+    public static function updatePassword($password, $password2, $id)
+    {
+        $user = self::findById($id);
+        if ($user) {
+            return $user
+                    ->setPassword($password, $password2)
+                    ->setResetKey(true);
+        }
+        throw new \Exception('User not found');
     }
 }
