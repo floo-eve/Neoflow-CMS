@@ -353,10 +353,10 @@ class App
      */
     protected function setError()
     {
-        //        set_error_handler(array($this, 'errorHandler'), E_ALL);
-//        register_shutdown_function(array($this, 'shutdownFunction'));
-//
-//        set_exception_handler(array($this, 'exceptionHandler'));
+        set_error_handler(array($this, 'errorHandler'), E_ALL);
+        register_shutdown_function(array($this, 'shutdownFunction'));
+
+        set_exception_handler(array($this, 'exceptionHandler'));
     }
 
     /**

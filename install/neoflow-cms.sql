@@ -291,7 +291,7 @@ CREATE TABLE `users` (
   `lastname` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `firstname` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `reset_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `reset_when` int(11) DEFAULT NULL,
+  `reseted_when` int(11) DEFAULT NULL,
   `role_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -299,7 +299,7 @@ CREATE TABLE `users` (
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`user_id`, `email`, `password`, `lastname`, `firstname`, `reset_key`, `reset_when`, `role_id`) VALUES
+INSERT INTO `users` (`user_id`, `email`, `password`, `lastname`, `firstname`, `reset_key`, `reseted_when`, `role_id`) VALUES
 (1, 'john.doe@neoflow.ch', sha('123456'), 'Doe', 'John', NULL, NULL, 1),
 (2, 'jonathan.nessier@outlook.com', sha('123456'), 'Nessier', 'Jonathan', NULL, NULL, 4);
 

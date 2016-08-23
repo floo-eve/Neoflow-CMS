@@ -82,7 +82,7 @@
     $('select').select2({
         theme: 'bootstrap',
         minimumResultsForSearch: -1,
-        allowClear: true,
+//        allowClear: true,
         templateResult: function (item) {
             if (item.hasOwnProperty('element')) {
                 var $element = $(item.element);

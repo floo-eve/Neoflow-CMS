@@ -89,6 +89,12 @@ nav {
                                     }
                                 }*/
 
+                &.logged-in-user {
+                    hr {
+                        margin: 10px 0;
+                    }
+                }
+
             }
 
             .sidebar-nav {

@@ -14666,6 +14666,9 @@ nav.sidebar .sidebar-collapse .sidebar-content {
                       }
                   }*/
 }
+nav.sidebar .sidebar-collapse .sidebar-content.logged-in-user hr {
+  margin: 10px 0;
+}
 nav.sidebar .sidebar-collapse .sidebar-nav {
   background: #32323A;
   border-top: 0;

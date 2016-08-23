@@ -9,9 +9,9 @@
         </a>
     </div>
     <div class="sidebar-collapse collapse">
-        <div class="sidebar-content">
+        <div class="sidebar-content logged-in-user">
             <div class="media">
-                <p><small><?= translate('Logged in as') ?></small></p>
+                <!--<p><small><?= translate('Logged in as') ?>:</small></p>-->
                 <span class="media-left">
                     <i class="fa fa-3x fa-user media-object"></i>
                 </span>
@@ -20,6 +20,13 @@
                     <?= $view->getAuthenticatedUser()->role()->fetch()->title ?>
                 </div>
             </div>
+            <hr />
+            <?php if ($view->app()->service('auth')->isAuthenticated()) { ?>
+                <a href="<?= generate_url('backend_logout') ?>" title="Logout" class="btn btn-xs btn-primary btn-icon-left btn-icon">
+                    <i class="fa fa-sign-out"></i>
+                    <span class="hidden-xs"> Logout</span></a>
+            <?php } ?>
+
         </div>
         <ul class="nav sidebar-nav">
             <li <?= $view->isCurrentRoute('dashboard*', 'class="active"') ?>>

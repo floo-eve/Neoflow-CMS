@@ -29,7 +29,12 @@ abstract class AbstractEntityModel
     /**
      * @var array
      */
-    public static $properties;
+    public static $properties = array();
+
+    /**
+     * @var array
+     */
+    public static $hiddenProperties = array();
 
     /**
      * @var EntityMapper
@@ -122,6 +127,18 @@ abstract class AbstractEntityModel
     }
 
     /**
+     * Get hidden properties of model entity.
+     *
+     * @return string
+     */
+    protected function getHiddenProperties()
+    {
+        $modelClassName = get_class($this);
+
+        return $modelClassName::$hiddenProperties;
+    }
+
+    /**
      * Get data of model entity as an array.
      *
      * @return array
@@ -210,7 +227,7 @@ abstract class AbstractEntityModel
                 $this->modifiedProperties[] = $key;
                 $this->isModified = true;
             }
-        } else {
+        } elseif (!in_array($key, $this->getHiddenProperties())) {
             $this->$key = $value;
         }
 
