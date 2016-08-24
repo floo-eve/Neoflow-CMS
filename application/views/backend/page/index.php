@@ -4,7 +4,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= translate('All {0}', array('Pages')) ?>
+                    <?= translate('All pages') ?>
                 </h3>
             </div>
 
@@ -44,7 +44,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= translate('Create {0}', array('Page')) ?>
+                    <?= translate('Create page') ?>
                 </h3>
             </div>
             <div class="panel-body">

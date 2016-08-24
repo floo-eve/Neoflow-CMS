@@ -203,4 +203,19 @@ class PageModel extends AbstractEntityModel
 
         return parent::delete();
     }
+
+    /**
+     * Toggle activation
+     *
+     * @return self
+     */
+    public function toggleActivation()
+    {
+        if ($this->is_active) {
+            $this->is_active = false;
+        } else {
+            $this->is_active = true;
+        }
+        return $this;
+    }
 }

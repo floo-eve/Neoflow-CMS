@@ -4,7 +4,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= translate('Edit user') ?>
+                    <?= translate('Edit user') ?><span class="label label-primary pull-right"><?= $user->getFullName() ?></span>
                 </h3>
             </div>
             <div class="panel-body">

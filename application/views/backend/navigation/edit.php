@@ -1,1 +1,41 @@
-<?php ?><div class="row">    <div class="col-lg-8">        <div class="panel panel-primary">            <div class="panel-heading">                <h3 class="panel-title"><?= $navigation->title ?> - <?= $activeLanguage->title . ' (' . $activeLanguage->code . ')' ?></h3>            </div>            <ul class="nav nav-tabs">                <?php foreach ($languages as $language) {                    ?>                    <li <?= ($language->id() === $activeLanguage->id() ? 'class="active"' : '') ?>>                        <a href="<?= generate_url('navigation_edit', array('id' => $navigation->id(), 'language_id' => $language->id())) ?>">                            <?= $language->title . ' (' . $language->code . ')' ?>                        </a>                    </li>                <?php }                ?>            </ul>            <div class="panel-body">                <form method="post" action="<?= generate_url('navigation_add_item') ?>" class="form-inline">                    <input type="hidden" value="<?= $navigation->id() ?>" name="navigation_id" />                    <input type="hidden" value="<?= $navigation->language_id ?>" name="language_id" />                    <div class="form-group">                        <label for="inputTitle"><?= translate('Title') ?></label>                        <input type="text" name="title" class="form-control" id="inputTitle" maxlength="50" minlength="3" >                    </div>                    <div class="form-group">                        <label for="selectPage"><?= translate('Page') ?></label>                        <select class="form-control select2" name="page_id" id="selectPage">                            <?= $view->renderSelectOption(array()) ?>                        </select>                    </div>                    <div class="form-group">                        <button name="saveSubmit" class="btn btn-primary"><i class="fa fa-plus"></i> <?= translate('Add') ?></button>                    </div>                </form>                <hr />                <?php if ($navitems) { ?>                    <div class="nestable" id="nestable">                        <?= $view->renderNestableList($navitems) ?>                    </div>                    <a href="#" id="saveOrderBtn" class="btn btn-primary disabled">Reihenfolge speichern</a>                    <a href="#" id="resetOrderBtn" class="btn btn-default disabled">Reihenfolge zurücksetzen</a>                <?php } else { ?>                    <p class="alert alert-info">Noch keine Elemente vorhanden</p>                <?php } ?>            </div>            <div class="panel-footer">                <a class="btn btn-default" href="<?= generate_url('navigation_index') ?>">                    <?= translate('Back to the navigations') ?>                </a>            </div>        </div>    </div>    <div class="col-lg-4">        <div class="panel panel-default">            <div class="panel-heading">                <h3 class="panel-title"><?= translate('Edit navigation') ?></h3>            </div>            <div class="panel-body">                <form method="post" action="<?= generate_url('navigation_update') ?>" class="form-horizontal">                    <div class="form-group">                        <label for="inputTitle" class="col-sm-2 control-label">                            <?= translate('Title') ?>                        </label>                        <div class="col-sm-10">                            <input id="inputTitle" type="text" required class="form-control" name="title" maxlength="50" minlength="3" value="<?= $navigation->title ?>" />                        </div>                    </div>                    <div class="form-group">                        <label for="textareaDescription" class="col-sm-2 control-label">                            <?= translate('Description') ?>                        </label>                        <div class="col-sm-10">                            <textarea name="description" class="form-control vresize" maxlength="150" id="textareaDescription" rows="3"><?= $navigation->description ?></textarea>                        </div>                    </div>                    <div class="form-group">                        <div class="col-sm-offset-2 col-sm-10">                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> <?= translate('Save') ?></button>                        </div>                    </div>                </form>            </div>        </div>    </div></div>
+<?= $view->renderTemplate('backend/navigation/navbar', array('navigation' => $navigation)) ?>
+
+<div class="row">
+    <div class="col-lg-8">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <?= translate('Edit navigation') ?><span class="label label-primary pull-right"><?= $navigation->title ?></span>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <form method="post" action="<?= generate_url('navigation_update') ?>" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputTitle" class="col-sm-2 control-label">
+                            <?= translate('Title') ?>
+                        </label>
+                        <div class="col-sm-10">
+                            <input id="inputTitle" type="text" required class="form-control" name="title" maxlength="50" minlength="3" value="<?= $navigation->title ?>" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="textareaDescription" class="col-sm-2 control-label">
+                            <?= translate('Description') ?>
+                        </label>
+                        <div class="col-sm-10">
+                            <textarea name="description" class="form-control vresize" maxlength="150" id="textareaDescription" rows="3"><?= $navigation->description ?></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary btn-icon btn-icon-left">
+                                <i class="fa fa-save"></i><?= translate('Save') ?>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

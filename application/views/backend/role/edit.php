@@ -4,7 +4,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= translate('Edit role') ?>
+                    <?= translate('Edit role') ?><span class="label label-primary pull-right"><?= $role->title ?></span>
                 </h3>
             </div>
             <div class="panel-body">

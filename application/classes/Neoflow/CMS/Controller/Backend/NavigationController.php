@@ -13,35 +13,9 @@ use Neoflow\CMS\Model\NavitemModel;
 use Neoflow\CMS\Views\Backend\NavigationView;
 use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Framework\Support\Validation\ValidationException;
-use function translate;
 
 class NavigationController extends BackendController
 {
-
-    /**
-     * @var LanguageMapper
-     */
-    protected $languageMapper;
-
-    /**
-     * @var PageMapper
-     */
-    protected $pageMapper;
-
-    /**
-     * @var NavigationMapper
-     */
-    protected $navigationMapper;
-
-    /**
-     * @var NavitemMapper
-     */
-    protected $navitemMapper;
-
-    /**
-     * @var array
-     */
-    protected $languages = array();
 
     /**
      * Constructor.
@@ -51,59 +25,62 @@ class NavigationController extends BackendController
         parent::__construct();
 
         // Set titles
-
         $this->view
-            ->setSubtitle('Backend / Content')
+            ->setSubtitle('Content')
             ->setTitle('Navigations');
-
-        // Create mapper
-
-        $this->languageMapper = new LanguageMapper();
-
-        $this->pageMapper = new PageMapper();
-
-        $this->navigationMapper = new NavigationMapper();
-
-        $this->navitemMapper = new NavitemMapper();
     }
 
     public function indexAction($args)
     {
-        $navigations = NavigationModel::findAll();
-
         return $this->render('backend/navigation/index', array(
-                'navigations' => $navigations,
+                'navigations' => NavigationModel::findAll(),
         ));
     }
 
-    public function editAction($args)
+    public function navitemsAction($args)
     {
         $navigation = NavigationModel::findById($args['id']);
 
-        $languages = $this->languageMapper->getOrm()
-            ->where('is_active', '=', true)
-            ->fetchAll();
+        // Get all languages
+        $languages = LanguageModel::findAllByColumn('is_active', true);
 
+        // Get navigation language id
         $language_id = $this->getRequest()->getGet('language_id');
 
         if (!$language_id) {
-            $args['language_id'] = $languages[0]->id();
-
-            return $this->redirectToRoute('navigation_edit', $args);
+            if ($this->session()->has('navigation_language_id')) {
+                $language_id = $this->session()->get('navigation_language_id');
+            } else {
+                $language_id = $languages[0]->id();
+                $this->session()->reflash();
+                return $this->redirectToRoute('navigation_navitems', array('id' => $navigation->id(), 'language_id' => $language_id));
+            }
         }
+        $this->session()->set('navigation_language_id', $language_id);
 
-        $activeLanguage = LanguageModel::findById($language_id);
+        // Get navigation language
+        $navigationLanguage = LanguageModel::findById($language_id);
 
         $navitems = $navigation->navitems()
             ->where('parent_navitem_id', 'IS', null)
             ->where('language_id', '=', $language_id)
+            ->orderByAsc('position')
             ->fetchAll();
 
-        return $this->render('backend/navigation/edit', array(
-                'languages' => $languages,
+        $pageNavitems = NavitemModel::repo()
+            ->where('navigation_id', '=', 1)
+            ->where('language_id', '=', $language_id)
+            ->fetchAll();
+
+        // Set back url
+        $this->view->setBackRoute('navigation_index', array('language_id' => $navigation->language_id));
+
+        return $this->render('backend/navigation/navitems', array(
                 'navigation' => $navigation,
                 'navitems' => $navitems,
-                'activeLanguage' => $activeLanguage,
+                'pageNavitems' => $pageNavitems,
+                'languages' => $languages,
+                'navigationLanguage' => $navigationLanguage,
         ));
     }
 
@@ -118,44 +95,55 @@ class NavigationController extends BackendController
      */
     public function createAction($args)
     {
-
-        // Get post data
-
-        $postData = $this->getRequest()->getPostData();
-
-        $navigation_id = $postData->get('navigation_id');
-
         try {
 
-            // Create model entity
+            // Get post data
+            $postData = $this->getRequest()->getPostData();
 
-            $navigation = new NavigationModel();
+            // Create navigation
+            $navigation = NavigationModel::create(array(
+                    'title' => $postData->get('title'),
+                    'description' => $postData->get('description')
+            ));
 
-            $navigation->title = $postData->get('title');
-
-            $navigation->description = $postData->get('description');
-
-            $navigation->save();
+            if ($navigation->validate() && $navigation->save()) {
+                $this->setSuccessAlert(translate('{0} successful created', array('Navigation')));
+            } else {
+                $this->setDangerAlert(translate('Create failed'));
+            }
         } catch (ValidationException $ex) {
-
-            // Fallback if validation fails
-
             $this->setDangerAlert($ex->getErrors());
-
-            return $this->redirectToRoute('navigation_index');
-        } catch (Exception $ex) {
-
-            // Fallback if something got wrong
-
-            $this->setDangerAlert(translate('Something got wrong'));
-
-            return $this->redirectToRoute('navigation_index');
         }
 
-        $this->session()
-            ->setSuccessAlert(translate('Successful saved'));
-
         return $this->redirectToRoute('navigation_index');
+    }
+
+    public function editAction($args)
+    {
+
+        // Get navigation data if validation has failed)
+        if ($this->service('validation')->hasError()) {
+            $navigationData = $this->service('validation')->getData();
+
+            $navigation = new PageModel($navigationData);
+        } else {
+
+            // Get navigation by id
+            $navigation = NavigationModel::findById($args['id']);
+            if (!$navigation) {
+                $this->setDangerAlert(translate('{0} not found', array('User')));
+
+                return $this->redirectToRoute('navigation_index');
+            }
+        }
+
+
+        // Set back url
+        $this->view->setBackRoute('navigation_index', array('language_id' => $navigation->language_id));
+
+        return $this->render('backend/navigation/edit', array(
+                'navigation' => $navigation
+        ));
     }
 
     /**
@@ -169,44 +157,29 @@ class NavigationController extends BackendController
      */
     public function updateAction($args)
     {
-
-        // Get post data
-
-        $postData = $this->getRequest()->getPostData();
-
-        $navigation_id = $postData->get('navigation_id');
-
         try {
 
-            // Update model entity
+            // Get post data
+            $postData = $this->getRequest()->getPostData();
 
-            $navigation = NavigationModel::findById($navigation_id);
+            // Get navigation by id
+            $navigation = NavigationModel::update(array(
+                    'title' => $postData->get('title'),
+                    'is_active' => $postData->get('is_active'),
+                    'parent_navitem_id' => $postData->get('parent_navitem_id'),
+                    'visibility' => $postData->get('visibility'),
+                    'module_id' => $postData->get('module_id'),
+                    ), $postData->get('navigation_id'));
 
-            $navigation->title = $postData->get('title');
-
-            $navigation->description = $postData->get('description');
-
-            $navigation->save();
+            // Save navigation and navitem
+            if ($navigation->validate() && $navigation->save()) {
+                $this->setSuccessAlert(translate('{0} successful updated', array('Navigation')));
+            } else {
+                $this->setDangerAlert(translate('Update failed'));
+            }
         } catch (ValidationException $ex) {
-
-            // Fallback if validation fails
-
-            $this->session()
-                ->setDangerAlert($ex->getErrors());
-
-            return $this->redirectToRoute('navigation_edit', array('id' => $navigation_id));
-        } catch (Exception $ex) {
-
-            // Fallback if something get wrong
-
-            $this->session()
-                ->setDangerAlert(translate('Transaction failed'));
-
-            return $this->redirectToRoute('navigation_index');
+            $this->setDangerAlert($ex->getErrors());
         }
-
-        $this->session()
-            ->setSuccessAlert(translate('Successful saved'));
 
         return $this->redirectToRoute('navigation_edit', array('id' => $navigation->id()));
     }
@@ -257,7 +230,28 @@ class NavigationController extends BackendController
         $this->session()
             ->setSuccessAlert(translate('Successful added'));
 
-        return $this->redirectToRoute('navigation_edit', array('id' => $navitem->navigation_id, 'language_id' => $navitem->language_id));
+        return $this->redirectToRoute('navigation_navitems', array('id' => $navitem->navigation_id, 'language_id' => $navitem->language_id));
+    }
+
+    /**
+     * Delete navigation action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     */
+    public function deleteAction($args)
+    {
+        // Delete navigation
+        $result = NavigationModel::deleteById($args['id']);
+
+        if ($result) {
+            $this->setSuccessAlert(translate('{0} successful deleted', array('Navigation')));
+        } else {
+            $this->setDangerAlert(translate('Delete failed'));
+        }
+
+        return $this->redirectToRoute('navigation_index');
     }
 
     /**

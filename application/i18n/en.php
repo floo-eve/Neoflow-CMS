@@ -230,6 +230,8 @@ $this->addTranslation(array(
     'All navigations' => 'All navigations',
     'Navigations' => 'Navigations',
     'Create navigation' => 'Create navigation',
+    'Navigation items of {0}' => 'Navigation items of {0}',
+    'Items' => 'Items',
 ));
 
 // Page

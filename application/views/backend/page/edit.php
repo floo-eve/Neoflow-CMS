@@ -6,7 +6,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= translate('Page settings of {0}', array('<i>' . $page->title . '</i>')) ?>
+                    <?= translate('Edit page') ?><span class="label label-primary pull-right"><?= $page->title ?></span>
                 </h3>
             </div>
             <div class="panel-body">

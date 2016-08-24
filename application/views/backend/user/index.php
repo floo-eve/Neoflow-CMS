@@ -116,8 +116,6 @@
                             </select>
                         </div>
                     </div>
-
-
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
                             <button type="submit" class="btn btn-primary btn-icon btn-icon-left">

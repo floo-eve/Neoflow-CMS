@@ -22,7 +22,7 @@ $this->addRoutes(array(
 
 // Backend page routes
 $this->addRoutes(array(
-    array('page_settings', 'get', '/backend/page/settings/(id:num)', 'Page@settings'),
+    array('page_edit', 'get', '/backend/page/edit/(id:num)', 'Page@edit'),
     array('page_sections', 'get', '/backend/page/sections/(id:num)', 'Page@sections'),
     array('page_delete', 'get', '/backend/page/delete/(id:num)', 'Page@delete'),
     array('page_activate', 'get', '/backend/page/activate/(id:num)', 'Page@activate'),
@@ -62,10 +62,13 @@ $this->addRoutes(array(
 // Backend navigation routes
 $this->addRoutes(array(
     array('navigation_create', 'post', '/backend/navigation/create', 'Navigation@create'),
-    array('navigation_edit', 'get', '/backend/navigation/(id:num)', 'Navigation@edit'),
+    array('navigation_edit', 'get', '/backend/navigation/edit/(id:num)', 'Navigation@edit'),
+    array('navigation_navitems', 'get', '/backend/navigation/navitems/(id:num)', 'Navigation@navitems'),
     array('navigation_update', 'post', '/backend/navigation/update', 'Navigation@update'),
     array('navigation_delete', 'get', '/backend/navigation/delete/(id:num)', 'Navigation@delete'),
-    array('navigation_add_item', 'post', '/backend/navigation/add/item', 'Navigation@addItem'),
+    array('navigation_create_navitem', 'post', '/backend/navigation/create-navitem', 'Navigation@createNavitem'),
+    array('navigation_delete_navitem', 'get', '/backend/navigation/delete-navitem/(id:num)', 'Navigation@deleteNavitem'),
+    array('navigation_edit_navitem', 'get', '/backend/navigation/edit-navitem/(id:num)', 'Navigation@editNavitem'),
     array('navigation_index', 'get', '/backend/navigations', 'Navigation@index')
 ));
 

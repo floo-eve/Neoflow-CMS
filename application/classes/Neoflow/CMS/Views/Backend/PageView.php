@@ -23,7 +23,7 @@ class PageView extends NavigationView
             foreach ($navitems as $navitem) {
                 $page = $navitem->page()->fetch();
 
-                $output .= '<li class="nestable-item list-group-item ' . (!$page->is_active ? 'list-groupd-item-disabled' : '') . '" data-collapsed="' . $this->cookies->exists($navitem->id()) . '" data-id="' . $navitem->id() . '">
+                $output .= '<li class="nestable-item list-group-item ' . (!$page->is_active ? 'list-groupd-item-disabled' : '') . '" data-collapsed="' . $this->app()->get('request')->getCookies()->exists($navitem->id()) . '" data-id="' . $navitem->id() . '">
                             <span class="nestable-handle">
                                 <i class="fa fa-fw fa-arrows"></i>
                             </span>
@@ -54,7 +54,7 @@ class PageView extends NavigationView
                                     <a href="' . generate_url('page_sections', array('id' => $page->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . translate('Sections') . '">
                                         <i class="fa fa-fw fa-th-list"></i>
                                     </a>
-                                    <a href="' . generate_url('page_settings', array('id' => $page->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . translate('Settings') . '">
+                                    <a href="' . generate_url('page_edit', array('id' => $page->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . translate('Settings') . '">
                                         <i class="fa fa-fw fa-cog"></i>
                                     </a>';
 
@@ -83,28 +83,6 @@ class PageView extends NavigationView
                 $output .= '</li>';
             }
             $output .= '</ol>';
-        }
-
-        return $output;
-    }
-
-    public function renderNavitemOptions(EntityCollection $navitems, $level = 0, $selectedNavitemId = null, array $disabledNavitemIds = array())
-    {
-        $output = '';
-        foreach ($navitems as $navitem) {
-            $output .= '<option ' . (in_array($navitem->id(), $disabledNavitemIds) ? 'disabled' : '') . ' ' . ($selectedNavitemId === $navitem->id() ? 'selected' : '') . ' data-level="' . $level . '" value="' . $navitem->id() . '">' . $navitem->title . '</option>';
-
-            $childNavitems = $navitem->childNavitems()
-                ->orderByAsc('position')
-                ->fetchAll();
-
-            if (in_array($navitem->id(), $disabledNavitemIds)) {
-                $disabledNavitemIds = $childNavitems->map(function ($navitem) {
-                        return $navitem->id();
-                    })->toArray();
-            }
-
-            $output .= $this->renderNavitemOptions($childNavitems, $level + 1, $selectedNavitemId, $disabledNavitemIds);
         }
 
         return $output;

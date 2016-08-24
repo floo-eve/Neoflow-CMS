@@ -14,8 +14,8 @@
                     <i class="fa fa-fw fa-th-list"></i> <?= translate('Sections') ?>
                 </a>
             </li>
-            <li <?= $view->isCurrentRoute('page_settings', 'class="active"') ?>>
-                <a href="<?= generate_url('page_settings', array('id' => $page->id())) ?>">
+            <li <?= $view->isCurrentRoute('page_edit', 'class="active"') ?>>
+                <a href="<?= generate_url('page_edit', array('id' => $page->id())) ?>">
                     <i class="fa fa-fw fa-cog"></i><?= translate('Settings') ?>
                 </a>
             </li>

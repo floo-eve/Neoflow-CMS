@@ -48,13 +48,10 @@ class PageController extends BackendController
                 $language_id = $this->session()->get('page_language_id');
             } else {
                 $language_id = $languages[0]->id();
-
                 $this->session()->reflash();
-
                 return $this->redirectToRoute('page_index', array('language_id' => $language_id));
             }
         }
-
         $this->session()->set('page_language_id', $language_id);
 
         // Get page language
@@ -142,7 +139,7 @@ class PageController extends BackendController
         ));
     }
 
-    public function settingsAction($args)
+    public function editAction($args)
     {
 
         // Get page data if validation has failed)
@@ -180,7 +177,7 @@ class PageController extends BackendController
         // Set back url
         $this->view->setBackRoute('page_index', array('language_id' => $page->language_id));
 
-        return $this->render('backend/page/settings', array(
+        return $this->render('backend/page/edit', array(
                 'page' => $page,
                 'navitems' => $navitems,
                 'selectedNavitemId' => ($parentNavitem ? $parentNavitem->id() : false),
@@ -229,7 +226,8 @@ class PageController extends BackendController
                     'is_active' => $postData->get('is_active'),
                     'parent_navitem_id' => $postData->get('parent_navitem_id'),
                     'visibility' => $postData->get('visibility'),
-                    'module_id' => $postData->get('module_id'),
+                    'keywords' => $postData->get('keywords'),
+                    'description' => $postData->get('description'),
                     ), $postData->get('page_id'));
 
             // Save page and navitem
@@ -242,7 +240,7 @@ class PageController extends BackendController
             $this->setDangerAlert($ex->getErrors());
         }
 
-        return $this->redirectToRoute('page_settings', array('id' => $page->id()));
+        return $this->redirectToRoute('page_edit', array('id' => $page->id()));
     }
 
     /**
