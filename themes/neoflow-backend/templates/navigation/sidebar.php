@@ -20,13 +20,12 @@
                     <?= $view->getAuthenticatedUser()->role()->fetch()->title ?>
                 </div>
             </div>
-            <hr />
+            <!--<hr />-->
             <?php if ($view->app()->service('auth')->isAuthenticated()) { ?>
-                <a href="<?= generate_url('backend_logout') ?>" title="Logout" class="btn btn-xs btn-primary btn-icon-left btn-icon">
-                    <i class="fa fa-sign-out"></i>
-                    <span class="hidden-xs"> Logout</span></a>
+    <!--                <a href="<?= generate_url('backend_logout') ?>" title="Logout" class="btn btn-xs btn-primary btn-icon-left btn-icon">
+                        <i class="fa fa-sign-out"></i>
+                        <span class="hidden-xs"> Logout</span></a>-->
             <?php } ?>
-
         </div>
         <ul class="nav sidebar-nav">
             <li <?= $view->isCurrentRoute('dashboard*', 'class="active"') ?>>

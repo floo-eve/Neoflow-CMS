@@ -14407,6 +14407,9 @@ label {
 .panel-default .panel-title {
   color: #666;
 }
+.panel-default .panel-title small {
+  font-size: 85%;
+}
 
 .panel-secondary {
   border-color: #32323A;

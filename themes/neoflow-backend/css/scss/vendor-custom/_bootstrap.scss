@@ -423,6 +423,10 @@ label {
 
     .panel-title {
         color: $gray;
+
+        small {
+            font-size: 85%;
+        }
     }
 }
 .panel-secondary {
