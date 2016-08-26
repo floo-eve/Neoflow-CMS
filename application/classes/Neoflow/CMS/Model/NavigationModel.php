@@ -7,6 +7,7 @@ use Neoflow\Framework\ORM\EntityRepository;
 
 class NavigationModel extends AbstractEntityModel
 {
+
     /**
      * @var string
      */
@@ -30,5 +31,17 @@ class NavigationModel extends AbstractEntityModel
     public function navitems()
     {
         return $this->hasMany('\\Neoflow\\CMS\\Model\\NavitemModel', 'navigation_id');
+    }
+
+    public function delete()
+    {
+        // Prevent delete of main navigation
+        if ($this->id() != 1) {
+
+            NavitemModel::deleteAllByColumn('navigation_id', $this->id());
+
+            return parent::delete();
+        }
+        return false;
     }
 }

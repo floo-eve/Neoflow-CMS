@@ -24,8 +24,8 @@ class PageModel extends AbstractEntityModel
      * @var array
      */
     public static $properties = ['page_id', 'title', 'slug',
-        'description', 'keywords', 'is_active', 'visibility',
-        'is_active', 'language_id',];
+        'description', 'keywords', 'is_active', 'is_restricted',
+        'language_id',];
 
     /**
      * Get repository to fetch sections.
@@ -117,21 +117,25 @@ class PageModel extends AbstractEntityModel
 
         if ($result) {
 
-            $navitem = NavitemModel::repo()
-                ->where('navigation_id', '=', 1)
-                ->where('page_id', '=', $this->id())
-                ->fetch();
+            if ($this->isNew) {
+                NavitemModel::create(array(
+                    'navigation_id' => 1,
+                    'page_id' => $this->id(),
+                    'language_id' => $this->language_id,
+                    'is_visible' => $this->is_active,
+                    'parent_navitem_id' => $this->parent_navitem_id ? : null,
+                ))->save();
+            } else {
 
-            if ($navitem) {
-                $navitem->delete();
+                $navitem = NavitemModel::repo()
+                    ->where('page_id', '=', $this->id())
+                    ->where('navigation_id', '=', 1)
+                    ->fetch();
+
+                $navitem->is_visible = $this->is_active;
+                $navitem->parent_navitem_id = $this->parent_navitem_id ? : null;
+                $navitem->save();
             }
-
-            NavitemModel::create(array(
-                'navigation_id' => 1,
-                'page_id' => $this->id(),
-                'language_id' => $this->language_id,
-                'parent_navitem_id' => $this->parent_navitem_id ? : null,
-            ))->save();
 
             if ($this->module_id) {
                 SectionModel::create(array(

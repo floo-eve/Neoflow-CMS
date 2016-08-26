@@ -55,7 +55,6 @@ $this->addTranslation(array(
     'Remove failed' => 'Remove failed',
     'None' => 'None',
     'Empty' => 'Empty',
-    'No result found' => 'No result found',
     'No results found' => 'No results found',
     '{0} not found' => '{0} not found',
     'No {0} found' => 'No {0} found',
@@ -123,6 +122,9 @@ $this->addTranslation(array(
     'Are you sure you want to activate it?' => 'Are you sure you want to activate it?',
     'Are you sure you want to disable it?' => 'Are you sure you want to disable it?',
     'Are you sure you want to delete it?' => 'Are you sure you want to delete it?',
+    'Are you sure you want to hide it?' => 'Are you sure you want to hide it?',
+    'Are you sure you want to make it visible?' => 'Are you sure you want to make it visible?',
+    'Unauthorized' => 'Unauthorized',
 ));
 
 
@@ -230,23 +232,25 @@ $this->addTranslation(array(
     'All navigations' => 'All navigations',
     'Navigations' => 'Navigations',
     'Create navigation' => 'Create navigation',
-    'Navigation items of {0}' => 'Navigation items of {0}',
     'Items' => 'Items',
+    'Navigation items' => 'Navigation items',
+    'Navigation item successful hidden' => 'Navigation item successful hidden',
+    'Navigation item successful made visible' => 'Navigation item successful made visible',
+    'Create item' => 'Create item',
+    'Edit navigation' => 'Edit navigation',
+    'Top item' => 'Top item',
+    'Are you sure you want to delete this and all of its subnavigation items?' => 'Are you sure you want to delete this and all of its subnavigation items?'
 ));
 
 // Page
 $this->addTranslation(array(
-    'Page ID' => 'Page ID',
-    'Section ID' => 'Section ID',
-    'Page section of {0}' => 'Page section of {0}',
-    'Page sections of {0}' => 'Page sections of {0}',
-    'Page settings of {0}' => 'Page settings of {0}',
+    'All pages' => 'All pages',
+    'Create page' => 'Create page',
     'Top page' => 'Top page',
+    'Page title' => 'Page title',
     'Page is active' => 'Page is active',
-    'No pages found' => 'No pages found',
     'Page settings' => 'Page settings',
     'Page sections' => 'Page sections',
-    'No sections found' => 'No sections found',
     'New section' => 'New section',
     'Section is active' => 'Section is active',
     'Current page' => 'Current page',

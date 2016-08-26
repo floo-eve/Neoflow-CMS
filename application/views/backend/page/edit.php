@@ -45,19 +45,7 @@
                         <div class="col-sm-10">
                             <select data-placeholder="<?= translate('None') ?>" class="form-control select2" name="parent_navitem_id" id="selectPage">
                                 <option value="0"><?= translate('None') ?></option>
-                                <?= $view->renderNavitemOptions($navitems, 0, $selectedNavitemId, $disabledNavitemIds) ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="selectVisibility" class="col-sm-2 control-label">
-                            <?= translate('Visibility') ?>
-                        </label>
-                        <div class="col-sm-10">
-                            <select class="form-control select2" name="visibility" id="selectVisibility">
-                                <option value="visible" <?= ($page->visibility === 'visible' ? 'selected' : '') ?>><?= translate('Visible') ?></option>
-                                <option value="restricted" <?= ($page->visibility === 'restricted' ? 'selected' : '') ?>><?= translate('Restricted') ?></option>
-                                <option value="hidden" <?= ($page->visibility === 'hidden' ? 'selected' : '') ?>><?= translate('Hidden') ?></option>
+                                <?= $view->renderNavitemOptions($navitems, 0, $selectedNavitemId, array($pageNavitem->id())) ?>
                             </select>
                         </div>
                     </div>
@@ -67,6 +55,16 @@
                                 <label>
                                     <input name="is_active" value="0" type="hidden" />
                                     <input name="is_active" value="1" type="checkbox" <?= ($page->is_active ? 'checked' : '') ?>> <?= translate('Page is active') ?>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input name="is_hidden" value="0" type="hidden" />
+                                    <input name="is_hidden" value="1" type="checkbox" <?= ($pageNavitem->is_hidden ? 'checked' : '') ?>> <?= translate('Page is hidden') ?>
                                 </label>
                             </div>
                         </div>

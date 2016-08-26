@@ -265,7 +265,7 @@ abstract class AbstractQuery
         if (is_array($value)) { // (a, b) IN ((1, 2), (3, 4))
             return '(' . implode(', ', array_map(array($this, 'quote'), $value)) . ')';
         }
-        if ($value instanceof DateTime) {
+        if ($value instanceof \DateTime) {
             return $value->format('Y-m-d H:i:s'); //! may be driver specific
         }
         if (is_float($value)) {

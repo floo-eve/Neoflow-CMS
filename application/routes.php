@@ -12,6 +12,7 @@ $this->addRoutes(array(
     array('backend_reset_password', 'post', '/backend/reset-password', 'Backend@resetPassword'),
     array('backend_new_password', 'get', '/backend/new-password/(reset_key:string)', 'Backend@newPassword'),
     array('backend_update_password', 'post', '/backend/update-password', 'Backend@updatePassword'),
+    array('backend_unauthorized', 'any', false, 'Backend@unauthorized')
 ));
 
 
@@ -23,7 +24,7 @@ $this->addRoutes(array(
 // Backend page routes
 $this->addRoutes(array(
     array('page_edit', 'get', '/backend/page/edit/(id:num)', 'Page@edit'),
-    array('page_sections', 'get', '/backend/page/sections/(id:num)', 'Page@sections'),
+    array('page_sections', 'get', '/backend/page/edit/(id:num)/sections', 'Page@sections'),
     array('page_delete', 'get', '/backend/page/delete/(id:num)', 'Page@delete'),
     array('page_activate', 'get', '/backend/page/activate/(id:num)', 'Page@activate'),
     array('page_update', 'post', '/backend/page/update', 'Page@update'),
@@ -63,18 +64,19 @@ $this->addRoutes(array(
 $this->addRoutes(array(
     array('navigation_create', 'post', '/backend/navigation/create', 'Navigation@create'),
     array('navigation_edit', 'get', '/backend/navigation/edit/(id:num)', 'Navigation@edit'),
-    array('navigation_navitems', 'get', '/backend/navigation/navitems/(id:num)', 'Navigation@navitems'),
+    array('navigation_navitems', 'get', '/backend/navigation/edit/(id:num)/items', 'Navigation@navitems'),
     array('navigation_update', 'post', '/backend/navigation/update', 'Navigation@update'),
     array('navigation_delete', 'get', '/backend/navigation/delete/(id:num)', 'Navigation@delete'),
-    array('navigation_create_navitem', 'post', '/backend/navigation/create-navitem', 'Navigation@createNavitem'),
-    array('navigation_delete_navitem', 'get', '/backend/navigation/delete-navitem/(id:num)', 'Navigation@deleteNavitem'),
-    array('navigation_edit_navitem', 'get', '/backend/navigation/edit-navitem/(id:num)', 'Navigation@editNavitem'),
     array('navigation_index', 'get', '/backend/navigations', 'Navigation@index')
 ));
 
 // Backend navitem routes
 $this->addRoutes(array(
-    array('navitem_reorder', 'post', '/backend/navitem/reorder', 'Navitem@reorder'),
+    array('navitem_reorder', 'post', '/backend/navigation/item/reorder', 'Navitem@reorder'),
+    array('navitem_create', 'post', '/backend/navigation/item/create', 'Navitem@create'),
+    array('navitem_edit', 'get', '/backend/navigation/item/edit/(id:num)', 'Navitem@edit'),
+    array('navitem_delete', 'get', '/backend/navigation/item/delete/(id:num)', 'Navitem@delete'),
+    array('navitem_toggle_visiblity', 'get', '/backend/navigation/item/edit/(id:num)/toggle-visiblity', 'Navitem@toggleVisiblity')
 ));
 
 // Backend setting routes

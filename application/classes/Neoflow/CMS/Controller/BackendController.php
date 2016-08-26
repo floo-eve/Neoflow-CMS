@@ -13,6 +13,8 @@ use Neoflow\Framework\Support\Validation\ValidationException;
 class BackendController extends AbstractController
 {
 
+    protected $permissionKeys = array();
+
     /**
      * Constructor.
      */
@@ -223,15 +225,30 @@ class BackendController extends AbstractController
     {
         $currentRoute = $this->router()->getCurrentRouting('route');
 
-        $anonymousRoutes = array('backend_login', 'backend_auth', 'backend_lost_password', 'backend_reset_password', 'backend_new_password', 'backend_update_password');
+        $anonymousRoutes = array('backend_unauthorized', 'backend_login', 'backend_auth', 'backend_lost_password', 'backend_reset_password', 'backend_new_password', 'backend_update_password');
 
-        if (!$this->service('auth')->isAuthenticated() && !in_array($currentRoute[0], $anonymousRoutes)) {
-            return $this->redirectToRoute('backend_login');
-        } elseif ($this->service('auth')->isAuthenticated() && in_array($currentRoute[0], $anonymousRoutes)) {
-            return $this->redirectToRoute('dashboard_index');
+        if ($this->service('auth')->isAuthenticated()) {
+            if (in_array($currentRoute[0], $anonymousRoutes)) {
+                return $this->redirectToRoute('dashboard_index');
+            } else if ($this->permissionKeys && !$this->service('auth')->hasPermission($this->permissionKeys)) {
+                return $this->unauthorizedAction();
+            }
+        } else {
+            if (!in_array($currentRoute[0], $anonymousRoutes)) {
+                return $this->redirectToRoute('backend_login');
+            }
         }
 
         return false;
+    }
+
+    /**
+     * Unauthorized action
+     * @return Response
+     */
+    public function unauthorizedAction()
+    {
+        return $this->render('backend/error/unauthorized')->setStatusCode(401);
     }
 
     /**

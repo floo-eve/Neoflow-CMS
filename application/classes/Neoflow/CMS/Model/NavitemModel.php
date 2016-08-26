@@ -23,7 +23,7 @@ class NavitemModel extends AbstractEntityModel
      */
     public static $properties = ['navitem_id', 'title', 'page_id',
         'parent_navitem_id', 'navigation_id', 'language_id',
-        'position',];
+        'position', 'is_visible'];
 
     /**
      * Get repository to fetch child navitems.
@@ -155,5 +155,20 @@ class NavitemModel extends AbstractEntityModel
             ->set('parent_navitem_id', 'Top navitem');
 
         return $validator->validate();
+    }
+
+    /**
+     * Toggle visibility
+     *
+     * @return self
+     */
+    public function toggleVisibility()
+    {
+        if ($this->is_visible) {
+            $this->is_visible = false;
+        } else {
+            $this->is_visible = true;
+        }
+        return $this;
     }
 }

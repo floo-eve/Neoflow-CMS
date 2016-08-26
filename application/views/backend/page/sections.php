@@ -20,7 +20,7 @@
                         <li><i class="fa fa-ban"></i> = <?= translate('Disabled') ?></li>
                     </ul>
                 <?php } else { ?>
-                    <p class="alert alert-warning"><?= translate('No sections found') ?></p>
+                    <p class="text-center text-muted"><?= translate('No results found') ?></p>
                 <?php } ?>
             </div>
         </div>

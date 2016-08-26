@@ -33,7 +33,7 @@
                         <li><i class="fa fa-ban"></i> = <?= translate('Disabled') ?></li>
                     </ul>
                 <?php } else { ?>
-                    <p class="alert alert-warning"><?= translate('No pages found') ?></p>
+                    <p class="text-center text-muted"><?= translate('No results found') ?></p>
                 <?php } ?>
             </div>
         </div>
@@ -77,20 +77,6 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class="form-group <?= $view->hasValidationError('visibility', 'has-error') ?>">
-                        <label for="selectVisibility" class="col-sm-3 control-label">
-                            <?= translate('Visibility') ?>
-                        </label>
-                        <div class="col-sm-9">
-                            <select class="form-control select2" name="visibility" id="selectVisibility">
-                                <option value="visible"><?= translate('Visible') ?></option>
-                                <option value="restricted"><?= translate('Restricted') ?></option>
-                                <option value="hidden"><?= translate('Hidden') ?></option>
-                            </select>
-                        </div>
-                    </div>
-
                     <div class="form-group <?= $view->hasValidationError('parent_navitem_id', 'has-error') ?>">
                         <label for="selectPage" class="col-sm-3 control-label">
                             <?= translate('Top page') ?>
@@ -108,7 +94,7 @@
                             <div class="checkbox">
                                 <label>
                                     <input name="is_active" value="0" type="hidden" />
-                                    <input name="is_active" value="1" type="checkbox" checked /> <?= translate('Page is active') ?>
+                                    <input name="is_active" value="1" type="checkbox" checked /> <?= translate('Active') ?>
                                 </label>
                             </div>
                         </div>

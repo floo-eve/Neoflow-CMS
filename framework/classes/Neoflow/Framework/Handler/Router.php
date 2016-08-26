@@ -146,38 +146,35 @@ class Router
                     $routeUriRegex = preg_replace('/\(([a-zA-Z0-9\-\_]+)\:[num]+\)/', '([0-9\.\,]+)', $routeUriRegex);
                     $routeUriRegex = preg_replace('/\(([a-zA-Z0-9\-\_]+)\:[uri]+\)/', '(.*)', $routeUriRegex);
                     $routeUriRegex = str_replace(array('/'), array('\/'), $routeUriRegex);
-                    $routeUriRegex = '/^' . $routeUriRegex . '$/';
+                    $routeUriRegex = '/' . $routeUriRegex . '$/';
 
                     // Remove args of routeUri
                     $routeUri = str_replace('//', '/', preg_replace($this->routeUriRegexPattern, '', $routeUri));
 
                     // Check if routeUri (regexCode) is matching requestUri
-                    if (preg_match($routeUriRegex, $requestUri) && strpos($requestUri, $routeUri) === 0) {
-                        $requestUri = substr($requestUri, strlen($routeUri));
+                    $bla = preg_match($routeUriRegex, $requestUri);
+                    if (preg_match($routeUriRegex, $requestUri)) {
+//                        $requestUri = substr($requestUri, strlen($routeUri));
 
                         $requestUriParts = array_values(array_filter(explode('/', $requestUri)));
+                        $routeUriParts = array_values(array_filter(explode('/', $route[2])));
 
-                        if (isset($routeUriArgs[0])) {
-                            for ($i = 0; $i < count($routeUriArgs[0]); ++$i) {
-                                if (isset($requestUriParts[$i])) {
-                                    if ($routeUriArgs[2][$i] === 'num' && is_numeric($requestUriParts[$i])) {
-                                        if (is_float($requestUriParts[$i])) {
-                                            $args[$routeUriArgs[1][$i]] = (float) $requestUriParts[$i];
-                                        } else {
-                                            $args[$routeUriArgs[1][$i]] = (int) $requestUriParts[$i];
-                                        }
-                                    } elseif ($routeUriArgs[2][$i] === 'string' && is_string($requestUriParts[$i])) {
-                                        $args[$routeUriArgs[1][$i]] = $requestUriParts[$i];
-                                    } elseif ($routeUriArgs[2][$i] === 'uri') {
-                                        $args[$routeUriArgs[1][$i]] = $requestUri;
-                                        break;
-                                    } elseif ($routeUriArgs[2][$i] === 'any') {
-                                        $args[$routeUriArgs[1][$i]] = $requestUriParts[$i];
+                        foreach ($requestUriParts as $index => $requestUriPart) {
+
+                            if (preg_match($this->routeUriRegexPattern, $routeUriParts[$index], $routeUriArgs)) {
+                                if ($routeUriArgs[2] === 'num' && is_numeric($requestUriPart)) {
+                                    if (is_float($requestUriParts)) {
+                                        $args[$routeUriArgs[1]] = (float) $requestUriPart;
                                     } else {
-                                        continue;
+                                        $args[$routeUriArgs[1]] = (int) $requestUriPart;
                                     }
-                                } else {
-                                    continue;
+                                } elseif ($routeUriArgs[2] === 'string' && is_string($requestUriPart)) {
+                                    $args[$routeUriArgs[1]] = $requestUriPart;
+                                } elseif ($routeUriArgs[2] === 'uri') {
+                                    $args[$routeUriArgs[1]] = $requestUri;
+                                    break;
+                                } elseif ($routeUriArgs[2] === 'any') {
+                                    $args[$routeUriArgs[1]] = $requestUriPart;
                                 }
                             }
                         }

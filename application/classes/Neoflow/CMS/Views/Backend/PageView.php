@@ -33,9 +33,7 @@ class PageView extends NavigationView
 
                 if (!$page->is_active) {
                     $output .= ' <i class="fa fa-fw fa-ban"></i>';
-                } elseif ($page->visibility === 'restricted') {
-                    $output .= ' <i class="fa fa-fw fa-eye-slash"></i>';
-                } elseif ($page->visibility === 'hidden') {
+                } else if ($page->is_restricted) {
                     $output .= ' <i class="fa fa-fw fa-eye-slash"></i>';
                 } else {
                     $output .= ' <i class="fa fa-fw fa-eye"></i>';
@@ -43,10 +41,10 @@ class PageView extends NavigationView
                 $output .= '</li>
                                 <li>
                                     <a href="' . generate_url('page_sections', array('id' => $navitem->page_id)) . '">
-                                        ' . $navitem->title . '
+                                        ' . $page->title . '
                                     </a>
                                 </li>
-                                <li class="small">
+                                <li class="small text-muted">
                                     ID: ' . $navitem->id() . '
                                 </li>
                             </ul>
@@ -104,7 +102,7 @@ class PageView extends NavigationView
             foreach ($sections as $section) {
                 $module = $section->module()->fetch();
 
-                $output .= '<li class="nestable-item list-group-item ' . (!$section->is_active ? 'list-groupd-item-disabled' : '') . '" data-collapsed="' . $this->cookies->exists($section->id()) . '" data-id="' . $section->id() . '">
+                $output .= '<li class="nestable-item list-group-item ' . (!$section->is_active ? 'list-groupd-item-disabled' : '') . '" data-collapsed="' . $this->app()->get('request')->getCookies()->exists($section->id()) . '" data-id="' . $section->id() . '">
                             <span class="nestable-handle">
                                 <i class="fa fa-fw fa-arrows"></i>
                             </span>

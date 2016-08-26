@@ -24,11 +24,15 @@
             <div class="panel-body">
 
                 <?php if ($navitems->count()) { ?>
-                    <div class="nestable" id="nestable">
+                    <div class="nestable" data-save-url="<?= generate_url('navitem_reorder') ?>" id="nestable">
                         <?= $view->renderNavitemNestable($navitems) ?>
                     </div>
+                    <ul class="list-inline">
+                        <li><i class="fa fa-eye"></i> = <?= translate('Visible') ?></li>
+                        <li><i class="fa fa-ban"></i> = <?= translate('Hidden') ?></li>
+                    </ul>
                 <?php } else { ?>
-                    <p class="alert alert-warning"><?= translate('No results found') ?></p>
+                    <p class="text-center text-muted"><?= translate('No results found') ?></p>
                 <?php } ?>
 
             </div>
@@ -41,14 +45,15 @@
                 <h3 class="panel-title"><?= translate('Create item') ?></h3>
             </div>
             <div class="panel-body">
-                <form method="post" action="<?= generate_url('navigation_create_navitem') ?>" class="form-horizontal">
+                <form method="post" action="<?= generate_url('navitem_create') ?>" class="form-horizontal">
                     <input type="hidden" value="<?= $navigationLanguage->id() ?>" name="language_id" />
+                    <input type="hidden" value="<?= $navigation->id() ?>" name="navigation_id" />
                     <div class="form-group <?= $view->hasValidationError('title', 'has-error') ?>">
                         <label for="inputTitle" class="col-sm-3 control-label">
                             <?= translate('Title') ?>
                         </label>
                         <div class="col-sm-9">
-                            <input id="inputTitle" type="text" required class="form-control" name="title" maxlength="50" minlength="3" />
+                            <input id="inputTitle" type="text" class="form-control" name="title" maxlength="50" minlength="3" />
                         </div>
                     </div>
 
@@ -58,7 +63,7 @@
                         </label>
                         <div class="col-sm-9">
                             <select class="form-control select2" name="page_id" id="selectPage">
-                                <?= $view->renderNavitemOptions($pageNavitems) ?>
+                                <?= $view->renderNavitemOptions($pageNavitems, 0, null, array(), 'page_id') ?>
                             </select>
                         </div>
                     </div>
@@ -72,6 +77,17 @@
                                 <option value=""><?= translate('None') ?></option>
                                 <?= $view->renderNavitemOptions($navitems) ?>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input name="is_visible" value="0" type="hidden" />
+                                    <input name="is_visible" value="1" type="checkbox" checked /> <?= translate('Visible') ?>
+                                </label>
+                            </div>
                         </div>
                     </div>
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 19. Aug 2016 um 14:04
+-- Erstellungszeit: 26. Aug 2016 um 14:48
 -- Server-Version: 5.7.11
 -- PHP-Version: 7.0.4
 
@@ -71,7 +71,7 @@ INSERT INTO `modules` (`module_id`, `title`, `folder`, `route`) VALUES
 
 CREATE TABLE `navigations` (
   `navigation_id` int(11) NOT NULL,
-  `title` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `title` varchar(50) COLLATE utf8_bin NOT NULL,
   `description` varchar(255) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -80,8 +80,8 @@ CREATE TABLE `navigations` (
 --
 
 INSERT INTO `navigations` (`navigation_id`, `title`, `description`) VALUES
-(1, 'Default navigation', 'All pages are added to this navigation. You cannot edit or delete the default navigation.'),
-(2, 'Footer navigation', NULL);
+(1, 'Main navigation', 'All pages are added to this navigation. You should not edit or delete it.'),
+(3, 'Footer', 'test');
 
 -- --------------------------------------------------------
 
@@ -96,21 +96,26 @@ CREATE TABLE `navitems` (
   `parent_navitem_id` int(11) DEFAULT NULL,
   `navigation_id` int(11) DEFAULT NULL,
   `language_id` int(11) DEFAULT NULL,
-  `position` int(11) DEFAULT NULL
+  `position` int(11) DEFAULT NULL,
+  `is_visible` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `navitems`
 --
 
-INSERT INTO `navitems` (`navitem_id`, `title`, `page_id`, `parent_navitem_id`, `navigation_id`, `language_id`, `position`) VALUES
-(1, 'Startseite', 1, NULL, 1, 1, 1),
-(2, 'Über uns', 2, 3, 1, 1, 4),
-(3, 'Beispiele', 3, NULL, 1, 1, 2),
-(4, 'Küche', 4, 3, 1, 1, 1),
-(5, 'Bad', 5, 3, 1, 1, 2),
-(6, 'Garage', 6, 3, 1, 1, 3),
-(7, 'Impressum', 7, NULL, 1, 1, 3);
+INSERT INTO `navitems` (`navitem_id`, `title`, `page_id`, `parent_navitem_id`, `navigation_id`, `language_id`, `position`, `is_visible`) VALUES
+(2, 'Über uns', 2, NULL, 1, 1, 2, 1),
+(3, 'Beispiele', 3, NULL, 1, 1, 3, 1),
+(4, 'Küche', 4, 3, 1, 1, 1, 1),
+(5, 'Bad', 5, 3, 1, 1, 2, 1),
+(6, 'Garage', 6, 3, 1, 1, 3, 1),
+(7, 'Impressum', 7, NULL, 1, 1, 4, 1),
+(39, 'Blabla', 4, NULL, 3, 1, 1, 1),
+(40, 'Blabla2', 7, 39, 3, 1, 1, 1),
+(44, 'Startseite', 1, NULL, 1, 1, 1, 1),
+(50, 'Startseite', 1, NULL, 3, 1, 2, 1),
+(54, 'asd', 1, 40, 3, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -120,27 +125,27 @@ INSERT INTO `navitems` (`navitem_id`, `title`, `page_id`, `parent_navitem_id`, `
 
 CREATE TABLE `pages` (
   `page_id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `slug` varchar(100) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `keywords` varchar(255) DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `slug` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `keywords` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `language_id` int(11) DEFAULT NULL,
-  `visibility` enum('visible','restricted','hidden') DEFAULT 'visible'
+  `is_restricted` tinyint(1) NOT NULL DEFAULT '0',
+  `is_active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `pages`
 --
 
-INSERT INTO `pages` (`page_id`, `title`, `slug`, `description`, `keywords`, `is_active`, `language_id`, `visibility`) VALUES
-(1, 'Startseite', 'startseite', NULL, NULL, 1, 1, 'visible'),
-(2, 'Über uns', 'uber-uns', NULL, NULL, 1, 1, 'visible'),
-(3, 'Beispiele', 'beispiele', NULL, NULL, 1, 1, 'visible'),
-(4, 'Küche', 'kueche', NULL, NULL, 1, 1, 'visible'),
-(5, 'Bad', 'bad', NULL, NULL, 1, 1, 'visible'),
-(6, 'Garage', 'garage', NULL, NULL, 1, 1, 'visible'),
-(7, 'Impressum', 'impressum', NULL, NULL, 1, 1, 'visible');
+INSERT INTO `pages` (`page_id`, `title`, `slug`, `description`, `keywords`, `language_id`, `is_restricted`, `is_active`) VALUES
+(1, 'Startseite', 'startseite', '', '', 1, 0, 1),
+(2, 'Über uns', 'uber-uns', NULL, NULL, 1, 0, 1),
+(3, 'Beispiele', 'beispiele', NULL, NULL, NULL, 0, 1),
+(4, 'Küche', 'kueche', NULL, NULL, 1, 0, 1),
+(5, 'Bad', 'bad', NULL, NULL, 1, 0, 1),
+(6, 'Garage', 'garage', NULL, NULL, 1, 0, 1),
+(7, 'Impressum', 'impressum', '', '', 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -188,7 +193,8 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`role_id`, `title`, `description`) VALUES
 (1, 'Administrator', '...'),
-(4, 'Süperüser', 'No description');
+(4, 'Süperüser', 'No description'),
+(5, 'Test', '');
 
 -- --------------------------------------------------------
 
@@ -216,7 +222,9 @@ INSERT INTO `roles_permissions` (`role_permission_id`, `role_id`, `permission_id
 (7, 1, 7),
 (8, 1, 8),
 (9, 1, 9),
-(10, 4, 2);
+(10, 4, 2),
+(11, 5, 1),
+(12, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -232,6 +240,13 @@ CREATE TABLE `sections` (
   `position` int(11) NOT NULL,
   `block` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Daten für Tabelle `sections`
+--
+
+INSERT INTO `sections` (`section_id`, `page_id`, `module_id`, `is_active`, `position`, `block`) VALUES
+(1, 7, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -300,8 +315,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `lastname`, `firstname`, `reset_key`, `reseted_when`, `role_id`) VALUES
-(1, 'john.doe@neoflow.ch', sha('123456'), 'Doe', 'John', NULL, NULL, 1),
-(2, 'jonathan.nessier@outlook.com', sha('123456'), 'Nessier', 'Jonathan', NULL, NULL, 4);
+(1, 'john.doe@neoflow.ch', sha(123456), 'Doe', 'John', NULL, NULL, 1);
 
 --
 -- Indizes der exportierten Tabellen
@@ -411,17 +425,17 @@ ALTER TABLE `modules`
 -- AUTO_INCREMENT für Tabelle `navigations`
 --
 ALTER TABLE `navigations`
-  MODIFY `navigation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `navigation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT für Tabelle `navitems`
 --
 ALTER TABLE `navitems`
-  MODIFY `navitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `navitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT für Tabelle `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT für Tabelle `permissions`
 --
@@ -431,17 +445,17 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT für Tabelle `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT für Tabelle `roles_permissions`
 --
 ALTER TABLE `roles_permissions`
-  MODIFY `role_permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `role_permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT für Tabelle `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT für Tabelle `settings`
 --
@@ -456,7 +470,7 @@ ALTER TABLE `themes`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 --
 -- Constraints der exportierten Tabellen
 --

@@ -22,9 +22,9 @@
             </div>
             <!--<hr />-->
             <?php if ($view->app()->service('auth')->isAuthenticated()) { ?>
-    <!--                <a href="<?= generate_url('backend_logout') ?>" title="Logout" class="btn btn-xs btn-primary btn-icon-left btn-icon">
-                        <i class="fa fa-sign-out"></i>
-                        <span class="hidden-xs"> Logout</span></a>-->
+                                                                                                                <!--                <a href="<?= generate_url('backend_logout') ?>" title="Logout" class="btn btn-xs btn-primary btn-icon-left btn-icon">
+                                                                                                                                    <i class="fa fa-sign-out"></i>
+                                                                                                                                    <span class="hidden-xs"> Logout</span></a>-->
             <?php } ?>
         </div>
         <ul class="nav sidebar-nav">
@@ -32,47 +32,91 @@
                 <a href="<?= generate_url('dashboard_index') ?>"><i class="fa fa-fw icon fa-dashboard"></i> <?= translate('Dashboard') ?></a>
             </li>
 
-            <li <?= $view->isCurrentRoute(array('navigation*', 'page*', 'section*', 'mod*'), 'class="active"') ?>>
-                <a href="#"><i class="fa fa-fw icon fa-files-o"></i> <?= translate('Content') ?><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li <?= $view->isCurrentRoute(array('page*', 'section*', 'mod*'), 'class="active"') ?>>
-                        <a href="<?= generate_url('page_index') ?>"><?= translate('Pages') ?></a>
-                    </li>
-                    <li <?= $view->isCurrentRoute('navigation*', 'class="active"') ?>>
-                        <a href="<?= generate_url('navigation_index') ?>"><?= translate('Navigations') ?></a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-fw icon fa-bar-chart-o"></i> <?= translate('Extensions') ?><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level collapse">
-                    <li>
-                        <a href="#"><?= translate('Modules') ?></a>
-                    </li>
-                    <li>
-                        <a href="#"><?= translate('Themes') ?></a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-fw icon fa-picture-o"></i> Media</a>
-            </li>
-            <li <?= $view->isCurrentRoute(array('setting*'), 'class="active"') ?>>
-                <a href="<?= generate_url('setting_index') ?>"><i class="fa fa-fw icon fa-edit"></i> <?= translate('Settings') ?></a>
-            </li>
-            <li <?= $view->isCurrentRoute(array('user*', 'role*'), 'class="active"') ?>>
-                <a href="#"><i class="fa fa-fw icon fa-users"></i> <?= translate('Accounts') ?><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li <?= $view->isCurrentRoute('user*', 'class="active"') ?>>
-                        <a href="<?= generate_url('user_index') ?>"><?= translate('Users') ?></a>
-                    </li>
-                    <li <?= $view->isCurrentRoute('role*', 'class="active"') ?>>
-                        <a href="<?= generate_url('role_index') ?>"><?= translate('Roles') ?></a>
-                    </li>
-                </ul>
-            </li>
+            <?php if (has_permission(array('manage_pages', 'manage_navigations'))) { ?>
+                <li <?= $view->isCurrentRoute(array('navigation*', 'page*', 'section*', 'mod*'), 'class="active"') ?>>
+                    <a href="#"><i class="fa fa-fw icon fa-files-o"></i> <?= translate('Content') ?><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <?php if (has_permission('manage_pages')) { ?>
+                            <li <?= $view->isCurrentRoute(array('page*', 'section*', 'mod*'), 'class="active"') ?>>
+                                <a href="<?= generate_url('page_index') ?>"><?= translate('Pages') ?></a>
+                            </li>
+                            <?php
+                        }
+                        if (has_permission('manage_navigations')) {
+
+                            ?>
+                            <li <?= $view->isCurrentRoute('navigation*', 'class="active"') ?>>
+                                <a href="<?= generate_url('navigation_index') ?>"><?= translate('Navigations') ?></a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </li>
+                <?php
+            }
+            if (has_permission(array('manage_modules', 'manage_templates'))) {
+
+                ?>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-fw icon fa-bar-chart-o"></i> <?= translate('Extensions') ?><span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse">
+                        <?php if (has_permission('manage_modules')) { ?>
+                            <li>
+                                <a href="#"><?= translate('Modules') ?></a>
+                            </li>
+                            <?php
+                        }
+                        if (has_permission('manage_templates')) {
+
+                            ?>
+                            <li>
+                                <a href="#"><?= translate('Themes') ?></a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </li>
+                <?php
+            }
+            if (has_permission('manage_media')) {
+
+                ?>
+                <li>
+                    <a href="#"><i class="fa fa-fw icon fa-picture-o"></i> Media</a>
+                </li>
+                <?php
+            }
+            if (has_permission('manage_settings')) {
+
+                ?>
+                <li <?= $view->isCurrentRoute(array('setting*'), 'class="active"') ?>>
+                    <a href="<?= generate_url('setting_index') ?>"><i class="fa fa-fw icon fa-edit"></i> <?= translate('Settings') ?></a>
+                </li>
+                <?php
+            }
+            if (has_permission(array('manage_users', 'manage_roles'))) {
+
+                ?>
+
+                <li <?= $view->isCurrentRoute(array('user*', 'role*'), 'class="active"') ?>>
+                    <a href="#"><i class="fa fa-fw icon fa-users"></i> <?= translate('Accounts') ?><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <?php if (has_permission('manage_users')) { ?>
+                            <li <?= $view->isCurrentRoute('user*', 'class="active"') ?>>
+                                <a href="<?= generate_url('user_index') ?>"><?= translate('Users') ?></a>
+                            </li>
+                            <?php
+                        }
+                        if (has_permission('manage_roles')) {
+
+                            ?>
+                            <li <?= $view->isCurrentRoute('role*', 'class="active"') ?>>
+                                <a href="<?= generate_url('role_index') ?>"><?= translate('Roles') ?></a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </li>
+            <?php } ?>
             <li <?= $view->isCurrentRoute('maintenance*', 'class="active"') ?>>
                 <a href="<?= generate_url('maintenance_index') ?>"><i class="fa fa-fw icon fa-picture-o"></i> <?= translate('Maintenance') ?></a>
             </li>

@@ -3,16 +3,14 @@
 namespace Neoflow\CMS\Controller\Backend;
 
 use Neoflow\CMS\Controller\BackendController;
-use Neoflow\CMS\Mapper\LanguageMapper;
-use Neoflow\CMS\Mapper\NavigationMapper;
-use Neoflow\CMS\Mapper\NavitemMapper;
-use Neoflow\CMS\Mapper\PageMapper;
 use Neoflow\CMS\Model\LanguageModel;
 use Neoflow\CMS\Model\NavigationModel;
 use Neoflow\CMS\Model\NavitemModel;
+use Neoflow\CMS\Model\PageModel;
 use Neoflow\CMS\Views\Backend\NavigationView;
 use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Framework\Support\Validation\ValidationException;
+use function translate;
 
 class NavigationController extends BackendController
 {
@@ -30,16 +28,32 @@ class NavigationController extends BackendController
             ->setTitle('Navigations');
     }
 
+    /**
+     * Index action
+     *
+     * @param array $args
+     * @return Response
+     */
     public function indexAction($args)
     {
+        $navigations = NavigationModel::repo()
+            ->where('navigation_id', '!=', 1)
+            ->fetchAll();
+
         return $this->render('backend/navigation/index', array(
-                'navigations' => NavigationModel::findAll(),
+                'navigations' => $navigations,
         ));
     }
 
     public function navitemsAction($args)
     {
+        // Get navigation by id
         $navigation = NavigationModel::findById($args['id']);
+        if (!$navigation || $navigation->id() == 1) {
+            $this->setDangerAlert(translate('{0} not found', array('Navigation')));
+
+            return $this->redirectToRoute('navigation_index');
+        }
 
         // Get all languages
         $languages = LanguageModel::findAllByColumn('is_active', true);
@@ -64,12 +78,15 @@ class NavigationController extends BackendController
         $navitems = $navigation->navitems()
             ->where('parent_navitem_id', 'IS', null)
             ->where('language_id', '=', $language_id)
+            ->where('parent_navitem_id', 'IS', null)
             ->orderByAsc('position')
             ->fetchAll();
 
         $pageNavitems = NavitemModel::repo()
             ->where('navigation_id', '=', 1)
             ->where('language_id', '=', $language_id)
+            ->where('parent_navitem_id', 'IS', null)
+            ->orderByAsc('position')
             ->fetchAll();
 
         // Set back url
@@ -86,11 +103,8 @@ class NavigationController extends BackendController
 
     /**
      * Create action.
-
      *
-
      * @param array $args
-
      * @return Response
      */
     public function createAction($args)
@@ -130,8 +144,8 @@ class NavigationController extends BackendController
 
             // Get navigation by id
             $navigation = NavigationModel::findById($args['id']);
-            if (!$navigation) {
-                $this->setDangerAlert(translate('{0} not found', array('User')));
+            if (!$navigation || $navigation->id() == 1) {
+                $this->setDangerAlert(translate('{0} not found', array('Navigation')));
 
                 return $this->redirectToRoute('navigation_index');
             }
@@ -182,55 +196,6 @@ class NavigationController extends BackendController
         }
 
         return $this->redirectToRoute('navigation_edit', array('id' => $navigation->id()));
-    }
-
-    /**
-     * Add item action.
-
-     *
-
-     * @param array $args
-
-     * @return Response
-     */
-    public function addItemAction($args)
-    {
-
-        // Get post data
-
-        $postData = $this->getRequest()->getPostData();
-
-        // Get model entities
-
-        $navitem = new NavitemModel();
-
-        try {
-
-            // Save setting
-
-            $navitem->title = $postData->get('title');
-
-            $navitem->page_id = $postData->get('page_id');
-
-            $navitem->language_id = $postData->get('language_id');
-
-            $navitem->navigation_id = $postData->get('navigation_id');
-
-            $navitem->save();
-        } catch (ValidationException $ex) {
-
-            // Fallback if validation fails
-
-            $this->session()
-                ->setDangerAlert($ex->getErrors());
-
-            return $this->redirectToRoute('navigation_index');
-        }
-
-        $this->session()
-            ->setSuccessAlert(translate('Successful added'));
-
-        return $this->redirectToRoute('navigation_navitems', array('id' => $navitem->navigation_id, 'language_id' => $navitem->language_id));
     }
 
     /**

@@ -145,6 +145,18 @@ $state-success-text: #fff;
 $state-success-bg: $brand-success;
 $alert-success-border: darken($brand-success, 5%);
 
+$state-danger-text: #fff;
+$state-danger-bg: $brand-danger;
+$alert-danger-border: darken($brand-danger, 5%);
+
+$state-warning-text: #fff;
+$state-warning-bg: $brand-warning;
+$alert-warning-border: darken($brand-warning, 5%);
+
+$state-info-text: #fff;
+$state-info-bg: $brand-info;
+$alert-info-border: darken($brand-info, 5%);
+
 $text-muted: $gray;
 
 $dropdown-link-disabled-color: #ccc;

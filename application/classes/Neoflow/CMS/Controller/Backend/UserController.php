@@ -93,7 +93,6 @@ class UserController extends BackendController
             $user = UserModel::findById($args['id']);
             if (!$user) {
                 $this->setDangerAlert(translate('{0} not found', array('User')));
-
                 return $this->redirectToRoute('user_index');
             }
         }

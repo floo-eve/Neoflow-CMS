@@ -60,13 +60,16 @@ class AuthService extends AbstractService
     /**
      * Check wether authenticated user has permission.
      *
-     * @param string $permissionKey
+     * @param string|array $permissionKeys
      *
      * @return bool
      */
-    public function hasPermission($permissionKey)
+    public function hasPermission($permissionKeys)
     {
-        return in_array($permissionKey, $this->getPermissionKeys());
+        if (is_string($permissionKeys)) {
+            $permissionKeys = array($permissionKeys);
+        }
+        return array_in_array($permissionKeys, $this->getPermissionKeys());
     }
 
     /**

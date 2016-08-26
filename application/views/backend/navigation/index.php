@@ -11,41 +11,49 @@
             </div>
 
             <div class="panel-body">
-                <table class="table table-striped datatable">
-                    <thead>
-                        <tr>
-                            <th>
-                                <?= translate('Title') ?>
-                            </th>
-                            <th>
-                                <?= translate('Description') ?>
-                            </th>
-                            <th class="no-order no-search"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($navigations as $navigation) { ?>
+
+                <?php if ($navigations->count()) { ?>
+
+                    <table class="table table-striped datatable">
+                        <thead>
                             <tr>
-                                <td class="nowrap">
-                                    <a href="<?= generate_url('navigation_navitems', array('id' => $navigation->id())) ?>" <?= ($navigation->id() === 1 ? 'class="disabled"' : '') ?>>
-                                        <?= $navigation->title ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <?= $navigation->description ?>
-                                </td>
-                                <td class="text-right nowrap">
-                                    <a href="<?= generate_url('navigation_navitems', array('id' => $navigation->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= translate('Edit {0}', array($navigation->title)) ?>">
-                                        <i class="fa fa-fw fa-pencil"></i> <?= translate('Edit') ?>
-                                    </a>
-                                    <a <?= ($navigation->id() === 1 ? 'disabled' : '') ?> href="<?= generate_url('navigation_delete', array('id' => $navigation->id())) ?>" class="btn btn-primary btn-xs confirm" data-message="<?= translate('Are you sure you want to delete it?') ?>" title="<?= translate('Delete {0}', array($navigation->title)) ?>">
-                                        <i class="fa fa-fw fa-trash-o"></i>
-                                    </a>
-                                </td>
+                                <th>
+                                    <?= translate('Title') ?>
+                                </th>
+                                <th>
+                                    <?= translate('Description') ?>
+                                </th>
+                                <th class="no-order no-search"></th>
                             </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($navigations as $navigation) { ?>
+                                <tr>
+                                    <td class="nowrap">
+                                        <a href="<?= generate_url('navigation_navitems', array('id' => $navigation->id())) ?>" <?= ($navigation->id() === 1 ? 'class="disabled"' : '') ?>>
+                                            <?= $navigation->title ?>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <?= $navigation->description ?>
+                                    </td>
+                                    <td class="text-right nowrap">
+                                        <a href="<?= generate_url('navigation_navitems', array('id' => $navigation->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= translate('Edit {0}', array($navigation->title)) ?>">
+                                            <i class="fa fa-fw fa-pencil"></i> <?= translate('Edit') ?>
+                                        </a>
+                                        <a <?= ($navigation->id() === 1 ? 'disabled' : '') ?> href="<?= generate_url('navigation_delete', array('id' => $navigation->id())) ?>" class="btn btn-primary btn-xs confirm" data-message="<?= translate('Are you sure you want to delete it?') ?>" title="<?= translate('Delete {0}', array($navigation->title)) ?>">
+                                            <i class="fa fa-fw fa-trash-o"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+
+                <?php } else { ?>
+                    <p class="text-center text-muted"><?= translate('No results found') ?></p>
+                <?php } ?>
+
             </div>
         </div>
 

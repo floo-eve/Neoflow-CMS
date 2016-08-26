@@ -130,7 +130,7 @@ class UserModel extends AbstractEntityModel
     public function delete()
     {
         // Prevent delete of initial user
-        if ($this->id() !== 1) {
+        if ($this->id() != 1) {
             return parent::delete();
         }
 

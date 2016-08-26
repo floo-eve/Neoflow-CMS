@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Normalize directory
+ * Normalize path
  *
- * @param string $directory
+ * @param string $path
  * @return string
  */
-function normalize_directory($directory)
+function normalize_path($path)
 {
-    return rtrim(preg_replace('/[\\|\/|\\\\|\/\/]+/', DIRECTORY_SEPARATOR, $directory), DIRECTORY_SEPARATOR);
+    return rtrim(preg_replace('/[\\|\/|\\\\|\/\/]+/', DIRECTORY_SEPARATOR, $path), DIRECTORY_SEPARATOR);
 }

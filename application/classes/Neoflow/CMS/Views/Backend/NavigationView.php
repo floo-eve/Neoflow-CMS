@@ -8,23 +8,23 @@ use Neoflow\Framework\ORM\EntityCollection;
 class NavigationView extends BackendView
 {
 
-    public function renderNavitemOptions(EntityCollection $navitems, $level = 0, $selectedNavitemId = null, array $disabledNavitemIds = array())
+    public function renderNavitemOptions(EntityCollection $navitems, $level = 0, $disabledProperty = null, array $disabledProperties = array(), $valueProperty = 'navitem_id')
     {
         $output = '';
         foreach ($navitems as $navitem) {
-            $output .= '<option ' . (in_array($navitem->id(), $disabledNavitemIds) ? 'disabled' : '') . ' ' . ($selectedNavitemId === $navitem->id() ? 'selected' : '') . ' data-level="' . $level . '" value="' . $navitem->id() . '">' . $navitem->title . '</option>';
+            $output .= '<option ' . (in_array($navitem->$valueProperty, $disabledProperties) ? 'disabled' : '') . ' ' . ($disabledProperty === $navitem->$valueProperty ? 'selected' : '') . ' data-level="' . $level . '" value="' . $navitem->$valueProperty . '">' . $navitem->title . '</option>';
 
             $childNavitems = $navitem->childNavitems()
                 ->orderByAsc('position')
                 ->fetchAll();
 
-            if (in_array($navitem->id(), $disabledNavitemIds)) {
-                $disabledNavitemIds = $childNavitems->map(function ($navitem) {
-                        return $navitem->id();
+            if (in_array($navitem->$valueProperty, $disabledProperties)) {
+                $disabledProperties = $childNavitems->map(function ($navitem) use($valueProperty) {
+                        return $navitem->$valueProperty;
                     })->toArray();
             }
 
-            $output .= $this->renderNavitemOptions($childNavitems, $level + 1, $selectedNavitemId, $disabledNavitemIds);
+            $output .= $this->renderNavitemOptions($childNavitems, $level + 1, $disabledProperty, $disabledProperties);
         }
 
         return $output;
@@ -46,7 +46,7 @@ class NavigationView extends BackendView
             foreach ($navitems as $navitem) {
                 $page = $navitem->page()->fetch();
 
-                $output .= '<li class="nestable-item list-group-item ' . (!$page->is_active ? 'list-groupd-item-disabled' : '') . '" data-collapsed="' . $this->app()->get('request')->getCookies()->exists($navitem->id()) . '" data-id="' . $navitem->id() . '">
+                $output .= '<li class="nestable-item list-group-item ' . (!$navitem->is_visible ? 'list-groupd-item-disabled' : '') . '" data-collapsed="' . $this->app()->get('request')->getCookies()->exists($navitem->id()) . '" data-id="' . $navitem->id() . '">
                             <span class="nestable-handle">
                                 <i class="fa fa-fw fa-arrows"></i>
                             </span>
@@ -54,30 +54,37 @@ class NavigationView extends BackendView
                                 <ul class="list-inline">
                                     <li>';
 
-                if (!$page->is_active) {
+                if (!$navitem->is_visible) {
                     $output .= ' <i class="fa fa-fw fa-ban"></i>';
-                }
-                $output .= '</li>
-                                <li>';
-
-                if ($navitem->navigation_id == 1) {
-                    $output .= $navitem->title;
                 } else {
-                    $output .= '<a href="' . generate_url('navigation_edit_navitem', array('id' => $navitem->id())) . '">
-                                        ' . $navitem->title . '
-                                    </a>';
+                    $output .= ' <i class="fa fa-fw fa-eye"></i>';
                 }
                 $output .= '</li>
-                                <li class="small">
+                                <li>
+                                    <a href="' . generate_url('page_sections', array('id' => $navitem->page_id)) . '">
+                                        ' . $navitem->title . '
+                                    </a>
+                                </li>
+                                <li class="small text-muted">
                                     ID: ' . $navitem->id() . '
+                                </li>
+                                <li class="small text-muted">
+                                    ' . translate('Page title') . ': ' . $page->title . '
                                 </li>
                             </ul>
                             <span class="pull-right">';
 
-                $output .= '<a href="' . generate_url('page_sections', array('id' => $page->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . translate('Page') . '">
-                                <i class="fa fa-fw fa-columns"></i>
-                            </a>
-                            <a ' . ($navitem->navigation_id == 1 ? 'disabled' : '') . ' href="' . generate_url('navigation_delete_navitem', array('id' => $navitem->id())) . '" class="btn btn-primary btn-xs confirm" data-message="' . translate('Are you sure you want to delete this navigation item?') . '" title="' . translate('Delete') . '">
+                if ($navitem->is_visible) {
+                    $output .= ' <a href="' . generate_url('navitem_toggle_visiblity', array('id' => $navitem->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to hide it?') . '"" title="' . translate('Hide') . '">
+                                    <i class="fa fa-fw fa-ban"></i>
+                                </a>';
+                } else {
+                    $output .= ' <a href="' . generate_url('navitem_toggle_visiblity', array('id' => $navitem->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to make it visible?') . '"" title="' . translate('Make visible') . '">
+                                    <i class="fa fa-fw fa-eye"></i>
+                                </a>';
+                }
+
+                $output .= ' <a ' . ($navitem->navigation_id == 1 ? 'disabled' : '') . ' href="' . generate_url('navitem_delete', array('id' => $navitem->id())) . '" class="btn btn-primary btn-xs confirm" data-message="' . translate('Are you sure you want to delete this and all of its subnavigation items?') . '" title="' . translate('Delete') . '">
                                 <i class="fa fa-fw fa-trash-o"></i>
                             </a>
                             </span>

@@ -21,6 +21,8 @@ class PageController extends BackendController
     {
         parent::__construct();
 
+        $this->permissionKeys = array('manage_pages');
+
         // Set titles
         $this->view
             ->setSubtitle('Content')
@@ -95,7 +97,6 @@ class PageController extends BackendController
                     'language_id' => $postData->get('language_id'),
                     'is_active' => $postData->get('is_active'),
                     'parent_navitem_id' => $postData->get('parent_navitem_id'),
-                    'visibility' => $postData->get('visibility'),
                     'module_id' => $postData->get('module_id'),
             ));
 
@@ -167,21 +168,20 @@ class PageController extends BackendController
             ->fetchAll();
 
         // Get parent navitem
-
-        $navitem = $page->navitems()
+        $pageNavitem = $page->navitems()
             ->where('navigation_id', '=', 1)
             ->fetch();
 
-        $parentNavitem = $navitem->parentNavitem()->fetch();
+        $parentNavitem = $pageNavitem->parentNavitem()->fetch();
 
         // Set back url
         $this->view->setBackRoute('page_index', array('language_id' => $page->language_id));
 
         return $this->render('backend/page/edit', array(
                 'page' => $page,
+                'pageNavitem' => $pageNavitem,
                 'navitems' => $navitems,
-                'selectedNavitemId' => ($parentNavitem ? $parentNavitem->id() : false),
-                'disabledNavitemIds' => array($navitem->id()),
+                'selectedNavitemId' => ($parentNavitem ? $parentNavitem->id() : false)
         ));
     }
 
@@ -225,7 +225,7 @@ class PageController extends BackendController
                     'title' => $postData->get('title'),
                     'is_active' => $postData->get('is_active'),
                     'parent_navitem_id' => $postData->get('parent_navitem_id'),
-                    'visibility' => $postData->get('visibility'),
+                    'is_hidden' => $postData->get('is_hidden'),
                     'keywords' => $postData->get('keywords'),
                     'description' => $postData->get('description'),
                     ), $postData->get('page_id'));
