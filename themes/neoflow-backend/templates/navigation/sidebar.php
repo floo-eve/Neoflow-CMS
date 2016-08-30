@@ -22,9 +22,9 @@
             </div>
             <!--<hr />-->
             <?php if ($view->app()->service('auth')->isAuthenticated()) { ?>
-                                                                                                                <!--                <a href="<?= generate_url('backend_logout') ?>" title="Logout" class="btn btn-xs btn-primary btn-icon-left btn-icon">
-                                                                                                                                    <i class="fa fa-sign-out"></i>
-                                                                                                                                    <span class="hidden-xs"> Logout</span></a>-->
+                                                                                                                                    <!--                <a href="<?= generate_url('backend_logout') ?>" title="Logout" class="btn btn-xs btn-primary btn-icon-left btn-icon">
+                                                                                                                                                        <i class="fa fa-sign-out"></i>
+                                                                                                                                                        <span class="hidden-xs"> Logout</span></a>-->
             <?php } ?>
         </div>
         <ul class="nav sidebar-nav">
@@ -32,7 +32,7 @@
                 <a href="<?= generate_url('dashboard_index') ?>"><i class="fa fa-fw icon fa-dashboard"></i> <?= translate('Dashboard') ?></a>
             </li>
 
-            <?php if (has_permission(array('manage_pages', 'manage_navigations'))) { ?>
+            <?php if (has_permission('manage_pages') || has_permission('manage_navigations')) { ?>
                 <li <?= $view->isCurrentRoute(array('navigation*', 'page*', 'section*', 'mod*'), 'class="active"') ?>>
                     <a href="#"><i class="fa fa-fw icon fa-files-o"></i> <?= translate('Content') ?><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
@@ -53,7 +53,7 @@
                 </li>
                 <?php
             }
-            if (has_permission(array('manage_modules', 'manage_templates'))) {
+            if (has_permission('manage_modules') || has_permission('manage_templates')) {
 
                 ?>
                 <li>
@@ -86,7 +86,7 @@
                 </li>
                 <?php
             }
-            if (has_permission('manage_settings')) {
+            if (has_permission('settings')) {
 
                 ?>
                 <li <?= $view->isCurrentRoute(array('setting*'), 'class="active"') ?>>
@@ -94,7 +94,7 @@
                 </li>
                 <?php
             }
-            if (has_permission(array('manage_users', 'manage_roles'))) {
+            if (has_permission('manage_users') || has_permission('manage_roles')) {
 
                 ?>
 
@@ -116,10 +116,15 @@
                         <?php } ?>
                     </ul>
                 </li>
+                <?php
+            }
+            if (has_permission(array('maintenance'))) {
+
+                ?>
+                <li <?= $view->isCurrentRoute('maintenance*', 'class="active"') ?>>
+                    <a href="<?= generate_url('maintenance_index') ?>"><i class="fa fa-fw icon fa-picture-o"></i> <?= translate('Maintenance') ?></a>
+                </li>
             <?php } ?>
-            <li <?= $view->isCurrentRoute('maintenance*', 'class="active"') ?>>
-                <a href="<?= generate_url('maintenance_index') ?>"><i class="fa fa-fw icon fa-picture-o"></i> <?= translate('Maintenance') ?></a>
-            </li>
         </ul>
         <div class="sidebar-content hidden-xs">
             <ul class="list-unstyled">

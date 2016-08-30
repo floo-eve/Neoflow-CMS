@@ -10,7 +10,6 @@ use Neoflow\Framework\Support\Validation\ValidationException;
 
 class UserController extends BackendController
 {
-
     /**
      * Constructor.
      */
@@ -18,9 +17,20 @@ class UserController extends BackendController
     {
         parent::__construct();
 
+        // Set title
         $this->view
-            ->setTitle('Accounts')
-            ->setSubtitle('Users');
+            ->setSubtitle('Accounts')
+            ->setTitle('Users');
+    }
+
+    /**
+     * Check permission.
+     *
+     * @return bool
+     */
+    public function checkPermission()
+    {
+        return has_permission('manage_users');
     }
 
     /**
@@ -93,6 +103,7 @@ class UserController extends BackendController
             $user = UserModel::findById($args['id']);
             if (!$user) {
                 $this->setDangerAlert(translate('{0} not found', array('User')));
+
                 return $this->redirectToRoute('user_index');
             }
         }
@@ -102,7 +113,7 @@ class UserController extends BackendController
 
         return $this->render('backend/user/edit', array(
                 'user' => $user,
-                'roles' => RoleModel::findAll(),));
+                'roles' => RoleModel::findAll(), ));
     }
 
     /**

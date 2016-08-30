@@ -3,8 +3,6 @@
 namespace Neoflow\CMS\Controller\Backend;
 
 use Neoflow\CMS\Controller\BackendController;
-use Neoflow\CMS\Model\ModuleModel;
-use Neoflow\CMS\Model\PageModel;
 use Neoflow\CMS\Model\SectionModel;
 use Neoflow\Framework\HTTP\Responsing\JsonResponse;
 use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
@@ -14,30 +12,26 @@ use Neoflow\Framework\Support\Validation\ValidationException;
 class SectionController extends BackendController
 {
     /**
-     * @var SectionModel
-     */
-    protected $section;
-
-    /**
-     * @var PageModel
-     */
-    protected $page;
-
-    /**
-     * @var ModuleModel
-     */
-    protected $module;
-
-    /**
      * Constructor.
      */
     public function __construct()
     {
         parent::__construct();
 
+        // Set title
         $this->view
             ->setSubtitle('Content')
             ->setTitle('Pages');
+    }
+
+    /**
+     * Check permission.
+     *
+     * @return bool
+     */
+    public function checkPermission()
+    {
+        return has_permission('manage_pages');
     }
 
     /**
@@ -76,7 +70,6 @@ class SectionController extends BackendController
         try {
 
             // Get post data
-
             $postData = $this->getRequest()->getPostData();
 
             $section = SectionModel::create(array(

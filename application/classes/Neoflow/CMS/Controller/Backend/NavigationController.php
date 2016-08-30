@@ -10,11 +10,9 @@ use Neoflow\CMS\Model\PageModel;
 use Neoflow\CMS\Views\Backend\NavigationView;
 use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Framework\Support\Validation\ValidationException;
-use function translate;
 
 class NavigationController extends BackendController
 {
-
     /**
      * Constructor.
      */
@@ -22,16 +20,27 @@ class NavigationController extends BackendController
     {
         parent::__construct();
 
-        // Set titles
+        // Set title
         $this->view
             ->setSubtitle('Content')
             ->setTitle('Navigations');
     }
 
     /**
-     * Index action
+     * Check permission.
+     *
+     * @return bool
+     */
+    public function checkPermission()
+    {
+        return has_permission('manage_navigations');
+    }
+
+    /**
+     * Index action.
      *
      * @param array $args
+     *
      * @return Response
      */
     public function indexAction($args)
@@ -67,6 +76,7 @@ class NavigationController extends BackendController
             } else {
                 $language_id = $languages[0]->id();
                 $this->session()->reflash();
+
                 return $this->redirectToRoute('navigation_navitems', array('id' => $navigation->id(), 'language_id' => $language_id));
             }
         }
@@ -105,6 +115,7 @@ class NavigationController extends BackendController
      * Create action.
      *
      * @param array $args
+     *
      * @return Response
      */
     public function createAction($args)
@@ -117,7 +128,7 @@ class NavigationController extends BackendController
             // Create navigation
             $navigation = NavigationModel::create(array(
                     'title' => $postData->get('title'),
-                    'description' => $postData->get('description')
+                    'description' => $postData->get('description'),
             ));
 
             if ($navigation->validate() && $navigation->save()) {
@@ -151,12 +162,11 @@ class NavigationController extends BackendController
             }
         }
 
-
         // Set back url
         $this->view->setBackRoute('navigation_index', array('language_id' => $navigation->language_id));
 
         return $this->render('backend/navigation/edit', array(
-                'navigation' => $navigation
+                'navigation' => $navigation,
         ));
     }
 
@@ -165,8 +175,7 @@ class NavigationController extends BackendController
 
      *
 
-     * @param array $args
-
+     * @param  array    $args
      * @return Response
      */
     public function updateAction($args)

@@ -5,12 +5,30 @@ namespace Neoflow\CMS\Controller\Backend;
 use Neoflow\CMS\Controller\BackendController;
 use Neoflow\CMS\Model\NavitemModel;
 use Neoflow\Framework\HTTP\Responsing\JsonResponse;
+use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\Support\Validation\ValidationException;
-use function is_json;
-use function translate;
 
 class NavitemController extends BackendController
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        // Set title
+        $this->view
+            ->setSubtitle('Content')
+            ->setTitle('Navigations');
+    }
+
+    /**
+     * Check permission.
+     *
+     * @return bool
+     */
+    protected function checkPermission()
+    {
+        return has_permission('manage_navigations') || has_permission('manage_pages');
+    }
 
     /**
      * Reorder navitems action.
@@ -35,22 +53,28 @@ class NavitemController extends BackendController
     }
 
     /**
-     * Create navitem action
+     * Create navitem action.
      *
      * @param array $args
+     *
      * @return Response
      */
     public function createAction($args)
     {
+        // Prevent access for page permissions
+        if (has_permission('manage_pages')) {
+            return $this->unauthorizedAction();
+        }
+
         try {
 
-// Get post data
+            // Get post data
             $postData = $this->getRequest()->getPostData();
 
-// Create navigation
+            // Create navigation
             $navitem = NavitemModel::create(array(
                     'title' => $postData->get('title'),
-                    'parent_navitem_id' => $postData->get('parent_navitem_id') ? : null,
+                    'parent_navitem_id' => $postData->get('parent_navitem_id') ?: null,
                     'navigation_id' => $postData->get('navigation_id'),
                     'language_id' => $postData->get('language_id'),
                     'page_id' => $postData->get('page_id'),
@@ -78,6 +102,10 @@ class NavitemController extends BackendController
      */
     public function toggleVisiblityAction($args)
     {
+        // Prevent access for page permissions
+        if (has_permission('manage_pages')) {
+            return $this->unauthorizedAction();
+        }
 
         // Get section
         $navitem = NavitemModel::findById($args['id']);
@@ -110,6 +138,10 @@ class NavitemController extends BackendController
      */
     public function deleteAction($args)
     {
+        // Prevent access for page permissions
+        if (has_permission('manage_pages')) {
+            return $this->unauthorizedAction();
+        }
 
         // Get navitem
         $navitem = NavitemModel::findById($args['id']);

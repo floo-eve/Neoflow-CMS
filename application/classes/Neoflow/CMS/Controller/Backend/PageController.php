@@ -13,7 +13,6 @@ use Neoflow\Framework\Support\Validation\ValidationException;
 
 class PageController extends BackendController
 {
-
     /**
      * Constructor.
      */
@@ -21,12 +20,20 @@ class PageController extends BackendController
     {
         parent::__construct();
 
-        $this->permissionKeys = array('manage_pages');
-
-        // Set titles
+        // Set title
         $this->view
             ->setSubtitle('Content')
             ->setTitle('Pages');
+    }
+
+    /**
+     * Check permission.
+     *
+     * @return bool
+     */
+    public function checkPermission()
+    {
+        return has_permission('manage_pages');
     }
 
     /**
@@ -51,6 +58,7 @@ class PageController extends BackendController
             } else {
                 $language_id = $languages[0]->id();
                 $this->session()->reflash();
+
                 return $this->redirectToRoute('page_index', array('language_id' => $language_id));
             }
         }
@@ -81,7 +89,8 @@ class PageController extends BackendController
     /**
      * Create action.
      *
-     * @param  array    $args
+     * @param array $args
+     *
      * @return Response
      */
     public function createAction($args)
@@ -181,7 +190,7 @@ class PageController extends BackendController
                 'page' => $page,
                 'pageNavitem' => $pageNavitem,
                 'navitems' => $navitems,
-                'selectedNavitemId' => ($parentNavitem ? $parentNavitem->id() : false)
+                'selectedNavitemId' => ($parentNavitem ? $parentNavitem->id() : false),
         ));
     }
 
@@ -248,7 +257,8 @@ class PageController extends BackendController
 
      *
 
-     * @param  array    $args
+     * @param array $args
+     *
      * @return Response
      */
     public function activateAction($args)
@@ -270,6 +280,7 @@ class PageController extends BackendController
         } else {
             $this->setDangerAlert(translate('{0} not found', array('Page')));
         }
+
         return $this->redirectToRoute('page_index');
     }
 

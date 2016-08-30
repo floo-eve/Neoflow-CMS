@@ -18,9 +18,20 @@ class RoleController extends BackendController
     {
         parent::__construct();
 
+        // Set title
         $this->view
-            ->setTitle('Accounts')
-            ->setSubtitle('Roles');
+            ->setSubtitle('Accounts')
+            ->setTitle('Roles');
+    }
+
+    /**
+     * Check permission.
+     *
+     * @return bool
+     */
+    public function checkPermission()
+    {
+        return has_permission('manage_roles');
     }
 
     /**

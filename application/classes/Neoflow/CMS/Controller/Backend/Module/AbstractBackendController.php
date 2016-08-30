@@ -64,13 +64,12 @@ abstract class AbstractBackendController extends BackendController
 
     /**
      * Render module view as block of the section view and content of response.
-     
+
      *
-     
-     * @param string   $viewFile
-     * @param array    $parameters
-     * @param Response $response
-     
+
+     * @param  string   $viewFile
+     * @param  array    $parameters
+     * @param  Response $response
      * @return Response
      */
     protected function render($viewFile, array $parameters = array(), Response $response = null)

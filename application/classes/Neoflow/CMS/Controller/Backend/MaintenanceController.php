@@ -3,16 +3,43 @@
 namespace Neoflow\CMS\Controller\Backend;
 
 use Neoflow\CMS\Controller\BackendController;
-use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\CMS\Support\Alert\SuccessAlert;
 use Neoflow\CMS\Support\Alert\WarningAlert;
+use Neoflow\Framework\HTTP\Responsing\Response;
 
 class MaintenanceController extends BackendController
 {
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        // Set title
+        $this->view
+            ->setTitle('Maintenance');
+    }
+
+    /**
+     * Check permission.
+     *
+     * @return bool
+     */
+    public function checkPermission()
+    {
+        return has_permission('maintenance');
+    }
+
+    /**
+     * Index action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     */
     public function indexAction($args)
     {
-        $this->view->setTitle('Maintenance');
-
         return $this->render('backend/maintenance/index');
     }
 

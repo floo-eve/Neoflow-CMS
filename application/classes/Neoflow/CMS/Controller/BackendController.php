@@ -215,7 +215,17 @@ class BackendController extends AbstractController
     }
 
     /**
-     * Pre hook method.
+     * Check permission
+     *
+     * @return Response|bool
+     */
+    protected function checkPermission()
+    {
+        return true;
+    }
+
+    /**
+     * Pre hook.
      *
      * @param array $args
      *
@@ -230,8 +240,8 @@ class BackendController extends AbstractController
         if ($this->service('auth')->isAuthenticated()) {
             if (in_array($currentRoute[0], $anonymousRoutes)) {
                 return $this->redirectToRoute('dashboard_index');
-            } else if ($this->permissionKeys && !$this->service('auth')->hasPermission($this->permissionKeys)) {
-                return $this->unauthorizedAction();
+            } elseif (!$this->checkPermission()) {
+                $this->unauthorizedAction();
             }
         } else {
             if (!in_array($currentRoute[0], $anonymousRoutes)) {

@@ -7,13 +7,10 @@ use Neoflow\CMS\Model\LanguageModel;
 use Neoflow\CMS\Model\SettingModel;
 use Neoflow\CMS\Model\ThemeModel;
 use Neoflow\Framework\HTTP\Responsing\Response;
-use Neoflow\CMS\Support\Alert\DangerAlert;
-use Neoflow\CMS\Support\Alert\SuccessAlert;
 use Neoflow\Framework\Support\Validation\ValidationException;
 
 class SettingController extends BackendController
 {
-
     /**
      * Constructor.
      */
@@ -21,7 +18,19 @@ class SettingController extends BackendController
     {
         parent::__construct();
 
-        $this->view->setTitle('Settings');
+        // Set title
+        $this->view
+            ->setTitle('Settings');
+    }
+
+    /**
+     * Check permission.
+     *
+     * @return bool
+     */
+    public function checkPermission()
+    {
+        return has_permission('settings');
     }
 
     /**
