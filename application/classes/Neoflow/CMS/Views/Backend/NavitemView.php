@@ -5,26 +5,26 @@ namespace Neoflow\CMS\Views\Backend;
 use Neoflow\CMS\Views\BackendView;
 use Neoflow\Framework\ORM\EntityCollection;
 
-class NavigationView extends BackendView
+class NavitemView extends BackendView
 {
 
-    public function renderNavitemOptions(EntityCollection $navitems, $level = 0, $disabledProperty = null, array $disabledProperties = array(), $valueProperty = 'navitem_id')
+    public function renderNavitemOptions(EntityCollection $navitems, $level = 0, array $selected = array(), array $disabled = array(), $property = 'navitem_id')
     {
         $output = '';
         foreach ($navitems as $navitem) {
-            $output .= '<option ' . (in_array($navitem->$valueProperty, $disabledProperties) ? 'disabled' : '') . ' ' . ($disabledProperty === $navitem->$valueProperty ? 'selected' : '') . ' data-level="' . $level . '" value="' . $navitem->$valueProperty . '">' . $navitem->title . '</option>';
+            $output .= '<option ' . (in_array($navitem->$property, $disabled) ? 'disabled' : '') . ' ' . (in_array($navitem->$property, $selected) ? 'selected' : '') . ' data-level="' . $level . '" value="' . $navitem->$property . '">' . $navitem->title . '</option>';
 
             $childNavitems = $navitem->childNavitems()
                 ->orderByAsc('position')
                 ->fetchAll();
 
-            if (in_array($navitem->$valueProperty, $disabledProperties)) {
-                $disabledProperties = $childNavitems->map(function ($navitem) use($valueProperty) {
-                        return $navitem->$valueProperty;
+            if (in_array($navitem->$property, $disabled)) {
+                $disabled = $childNavitems->map(function ($navitem) use($property) {
+                        return $navitem->$property;
                     })->toArray();
             }
 
-            $output .= $this->renderNavitemOptions($childNavitems, $level + 1, $disabledProperty, $disabledProperties);
+            $output .= $this->renderNavitemOptions($childNavitems, $level + 1, $selected, $disabled);
         }
 
         return $output;
@@ -61,7 +61,7 @@ class NavigationView extends BackendView
                 }
                 $output .= '</li>
                                 <li>
-                                    <a href="' . generate_url('page_sections', array('id' => $navitem->page_id)) . '">
+                                    <a href="' . generate_url('navitem_edit', array('id' => $navitem->id())) . '">
                                         ' . $navitem->title . '
                                     </a>
                                 </li>

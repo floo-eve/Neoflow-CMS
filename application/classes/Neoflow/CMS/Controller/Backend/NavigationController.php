@@ -3,16 +3,16 @@
 namespace Neoflow\CMS\Controller\Backend;
 
 use Neoflow\CMS\Controller\BackendController;
-use Neoflow\CMS\Model\LanguageModel;
 use Neoflow\CMS\Model\NavigationModel;
-use Neoflow\CMS\Model\NavitemModel;
 use Neoflow\CMS\Model\PageModel;
-use Neoflow\CMS\Views\Backend\NavigationView;
 use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Framework\Support\Validation\ValidationException;
+use function has_permission;
+use function translate;
 
 class NavigationController extends BackendController
 {
+
     /**
      * Constructor.
      */
@@ -51,63 +51,6 @@ class NavigationController extends BackendController
 
         return $this->render('backend/navigation/index', array(
                 'navigations' => $navigations,
-        ));
-    }
-
-    public function navitemsAction($args)
-    {
-        // Get navigation by id
-        $navigation = NavigationModel::findById($args['id']);
-        if (!$navigation || $navigation->id() == 1) {
-            $this->setDangerAlert(translate('{0} not found', array('Navigation')));
-
-            return $this->redirectToRoute('navigation_index');
-        }
-
-        // Get all languages
-        $languages = LanguageModel::findAllByColumn('is_active', true);
-
-        // Get navigation language id
-        $language_id = $this->getRequest()->getGet('language_id');
-
-        if (!$language_id) {
-            if ($this->session()->has('navigation_language_id')) {
-                $language_id = $this->session()->get('navigation_language_id');
-            } else {
-                $language_id = $languages[0]->id();
-                $this->session()->reflash();
-
-                return $this->redirectToRoute('navigation_navitems', array('id' => $navigation->id(), 'language_id' => $language_id));
-            }
-        }
-        $this->session()->set('navigation_language_id', $language_id);
-
-        // Get navigation language
-        $navigationLanguage = LanguageModel::findById($language_id);
-
-        $navitems = $navigation->navitems()
-            ->where('parent_navitem_id', 'IS', null)
-            ->where('language_id', '=', $language_id)
-            ->where('parent_navitem_id', 'IS', null)
-            ->orderByAsc('position')
-            ->fetchAll();
-
-        $pageNavitems = NavitemModel::repo()
-            ->where('navigation_id', '=', 1)
-            ->where('language_id', '=', $language_id)
-            ->where('parent_navitem_id', 'IS', null)
-            ->orderByAsc('position')
-            ->fetchAll();
-
-        // Set back url
-        $this->view->setBackRoute('navigation_index', array('language_id' => $navigation->language_id));
-
-        return $this->render('backend/navigation/navitems', array(
-                'navigation' => $navigation,
-                'navitems' => $navitems,
-                'pageNavitems' => $pageNavitems,
-                'languages' => $languages,
-                'navigationLanguage' => $navigationLanguage,
         ));
     }
 
@@ -172,9 +115,7 @@ class NavigationController extends BackendController
 
     /**
      * Update action.
-
      *
-
      * @param  array    $args
      * @return Response
      */
@@ -188,10 +129,7 @@ class NavigationController extends BackendController
             // Get navigation by id
             $navigation = NavigationModel::update(array(
                     'title' => $postData->get('title'),
-                    'is_active' => $postData->get('is_active'),
-                    'parent_navitem_id' => $postData->get('parent_navitem_id'),
-                    'visibility' => $postData->get('visibility'),
-                    'module_id' => $postData->get('module_id'),
+                    'description' => $postData->get('description'),
                     ), $postData->get('navigation_id'));
 
             // Save navigation and navitem
@@ -226,13 +164,5 @@ class NavigationController extends BackendController
         }
 
         return $this->redirectToRoute('navigation_index');
-    }
-
-    /**
-     * Set view.
-     */
-    protected function setView()
-    {
-        $this->view = new NavigationView();
     }
 }

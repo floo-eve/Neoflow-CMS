@@ -6,11 +6,13 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= translate('Edit navigation') ?><span class="label label-primary pull-right"><?= $navigation->title ?></span>
+                    <?= translate('Navigation details') ?><span class="label label-primary pull-right"><?= $navigation->title ?></span>
                 </h3>
             </div>
             <div class="panel-body">
                 <form method="post" action="<?= generate_url('navigation_update') ?>" class="form-horizontal">
+                    <input value="<?= $navigation->id() ?>" type="hidden" name="navigation_id" />
+
                     <div class="form-group">
                         <label for="inputTitle" class="col-sm-2 control-label">
                             <?= translate('Title') ?>

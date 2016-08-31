@@ -64,7 +64,6 @@ $this->addRoutes(array(
 $this->addRoutes(array(
     array('navigation_create', 'post', '/backend/navigation/create', 'Navigation@create'),
     array('navigation_edit', 'get', '/backend/navigation/edit/(id:num)', 'Navigation@edit'),
-    array('navigation_navitems', 'get', '/backend/navigation/edit/(id:num)/items', 'Navigation@navitems'),
     array('navigation_update', 'post', '/backend/navigation/update', 'Navigation@update'),
     array('navigation_delete', 'get', '/backend/navigation/delete/(id:num)', 'Navigation@delete'),
     array('navigation_index', 'get', '/backend/navigations', 'Navigation@index')
@@ -72,9 +71,11 @@ $this->addRoutes(array(
 
 // Backend navitem routes
 $this->addRoutes(array(
+    array('navitem_index', 'get', '/backend/navigation/(id:num)/items', 'Navitem@index'),
     array('navitem_reorder', 'post', '/backend/navigation/item/reorder', 'Navitem@reorder'),
     array('navitem_create', 'post', '/backend/navigation/item/create', 'Navitem@create'),
     array('navitem_edit', 'get', '/backend/navigation/item/edit/(id:num)', 'Navitem@edit'),
+    array('navitem_update', 'post', '/backend/navigation/item/update', 'Navitem@update'),
     array('navitem_delete', 'get', '/backend/navigation/item/delete/(id:num)', 'Navitem@delete'),
     array('navitem_toggle_visiblity', 'get', '/backend/navigation/item/edit/(id:num)/toggle-visiblity', 'Navitem@toggleVisiblity')
 ));

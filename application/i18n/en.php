@@ -68,6 +68,7 @@ $this->addTranslation(array(
     'Forward' => 'Forward',
     'Page' => 'Page',
     'Pages' => 'Pages',
+    'Details' => 'Details',
     'Content' => 'Content',
     'Section' => 'Sections',
     'Sections' => 'Sections',
@@ -233,11 +234,12 @@ $this->addTranslation(array(
     'Navigations' => 'Navigations',
     'Create navigation' => 'Create navigation',
     'Items' => 'Items',
+    'Edit navigation item' => 'Edit navigation item',
     'Navigation items' => 'Navigation items',
     'Navigation item successful hidden' => 'Navigation item successful hidden',
     'Navigation item successful made visible' => 'Navigation item successful made visible',
     'Create item' => 'Create item',
-    'Edit navigation' => 'Edit navigation',
+    'Navigation details' => 'Navigation details',
     'Top item' => 'Top item',
     'Are you sure you want to delete this and all of its subnavigation items?' => 'Are you sure you want to delete this and all of its subnavigation items?'
 ));
@@ -246,6 +248,7 @@ $this->addTranslation(array(
 $this->addTranslation(array(
     'All pages' => 'All pages',
     'Create page' => 'Create page',
+    'Page details' => 'Page details',
     'Top page' => 'Top page',
     'Page title' => 'Page title',
     'Page is active' => 'Page is active',

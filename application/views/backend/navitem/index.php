@@ -13,7 +13,7 @@
                 <ul class="nav nav-tabs">
                     <?php foreach ($languages as $language) { ?>
                         <li <?= ($language->id() === $navigationLanguage->id() ? 'class="active"' : '') ?>>
-                            <a href="<?= generate_url('navigation_navitems', array('id' => $navigation->id(), 'language_id' => $language->id())) ?>">
+                            <a href="<?= generate_url('navitem_index', array('id' => $navigation->id(), 'language_id' => $language->id())) ?>">
                                 <?= $language->renderFlagIcon() ?> <?= $language->translated('title') ?>
                             </a>
                         </li>
@@ -63,7 +63,7 @@
                         </label>
                         <div class="col-sm-9">
                             <select class="form-control select2" name="page_id" id="selectPage">
-                                <?= $view->renderNavitemOptions($pageNavitems, 0, null, array(), 'page_id') ?>
+                                <?= $view->renderNavitemOptions($pageNavitems, 0, array(), array(), 'page_id') ?>
                             </select>
                         </div>
                     </div>

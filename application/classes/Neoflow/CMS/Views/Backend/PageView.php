@@ -4,7 +4,7 @@ namespace Neoflow\CMS\Views\Backend;
 
 use Neoflow\Framework\ORM\EntityCollection;
 
-class PageView extends NavigationView
+class PageView extends NavitemView
 {
 
     /**

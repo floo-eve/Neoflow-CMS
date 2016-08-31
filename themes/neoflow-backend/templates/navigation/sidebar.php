@@ -22,9 +22,9 @@
             </div>
             <!--<hr />-->
             <?php if ($view->app()->service('auth')->isAuthenticated()) { ?>
-                                                                                                                                    <!--                <a href="<?= generate_url('backend_logout') ?>" title="Logout" class="btn btn-xs btn-primary btn-icon-left btn-icon">
-                                                                                                                                                        <i class="fa fa-sign-out"></i>
-                                                                                                                                                        <span class="hidden-xs"> Logout</span></a>-->
+                                                                                                                                        <!--                <a href="<?= generate_url('backend_logout') ?>" title="Logout" class="btn btn-xs btn-primary btn-icon-left btn-icon">
+                                                                                                                                                            <i class="fa fa-sign-out"></i>
+                                                                                                                                                            <span class="hidden-xs"> Logout</span></a>-->
             <?php } ?>
         </div>
         <ul class="nav sidebar-nav">
@@ -33,7 +33,7 @@
             </li>
 
             <?php if (has_permission('manage_pages') || has_permission('manage_navigations')) { ?>
-                <li <?= $view->isCurrentRoute(array('navigation*', 'page*', 'section*', 'mod*'), 'class="active"') ?>>
+                <li <?= $view->isCurrentRoute(array('navigation*', 'page*', 'section*', 'mod*', 'navitem*'), 'class="active"') ?>>
                     <a href="#"><i class="fa fa-fw icon fa-files-o"></i> <?= translate('Content') ?><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <?php if (has_permission('manage_pages')) { ?>
@@ -45,7 +45,7 @@
                         if (has_permission('manage_navigations')) {
 
                             ?>
-                            <li <?= $view->isCurrentRoute('navigation*', 'class="active"') ?>>
+                            <li <?= $view->isCurrentRoute(array('navigation*', 'navitem*'), 'class="active"') ?>>
                                 <a href="<?= generate_url('navigation_index') ?>"><?= translate('Navigations') ?></a>
                             </li>
                         <?php } ?>

@@ -8,7 +8,7 @@ return array(
         'dbname' => 'neoflow-cms',
         'charset' => 'UTF8',
     ),
-    'email' => 'jonathan.nessier@outlook.com',
+    'email' => 'john.doe@neoflow.ch',
     'session' => array(
         'name' => 'neoflow-cms', // false (system default) | string
         'lifetime' => 3600, // false (system default) | int (seconds)
