@@ -31,7 +31,7 @@ class PageController extends BackendController
      *
      * @return bool
      */
-    public function checkPermission()
+    protected function checkPermission()
     {
         return has_permission('manage_pages');
     }

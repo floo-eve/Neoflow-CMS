@@ -37,7 +37,7 @@ $this->addRoutes(array(
     array('section_reorder', 'post', '/backend/section/reorder', 'Section@reorder'),
     array('section_create', 'post', '/backend/section/create', 'Section@create'),
     array('section_delete', 'get', '/backend/section/delete/(id:num)', 'Section@delete'),
-    array('section_activate', 'get', '/backend/section/activate/(id:num)', 'Section@activate')
+    array('section_toggle_activation', 'get', '/backend/section/edit/(id:num)/toggle-activation', 'Section@toggleActivation')
 ));
 
 // Backend user routes

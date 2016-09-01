@@ -132,11 +132,11 @@ class PageView extends NavitemView
                                     </a>';
 
                 if ($section->is_active) {
-                    $output .= ' <a href="' . generate_url('section_activate', array('id' => $section->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to disable it?') . '"" title="' . translate('Disable') . '">
+                    $output .= ' <a href="' . generate_url('section_toggle_activation', array('id' => $section->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to disable it?') . '"" title="' . translate('Disable') . '">
                                     <i class="fa fa-fw fa-ban"></i>
                                 </a>';
                 } else {
-                    $output .= ' <a href="' . generate_url('section_activate', array('id' => $section->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to activate it?') . '"" title="' . translate('Activate') . '">
+                    $output .= ' <a href="' . generate_url('section_toggle_activation', array('id' => $section->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to activate it?') . '"" title="' . translate('Activate') . '">
                                     <i class="fa fa-fw fa-eye"></i>
                                 </a>';
                 }

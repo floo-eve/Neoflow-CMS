@@ -6,7 +6,6 @@ use Neoflow\CMS\Controller\BackendController;
 use Neoflow\CMS\Model\SectionModel;
 use Neoflow\Framework\HTTP\Responsing\JsonResponse;
 use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
-use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Framework\Support\Validation\ValidationException;
 
 class SectionController extends BackendController
@@ -25,16 +24,6 @@ class SectionController extends BackendController
     }
 
     /**
-     * Check permission.
-     *
-     * @return bool
-     */
-    public function checkPermission()
-    {
-        return has_permission('manage_pages');
-    }
-
-    /**
      * Reorder sections action.
      *
      * @param array $args
@@ -43,27 +32,28 @@ class SectionController extends BackendController
      */
     public function reorderAction($args)
     {
-
-        // Get json data and update order of sections
+        // Get json request
         $json = file_get_contents('php://input');
 
+        // Reorder and update navigation item
         $result = false;
-
         if (is_json($json)) {
             $result = $this
                 ->service('section')
                 ->updateOrder(json_decode($json, true));
         }
 
-        return new JsonResponse(array('success' => (bool) $result));
+        return new JsonResponse(array('success' => $result));
     }
 
     /**
-     * Create new section action.
+     * Create section action.
      *
      * @param array $args
      *
-     * @return Response
+     * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function createAction($args)
     {
@@ -72,6 +62,7 @@ class SectionController extends BackendController
             // Get post data
             $postData = $this->request()->getPostData();
 
+            // Create section
             $section = SectionModel::create(array(
                     'page_id' => $postData->get('page_id'),
                     'module_id' => $postData->get('module_id'),
@@ -79,10 +70,11 @@ class SectionController extends BackendController
                     'block' => 1,
             ));
 
+            // Validate and save section
             if ($section->validate() && $section->save()) {
-                $this->setSuccessAlert(translate('{0} successful saved', array('Section')));
+                $this->setSuccessAlert(translate('successful created'));
             } else {
-                $this->setDangerAlert(translate('Create failed'));
+                throw new Exception('Create section failed');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
@@ -96,58 +88,54 @@ class SectionController extends BackendController
      *
      * @param array $args
      *
-     * @return Response
+     * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function deleteAction($args)
     {
-
-        // Get section
+        // Get and delete section
         $section = SectionModel::findById($args['id']);
-
-        if ($section) {
-            if ($section->delete()) {
-                $this->setSuccessAlert(translate('{0} successful deleted', array('Section')));
-            } else {
-                $this->setDangerAlert(translate('Delete failed'));
-            }
-
-            return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
+        if ($section && $section->delete()) {
+            return $this
+                    ->setSuccessAlert(translate('Successful deleted'))
+                    ->redirectToRoute('page_sections', array('id' => $section->page_id));
         }
-
-        $this->setDangerAlert(translate('{0} not found', array('Section')));
-
-        return $this->redirectToRoute('page_index');
+        throw new Exception('Delete section failed (ID: '.$args['id'].')');
     }
 
     /**
-     * Activate section action.
+     * Toggle section activation action.
      *
      * @param array $args
      *
-     * @return RedirectResponse|Response
+     * @return RedirectResponse
+     *
+     * @throws Exception
      */
-    public function activateAction($args)
+    public function toggleActivationAction($args)
     {
-
-        // Get section
+        // Get section and toggle activity
         $section = SectionModel::findById($args['id']);
-
-        if ($section) {
-            $section
-                ->toggleActivation()
-                ->save();
-
-            if ($section->is_active) {
-                $this->setSuccessAlert(translate('Section successful activated'));
+        if ($section && $section->toggleActivation() && $section->save()) {
+            if ($section->is_visible) {
+                $this->setSuccessAlert(translate('Successful activated'));
             } else {
-                $this->setSuccessAlert(translate('Section successful disabled'));
+                $this->setSuccessAlert(translate('Successful disabled'));
             }
 
             return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
         }
+        throw new Exception('Section not found or toggle activation failed (ID: '.$args['id'].')');
+    }
 
-        $this->setDangerAlert(translate('{0} not found', array('Section')));
-
-        return $this->redirectToRoute('page_index');
+    /**
+     * Check permission.
+     *
+     * @return bool
+     */
+    protected function checkPermission()
+    {
+        return has_permission('manage_pages');
     }
 }

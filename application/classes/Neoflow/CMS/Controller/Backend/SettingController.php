@@ -11,6 +11,7 @@ use Neoflow\Framework\Support\Validation\ValidationException;
 
 class SettingController extends BackendController
 {
+
     /**
      * Constructor.
      */
@@ -24,16 +25,6 @@ class SettingController extends BackendController
     }
 
     /**
-     * Check permission.
-     *
-     * @return bool
-     */
-    public function checkPermission()
-    {
-        return has_permission('settings');
-    }
-
-    /**
      * Index action.
      *
      * @param array $args
@@ -42,74 +33,81 @@ class SettingController extends BackendController
      */
     public function indexAction($args)
     {
-        // Get setting entity (from database or self-made if validation has failed)
+        // Get settings or data if validation has failed
         if ($this->service('validation')->hasError()) {
             $data = $this->service('validation')->getData();
-            $setting = new SettingModel($data);
+            $settings = new SettingModel($data);
         } else {
-            $setting = SettingModel::findById(1);
+            $settings = SettingModel::findById(1);
+            if (!$settings) {
+                throw new Exception('Settings not found (ID: ' . $args['id'] . ')');
+            }
         }
 
-        // Get additional model entities
-        $languages = LanguageModel::findAll();
-        $themes = ThemeModel::findAll();
-
         return $this->render('backend/setting/index', array(
-                'setting' => $setting,
-                'languages' => $languages,
-                'themes' => $themes,
+                'setting' => $settings,
+                'languages' => LanguageModel::findAll(),
+                'themes' => ThemeModel::findAll(),
         ));
     }
 
     /**
-     * Update action.
+     * Update settings action.
      *
      * @param array $args
      *
-     * @return Response
+     * @return \Neoflow\Framework\HTTP\Responsing\RedirectResponse
      */
     public function updateAction($args)
     {
         // Get post data
         $postData = $this->request()->getPostData();
-        $settingPostData = $postData->get('setting');
-        $languagePostData = $settingPostData->get('language');
-
-        // Get model entities
-        $languages = LanguageModel::findAll();
 
         try {
 
             // Update settings
             $settings = SettingModel::update(array(
-                    'language_id' => $settingPostData->get('language_id'),
-                    'website_title' => $settingPostData->get('website_title'),
-                    'website_description' => $settingPostData->get('website_description'),
-                    'keywords' => $settingPostData->get('keywords'),
-                    'author' => $settingPostData->get('author'),
-                    'theme_id' => $settingPostData->get('theme_id'),
-                    'backend_theme_id' => $settingPostData->get('backend_theme_id'),
-                    ), '1');
+                    'language_id' => $postData->get('language_id'),
+                    'website_title' => $postData->get('website_title'),
+                    'website_description' => $postData->get('website_description'),
+                    'keywords' => $postData->get('keywords'),
+                    'author' => $postData->get('author'),
+                    'theme_id' => $postData->get('theme_id'),
+                    'backend_theme_id' => $postData->get('backend_theme_id'),
+                    'language_id' => $postData->get('language_id'),
+                    ), 1);
 
-            if ($settings->validate() && $settings->save()) {
+            // Validate and save settings
+            if ($settings && $settings->validate() && $settings->save()) {
 
-                // Save active languages
-                $activeLanguageIds = $languagePostData->get('active_language_ids');
-                foreach ($languages as $language) {
+                // Update and save activity state of languages
+                $activeLanguageIds = $postData->get('active_language_ids');
+                LanguageModel::findAll()->each(function($language) use ($settings, $activeLanguageIds) {
                     $language->is_active = false;
-                    if ($settings->language_id === $language->id() || in_array($language->id(), $activeLanguageIds)) {
+                    if ($settings->language_id == $language->id() || in_array($language->id(), $activeLanguageIds)) {
                         $language->is_active = true;
                     }
                     $language->save();
-                }
-                $this->setSuccessAlert(translate('{0} successful updated', array('Settings')));
+                });
+
+                $this->setSuccessAlert(translate('Successful updated'));
             } else {
-                $this->setDangerAlert(translate('Update failed'));
+                throw new Exception('Update settings failed');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
         }
 
         return $this->redirectToRoute('setting_index');
+    }
+
+    /**
+     * Check permission.
+     *
+     * @return bool
+     */
+    protected function checkPermission()
+    {
+        return has_permission('settings');
     }
 }

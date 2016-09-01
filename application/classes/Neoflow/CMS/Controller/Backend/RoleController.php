@@ -11,6 +11,7 @@ use Neoflow\Framework\Support\Validation\ValidationException;
 
 class RoleController extends BackendController
 {
+
     /**
      * Constructor.
      */
@@ -22,16 +23,6 @@ class RoleController extends BackendController
         $this->view
             ->setSubtitle('Accounts')
             ->setTitle('Roles');
-    }
-
-    /**
-     * Check permission.
-     *
-     * @return bool
-     */
-    public function checkPermission()
-    {
-        return has_permission('manage_roles');
     }
 
     /**
@@ -75,10 +66,11 @@ class RoleController extends BackendController
                     'permission_ids' => $postData->get('permission_ids'),
             ));
 
-            if ($role->validate() && $role->save()) {
-                $this->setSuccessAlert(translate('{0} successful created', array('Role')));
+            // Validate and save role
+            if ($role && $role->validate() && $role->save()) {
+                $this->setSuccessAlert(translate('Successful created'));
             } else {
-                $this->setDangerAlert(translate('Create failed'));
+                throw new Exception('Create role failed');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
@@ -92,23 +84,19 @@ class RoleController extends BackendController
      *
      * @param array $args
      *
-     * @return Response|RedirectResponse
+     * @return Response
      */
     public function editAction($args)
     {
 
-        // Get role if validation has failed
+        // Get user or data if validation has failed
         if ($this->service('validation')->hasError()) {
             $data = $this->service('validation')->getData();
             $role = new RoleModel($data);
         } else {
-
-            // Get role by id
             $role = RoleModel::findById($args['id']);
             if (!$role) {
-                $this->setDangerAlert(translate('{0} not found', array('Role')));
-
-                return $this->redirectToRoute('role_index');
+                throw new Exception('Role not found (ID: ' . $args['id'] . ')');
             }
         }
 
@@ -127,6 +115,8 @@ class RoleController extends BackendController
      * @param array $args
      *
      * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function updateAction($args)
     {
@@ -135,19 +125,18 @@ class RoleController extends BackendController
             // Get post data
             $postData = $this->request()->getPostData();
 
-            // Get and update role
+            // Update role
             $role = RoleModel::update(array(
                     'title' => $postData->get('title'),
                     'description' => $postData->get('description'),
                     'permission_ids' => $postData->get('permission_ids'),
                     ), $postData->get('role_id'));
 
-            if ($role->validate() && $role->save()) {
+            // Validate and save role
+            if ($role && $role->validate() && $role->save()) {
                 $this->setSuccessAlert(translate('{0} successful updated', array('Role')));
             } else {
-                $this->setDangerAlert(translate('Update failed'));
-
-                return $this->redirectToRoute('role_index');
+                throw new Exception('Update role failed (ID: ' . $args['id'] . ')');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
@@ -162,22 +151,34 @@ class RoleController extends BackendController
      * @param array $args
      *
      * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function deleteAction($args)
     {
         try {
+
             // Delete role
             $result = RoleModel::deleteById($args['id']);
-
             if ($result) {
-                $this->setSuccessAlert(translate('{0} successful deleted', array('Role')));
+                $this->setSuccessAlert(translate('Successful deleted'));
             } else {
-                $this->setDangerAlert(translate('Delete failed'));
+                throw new Exception('Role not found or delete failed (ID: ' . $args['id'] . ')');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
         }
 
         return $this->redirectToRoute('role_index');
+    }
+
+    /**
+     * Check permission.
+     *
+     * @return bool
+     */
+    protected function checkPermission()
+    {
+        return has_permission('manage_roles');
     }
 }

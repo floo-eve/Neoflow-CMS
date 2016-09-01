@@ -70,7 +70,7 @@ class UserController extends BackendController
             ));
 
             // Validate and save user
-            if ($user->validate() && $user->validatePassword() && $user->save()) {
+            if ($user && $user->validate() && $user->validatePassword() && $user->save()) {
                 $this->setSuccessAlert(translate('Successful created'));
             } else {
                 throw new Exception('Create user failed');
@@ -100,7 +100,7 @@ class UserController extends BackendController
         } else {
             $user = UserModel::findById($args['id']);
             if (!$user) {
-                throw new Exception('User found (ID: ' . $args['id'] . ')');
+                throw new Exception('User not found (ID: ' . $args['id'] . ')');
             }
         }
 
@@ -137,10 +137,10 @@ class UserController extends BackendController
                     ), $postData->get('user_id'));
 
             // Validate and save user
-            if ($user->validate() && $user->save()) {
+            if ($user && $user->validate() && $user->save()) {
                 $this->setSuccessAlert(translate('Successful updated'));
             } else {
-                throw new Exception('Update user failed (ID: ' . $postData->get('user_id') . ')');
+                throw new Exception('User not found or delete failed (ID: ' . $postData->get('user_id') . ')');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
@@ -207,7 +207,7 @@ class UserController extends BackendController
      *
      * @return bool
      */
-    public function checkPermission()
+    protected function checkPermission()
     {
         return has_permission('manage_users');
     }

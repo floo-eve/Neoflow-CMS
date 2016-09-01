@@ -258,6 +258,8 @@ class NavitemController extends BackendController
      * @param array $args
      *
      * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function toggleVisiblityAction($args)
     {
@@ -270,9 +272,9 @@ class NavitemController extends BackendController
         $navitem = NavitemModel::findById($args['id']);
         if ($navitem && $navitem->toggleVisibility() && $navitem->save()) {
             if ($navitem->is_visible) {
-                $this->setSuccessAlert(translate('Navigation item successful made visible'));
+                $this->setSuccessAlert(translate('Successful made visible'));
             } else {
-                $this->setSuccessAlert(translate('Navigation item successful hidden'));
+                $this->setSuccessAlert(translate('Successful hidden'));
             }
             return $this->redirectToRoute('navitem_index', array('id' => $navitem->navigation_id));
         }

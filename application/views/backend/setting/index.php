@@ -14,7 +14,7 @@
                             <?= translate('Website title') ?>
                         </label>
                         <div class="col-sm-10">
-                            <input id="inputWebsiteTitle" type="text" required value="<?= $setting->website_title ?>" class="form-control" name="setting[website_title]" maxlength="50" minlength="3" />
+                            <input id="inputWebsiteTitle" type="text" required value="<?= $setting->website_title ?>" class="form-control" name="website_title" maxlength="50" minlength="3" />
                         </div>
                     </div>
                     <div class="form-group <?= $view->hasValidationError('website_description', 'has-error') ?>">
@@ -22,7 +22,7 @@
                             <?= translate('Website description') ?>
                         </label>
                         <div class="col-sm-10">
-                            <textarea name="setting[website_description]" class="form-control vresize" maxlength="150" id="textareaWebsiteDescription" rows="3"><?= $setting->website_description ?></textarea>
+                            <textarea name="website_description" class="form-control vresize" maxlength="150" id="textareaWebsiteDescription" rows="3"><?= $setting->website_description ?></textarea>
                         </div>
                     </div>
                     <div class="form-group <?= $view->hasValidationError('keywords', 'has-error') ?>">
@@ -30,7 +30,7 @@
                             <?= translate('Keywords') ?>
                         </label>
                         <div class="col-sm-10">
-                            <input id="inputKeywords" type="text" value="<?= $setting->keywords ?>" class="form-control" name="setting[keywords]" maxlength="255" />
+                            <input id="inputKeywords" type="text" value="<?= $setting->keywords ?>" class="form-control" name="keywords" maxlength="255" />
                         </div>
                     </div>
                     <div class="form-group <?= $view->hasValidationError('Author', 'has-error') ?>">
@@ -38,7 +38,7 @@
                             <?= translate('Author') ?>
                         </label>
                         <div class="col-sm-10">
-                            <input id="inputAuthor" type="text" value="<?= $setting->author ?>" class="form-control" name="setting[author]" maxlength="50" />
+                            <input id="inputAuthor" type="text" value="<?= $setting->author ?>" class="form-control" name="author" maxlength="50" />
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@
                             <?= translate('Frontend theme') ?>
                         </label>
                         <div class="col-sm-10">
-                            <select class="form-control select2" name="setting[theme_id]" id="selectTheme">
+                            <select class="form-control select2" name="theme_id" id="selectTheme">
                                 <?php
                                 foreach ($themes as $theme) {
                                     if ($theme->type === 'frontend') {
@@ -69,7 +69,7 @@
                             <?= translate('Backend theme') ?>
                         </label>
                         <div class="col-sm-10">
-                            <select class="form-control select2" name="setting[backend_theme_id]" id="selectBackendTheme">
+                            <select class="form-control select2" name="backend_theme_id" id="selectBackendTheme">
                                 <?php
                                 foreach ($themes as $theme) {
                                     if ($theme->type === 'backend') {
@@ -92,11 +92,11 @@
                             <?= translate('Default language') ?>
                         </label>
                         <div class="col-sm-10">
-                            <select class="form-control select2" name="setting[language_id]" id="selectDefaultLanguage">
+                            <select class="form-control select2" name="language_id" id="selectDefaultLanguage">
                                 <?php foreach ($languages as $language) {
 
                                     ?>
-                                    <option value="<?= $language->id() ?>"  <?= ($language->id() === $setting->language_id ? 'selected' : '') ?>><?= $language->translated('title') ?></option>
+                                    <option value="<?= $language->id() ?>"  <?= ($language->id() == $setting->language_id ? 'selected' : '') ?>><?= $language->translated('title') ?></option>
                                 <?php }
 
                                 ?>
@@ -107,7 +107,7 @@
                     <div class="form-group">
                         <label for="selectActiveLanguages" class="col-sm-2 control-label"><?= translate('Languages') ?></label>
                         <div class="col-sm-10">
-                            <select class="form-control select2" name="setting[language][active_language_ids][]" multiple id="selectActiveLanguages">
+                            <select class="form-control select2" name="active_language_ids[]" multiple id="selectActiveLanguages">
                                 <?php foreach ($languages as $language) {
 
                                     ?>
