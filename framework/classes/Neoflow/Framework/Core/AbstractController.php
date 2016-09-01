@@ -146,14 +146,4 @@ abstract class AbstractController
     {
         return $this->session()->setFlash($key, $value);
     }
-
-    /**
-     * Get request
-     *
-     * @return Request
-     */
-    protected function getRequest()
-    {
-        return $this->app()->get('request');
-    }
 }

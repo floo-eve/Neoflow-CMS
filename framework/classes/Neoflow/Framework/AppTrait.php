@@ -7,6 +7,7 @@ use Neoflow\Framework\Handler\Config;
 use Neoflow\Framework\Handler\Logging\Logger;
 use Neoflow\Framework\Handler\Router;
 use Neoflow\Framework\Handler\Translator;
+use Neoflow\Framework\HTTP\Request;
 use Neoflow\Framework\HTTP\Session;
 use ReflectionClass;
 
@@ -61,6 +62,16 @@ trait AppTrait
     public function translator()
     {
         return $this->app()->get('translator');
+    }
+
+    /**
+     * Get request
+     *
+     * @return Request
+     */
+    public function request()
+    {
+        return $this->app()->get('request');
     }
 
     /**

@@ -1,1 +1,0 @@
-<?phpnamespace Neoflow\CMS\Exception;class AccessDeniedException extends \Exception{}

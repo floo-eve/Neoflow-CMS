@@ -116,7 +116,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
     }
 
     /**
-     * Join model entities to a string.
+     * Join collection items to a string.
      *
      * @param callable $callback
      * @param string   $seperator
@@ -128,6 +128,16 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
         $result = $this->map($callback)->toArray();
 
         return implode($seperator, $result);
+    }
+
+    /**
+     * Get first collection item
+     *
+     * @return mixed
+     */
+    public function first()
+    {
+        return reset($this->items);
     }
 
     /**

@@ -71,7 +71,7 @@ class SettingController extends BackendController
     public function updateAction($args)
     {
         // Get post data
-        $postData = $this->getRequest()->getPostData();
+        $postData = $this->request()->getPostData();
         $settingPostData = $postData->get('setting');
         $languagePostData = $settingPostData->get('language');
 

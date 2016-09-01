@@ -6,13 +6,10 @@ use Exception;
 use InvalidArgumentException;
 use Neoflow\CMS\Core\View;
 use Neoflow\Framework\Common\Container;
-use Neoflow\Framework\Handler\Config;
-use Neoflow\Framework\Handler\Translator;
 use Neoflow\Framework\Persistence\Caching\AbstractCache;
 
 abstract class AbstractView
 {
-
     /**
      * App trait.
      */
@@ -63,8 +60,8 @@ abstract class AbstractView
     {
         $this->data = new Container();
 
-        $this->viewFileDirectories[] = $this->config()->getPath(DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'views');
-        $this->templateFileDirectories[] = $this->config()->getPath(DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'templates');
+        $this->viewFileDirectories[] = $this->config()->getPath(DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'views');
+        $this->templateFileDirectories[] = $this->config()->getPath(DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'templates');
     }
 
     /**
@@ -86,7 +83,7 @@ abstract class AbstractView
                 $this->resources[$type][$key] = array();
             }
             if ($isRelative) {
-                $url = $this->getThemeUrl('/' . $url);
+                $url = $this->getThemeUrl('/'.$url);
             }
             $this->resources[$type][$key][] = $url;
 
@@ -187,7 +184,7 @@ abstract class AbstractView
 
         $urls = $this->getResourceUrls($type, $key);
         foreach ($urls as $url) {
-            $output .= sprintf($template, $url) . PHP_EOL;
+            $output .= sprintf($template, $url).PHP_EOL;
         }
 
         return $output;
@@ -285,7 +282,7 @@ abstract class AbstractView
      */
     public function getThemeUrl($uri = '')
     {
-        return $this->config()->getUrl('/theme/' . $uri);
+        return $this->config()->getUrl('/theme/'.$uri);
     }
 
     /**
@@ -297,7 +294,7 @@ abstract class AbstractView
      */
     protected function getThemePath($uri = '')
     {
-        return $this->config()->getPath('/theme/' . $uri);
+        return $this->config()->getPath('/theme/'.$uri);
     }
 
     /**
@@ -329,7 +326,7 @@ abstract class AbstractView
     public function startBlock($id)
     {
         if (in_array($id, $this->openBlocks)) {
-            throw new Exception('A block already started with this ID: ' . $id);
+            throw new Exception('A block already started with this ID: '.$id);
         }
         $this->openBlocks[] = $id;
         $this->blocks[$id] = '';
@@ -432,7 +429,7 @@ abstract class AbstractView
     {
         $this->addParameters($parameters);
 
-        $viewFilePath = $this->getFilePath($viewFile, sha1('_view_' . $viewFile), $this->viewFileDirectories);
+        $viewFilePath = $this->getFilePath($viewFile, sha1('_view_'.$viewFile), $this->viewFileDirectories);
         if ($viewFilePath) {
             $content = $this->renderFile($viewFilePath, $this->parameters);
 
@@ -442,7 +439,7 @@ abstract class AbstractView
 
             return $content;
         }
-        throw new Exception('View not found: ' . $viewFile);
+        throw new Exception('View not found: '.$viewFile);
     }
 
     /**
@@ -457,11 +454,11 @@ abstract class AbstractView
      */
     public function renderTemplate($templateFile, $parameters = array())
     {
-        $templateFilePath = $this->getFilePath($templateFile, sha1('_template_' . $templateFile), $this->templateFileDirectories);
+        $templateFilePath = $this->getFilePath($templateFile, sha1('_template_'.$templateFile), $this->templateFileDirectories);
         if ($templateFilePath) {
             return $this->renderFile($templateFilePath, $parameters);
         }
-        throw new Exception('Template not found: ' . $templateFile);
+        throw new Exception('Template not found: '.$templateFile);
     }
 
     /**
@@ -480,7 +477,7 @@ abstract class AbstractView
         } else {
             foreach ($directories as $directory) {
                 $filePaths = array_map(function ($extension) use ($directory, $file) {
-                    return $directory . DIRECTORY_SEPARATOR . $file . $extension;
+                    return $directory.DIRECTORY_SEPARATOR.$file.$extension;
                 }, array('', '.php', '.html'));
 
                 foreach ($filePaths as $filePath) {
@@ -508,9 +505,9 @@ abstract class AbstractView
     public function renderTheme($themeFile = 'index')
     {
         $themeFiles = array(
-            $this->getThemePath(DIRECTORY_SEPARATOR . $themeFile),
-            $this->getThemePath(DIRECTORY_SEPARATOR . $themeFile . '.php'),
-            $this->getThemePath(DIRECTORY_SEPARATOR . $themeFile . '.html'),
+            $this->getThemePath(DIRECTORY_SEPARATOR.$themeFile),
+            $this->getThemePath(DIRECTORY_SEPARATOR.$themeFile.'.php'),
+            $this->getThemePath(DIRECTORY_SEPARATOR.$themeFile.'.html'),
         );
 
         // Render theme file and get output
@@ -524,7 +521,7 @@ abstract class AbstractView
     }
 
     /**
-     * Add parameters
+     * Add parameters.
      *
      * @param array $parameters
      */
@@ -562,13 +559,13 @@ abstract class AbstractView
             // Search and replace placeholders
             foreach ($parameters as $key => $value) {
                 if (is_string($value) || is_integer($value)) {
-                    $output = str_replace('[' . $key . ']', $value, $output);
+                    $output = str_replace('['.$key.']', $value, $output);
                 }
             }
 
             return $output;
         }
-        throw new InvalidArgumentException('File not found: ' . $file);
+        throw new InvalidArgumentException('File not found: '.$file);
     }
 
     /**

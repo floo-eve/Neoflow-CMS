@@ -39,10 +39,10 @@ abstract class AbstractBackendController extends BackendController
 
             ->setTitle('Pages');
 
-        $section_id = $this->getRequest()->getGet('section_id');
+        $section_id = $this->request()->getGet('section_id');
 
         if (!$section_id) {
-            $section_id = $this->getRequest()->getPost('section_id');
+            $section_id = $this->request()->getPost('section_id');
         }
 
         // Get section, module and page

@@ -45,7 +45,7 @@ class MaintenanceController extends BackendController
 
     public function deleteCacheAction($args)
     {
-        $cacheTag = $this->getRequest()->getPost('cache');
+        $cacheTag = $this->request()->getPost('cache');
 
         $cache = $this->app()->get('cache');
         if ($cacheTag) {

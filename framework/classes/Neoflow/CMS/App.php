@@ -27,11 +27,11 @@ class App extends \Neoflow\Framework\App
         $this->set('modules', $modules);
 
         // Register CMS settings
-        $setting = SettingModel::findById(1);
+        $settings = SettingModel::findById(1);
 
-        if ($setting) {
-            $setting->setReadOnly();
-            $this->set('setting', $setting);
+        if ($settings) {
+            $settings->setReadOnly();
+            $this->set('settings', $settings);
         } else {
             throw new Exception('Settings not found');
         }

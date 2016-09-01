@@ -14165,6 +14165,87 @@ a:focus {
   box-shadow: none;
 }
 
+.has-success .help-block,
+.has-success .control-label,
+.has-success .radio,
+.has-success .checkbox,
+.has-success .radio-inline,
+.has-success .checkbox-inline, .has-success.radio label, .has-success.checkbox label, .has-success.radio-inline label, .has-success.checkbox-inline label {
+  color: #43AC6A;
+}
+.has-success .form-control {
+  border-color: #43AC6A;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.has-success .form-control:focus {
+  border-color: #358753;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #85d0a1;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #85d0a1;
+}
+.has-success .input-group-addon {
+  color: #43AC6A;
+  border-color: #43AC6A;
+  background-color: #43AC6A;
+}
+.has-success .form-control-feedback {
+  color: #43AC6A;
+}
+
+.has-warning .help-block,
+.has-warning .control-label,
+.has-warning .radio,
+.has-warning .checkbox,
+.has-warning .radio-inline,
+.has-warning .checkbox-inline, .has-warning.radio label, .has-warning.checkbox label, .has-warning.radio-inline label, .has-warning.checkbox-inline label {
+  color: #EA981E;
+}
+.has-warning .form-control {
+  border-color: #EA981E;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.has-warning .form-control:focus {
+  border-color: #c37c12;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #f3c37b;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #f3c37b;
+}
+.has-warning .input-group-addon {
+  color: #EA981E;
+  border-color: #EA981E;
+  background-color: #EA981E;
+}
+.has-warning .form-control-feedback {
+  color: #EA981E;
+}
+
+.has-error .help-block,
+.has-error .control-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label {
+  color: #DB4C4C;
+}
+.has-error .form-control {
+  border-color: #DB4C4C;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.has-error .form-control:focus {
+  border-color: #cb2929;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #eca1a1;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #eca1a1;
+}
+.has-error .input-group-addon {
+  color: #DB4C4C;
+  border-color: #DB4C4C;
+  background-color: #DB4C4C;
+}
+.has-error .form-control-feedback {
+  color: #DB4C4C;
+}
+
 label {
   font-weight: 600;
 }

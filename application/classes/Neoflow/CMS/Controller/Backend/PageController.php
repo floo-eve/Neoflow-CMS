@@ -50,7 +50,7 @@ class PageController extends BackendController
         $languages = LanguageModel::findAllByColumn('is_active', true);
 
         // Get page language id
-        $language_id = $this->getRequest()->getGet('language_id');
+        $language_id = $this->request()->getGet('language_id');
 
         if (!$language_id) {
             if ($this->session()->has('page_language_id')) {
@@ -98,7 +98,7 @@ class PageController extends BackendController
         try {
 
             // Get post data
-            $postData = $this->getRequest()->getPostData();
+            $postData = $this->request()->getPostData();
 
             // Create page
             $page = PageModel::create(array(
@@ -227,7 +227,7 @@ class PageController extends BackendController
         try {
 
             // Get post data
-            $postData = $this->getRequest()->getPostData();
+            $postData = $this->request()->getPostData();
 
             // Get page by id
             $page = PageModel::update(array(

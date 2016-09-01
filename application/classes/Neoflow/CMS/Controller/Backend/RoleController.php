@@ -66,7 +66,7 @@ class RoleController extends BackendController
         try {
 
             // Get post data
-            $postData = $this->getRequest()->getPostData();
+            $postData = $this->request()->getPostData();
 
             // Create role
             $role = RoleModel::create(array(
@@ -133,7 +133,7 @@ class RoleController extends BackendController
         try {
 
             // Get post data
-            $postData = $this->getRequest()->getPostData();
+            $postData = $this->request()->getPostData();
 
             // Get and update role
             $role = RoleModel::update(array(

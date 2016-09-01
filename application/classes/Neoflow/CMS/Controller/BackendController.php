@@ -90,8 +90,8 @@ class BackendController extends AbstractController
     {
 
         // Get post data
-        $email = $this->getRequest()->getPost('email');
-        $password = $this->getRequest()->getPost('password');
+        $email = $this->request()->getPost('email');
+        $password = $this->request()->getPost('password');
 
         // Authenticate and authorize user
         if ($this->service('auth')->login($email, $password)) {
@@ -149,7 +149,7 @@ class BackendController extends AbstractController
         try {
 
             // Get post data
-            $postData = $this->getRequest()->getPostData();
+            $postData = $this->request()->getPostData();
 
             // Update user
             $user = UserModel::update(array(
@@ -185,7 +185,7 @@ class BackendController extends AbstractController
      */
     public function resetPasswordAction($args)
     {
-        $email = $this->getRequest()->getPost('email');
+        $email = $this->request()->getPost('email');
 
         $user = UserModel::repo()
             ->where('email', '=', $email)

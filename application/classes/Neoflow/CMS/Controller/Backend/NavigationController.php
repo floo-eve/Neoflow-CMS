@@ -66,7 +66,7 @@ class NavigationController extends BackendController
         try {
 
             // Get post data
-            $postData = $this->getRequest()->getPostData();
+            $postData = $this->request()->getPostData();
 
             // Create navigation
             $navigation = NavigationModel::create(array(
@@ -124,7 +124,7 @@ class NavigationController extends BackendController
         try {
 
             // Get post data
-            $postData = $this->getRequest()->getPostData();
+            $postData = $this->request()->getPostData();
 
             // Get navigation by id
             $navigation = NavigationModel::update(array(

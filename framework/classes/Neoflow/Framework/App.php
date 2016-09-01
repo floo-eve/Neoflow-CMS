@@ -59,8 +59,10 @@ class App
     {
         // Set start time in seconds
         $this->startTime = microtime(true);
+
         // Safe current app instance
         self::$instance = $this;
+
         // Initialize application
         $this->initialize($path);
     }
@@ -85,10 +87,10 @@ class App
         $this->setConfig($path);
         $this->setLogger();
         $this->setError();
-        $this->setCache();
-        $this->setDatabase();
-        $this->setSession();
-        $this->setRequest();
+        $this->initCache();
+        $this->initDatabase();
+        $this->initSession();
+        $this->initRequest();
         $this->setRouter();
         $this->setTranslator();
 
@@ -273,7 +275,7 @@ class App
     /**
      * Create and set cache instance.
      */
-    protected function setCache()
+    protected function initCache()
     {
         // Get cache config
         $cacheConfig = $this->get('config')->get('cache');
@@ -291,48 +293,48 @@ class App
     }
 
     /**
-     * Create and set database.
+     * Initialize database connection
      */
-    protected function setDatabase()
+    protected function initDatabase()
     {
         // Get database config
         $databaseConfig = $this->get('config')->get('database');
+
         // Set DSN
         $dsn = 'mysql:host=' . $databaseConfig->get('host');
         $dsn .= ';dbname=' . $databaseConfig->get('dbname');
         $dsn .= ';charset=' . $databaseConfig->get('charset');
+
         // Set options
         $options = array(
             Database::ATTR_PERSISTENT => true,
             Database::ATTR_ERRMODE => Database::ERRMODE_EXCEPTION,
             Database::ATTR_STRINGIFY_FETCHES => false,);
+
         // Create PDO instance
         $database = new Database($dsn, $databaseConfig->get('username'), $databaseConfig->get('password'), $options);
 
-        $this
-            ->set('database', $database)
-            ->set('db', $database)
-            ->set('pdo', $database);
+        $this->set('database', $database);
     }
 
     /**
-     * Create and set registry.
+     * Initialize and set session handler
      */
-    protected function setSession()
+    protected function initSession()
     {
         $this->set('session', new Session());
     }
 
     /**
-     * Create and set request.
+     * Initialize and set request container
      */
-    protected function setRequest()
+    protected function initRequest()
     {
         $this->set('request', new Request());
     }
 
     /**
-     * Create and set router.
+     * Initialize and set request container
      */
     protected function setRouter()
     {

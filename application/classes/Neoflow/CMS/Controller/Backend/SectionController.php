@@ -70,7 +70,7 @@ class SectionController extends BackendController
         try {
 
             // Get post data
-            $postData = $this->getRequest()->getPostData();
+            $postData = $this->request()->getPostData();
 
             $section = SectionModel::create(array(
                     'page_id' => $postData->get('page_id'),

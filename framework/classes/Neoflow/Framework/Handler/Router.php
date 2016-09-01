@@ -118,7 +118,7 @@ class Router
 
         $cache = $this->app()->get('cache');
 
-        $requestUri = $this->getRequest()->getUri();
+        $requestUri = $this->request()->getUri();
 
         // Remove end-slash from URL
         if (substr($requestUri, -1) === '/') {
@@ -136,7 +136,7 @@ class Router
                 $routeMethods = explode('|', $route[1]);
                 $routeUri = $route[2];
 
-                if ($routeUri && strtolower($routeMethods[0]) === 'any' || $this->getRequest()->isMethod($routeMethods)) {
+                if ($routeUri && strtolower($routeMethods[0]) === 'any' || $this->request()->isMethod($routeMethods)) {
 
                     // Get args of routeUri
                     $routeUriArgs = $this->getRouteUriArgs($routeUri);
@@ -190,7 +190,7 @@ class Router
         }
 
         // Check wether language code not found, not sent if needed or sent if not needed
-        $uriLanguageCode = $this->getRequest()->getUriLanguage();
+        $uriLanguageCode = $this->request()->getUriLanguage();
         $languageCodes = $this->config()->get('languages');
         if (($uriLanguageCode && !in_array($uriLanguageCode, $languageCodes)) ||
             (count($languageCodes) > 1 && !$uriLanguageCode) ||
@@ -371,15 +371,5 @@ class Router
         preg_match_all($this->routeUriRegexPattern, $routeUri, $matches);
 
         return $matches;
-    }
-
-    /**
-     * Get request
-     *
-     * @return Request
-     */
-    public function getRequest()
-    {
-        return $this->app()->get('request');
     }
 }

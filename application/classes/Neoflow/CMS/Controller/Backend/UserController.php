@@ -2,14 +2,19 @@
 
 namespace Neoflow\CMS\Controller\Backend;
 
+use Exception;
 use Neoflow\CMS\Controller\BackendController;
 use Neoflow\CMS\Model\RoleModel;
 use Neoflow\CMS\Model\UserModel;
+use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Framework\Support\Validation\ValidationException;
+use function has_permission;
+use function translate;
 
 class UserController extends BackendController
 {
+
     /**
      * Constructor.
      */
@@ -21,16 +26,6 @@ class UserController extends BackendController
         $this->view
             ->setSubtitle('Accounts')
             ->setTitle('Users');
-    }
-
-    /**
-     * Check permission.
-     *
-     * @return bool
-     */
-    public function checkPermission()
-    {
-        return has_permission('manage_users');
     }
 
     /**
@@ -53,14 +48,16 @@ class UserController extends BackendController
      *
      * @param array $args
      *
-     * @return Response
+     * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function createAction($args)
     {
         try {
 
             // Get post data
-            $postData = $this->getRequest()->getPostData();
+            $postData = $this->request()->getPostData();
 
             // Create user
             $user = UserModel::create(array(
@@ -72,10 +69,11 @@ class UserController extends BackendController
                     'password2' => $postData->get('password2'),
             ));
 
+            // Validate and save user
             if ($user->validate() && $user->validatePassword() && $user->save()) {
-                $this->setSuccessAlert(translate('{0} successful created', array('User')));
+                $this->setSuccessAlert(translate('Successful created'));
             } else {
-                $this->setDangerAlert(translate('Create failed'));
+                throw new Exception('Create user failed');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
@@ -90,21 +88,19 @@ class UserController extends BackendController
      * @param array $args
      *
      * @return Response
+     *
+     * @throws Exception
      */
     public function editAction($args)
     {
-        // Get user or create user with inva
+        // Get user or data if validation has failed
         if ($this->service('validation')->hasError()) {
             $data = $this->service('validation')->getData();
             $user = UserModel::update($data, $data['user_id']);
         } else {
-
-            // Get user by id
             $user = UserModel::findById($args['id']);
             if (!$user) {
-                $this->setDangerAlert(translate('{0} not found', array('User')));
-
-                return $this->redirectToRoute('user_index');
+                throw new Exception('User found (ID: ' . $args['id'] . ')');
             }
         }
 
@@ -113,7 +109,7 @@ class UserController extends BackendController
 
         return $this->render('backend/user/edit', array(
                 'user' => $user,
-                'roles' => RoleModel::findAll(), ));
+                'roles' => RoleModel::findAll(),));
     }
 
     /**
@@ -121,14 +117,16 @@ class UserController extends BackendController
      *
      * @param array $args
      *
-     * @return Response
+     * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function updateAction($args)
     {
         try {
 
             // Get post data
-            $postData = $this->getRequest()->getPostData();
+            $postData = $this->request()->getPostData();
 
             // Update user
             $user = UserModel::update(array(
@@ -138,10 +136,11 @@ class UserController extends BackendController
                     'role_id' => $postData->get('role_id'),
                     ), $postData->get('user_id'));
 
+            // Validate and save user
             if ($user->validate() && $user->save()) {
-                $this->setSuccessAlert(translate('{0} successful updated', array('User')));
+                $this->setSuccessAlert(translate('Successful updated'));
             } else {
-                $this->setDangerAlert(translate('Update failed'));
+                throw new Exception('Update user failed (ID: ' . $postData->get('user_id') . ')');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
@@ -155,22 +154,25 @@ class UserController extends BackendController
      *
      * @param array $args
      *
-     * @return Response
+     * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function updatePasswordAction($args)
     {
         try {
 
             // Get post data
-            $postData = $this->getRequest()->getPostData();
+            $postData = $this->request()->getPostData();
 
-            // Update user
+            // Update user password
             $user = UserModel::updatePassword($postData->get('password'), $postData->get('password2'), $postData->get('user_id'));
 
+            // Validate and save user password
             if ($user->validatePassword() && $user->save()) {
-                $this->setSuccessAlert(translate('{0} successful updated', array('Password')));
+                $this->setSuccessAlert(translate('Password successful updated'));
             } else {
-                $this->setDangerAlert(translate('Update failed'));
+                throw new Exception('Update password of user failed (ID: ' . $postData->get('navitem_id') . ')');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
@@ -184,19 +186,29 @@ class UserController extends BackendController
      *
      * @param array $args
      *
-     * @return Response
+     * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function deleteAction($args)
     {
         // Delete user
         $result = UserModel::deleteById($args['id']);
-
         if ($result) {
-            $this->setSuccessAlert(translate('{0} successful deleted', array('User')));
-        } else {
-            $this->setDangerAlert(translate('Delete failed'));
+            return $this
+                    ->setSuccessAlert(translate('{0} successful deleted', array('User')))
+                    ->redirectToRoute('user_index');
         }
+        throw new Exception('Delete user failed (ID: ' . $args['id'] . ')');
+    }
 
-        return $this->redirectToRoute('user_index');
+    /**
+     * Check permission.
+     *
+     * @return bool
+     */
+    public function checkPermission()
+    {
+        return has_permission('manage_users');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Neoflow\Framework\Handler;
 
-use \DateTime;
+use DateTime;
 
 class Translator
 {
@@ -104,7 +104,6 @@ class Translator
      */
     public function identifyLanguage()
     {
-        $session = $this->session();
         $request = $this->app()->get('request');
 
         // Set default language code as current
@@ -117,7 +116,7 @@ class Translator
         $uriLanguage = strtolower($request->getUriLanguage());
 
         // Get language code from session
-        $sessionLanguage = $session->get('_language');
+        $sessionLanguage = $this->session()->get('_language');
 
         // Set current language code
         if ($uriLanguage && in_array($uriLanguage, $this->config()->get('languages'))) {
@@ -129,7 +128,7 @@ class Translator
         }
 
         // Set language code to session
-        $session->set('_language', $this->currentLanguageCode);
+        $this->session()->set('_language', $this->currentLanguageCode);
 
         return $this;
     }
@@ -218,7 +217,7 @@ class Translator
     }
 
     /**
-     * Translate key and values
+     * Translate key and values.
      *
      * @param string $key
      * @param array  $values

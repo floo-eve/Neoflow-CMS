@@ -2,6 +2,7 @@
 
 namespace Neoflow\CMS\Model;
 
+use Exception;
 use Neoflow\Framework\ORM\AbstractEntityModel;
 use Neoflow\Framework\ORM\EntityRepository;
 use Neoflow\Framework\Support\Validation\Validator;
@@ -85,6 +86,7 @@ class UserModel extends AbstractEntityModel
         $validator = new Validator(array(
             'password' => $this->password,
             'password2' => $this->password2,
+            self::$primaryKey => $this->id(),
         ));
 
         $validator
@@ -192,6 +194,6 @@ class UserModel extends AbstractEntityModel
                     ->setPassword($password, $password2)
                     ->setResetKey(true);
         }
-        throw new \Exception('User not found');
+        throw new Exception('User not found');
     }
 }

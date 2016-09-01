@@ -23,12 +23,12 @@ class Logger
     /**
      * @var int
      */
-    private $logLevelThreshold = LogLevel::DEBUG;
+    private $loglevelThreshold = Loglevel::DEBUG;
 
     /**
      * @var array
      */
-    private $logLevels = [
+    private $loglevels = [
         'EMERGENCY', 'ALERT', 'CRITICAL',
         'ERROR', 'WARNING', 'NOTICE',
         'INFO', 'DEBUG',
@@ -56,7 +56,7 @@ class Logger
         $config = $this->config();
 
         $logConfig = $config->get('logger');
-        $this->logLevelThreshold = strtoupper($logConfig->get('level'));
+        $this->loglevelThreshold = strtoupper($logConfig->get('level'));
 
         $logFileFolder = $config->getTempPath(DIRECTORY_SEPARATOR . 'logs');
         if (!is_dir($logFileFolder)) {
@@ -80,9 +80,9 @@ class Logger
      *
      * @return string
      */
-    public function getLogLevel()
+    public function getLoglevel()
     {
-        return $this->logLevelThreshold;
+        return $this->loglevelThreshold;
     }
 
     /**
@@ -106,7 +106,7 @@ class Logger
      */
     public function log($level, $message, array $context = array())
     {
-        if ($this->logLevelThreshold && array_search($this->logLevelThreshold, $this->logLevels) >= $level) {
+        if ($this->loglevelThreshold && array_search($this->loglevelThreshold, $this->loglevels) >= $level) {
             $message = $this->formatMessage($level, $message, $context);
             $this->write($message);
         }
@@ -124,7 +124,7 @@ class Logger
      */
     public function error($message, $context = array())
     {
-        return $this->log(LogLevel::ERROR, $message, $context);
+        return $this->log(Loglevel::ERROR, $message, $context);
     }
 
     /**
@@ -137,7 +137,7 @@ class Logger
      */
     public function warning($message, $context = array())
     {
-        return $this->log(LogLevel::WARNING, $message, $context);
+        return $this->log(Loglevel::WARNING, $message, $context);
     }
 
     /**
@@ -150,7 +150,7 @@ class Logger
      */
     public function info($message, $context = array())
     {
-        return $this->log(LogLevel::INFO, $message, $context);
+        return $this->log(Loglevel::INFO, $message, $context);
     }
 
     /**
@@ -163,7 +163,7 @@ class Logger
      */
     public function debug($message, $context = array())
     {
-        return $this->log(LogLevel::DEBUG, $message, $context);
+        return $this->log(Loglevel::DEBUG, $message, $context);
     }
 
     /**
@@ -237,7 +237,7 @@ class Logger
      */
     private function formatMessage($level, $message, $context)
     {
-        $message = "[{$this->getTimestamp()}] [{$this->logLevels[$level]}] {$message}";
+        $message = "[{$this->getTimestamp()}] [{$this->loglevels[$level]}] {$message}";
 
         if (!empty($context)) {
             $message .= PHP_EOL . $this->indent($this->contextToString($context));

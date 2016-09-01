@@ -7,6 +7,7 @@ use Neoflow\CMS\Model\UserModel;
 
 class BackendView extends AbstractView
 {
+
     /**
      * @var string
      */
@@ -33,7 +34,7 @@ class BackendView extends AbstractView
     protected function setTheme()
     {
         $this->theme = $this->app()
-            ->get('setting')
+            ->get('settings')
             ->backendTheme()
             ->fetch();
     }
