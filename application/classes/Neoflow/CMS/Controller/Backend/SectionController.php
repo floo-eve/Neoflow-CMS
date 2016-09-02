@@ -3,13 +3,21 @@
 namespace Neoflow\CMS\Controller\Backend;
 
 use Neoflow\CMS\Controller\BackendController;
+use Neoflow\CMS\Model\ModuleModel;
+use Neoflow\CMS\Model\PageModel;
 use Neoflow\CMS\Model\SectionModel;
+use Neoflow\CMS\Views\Backend\SectionView;
 use Neoflow\Framework\HTTP\Responsing\JsonResponse;
 use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
+use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Framework\Support\Validation\ValidationException;
+use function has_permission;
+use function is_json;
+use function translate;
 
 class SectionController extends BackendController
 {
+
     /**
      * Constructor.
      */
@@ -21,6 +29,38 @@ class SectionController extends BackendController
         $this->view
             ->setSubtitle('Content')
             ->setTitle('Pages');
+    }
+
+    /**
+     * Index action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     *
+     * @throws Exception
+     */
+    public function indexAction($args)
+    {
+        // Get page by id
+        $page = PageModel::findById($args['id']);
+        if (!$page) {
+            throw new Exception('Page not found (ID: ' . $args['id'] . ')');
+        }
+
+        // Get sections
+        $sections = $page->sections()
+            ->orderByAsc('position')
+            ->fetchAll();
+
+        // Set back url
+        $this->view->setBackRoute('page_index', array('language_id' => $page->language_id));
+
+        return $this->render('backend/section/index', array(
+                'page' => $page,
+                'modules' => ModuleModel::findAll(),
+                'sections' => $sections,
+        ));
     }
 
     /**
@@ -80,7 +120,7 @@ class SectionController extends BackendController
             $this->setDangerAlert($ex->getErrors());
         }
 
-        return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
+        return $this->redirectToRoute('section_index', array('id' => $section->page_id));
     }
 
     /**
@@ -99,9 +139,9 @@ class SectionController extends BackendController
         if ($section && $section->delete()) {
             return $this
                     ->setSuccessAlert(translate('Successful deleted'))
-                    ->redirectToRoute('page_sections', array('id' => $section->page_id));
+                    ->redirectToRoute('section_index', array('id' => $section->page_id));
         }
-        throw new Exception('Delete section failed (ID: '.$args['id'].')');
+        throw new Exception('Delete section failed (ID: ' . $args['id'] . ')');
     }
 
     /**
@@ -115,18 +155,18 @@ class SectionController extends BackendController
      */
     public function toggleActivationAction($args)
     {
-        // Get section and toggle activity
+        // Get section and toggle activation
         $section = SectionModel::findById($args['id']);
         if ($section && $section->toggleActivation() && $section->save()) {
-            if ($section->is_visible) {
-                $this->setSuccessAlert(translate('Successful activated'));
+            if ($section->is_active) {
+                $this->setSuccessAlert(translate('Successful enabled'));
             } else {
                 $this->setSuccessAlert(translate('Successful disabled'));
             }
 
-            return $this->redirectToRoute('page_sections', array('id' => $section->page_id));
+            return $this->redirectToRoute('section_index', array('id' => $section->page_id));
         }
-        throw new Exception('Section not found or toggle activation failed (ID: '.$args['id'].')');
+        throw new Exception('Section not found or toggle activation failed (ID: ' . $args['id'] . ')');
     }
 
     /**
@@ -137,5 +177,13 @@ class SectionController extends BackendController
     protected function checkPermission()
     {
         return has_permission('manage_pages');
+    }
+
+    /**
+     * Initialize view
+     */
+    protected function initView()
+    {
+        $this->view = new SectionView();
     }
 }

@@ -353,7 +353,7 @@ class Router
         if ($languageCode) {
             $routeUri = '/' . $languageCode . $routeUri;
         } elseif (count($this->config()->get('languages')) > 1) {
-            $routeUri = '/' . $this->translator()->getCurrentLanguageCode() . $routeUri;
+            $routeUri = '/' . $this->translator()->getActiveLanguageCode() . $routeUri;
         }
 
         return $this->config()->getUrl($routeUri);

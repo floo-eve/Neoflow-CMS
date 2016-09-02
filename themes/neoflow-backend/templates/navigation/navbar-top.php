@@ -5,18 +5,18 @@
         </p>
 
         <ul class="nav navbar-nav navbar-right">
-            <?php if (count($view->get('languages')) > 1) {
+            <?php if (count($view->getLanguages()) > 1) {
 
                 ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <?= $view->get('currentLanguage')->renderFlagIcon() ?>
+                        <?= $view->getActiveLanguage()->renderFlagIcon() ?>
                     </a>
                     <ul class="dropdown-menu">
-                        <?php foreach ($view->get('languages') as $language) {
+                        <?php foreach ($view->getLanguages() as $language) {
 
                             ?>
-                            <li <?= ($language->code === $view->translator()->getCurrentLanguageCode() ? 'class="active"' : '') ?>>
+                            <li <?= ($language->code === $view->translator()->getActiveLanguageCode() ? 'class="active"' : '') ?>>
                                 <a href="<?= generate_url('', array(), $language->code) ?>">
                                     <?= $language->renderFlagIcon() ?>
                                 </a>

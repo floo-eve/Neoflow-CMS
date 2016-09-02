@@ -11,7 +11,7 @@
             <?php if (count($languages) > 1) { ?>
                 <ul class="nav nav-tabs">
                     <?php foreach ($languages as $language) { ?>
-                        <li <?= ($language->id() === $pageLanguage->id() ? 'class="active"' : '') ?>>
+                        <li <?= ($language->id() === $activeLanguage->id() ? 'class="active"' : '') ?>>
                             <a href="<?= generate_url('page_index', array('language_id' => $language->id())) ?>">
                                 <?= $language->renderFlagIcon() ?> <?= $language->translated('title') ?>
                             </a>
@@ -27,7 +27,7 @@
                         <?= $view->renderNavitemNestable($navitems) ?>
                     </div>
                     <ul class="list-inline">
-                        <li><i class="fa fa-eye"></i> = <?= translate('Active') ?></li>
+                        <li><i class="fa fa-eye"></i> = <?= translate('Enabled') ?></li>
                         <li><i class="fa fa-lock"></i> = <?= translate('Restricted') ?></li>
                         <li><i class="fa fa-eye-slash"></i> = <?= translate('Hidden') ?></li>
                         <li><i class="fa fa-ban"></i> = <?= translate('Disabled') ?></li>
@@ -49,7 +49,7 @@
             </div>
             <div class="panel-body">
                 <form method="post" action="<?= generate_url('page_create') ?>" class="form-horizontal">
-                    <input type="hidden" value="<?= $pageLanguage->id() ?>" name="language_id" />
+                    <input type="hidden" value="<?= $activeLanguage->id() ?>" name="language_id" />
                     <div class="form-group <?= $view->hasValidationError('title', 'has-error') ?>">
                         <label for="inputTitle" class="col-sm-3 control-label">
                             <?= translate('Title') ?>
@@ -90,11 +90,17 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div class="checkbox">
+                        <div class="col-sm-offset-3 col-sm-3">
+                            <div class="radio">
                                 <label>
-                                    <input name="is_active" value="0" type="hidden" />
-                                    <input name="is_active" value="1" type="checkbox" checked /> <?= translate('Active') ?>
+                                    <input name="is_active" value="1" type="radio" checked /> <?= translate('Enabled') ?>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="radio">
+                                <label>
+                                    <input name="is_active" value="0" type="radio" /> <?= translate('Disabled') ?>
                                 </label>
                             </div>
                         </div>

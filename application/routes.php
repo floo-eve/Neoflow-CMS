@@ -24,9 +24,8 @@ $this->addRoutes(array(
 // Backend page routes
 $this->addRoutes(array(
     array('page_edit', 'get', '/backend/page/edit/(id:num)', 'Page@edit'),
-    array('page_sections', 'get', '/backend/page/edit/(id:num)/sections', 'Page@sections'),
     array('page_delete', 'get', '/backend/page/delete/(id:num)', 'Page@delete'),
-    array('page_activate', 'get', '/backend/page/activate/(id:num)', 'Page@activate'),
+    array('page_toggle_activation', 'get', '/backend/page/edit/(id:num)/toggle-activation', 'Page@toggleActivation'),
     array('page_update', 'post', '/backend/page/update', 'Page@update'),
     array('page_create', 'post', '/backend/page/create', 'Page@create'),
     array('page_index', 'get', '/backend/pages', 'Page@index')
@@ -37,7 +36,8 @@ $this->addRoutes(array(
     array('section_reorder', 'post', '/backend/section/reorder', 'Section@reorder'),
     array('section_create', 'post', '/backend/section/create', 'Section@create'),
     array('section_delete', 'get', '/backend/section/delete/(id:num)', 'Section@delete'),
-    array('section_toggle_activation', 'get', '/backend/section/edit/(id:num)/toggle-activation', 'Section@toggleActivation')
+    array('section_toggle_activation', 'get', '/backend/section/edit/(id:num)/toggle-activation', 'Section@toggleActivation'),
+    array('section_index', 'get', '/backend/page/edit/(id:num)/sections', 'Section@index')
 ));
 
 // Backend user routes

@@ -2,13 +2,15 @@
 
 namespace Neoflow\CMS\Views;
 
-class FrontendView extends \Neoflow\CMS\Core\AbstractView
+use Neoflow\CMS\Core\AbstractView;
+use Neoflow\CMS\Model\UserModel;
+use function generate_url;
+use function translate;
+
+class FrontendView extends AbstractView
 {
 
-    /**
-     * Set theme.
-     */
-    protected function setTheme()
+    protected function initTheme()
     {
         $this->theme = $this->app()
             ->get('settings')

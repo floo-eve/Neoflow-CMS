@@ -9,8 +9,8 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse">
         <ul class="nav navbar-nav">
-            <li <?= $view->isCurrentRoute(array('page_sections', 'section*', 'mod*'), 'class="active"') ?>>
-                <a href="<?= generate_url('page_sections', array('id' => $page->id())) ?>">
+            <li <?= $view->isCurrentRoute(array('section_index', 'section*', 'mod*'), 'class="active"') ?>>
+                <a href="<?= generate_url('section_index', array('id' => $page->id())) ?>">
                     <i class="fa fa-fw fa-th-list"></i> <?= translate('Sections') ?>
                 </a>
             </li>

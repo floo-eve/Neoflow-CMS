@@ -138,7 +138,7 @@ class Translator
      *
      * @return string
      */
-    public function getCurrentLanguageCode()
+    public function getActiveLanguageCode()
     {
         return $this->currentLanguageCode;
     }

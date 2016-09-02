@@ -2,7 +2,9 @@
 
 namespace Neoflow\CMS\Core;
 
+use Neoflow\CMS\Model\LanguageModel;
 use Neoflow\CMS\Model\ThemeModel;
+use Neoflow\Framework\ORM\EntityCollection;
 
 abstract class AbstractView extends \Neoflow\Framework\Core\AbstractView
 {
@@ -12,37 +14,56 @@ abstract class AbstractView extends \Neoflow\Framework\Core\AbstractView
     protected $theme;
 
     /**
+     * @var LanguageModel
+     */
+    protected $activeLanguage;
+
+    /**
+     * @var EntityCollection
+     */
+    protected $languages;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         parent::__construct();
 
-        $this->setTheme();
+        // Initialize theme
+        $this->initTheme();
 
-        $cacheKey = sha1('_viewAndtemplateFileDirectories');
-        if ($this->getCache()->exists($cacheKey)) {
+        if ($this->getCache()->existsByTag('_view')) {
 
-            // Fetch tempalte and view file paths from cahce
-            $viewAndTemplateFilePaths = $this->getCache()->fetch($cacheKey);
-            $this->viewFileDirectories = $viewAndTemplateFilePaths[0];
-            $this->templateFileDirectories = $viewAndTemplateFilePaths[1];
+            // Fetch template and view file directories from cache
+            $this->viewFileDirectories = $this->getCache()->fetch('viewFileDirectories');
+            $this->templateFileDirectories = $this->getCache()->fetch('templateFileDirectories');
         } else {
 
-            // Set theme template and view file paths
+            // Set theme template and view file directories
             $this->viewFileDirectories[] = $this->getThemePath(DIRECTORY_SEPARATOR.'views');
             $this->templateFileDirectories[] = $this->getThemePath(DIRECTORY_SEPARATOR.'templates');
 
-            // Set template and view file paths of modules
+            // Set template and view file directories of modules
             $modules = $this->app()->get('modules');
             foreach ($modules as $module) {
                 $this->viewFileDirectories[] = $module->getPath(DIRECTORY_SEPARATOR.'views');
                 $this->templateFileDirectories[] = $module->getPath(DIRECTORY_SEPARATOR.'templates');
             }
 
-            // Store template and view file paths to cache
-            $this->getCache()->store($cacheKey, array($this->viewFileDirectories, $this->templateFileDirectories), 0, array('_view'));
+            // Store template and view file directories to cache
+            $this->getCache()->store('viewFileDirectories', $this->viewFileDirectories, 0, array('_view'));
+            $this->getCache()->store('templateFileDirectories', $this->templateFileDirectories, 0, array('_view'));
         }
+
+        // Set languages
+        $this->languages = LanguageModel::repo()
+            ->where('is_active', '=', true)
+            ->fetchAll();
+
+        // Set active language
+        $activeLanguageCode = $this->translator()->getActiveLanguageCode();
+        $this->activeLanguage = LanguageModel::findByColumn('code', $activeLanguageCode);
     }
 
     /**
@@ -70,7 +91,27 @@ abstract class AbstractView extends \Neoflow\Framework\Core\AbstractView
     }
 
     /**
-     * Set theme.
+     * Get languages.
+     *
+     * @return EntityCollection
      */
-    abstract protected function setTheme();
+    public function getLanguages()
+    {
+        return $this->languages;
+    }
+
+    /**
+     * Get active language.
+     *
+     * @return LanguageModel
+     */
+    public function getActiveLanguage()
+    {
+        return $this->activeLanguage;
+    }
+
+    /**
+     * Initialize theme.
+     */
+    abstract protected function initTheme();
 }

@@ -69,7 +69,7 @@ class AbstractController extends BackendController
 
         // Set back url
 
-        $this->view->setBackRoute('page_sections', array('id' => $this->page->id()));
+        $this->view->setBackRoute('section_index', array('id' => $this->page->id()));
     }
 
     protected function render($viewFile, array $parameters = array(), Response $response = null)

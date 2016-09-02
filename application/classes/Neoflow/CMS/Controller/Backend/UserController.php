@@ -9,8 +9,6 @@ use Neoflow\CMS\Model\UserModel;
 use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Framework\Support\Validation\ValidationException;
-use function has_permission;
-use function translate;
 
 class UserController extends BackendController
 {
@@ -196,7 +194,7 @@ class UserController extends BackendController
         $result = UserModel::deleteById($args['id']);
         if ($result) {
             return $this
-                    ->setSuccessAlert(translate('{0} successful deleted', array('User')))
+                    ->setSuccessAlert(translate('Successful deleted'))
                     ->redirectToRoute('user_index');
         }
         throw new Exception('Delete user failed (ID: ' . $args['id'] . ')');

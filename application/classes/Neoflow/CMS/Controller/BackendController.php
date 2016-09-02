@@ -3,37 +3,18 @@
 namespace Neoflow\CMS\Controller;
 
 use Neoflow\CMS\Core\AbstractController;
-use Neoflow\CMS\Model\LanguageModel;
 use Neoflow\CMS\Model\UserModel;
 use Neoflow\CMS\Views\BackendView;
 use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Framework\Support\Validation\ValidationException;
+use function generate_url;
+use function translate;
 
 class BackendController extends AbstractController
 {
 
     protected $permissionKeys = array();
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $languages = LanguageModel::repo()
-            ->where('is_active', '=', true)
-            ->fetchAll();
-
-        // Get current language
-        $currentLanguageCode = $this->translator()->getCurrentLanguageCode();
-        $currentLanguage = LanguageModel::findByColumn('code', $currentLanguageCode);
-
-        $this->view
-            ->set('languages', $languages)
-            ->set('currentLanguage', $currentLanguage);
-    }
 
     /**
      * Index action.
@@ -262,9 +243,9 @@ class BackendController extends AbstractController
     }
 
     /**
-     * Set view.
+     * Initialize view
      */
-    protected function setView()
+    protected function initView()
     {
         $this->view = new BackendView();
     }

@@ -2,12 +2,12 @@
 
 namespace Neoflow\Framework\Core;
 
-use \Neoflow\Framework\HTTP\Request;
-use \Neoflow\Framework\HTTP\Responsing\DebugResponse;
-use \Neoflow\Framework\HTTP\Responsing\RedirectResponse;
-use \Neoflow\Framework\HTTP\Responsing\Response;
-use \Neoflow\Framework\HTTP\Session;
-use \RuntimeException;
+use Neoflow\Framework\HTTP\Responsing\DebugResponse;
+use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
+use Neoflow\Framework\HTTP\Responsing\Response;
+use Neoflow\Framework\HTTP\Session;
+use RuntimeException;
+use function generate_url;
 
 abstract class AbstractController
 {
@@ -27,7 +27,7 @@ abstract class AbstractController
      */
     public function __construct()
     {
-        $this->setView();
+        $this->initView();
     }
 
     /**
@@ -132,9 +132,9 @@ abstract class AbstractController
     abstract public function indexAction($args);
 
     /**
-     * Set view.
+     * Initialize view.
      */
-    abstract protected function setView();
+    abstract protected function initView();
 
     /**
      * Set new session flash value.

@@ -13,9 +13,6 @@ use Neoflow\Framework\HTTP\Responsing\JsonResponse;
 use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Framework\Support\Validation\ValidationException;
-use function has_permission;
-use function is_json;
-use function translate;
 
 class NavitemController extends BackendController
 {
@@ -84,7 +81,7 @@ class NavitemController extends BackendController
             ->fetchAll();
 
         // Set back url
-        $this->view->setBackRoute('navigation_index', array('language_id' => $navigation->language_id));
+        $this->view->setBackRoute('navigation_index');
 
         return $this->render('backend/navitem/index', array(
                 'navigation' => $navigation,
@@ -276,6 +273,7 @@ class NavitemController extends BackendController
             } else {
                 $this->setSuccessAlert(translate('Successful hidden'));
             }
+
             return $this->redirectToRoute('navitem_index', array('id' => $navitem->navigation_id));
         }
         throw new Exception('Navigation item not found or toggle visibility failed (ID: ' . $args['id'] . ')');
@@ -300,6 +298,7 @@ class NavitemController extends BackendController
                 ->service('navitem')
                 ->updateOrder(json_decode($json, true));
         }
+
         return new JsonResponse(array('success' => $result));
     }
 
@@ -314,9 +313,9 @@ class NavitemController extends BackendController
     }
 
     /**
-     * Set view.
+     * Initialize view.
      */
-    protected function setView()
+    protected function initView()
     {
         $this->view = new NavitemView();
     }

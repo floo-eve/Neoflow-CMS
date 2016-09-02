@@ -4,12 +4,13 @@ namespace Neoflow\Framework\Persistence\Caching;
 
 abstract class AbstractCache
 {
+
     /**
      * App trait.
      */
     use \Neoflow\Framework\AppTrait;
 
-    /**
+/**
      * Key tagging trait.
      */
     use \Neoflow\Framework\Common\KeyTaggingTrait;
@@ -20,7 +21,7 @@ abstract class AbstractCache
     public function __construct()
     {
         $this->tags = $this->fetch('cacheTags');
-        $this->logger()->info($this->getReflection()->getShortName().' created');
+        $this->logger()->info($this->getReflection()->getShortName() . ' created');
     }
 
     /**
@@ -49,7 +50,7 @@ abstract class AbstractCache
     }
 
     /**
-     * Fetch cache values by tag.
+     * Fetch cache value by tag.
      *
      * @param string $tag
      *
@@ -64,6 +65,18 @@ abstract class AbstractCache
         }
 
         return $cacheValues;
+    }
+
+    /**
+     * Check wether cache value by tag exists.
+     *
+     * @param array $tag
+     * @return bool
+     */
+    public function existsByTag($tag)
+    {
+        $cacheValues = $this->fetchByTag($tag);
+        return count($cacheValues) > 0;
     }
 
     /**

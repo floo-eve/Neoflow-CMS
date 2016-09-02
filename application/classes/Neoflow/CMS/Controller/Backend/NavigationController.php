@@ -4,11 +4,10 @@ namespace Neoflow\CMS\Controller\Backend;
 
 use Neoflow\CMS\Controller\BackendController;
 use Neoflow\CMS\Model\NavigationModel;
-use Neoflow\CMS\Model\PageModel;
+use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Framework\Support\Validation\ValidationException;
-use function has_permission;
-use function translate;
+use Exception;
 
 class NavigationController extends BackendController
 {
@@ -24,16 +23,6 @@ class NavigationController extends BackendController
         $this->view
             ->setSubtitle('Content')
             ->setTitle('Navigations');
-    }
-
-    /**
-     * Check permission.
-     *
-     * @return bool
-     */
-    protected function checkPermission()
-    {
-        return has_permission('manage_navigations');
     }
 
     /**
@@ -55,11 +44,13 @@ class NavigationController extends BackendController
     }
 
     /**
-     * Create action.
+     * Create navigation action.
      *
      * @param array $args
      *
      * @return Response
+     *
+     * @throws Exception
      */
     public function createAction($args)
     {
@@ -74,10 +65,11 @@ class NavigationController extends BackendController
                     'description' => $postData->get('description'),
             ));
 
-            if ($navigation->validate() && $navigation->save()) {
-                $this->setSuccessAlert(translate('{0} successful created', array('Navigation')));
+            // Validate and save navigation
+            if ($navigation && $navigation->validate() && $navigation->save()) {
+                $this->setSuccessAlert(translate('Successful created'));
             } else {
-                $this->setDangerAlert(translate('Create failed'));
+                throw new Exception('Create navigation failed');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
@@ -86,27 +78,31 @@ class NavigationController extends BackendController
         return $this->redirectToRoute('navigation_index');
     }
 
+    /**
+     * Edit navigation action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     *
+     * @throws Exception
+     */
     public function editAction($args)
     {
 
-        // Get navigation data if validation has failed)
+        // Get user or data if validation has failed
         if ($this->service('validation')->hasError()) {
-            $navigationData = $this->service('validation')->getData();
-
-            $navigation = new PageModel($navigationData);
+            $data = $this->service('validation')->getData();
+            $navigation = NavigationModel::update($data, $data['user_id']);
         } else {
-
-            // Get navigation by id
             $navigation = NavigationModel::findById($args['id']);
             if (!$navigation || $navigation->id() == 1) {
-                $this->setDangerAlert(translate('{0} not found', array('Navigation')));
-
-                return $this->redirectToRoute('navigation_index');
+                throw new Exception('Navigation not found or inaccessible (ID: ' . $args['id'] . ')');
             }
         }
 
         // Set back url
-        $this->view->setBackRoute('navigation_index', array('language_id' => $navigation->language_id));
+        $this->view->setBackRoute('navigation_index');
 
         return $this->render('backend/navigation/edit', array(
                 'navigation' => $navigation,
@@ -114,10 +110,13 @@ class NavigationController extends BackendController
     }
 
     /**
-     * Update action.
+     * Update user action.
      *
-     * @param  array    $args
-     * @return Response
+     * @param array $args
+     *
+     * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function updateAction($args)
     {
@@ -126,17 +125,17 @@ class NavigationController extends BackendController
             // Get post data
             $postData = $this->request()->getPostData();
 
-            // Get navigation by id
+            // Update navigation
             $navigation = NavigationModel::update(array(
                     'title' => $postData->get('title'),
                     'description' => $postData->get('description'),
                     ), $postData->get('navigation_id'));
 
-            // Save navigation and navitem
-            if ($navigation->validate() && $navigation->save()) {
-                $this->setSuccessAlert(translate('{0} successful updated', array('Navigation')));
+            // Validate and save user
+            if ($navigation && $navigation->validate() && $navigation->save()) {
+                $this->setSuccessAlert(translate('Successful updated'));
             } else {
-                $this->setDangerAlert(translate('Update failed'));
+                throw new Exception('Navigation not found or delete failed (ID: ' . $postData->get('navigation_id') . ')');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
@@ -150,19 +149,29 @@ class NavigationController extends BackendController
      *
      * @param array $args
      *
-     * @return Response
+     * @return RedirectResponse
+     *
+     * @throws Exception
      */
     public function deleteAction($args)
     {
-        // Delete navigation
-        $result = NavigationModel::deleteById($args['id']);
-
-        if ($result) {
-            $this->setSuccessAlert(translate('{0} successful deleted', array('Navigation')));
-        } else {
-            $this->setDangerAlert(translate('Delete failed'));
+        // Get and delete navigation
+        $navigation = NavigationModel::findById($args['id']);
+        if ($navigation && $navigation->id() != 1 && $navigation->delete()) {
+            return $this
+                    ->setSuccessAlert(translate('Successful deleted'))
+                    ->redirectToRoute('navigation_index');
         }
+        throw new Exception('Navigation not found or inaccessible (ID: ' . $args['id'] . ')');
+    }
 
-        return $this->redirectToRoute('navigation_index');
+    /**
+     * Check permission.
+     *
+     * @return bool
+     */
+    protected function checkPermission()
+    {
+        return has_permission('manage_navigations');
     }
 }

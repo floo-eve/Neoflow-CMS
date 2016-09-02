@@ -4,6 +4,8 @@ namespace Neoflow\CMS\Views;
 
 use Neoflow\CMS\Core\AbstractView;
 use Neoflow\CMS\Model\UserModel;
+use function generate_url;
+use function translate;
 
 class BackendView extends AbstractView
 {
@@ -26,17 +28,6 @@ class BackendView extends AbstractView
     public function getAuthenticatedUser()
     {
         return $this->service('auth')->getAuthenticatedUser();
-    }
-
-    /**
-     * Set theme.
-     */
-    protected function setTheme()
-    {
-        $this->theme = $this->app()
-            ->get('settings')
-            ->backendTheme()
-            ->fetch();
     }
 
     /**
@@ -167,5 +158,16 @@ class BackendView extends AbstractView
         }
 
         return '';
+    }
+
+    /**
+     * Initialize theme
+     */
+    protected function initTheme()
+    {
+        $this->theme = $this->app()
+            ->get('settings')
+            ->backendTheme()
+            ->fetch();
     }
 }

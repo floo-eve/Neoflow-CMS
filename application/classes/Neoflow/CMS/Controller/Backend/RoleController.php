@@ -134,9 +134,9 @@ class RoleController extends BackendController
 
             // Validate and save role
             if ($role && $role->validate() && $role->save()) {
-                $this->setSuccessAlert(translate('{0} successful updated', array('Role')));
+                $this->setSuccessAlert(translate('Successful updated'));
             } else {
-                throw new Exception('Update role failed (ID: ' . $args['id'] . ')');
+                throw new Exception('Update role failed (ID: ' . $postData->get('page_id') . ')');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());

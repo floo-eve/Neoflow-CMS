@@ -45,7 +45,7 @@
                         <div class="col-sm-10">
                             <select data-placeholder="<?= translate('None') ?>" class="form-control select2" name="parent_navitem_id" id="selectPage">
                                 <option value="0"><?= translate('None') ?></option>
-                                <?= $view->renderNavitemOptions($navitems, 0, $selectedNavitemId, array($pageNavitem->id())) ?>
+                                <?= $view->renderNavitemOptions($navitems, 0, array($navitem->parent_navitem_id), array($navitem->id())) ?>
                             </select>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                             <div class="checkbox">
                                 <label>
                                     <input name="is_hidden" value="0" type="hidden" />
-                                    <input name="is_hidden" value="1" type="checkbox" <?= ($pageNavitem->is_hidden ? 'checked' : '') ?>> <?= translate('Page is hidden') ?>
+                                    <input name="is_hidden" value="1" type="checkbox" <?= ($navitem->is_hidden ? 'checked' : '') ?>> <?= translate('Page is hidden') ?>
                                 </label>
                             </div>
                         </div>

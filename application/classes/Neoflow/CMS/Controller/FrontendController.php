@@ -2,7 +2,6 @@
 
 namespace Neoflow\CMS\Controller;
 
-use Exception;
 use Neoflow\CMS\Mapper\PageMapper;
 use Neoflow\CMS\Views\FrontendView;
 use Neoflow\Framework\Core\AbstractController;
@@ -104,9 +103,9 @@ class FrontendController extends AbstractController
     }
 
     /**
-     * Set view.
+     * Initialize view
      */
-    protected function setView()
+    protected function initView()
     {
         $this->view = new FrontendView();
     }

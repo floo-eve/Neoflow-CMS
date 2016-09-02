@@ -81,11 +81,17 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div class="checkbox">
+                        <div class="col-sm-offset-3 col-sm-3">
+                            <div class="radio">
                                 <label>
-                                    <input name="is_visible" value="0" type="hidden" />
-                                    <input name="is_visible" value="1" type="checkbox" checked /> <?= translate('Visible') ?>
+                                    <input name="is_visible" value="1" type="radio" checked /> <?= translate('Visible') ?>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="radio">
+                                <label>
+                                    <input name="is_visible" value="0" type="radio" /> <?= translate('Hidden') ?>
                                 </label>
                             </div>
                         </div>

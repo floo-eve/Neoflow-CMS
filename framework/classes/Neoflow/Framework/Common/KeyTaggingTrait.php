@@ -4,6 +4,7 @@ namespace Neoflow\Framework\Common;
 
 trait KeyTaggingTrait
 {
+
     /**
      * @var array
      */
