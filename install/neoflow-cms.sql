@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 26. Aug 2016 um 14:48
+-- Erstellungszeit: 02. Sep 2016 um 14:38
 -- Server-Version: 5.7.11
 -- PHP-Version: 7.0.4
 
@@ -66,6 +66,25 @@ INSERT INTO `modules` (`module_id`, `title`, `folder`, `route`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `mod_hello_world_messages`
+--
+
+CREATE TABLE `mod_hello_world_messages` (
+  `message_id` int(11) NOT NULL,
+  `message` varchar(200) COLLATE utf8_bin NOT NULL,
+  `section_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Daten für Tabelle `mod_hello_world_messages`
+--
+
+INSERT INTO `mod_hello_world_messages` (`message_id`, `message`, `section_id`) VALUES
+(1, 'Hello World', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `navigations`
 --
 
@@ -80,8 +99,8 @@ CREATE TABLE `navigations` (
 --
 
 INSERT INTO `navigations` (`navigation_id`, `title`, `description`) VALUES
-(1, 'Main navigation', 'All pages are added to this navigation. You should not edit or delete it.'),
-(3, 'Footer', 'test');
+(1, '...', '...'),
+(4, 'asd', 'sadfasd');
 
 -- --------------------------------------------------------
 
@@ -105,17 +124,18 @@ CREATE TABLE `navitems` (
 --
 
 INSERT INTO `navitems` (`navitem_id`, `title`, `page_id`, `parent_navitem_id`, `navigation_id`, `language_id`, `position`, `is_visible`) VALUES
-(2, 'Über uns', 2, NULL, 1, 1, 2, 1),
-(3, 'Beispiele', 3, NULL, 1, 1, 3, 1),
-(4, 'Küche', 4, 3, 1, 1, 1, 1),
+(1, 'Startseite', 1, NULL, 1, 1, 1, 1),
+(2, 'Über uns', 2, NULL, 1, 1, 3, 1),
+(3, 'Beispiele', 3, NULL, 1, 1, 2, 1),
+(4, 'Küche', 4, NULL, 1, 1, 1, 1),
 (5, 'Bad', 5, 3, 1, 1, 2, 1),
-(6, 'Garage', 6, 3, 1, 1, 3, 1),
+(6, 'Garage', 6, NULL, 1, 1, 3, 1),
 (7, 'Impressum', 7, NULL, 1, 1, 4, 1),
-(39, 'Blabla', 4, NULL, 3, 1, 1, 1),
-(40, 'Blabla2', 7, 39, 3, 1, 1, 1),
-(44, 'Startseite', 1, NULL, 1, 1, 1, 1),
-(50, 'Startseite', 1, NULL, 3, 1, 2, 1),
-(54, 'asd', 1, 40, 3, 1, 1, 1);
+(63, 'asdfasdf', 1, NULL, 4, 1, 1, 1),
+(64, 'asdasd', 1, NULL, 4, 1, 2, 1),
+(65, 'Startseite', 1, NULL, 4, 1, 3, 1),
+(66, 'Startseite', 1, 64, 4, 1, 1, 0),
+(67, 'Bad', 5, NULL, 4, 1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -144,7 +164,7 @@ INSERT INTO `pages` (`page_id`, `title`, `slug`, `description`, `keywords`, `lan
 (3, 'Beispiele', 'beispiele', NULL, NULL, NULL, 0, 1),
 (4, 'Küche', 'kueche', NULL, NULL, 1, 0, 1),
 (5, 'Bad', 'bad', NULL, NULL, 1, 0, 1),
-(6, 'Garage', 'garage', NULL, NULL, 1, 0, 1),
+(6, 'Garage', 'garage', '', '', 1, 0, 0),
 (7, 'Impressum', 'impressum', '', '', 1, 0, 1);
 
 -- --------------------------------------------------------
@@ -170,7 +190,7 @@ INSERT INTO `permissions` (`permission_id`, `permission_key`, `title`, `descript
 (3, 'manage_modules', 'Modules', 'Manage modules'),
 (4, 'manage_templates', 'Templates', 'Manage templates'),
 (5, 'manage_media', 'Media', 'Manage media data'),
-(6, 'manage_settings', 'Settings', 'Update website settings'),
+(6, 'settings', 'Settings', 'Update website settings'),
 (7, 'manage_users', 'Users', 'Manage user accounts'),
 (8, 'manage_roles', 'Roles', 'Manage roles and permissions'),
 (9, 'maintenance', 'Maintenance', 'Maintain website and system');
@@ -222,9 +242,9 @@ INSERT INTO `roles_permissions` (`role_permission_id`, `role_id`, `permission_id
 (7, 1, 7),
 (8, 1, 8),
 (9, 1, 9),
-(10, 4, 2),
 (11, 5, 1),
-(12, 5, 2);
+(12, 5, 2),
+(13, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -246,7 +266,8 @@ CREATE TABLE `sections` (
 --
 
 INSERT INTO `sections` (`section_id`, `page_id`, `module_id`, `is_active`, `position`, `block`) VALUES
-(1, 7, 1, 1, 1, 1);
+(1, 7, 1, 1, 1, 1),
+(2, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -315,7 +336,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `lastname`, `firstname`, `reset_key`, `reseted_when`, `role_id`) VALUES
-(1, 'john.doe@neoflow.ch', sha(123456), 'Doe', 'John', NULL, NULL, 1);
+(1, 'john.doe@neoflow.ch', sha1('123456'), 'Doe', 'John', NULL, NULL, 1);
 
 --
 -- Indizes der exportierten Tabellen
@@ -332,6 +353,13 @@ ALTER TABLE `languages`
 --
 ALTER TABLE `modules`
   ADD PRIMARY KEY (`module_id`);
+
+--
+-- Indizes für die Tabelle `mod_hello_world_messages`
+--
+ALTER TABLE `mod_hello_world_messages`
+  ADD PRIMARY KEY (`message_id`),
+  ADD KEY `fk_section_id_idx` (`section_id`);
 
 --
 -- Indizes für die Tabelle `navigations`
@@ -422,20 +450,25 @@ ALTER TABLE `languages`
 ALTER TABLE `modules`
   MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT für Tabelle `mod_hello_world_messages`
+--
+ALTER TABLE `mod_hello_world_messages`
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT für Tabelle `navigations`
 --
 ALTER TABLE `navigations`
-  MODIFY `navigation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `navigation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT für Tabelle `navitems`
 --
 ALTER TABLE `navitems`
-  MODIFY `navitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `navitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 --
 -- AUTO_INCREMENT für Tabelle `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT für Tabelle `permissions`
 --
@@ -450,12 +483,12 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT für Tabelle `roles_permissions`
 --
 ALTER TABLE `roles_permissions`
-  MODIFY `role_permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `role_permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT für Tabelle `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT für Tabelle `settings`
 --
@@ -470,10 +503,16 @@ ALTER TABLE `themes`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints der exportierten Tabellen
 --
+
+--
+-- Constraints der Tabelle `mod_hello_world_messages`
+--
+ALTER TABLE `mod_hello_world_messages`
+  ADD CONSTRAINT `fk_mod_hello_world_messages_section_id` FOREIGN KEY (`section_id`) REFERENCES `sections` (`section_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints der Tabelle `navitems`
