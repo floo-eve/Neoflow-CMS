@@ -11,6 +11,7 @@ use Neoflow\Framework\Support\Validation\ValidationException;
 
 class SettingController extends BackendController
 {
+
     /**
      * Constructor.
      */
@@ -39,7 +40,7 @@ class SettingController extends BackendController
         } else {
             $settings = SettingModel::findById(1);
             if (!$settings) {
-                throw new Exception('Settings not found (ID: '.$args['id'].')');
+                throw new Exception('Settings not found (ID: ' . $args['id'] . ')');
             }
         }
 
@@ -74,21 +75,11 @@ class SettingController extends BackendController
                     'theme_id' => $postData->get('theme_id'),
                     'backend_theme_id' => $postData->get('backend_theme_id'),
                     'language_id' => $postData->get('language_id'),
+                    'active_language_ids' => $postData->get('active_language_ids')
                     ), 1);
 
             // Validate and save settings
             if ($settings && $settings->validate() && $settings->save()) {
-
-                // Update and save activity state of languages
-                $activeLanguageIds = $postData->get('active_language_ids');
-                LanguageModel::findAll()->each(function ($language) use ($settings, $activeLanguageIds) {
-                    $language->is_active = false;
-                    if ($settings->language_id == $language->id() || in_array($language->id(), $activeLanguageIds)) {
-                        $language->is_active = true;
-                    }
-                    $language->save();
-                });
-
                 $this->setSuccessAlert(translate('Successful updated'));
             } else {
                 throw new Exception('Update settings failed');

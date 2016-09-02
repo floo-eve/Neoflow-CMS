@@ -25,7 +25,7 @@ $this->addRoutes(array(
 $this->addRoutes(array(
     array('page_edit', 'get', '/backend/page/edit/(id:num)', 'Page@edit'),
     array('page_delete', 'get', '/backend/page/delete/(id:num)', 'Page@delete'),
-    array('page_toggle_activation', 'get', '/backend/page/edit/(id:num)/toggle-activation', 'Page@toggleActivation'),
+    array('page_toggle_activation', 'get', '/backend/page/toggle-activation/(id:num)', 'Page@toggleActivation'),
     array('page_update', 'post', '/backend/page/update', 'Page@update'),
     array('page_create', 'post', '/backend/page/create', 'Page@create'),
     array('page_index', 'get', '/backend/pages', 'Page@index')
@@ -33,10 +33,10 @@ $this->addRoutes(array(
 
 // Backend section routes
 $this->addRoutes(array(
-    array('section_reorder', 'post', '/backend/section/reorder', 'Section@reorder'),
-    array('section_create', 'post', '/backend/section/create', 'Section@create'),
-    array('section_delete', 'get', '/backend/section/delete/(id:num)', 'Section@delete'),
-    array('section_toggle_activation', 'get', '/backend/section/edit/(id:num)/toggle-activation', 'Section@toggleActivation'),
+    array('section_reorder', 'post', '/backend/page/section/reorder', 'Section@reorder'),
+    array('section_create', 'post', '/backend/page/section/create', 'Section@create'),
+    array('section_delete', 'get', '/backend/page/section/delete/(id:num)', 'Section@delete'),
+    array('section_toggle_activation', 'get', '/backend/page/section/toggle-activation/(id:num)', 'Section@toggleActivation'),
     array('section_index', 'get', '/backend/page/edit/(id:num)/sections', 'Section@index')
 ));
 
@@ -71,13 +71,13 @@ $this->addRoutes(array(
 
 // Backend navitem routes
 $this->addRoutes(array(
-    array('navitem_index', 'get', '/backend/navigation/(id:num)/items', 'Navitem@index'),
+    array('navitem_index', 'get', '/backend/navigation/edit/(id:num)/items', 'Navitem@index'),
     array('navitem_reorder', 'post', '/backend/navigation/item/reorder', 'Navitem@reorder'),
     array('navitem_create', 'post', '/backend/navigation/item/create', 'Navitem@create'),
     array('navitem_edit', 'get', '/backend/navigation/item/edit/(id:num)', 'Navitem@edit'),
     array('navitem_update', 'post', '/backend/navigation/item/update', 'Navitem@update'),
     array('navitem_delete', 'get', '/backend/navigation/item/delete/(id:num)', 'Navitem@delete'),
-    array('navitem_toggle_visiblity', 'get', '/backend/navigation/item/edit/(id:num)/toggle-visiblity', 'Navitem@toggleVisiblity')
+    array('navitem_toggle_visiblity', 'get', '/backend/navigation/item/toggle-visiblity/(id:num)', 'Navitem@toggleVisiblity')
 ));
 
 // Backend setting routes

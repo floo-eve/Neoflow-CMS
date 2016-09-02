@@ -70,7 +70,7 @@
 
                     <div class="form-group <?= $view->hasValidationError('parent_navitem_id', 'has-error') ?>">
                         <label for="selectParentNavitem" class="col-sm-3 control-label">
-                            <?= translate('Top item') ?>
+                            <?= translate('Parent item') ?>
                         </label>
                         <div class="col-sm-9">
                             <select class="form-control select2" name="parent_navitem_id" id="selectParentNavitem">
@@ -81,19 +81,13 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-3">
-                            <div class="radio">
-                                <label>
-                                    <input name="is_visible" value="1" type="radio" checked /> <?= translate('Visible') ?>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="radio">
-                                <label>
-                                    <input name="is_visible" value="0" type="radio" /> <?= translate('Hidden') ?>
-                                </label>
-                            </div>
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <label class="radio-inline">
+                                <input name="is_visible" value="1" type="radio" checked/> <?= translate('Visible') ?>
+                            </label>
+                            <label class="radio-inline">
+                                <input name="is_visible" value="0" type="radio" /> <?= translate('Hidden') ?>
+                            </label>
                         </div>
                     </div>
 

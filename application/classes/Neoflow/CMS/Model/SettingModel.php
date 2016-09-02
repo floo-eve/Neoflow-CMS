@@ -8,6 +8,7 @@ use Neoflow\Framework\Support\Validation\Validator;
 
 class SettingModel extends AbstractEntityModel
 {
+
     /**
      * @var string
      */
@@ -23,7 +24,7 @@ class SettingModel extends AbstractEntityModel
      */
     public static $properties = ['setting_id', 'website_title', 'website_description',
         'keywords', 'author', 'theme_id',
-        'backend_theme_id', 'language_id', ];
+        'backend_theme_id', 'language_id',];
 
     /**
      * Get repository to fetch frontend theme.
@@ -82,5 +83,29 @@ class SettingModel extends AbstractEntityModel
             ->set('author', 'Author');
 
         return $validator->validate();
+    }
+
+    /**
+     * Save settings.
+     *
+     * @return bool
+     */
+    public function save()
+    {
+        if (parent::save()) {
+
+            // Update activation of languages
+            $activeLanguageIds = $this->active_language_ids;
+            LanguageModel::findAll()->each(function ($language) use ($activeLanguageIds) {
+                $language->is_active = false;
+                if ($this->language_id == $language->id() || in_array($language->id(), $activeLanguageIds)) {
+                    $language->is_active = true;
+                }
+                $language->save();
+            });
+
+            return true;
+        }
+        return false;
     }
 }

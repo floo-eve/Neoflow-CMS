@@ -6,6 +6,7 @@ use Neoflow\Framework\ORM\AbstractEntityModel;
 
 class MessageModel extends AbstractEntityModel
 {
+
     /**
      * @var string
      */
@@ -19,5 +20,6 @@ class MessageModel extends AbstractEntityModel
     /**
      * @var array
      */
-    public static $properties = ['message_id', 'message'];
+    public static $properties = ['message_id', 'message', 'section_id'];
+
 }

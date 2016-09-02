@@ -151,7 +151,7 @@ class NavitemModel extends AbstractEntityModel
                 }
 
                 return !in_array($parent_navitem_id, $forbiddenNavitemIds);
-            }, 'The navitem himself or subnavitems cannot be the top navitem', array($this))
+            }, 'The navigation item or child items cannot be the parent item', array($this))
             ->set('parent_navitem_id', 'Top navitem');
 
         return $validator->validate();

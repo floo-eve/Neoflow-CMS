@@ -251,8 +251,8 @@ $this->addTranslation(array(
     'Navigation item successful hidden' => 'Navigation item successful hidden',
     'Navigation item successful made visible' => 'Navigation item successful made visible',
     'Create item' => 'Create item',
-    'Navigation details' => 'Navigation details',
-    'Top item' => 'Top item',
+    'Edit navigation' => 'Edit navigation',
+    'Parent item' => 'Parent item',
     'Are you sure you want to delete this and all of its subnavigation items?' => 'Are you sure you want to delete this and all of its subnavigation items?'
 ));
 
@@ -260,18 +260,17 @@ $this->addTranslation(array(
 $this->addTranslation(array(
     'All pages' => 'All pages',
     'Create page' => 'Create page',
-    'Page details' => 'Page details',
+    'Edit page section' => 'Edit page section',
     'Top page' => 'Top page',
     'Page title' => 'Page title',
-    'Page is active' => 'Page is active',
+    'Edit page' => 'Edit page',
     'Page settings' => 'Page settings',
     'Page sections' => 'Page sections',
     'New section' => 'New section',
-    'Section is active' => 'Section is active',
     'Current page' => 'Current page',
     'Are you sure you want to delete this section and all of its content?' => 'Are you sure you want to delete this section and all of its content?',
     'Are you sure you want to delete this page and all of its subpage?' => 'Are you sure you want to delete this page and all of its subpage?',
-    'The navitem himself or subnavitems cannot be the top navitem' => 'The navitem himself or subnavitems cannot be the top navitem',
+    'The navigation item or child items cannot be the parent item' => 'The navigation item or child items cannot be the parent item',
 ));
 
 // Modul

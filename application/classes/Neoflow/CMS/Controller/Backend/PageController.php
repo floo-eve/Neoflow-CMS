@@ -15,6 +15,7 @@ use Neoflow\Framework\Support\Validation\ValidationException;
 
 class PageController extends BackendController
 {
+
     /**
      * Constructor.
      */
@@ -131,7 +132,7 @@ class PageController extends BackendController
         } else {
             $page = PageModel::findById($args['id']);
             if (!$page) {
-                throw new Exception('Page not found (ID: '.$args['id'].')');
+                throw new Exception('Page not found (ID: ' . $args['id'] . ')');
             }
         }
 
@@ -176,7 +177,7 @@ class PageController extends BackendController
                     ->setSuccessAlert(translate('Successful deleted'))
                     ->redirectToRoute('page_index');
         }
-        throw new Exception('Delete page failed (ID: '.$args['id'].')');
+        throw new Exception('Delete page failed (ID: ' . $args['id'] . ')');
     }
 
     /**
@@ -200,16 +201,16 @@ class PageController extends BackendController
                     'title' => $postData->get('title'),
                     'is_active' => $postData->get('is_active'),
                     'parent_navitem_id' => $postData->get('parent_navitem_id'),
-                    'is_hidden' => $postData->get('is_hidden'),
+                    'is_visible' => $postData->get('is_visible'),
                     'keywords' => $postData->get('keywords'),
                     'description' => $postData->get('description'),
                     ), $postData->get('page_id'));
 
             // Validate and save page
-            if ($page->validate() && $page->save()) {
+            if ($page && $page->validate() && $page->save()) {
                 $this->setSuccessAlert(translate('Successful updated'));
             } else {
-                throw new Exception('Update page failed (ID: '.$postData->get('page_id').')');
+                throw new Exception('Update page failed (ID: ' . $postData->get('page_id') . ')');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
@@ -240,7 +241,7 @@ class PageController extends BackendController
 
             return $this->redirectToRoute('page_index');
         }
-        throw new Exception('Page not found or toggle activation failed (ID: '.$args['id'].')');
+        throw new Exception('Page not found or toggle activation failed (ID: ' . $args['id'] . ')');
     }
 
     /**

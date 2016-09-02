@@ -35,7 +35,7 @@
 
                     <div class="form-group <?= $view->hasValidationError('parent_navitem_id', 'has-error') ?>">
                         <label for="selectParentNavitem" class="col-sm-2 control-label">
-                            <?= translate('Top item') ?>
+                            <?= translate('Parent item') ?>
                         </label>
                         <div class="col-sm-10">
                             <select class="form-control select2" name="parent_navitem_id" id="selectParentNavitem">
@@ -46,19 +46,13 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-3">
-                            <div class="radio">
-                                <label>
-                                    <input name="is_visible" value="1" type="radio" <?= ($navitem->is_visible ? 'checked' : '') ?> /> <?= translate('Visible') ?>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="radio">
-                                <label>
-                                    <input name="is_visible" value="0" type="radio" <?= ($navitem->is_visible ? '' : 'checked') ?> /> <?= translate('Hidden') ?>
-                                </label>
-                            </div>
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <label class="radio-inline">
+                                <input name="is_visible" value="1" type="radio" <?= ($navitem->is_visible ? 'checked' : '') ?> /> <?= translate('Visible') ?>
+                            </label>
+                            <label class="radio-inline">
+                                <input name="is_visible" value="0" type="radio" <?= ($navitem->is_visible ? '' : 'checked') ?> /> <?= translate('Hidden') ?>
+                            </label>
                         </div>
                     </div>
 

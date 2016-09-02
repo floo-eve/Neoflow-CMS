@@ -132,7 +132,7 @@ class PageModel extends AbstractEntityModel
                     ->where('navigation_id', '=', 1)
                     ->fetch();
 
-                $navitem->is_visible = $this->is_active;
+                $navitem->is_visible = $this->is_visible;
                 $navitem->parent_navitem_id = $this->parent_navitem_id ? : null;
                 $navitem->save();
             }

@@ -90,19 +90,13 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-3">
-                            <div class="radio">
-                                <label>
-                                    <input name="is_active" value="1" type="radio" checked /> <?= translate('Enabled') ?>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="radio">
-                                <label>
-                                    <input name="is_active" value="0" type="radio" /> <?= translate('Disabled') ?>
-                                </label>
-                            </div>
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <label class="radio-inline">
+                                <input name="is_active" value="1" type="radio" checked/> <?= translate('Enabled') ?>
+                            </label>
+                            <label class="radio-inline">
+                                <input name="is_active" value="0" type="radio" /> <?= translate('Disabled') ?>
+                            </label>
                         </div>
                     </div>
 

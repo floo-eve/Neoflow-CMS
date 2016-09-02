@@ -6,7 +6,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= translate('Page details') ?><span class="label label-primary pull-right"><?= $page->title ?></span>
+                    <?= translate('Edit page') ?><span class="label label-primary pull-right"><?= $page->title ?></span>
                 </h3>
             </div>
             <div class="panel-body">
@@ -49,26 +49,29 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input name="is_active" value="0" type="hidden" />
-                                    <input name="is_active" value="1" type="checkbox" <?= ($page->is_active ? 'checked' : '') ?>> <?= translate('Page is active') ?>
-                                </label>
-                            </div>
+                            <label class="radio-inline">
+                                <input name="is_active" value="1" type="radio" <?= ($page->is_active ? 'checked' : '') ?> /> <?= translate('Enabled') ?>
+                            </label>
+                            <label class="radio-inline">
+                                <input name="is_active" value="0" type="radio" <?= ($page->is_active ? '' : 'checked') ?> /> <?= translate('Disabled') ?>
+                            </label>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input name="is_hidden" value="0" type="hidden" />
-                                    <input name="is_hidden" value="1" type="checkbox" <?= ($navitem->is_hidden ? 'checked' : '') ?>> <?= translate('Page is hidden') ?>
-                                </label>
-                            </div>
+                            <label class="radio-inline">
+                                <input name="is_visible" value="1" type="radio" <?= ($navitem->is_visible ? 'checked' : '') ?> /> <?= translate('Visible') ?>
+                            </label>
+                            <label class="radio-inline">
+                                <input name="is_visible" value="0" type="radio" <?= ($navitem->is_visible ? '' : 'checked') ?> /> <?= translate('Hidden') ?>
+                            </label>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary btn-icon btn-icon-left">
