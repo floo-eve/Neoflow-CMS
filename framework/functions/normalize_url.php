@@ -8,5 +8,5 @@
  */
 function normalize_url($url)
 {
-    return rtrim(preg_replace('/[\/]+/', '/', $url), '/');
+    return rtrim(preg_replace('/([^:])(\/{2,})/', '$1/', $url), '/');
 }
