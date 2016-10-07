@@ -6,13 +6,12 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= translate('Page sections') ?><span class="label label-primary pull-right"><?= $page->title ?></span>
+                    <?= translate('Page sections') ?>
                 </h3>
             </div>
             <div class="panel-body">
-
                 <?php if ($sections->count()) { ?>
-                    <div class="nestable"  data-max-depth="1" data-save-url="<?= generate_url('section_reorder') ?>" id="nestable">
+                    <div class="nestable sections" data-max-depth="1" data-save-url="<?= generate_url('section_reorder') ?>" id="nestable">
                         <?= $view->renderSectionNestable($sections) ?>
                     </div>
                     <ul class="list-inline">
@@ -30,7 +29,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><?= translate('New section') ?></h3>
+                <h3 class="panel-title"><?= translate('Create section') ?></h3>
             </div>
             <div class="panel-body">
                 <form method="post" action="<?= generate_url('section_create') ?>" class="form-horizontal">
@@ -56,19 +55,13 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-3">
-                            <div class="radio">
-                                <label>
-                                    <input name="is_active" value="1" type="radio" checked /> <?= translate('Enabled') ?>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="radio">
-                                <label>
-                                    <input name="is_active" value="0" type="radio" /> <?= translate('Disabled') ?>
-                                </label>
-                            </div>
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <label class="radio-inline">
+                                <input name="is_active" value="1" type="radio" checked /> <?= translate('Enabled') ?>
+                            </label>
+                            <label class="radio-inline">
+                                <input name="is_active" value="0" type="radio" /> <?= translate('Disabled') ?>
+                            </label>
                         </div>
                     </div>
 

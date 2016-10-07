@@ -30,7 +30,7 @@
                             <?php foreach ($navigations as $navigation) { ?>
                                 <tr>
                                     <td class="nowrap">
-                                        <a href="<?= generate_url('navitem_index', array('id' => $navigation->id())) ?>" <?= ($navigation->id() === 1 ? 'class="disabled"' : '') ?>>
+                                        <a href="<?= generate_url('navitem_index', array('id' => $navigation->id())) ?>" <?= ($navigation->id() === 1 ? 'class="disabled"' : '') ?>  title="<?= translate('Manage items') ?>">
                                             <?= $navigation->title ?>
                                         </a>
                                     </td>
@@ -39,13 +39,13 @@
                                     </td>
                                     <td class="text-right nowrap">
 
-                                        <a href="<?= generate_url('navitem_index', array('id' => $navigation->id())) ?>" class="btn btn-default btn-xs" title="<?= translate('Items') ?>">
+                                        <a href="<?= generate_url('navitem_index', array('id' => $navigation->id())) ?>" class="btn btn-default btn-xs"   title="<?= translate('Manage items') ?>">
                                             <i class="fa fa-fw fa-th-list"></i>
                                         </a>
-                                        <a href="<?= generate_url('navigation_edit', array('id' => $navigation->id())) ?>" class="btn btn-default btn-xs" title="<?= translate('Details') ?>">
+                                        <a href="<?= generate_url('navigation_edit', array('id' => $navigation->id())) ?>" class="btn btn-default btn-xs" title="<?= translate('Edit navigation') ?>">
                                             <i class="fa fa-fw fa-cog"></i>
                                         </a>
-                                        <a <?= ($navigation->id() === 1 ? 'disabled' : '') ?> href="<?= generate_url('navigation_delete', array('id' => $navigation->id())) ?>" class="btn btn-primary btn-xs confirm" data-message="<?= translate('Are you sure you want to delete it?') ?>" title="<?= translate('Delete {0}', array($navigation->title)) ?>">
+                                        <a <?= ($navigation->id() === 1 ? 'disabled' : '') ?> href="<?= generate_url('navigation_delete', array('id' => $navigation->id())) ?>" class="btn btn-primary btn-xs confirm" data-message="<?= translate('Are you sure you want to delete it?') ?>" title="<?= translate('Delete navigation') ?>">
                                             <i class="fa fa-fw fa-trash-o"></i>
                                         </a>
                                     </td>

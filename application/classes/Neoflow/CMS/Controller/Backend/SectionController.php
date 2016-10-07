@@ -87,6 +87,43 @@ class SectionController extends BackendController
     }
 
     /**
+     * Update section action.
+     *
+     * @param array $args
+     *
+     * @return RedirectResponse
+     *
+     * @throws Exception
+     */
+    public function updateAction($args)
+    {
+        try {
+
+            // Get post data
+            $postData = $this->request()->getPostData();
+
+            // Update section
+            $section = SectionModel::update(array(
+                    'is_active' => $postData->get('is_active'),
+                    ), $postData->get('section_id'));
+
+            // Validate and save section
+            if ($section && $section->validate() && $section->save()) {
+                $this->setSuccessAlert(translate('Successful updated'));
+            } else {
+                throw new Exception('Section not found or update failed (ID: ' . $postData->get('section_id') . ')');
+            }
+        } catch (ValidationException $ex) {
+            $this->setDangerAlert($ex->getErrors());
+        }
+
+        // Module of section
+        $module = $section->module()->fetch();
+
+        return $this->redirectToRoute($module->route, array('section_id' => $section->id()));
+    }
+
+    /**
      * Create section action.
      *
      * @param array $args
@@ -167,6 +204,38 @@ class SectionController extends BackendController
             return $this->redirectToRoute('section_index', array('id' => $section->page_id));
         }
         throw new Exception('Section not found or toggle activation failed (ID: ' . $args['id'] . ')');
+    }
+
+    /**
+     * Edit section action.
+     *
+     * @param array $args
+     *
+     * @return Response
+     *
+     * @throws Exception
+     */
+    public function editAction($args)
+    {
+        // Get section or data if validation has failed
+        if ($this->service('validation')->hasError()) {
+            $data = $this->service('validation')->getData();
+            $section = SectionModel::update($data, $data['section_id']);
+        } else {
+            $section = SectionModel::findById($args['id']);
+            if (!$section) {
+                throw new Exception('Section not found (ID: ' . $args['id'] . ')');
+            }
+        }
+
+        // Set back url
+        $this->view->setBackRoute('section_index', array('id' => $section->page_id));
+
+        return $this->render('backend/section/edit', array(
+                'section' => $section,
+                'page' => $section->page()->fetch(),
+                'module' => $section->module()->fetch()
+        ));
     }
 
     /**

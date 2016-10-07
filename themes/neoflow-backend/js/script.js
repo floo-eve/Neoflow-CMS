@@ -112,6 +112,51 @@
     });
 
 
+
+    $('.timer').each(function () {
+        var $this = $(this),
+                duration = $this.data('time') - 1,
+                timer = duration;
+
+        setInterval(function () {
+
+            var seconds = Math.floor(timer % 60),
+                    minutes = Math.floor((timer / 60) % 60),
+                    hours = Math.floor((timer / (60 * 60)) % 24);
+
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            $this.text(hours + ':' + minutes + ':' + seconds);
+
+            if (--timer < 0) {
+                if ($this.data('timeout-redirect')) {
+                    window.location.href = $this.data('timeout-redirect');
+                } else if ($this.data('timeout-message')) {
+                    $this.parent().addClass('text-primary').text($this.data('timeout-message'));
+                }
+
+                clearTimeout(timer);
+            }
+        }, 1000);
+
+    });
+
+
+})();
+
+(function () {
+    var $window = $(window),
+            $navXsStacked = $('ul.nav-xs-stacked');
+
+    $window.on('resize theme-resize', function () {
+        if ($window.outerWidth() > 768) {
+            $navXsStacked.removeClass('nav-stacked');
+        } else {
+            $navXsStacked.addClass('nav-stacked');
+        }
+    }).trigger('theme-resize');
 })();
 
 (function () {

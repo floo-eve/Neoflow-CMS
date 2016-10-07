@@ -5,7 +5,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <?= translate('Navigation items') ?><span class="label label-primary pull-right"><?= $navigation->title ?></span>
+                    <?= translate('Navigation items') ?>
                 </h3>
             </div>
 

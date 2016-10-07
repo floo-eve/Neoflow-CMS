@@ -1,11 +1,20 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title"><?= translate('Message') ?></h3>
+        <h3 class="panel-title">Hi and welcome!</h3>
     </div>
     <div class="panel-body">
-        <p><?= translate('Change your "Hello World" message here.') ?></p>
+        <p>
+            <i>Hello World</i> was developped for test-cases only and is the
+            first official page-module of the Neoflow CMS.
+        </p>
+        <p>
+            Change your message in the following textarea to create and publish
+            your first <i>Hello World</i> message on your website.
+        </p>
 
-        <form method="post" action="<?= generate_url('mod_hello_world_save') ?>" class="form-horizontal">
+        <hr />
+
+        <form method="post" action="<?= generate_url('mod_hello_world_update') ?>" class="form-horizontal">
 
             <div class="form-group <?= $this->hasValidationError('message', 'has-error') ?>">
                 <label for="textareaMessage" class="col-sm-2 control-label">

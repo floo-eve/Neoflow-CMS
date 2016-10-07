@@ -22,7 +22,7 @@
                         <?php foreach ($roles as $role) { ?>
                             <tr>
                                 <td>
-                                    <a href="<?= generate_url('role_edit', array('id' => $role->id())) ?>" title="<?= translate('Edit {0}', array($role->title)) ?>">
+                                    <a href="<?= generate_url('role_edit', array('id' => $role->id())) ?>" title="<?= translate('Edit role') ?>">
                                         <?= $role->title ?>
                                     </a>
                                 </td>
@@ -30,10 +30,10 @@
                                 <td><?= $role->permissions()->fetchAll()->implode('title', ', ') ?></td>
                                 </td>
                                 <td class="text-right nowrap">
-                                    <a href="<?= generate_url('role_edit', array('id' => $role->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= translate('Edit {0}', array($role->title)) ?>">
+                                    <a href="<?= generate_url('role_edit', array('id' => $role->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= translate('Edit role') ?>">
                                         <i class="fa fa-fw fa-pencil"></i> <?= translate('Edit') ?>
                                     </a>
-                                    <a href="<?= generate_url('role_delete', array('id' => $role->id())) ?>" class="btn btn-primary btn-xs confirm" data-message="<?= translate('Are you sure you want to delete it?') ?>" title="<?= translate('Delete {0}', array($role->title)) ?>">
+                                    <a href="<?= generate_url('role_delete', array('id' => $role->id())) ?>" class="btn btn-primary btn-xs confirm" data-message="<?= translate('Are you sure you want to delete it?') ?>" title="<?= translate('Delete role') ?>">
                                         <i class="fa fa-fw fa-trash-o"></i>
                                     </a>
                                 </td>

@@ -11,7 +11,7 @@ return array(
     'email' => 'john.doe@neoflow.ch',
     'session' => array(
         'name' => 'neoflow-cms', // false (system default) | string
-        'lifetime' => 3600, // false (system default) | int (seconds)
+        'lifetime' => 1800, // false (system default) | int (seconds)
     ),
     'orm' => array(
         'caching' => false, // true | false

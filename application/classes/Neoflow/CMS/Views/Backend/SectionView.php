@@ -37,30 +37,30 @@ class SectionView extends \Neoflow\CMS\Views\BackendView
 
                 $output .= '</li>
                                 <li>
-                                    <a href="' . generate_url($module->route, array('section_id' => $section->id())) . '">
+                                    <a href="' . generate_url($module->route, array('section_id' => $section->id())) . '" title="' . translate('Edit section') . '">
                                         ' . $module->title . '
                                     </a>
                                 </li>
-                                <li class="small">
+                                <li class="small hidden-xs">
                                     ID: ' . $section->id() . '
                                 </li>
                             </ul>
                             <span class="pull-right">
-                                    <a href="' . generate_url($module->route, array('section_id' => $section->id())) . '" class="btn btn-default btn-xs hidden-xs btn-icon btn-icon-left" title="' . translate('Edit') . '">
-                                        <i class="fa fa-fw fa-pencil"></i>' . translate('Edit') . '
+                                    <a href="' . generate_url($module->route, array('section_id' => $section->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . translate('Edit section') . '">
+                                          <i class="fa fa-fw fa-pencil"></i>
                                     </a>';
 
                 if ($section->is_active) {
-                    $output .= ' <a href="' . generate_url('section_toggle_activation', array('id' => $section->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to disable it?') . '"" title="' . translate('Disable') . '">
+                    $output .= ' <a href="' . generate_url('section_toggle_activation', array('id' => $section->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to disable it?') . '" title="' . translate('Disable section') . '">
                                     <i class="fa fa-fw fa-ban"></i>
                                 </a>';
                 } else {
-                    $output .= ' <a href="' . generate_url('section_toggle_activation', array('id' => $section->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to activate it?') . '"" title="' . translate('Enable') . '">
+                    $output .= ' <a href="' . generate_url('section_toggle_activation', array('id' => $section->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to enable it?') . '" title="' . translate('Enable section') . '">
                                     <i class="fa fa-fw fa-eye"></i>
                                 </a>';
                 }
 
-                $output .= ' <a href="' . generate_url('section_delete', array('id' => $section->id())) . '" class="btn btn-primary btn-xs confirm" data-message="' . translate('Are you sure you want to delete this section and all of its content?') . '" title="' . translate('Delete') . '">
+                $output .= ' <a href="' . generate_url('section_delete', array('id' => $section->id())) . '" class="btn btn-primary btn-xs confirm" data-message="' . translate('Are you sure you want to delete this section and all of its content?') . '" title="' . translate('Delete section') . '">
                                         <i class="fa fa-fw fa-trash-o"></i>
                                     </a>
                             </span>

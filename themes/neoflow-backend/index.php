@@ -50,9 +50,9 @@
                             <div class="container-fluid">
 
                                 <?= $view->renderTemplate('page-title') ?>
-
                                 <?= $view->renderAlert() ?>
                                 <?= $view->getBlock(1) ?>
+
                             </div>
                         </div>
                     </div>

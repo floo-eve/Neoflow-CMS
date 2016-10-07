@@ -161,7 +161,7 @@ class NavitemController extends BackendController
     }
 
     /**
-     * Edit navigation item action.
+     * Edit item action.
      *
      * @param array $args
      *

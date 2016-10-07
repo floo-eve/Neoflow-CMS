@@ -61,7 +61,7 @@ class NavitemView extends BackendView
                 }
                 $output .= '</li>
                                 <li>
-                                    <a href="' . generate_url('navitem_edit', array('id' => $navitem->id())) . '">
+                                    <a href="' . generate_url('navitem_edit', array('id' => $navitem->id())) . '" title="' . translate('Edit item') . '">
                                         ' . $navitem->title . '
                                     </a>
                                 </li>
@@ -69,22 +69,24 @@ class NavitemView extends BackendView
                                     ID: ' . $navitem->id() . '
                                 </li>
                                 <li class="small text-muted">
-                                    ' . translate('Page title') . ': ' . $page->title . '
+                                    ' . translate('Page') . ': ' . $page->title . '
                                 </li>
                             </ul>
-                            <span class="pull-right">';
-
+                            <span class="pull-right">
+                                <a href="' . generate_url('navitem_edit', array('id' => $navitem->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . translate('Edit item') . '">
+                                      <i class="fa fa-fw fa-pencil"></i>
+                                </a>';
                 if ($navitem->is_visible) {
-                    $output .= ' <a href="' . generate_url('navitem_toggle_visiblity', array('id' => $navitem->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to hide it?') . '"" title="' . translate('Hide') . '">
+                    $output .= ' <a href="' . generate_url('navitem_toggle_visiblity', array('id' => $navitem->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to hide it?') . '"" title="' . translate('Hide item') . '">
                                     <i class="fa fa-fw fa-ban"></i>
                                 </a>';
                 } else {
-                    $output .= ' <a href="' . generate_url('navitem_toggle_visiblity', array('id' => $navitem->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to make it visible?') . '"" title="' . translate('Make visible') . '">
+                    $output .= ' <a href="' . generate_url('navitem_toggle_visiblity', array('id' => $navitem->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to make it visible?') . '"" title="' . translate('Make item visible') . '">
                                     <i class="fa fa-fw fa-eye"></i>
                                 </a>';
                 }
 
-                $output .= ' <a ' . ($navitem->navigation_id == 1 ? 'disabled' : '') . ' href="' . generate_url('navitem_delete', array('id' => $navitem->id())) . '" class="btn btn-primary btn-xs confirm" data-message="' . translate('Are you sure you want to delete this and all of its subnavigation items?') . '" title="' . translate('Delete') . '">
+                $output .= ' <a ' . ($navitem->navigation_id == 1 ? 'disabled' : '') . ' href="' . generate_url('navitem_delete', array('id' => $navitem->id())) . '" class="btn btn-primary btn-xs confirm" data-message="' . translate('Are you sure you want to delete this and all of its subnavigation items?') . '" title="' . translate('Delete item') . '">
                                 <i class="fa fa-fw fa-trash-o"></i>
                             </a>
                             </span>

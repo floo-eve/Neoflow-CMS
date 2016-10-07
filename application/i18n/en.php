@@ -132,12 +132,13 @@ $this->addTranslation(array(
     'Language' => 'Language',
     'Languages' => 'Languages',
     'Dashboard' => 'Dashboard',
-    'Are you sure you want to activate it?' => 'Are you sure you want to activate it?',
+    'Are you sure you want to enable it?' => 'Are you sure you want to enable it?',
     'Are you sure you want to disable it?' => 'Are you sure you want to disable it?',
     'Are you sure you want to delete it?' => 'Are you sure you want to delete it?',
     'Are you sure you want to hide it?' => 'Are you sure you want to hide it?',
     'Are you sure you want to make it visible?' => 'Are you sure you want to make it visible?',
     'Unauthorized' => 'Unauthorized',
+    'Last change by {0} on {1}' => 'Last change by {0} on {1}',
 ));
 
 
@@ -198,6 +199,8 @@ $this->addTranslation(array(
 
 // Backend
 $this->addTranslation(array(
+    'Your session is expired' => 'Your session is expired',
+    'Session timeout in {0}' => 'Session timeout in {0}',
 ));
 
 // Dashboard
@@ -236,7 +239,8 @@ $this->addTranslation(array(
     'All roles' => 'All roles',
     'Edit role' => 'Edit role',
     'Create role' => 'Create role',
-    'Role is in use and cannot be deleted' => 'Role is in use and cannot be deleted'
+    'Role is in use and cannot be deleted' => 'Role is in use and cannot be deleted',
+    'Delete role' => 'Delete role',
 ));
 
 
@@ -246,13 +250,17 @@ $this->addTranslation(array(
     'Navigations' => 'Navigations',
     'Create navigation' => 'Create navigation',
     'Items' => 'Items',
-    'Edit navigation item' => 'Edit navigation item',
     'Navigation items' => 'Navigation items',
-    'Navigation item successful hidden' => 'Navigation item successful hidden',
-    'Navigation item successful made visible' => 'Navigation item successful made visible',
     'Create item' => 'Create item',
     'Edit navigation' => 'Edit navigation',
     'Parent item' => 'Parent item',
+    'Delete navigation' => 'Delete navigation',
+    'Manage items' => 'Manage items',
+    'Hide item' => 'Hide item',
+    'Make item visible' => 'Make item visible',
+    'Delete item' => 'Delete item',
+    'Edit item' => 'Edit item',
+    'Current navigation' => 'Current navigation',
     'Are you sure you want to delete this and all of its subnavigation items?' => 'Are you sure you want to delete this and all of its subnavigation items?'
 ));
 
@@ -260,14 +268,22 @@ $this->addTranslation(array(
 $this->addTranslation(array(
     'All pages' => 'All pages',
     'Create page' => 'Create page',
-    'Edit page section' => 'Edit page section',
+    'Section' => 'Section',
+    'Edit section' => 'Edit section',
+    'Manage sections' => 'Manage sections',
+    'Delete page' => 'Delete page',
+    'Disable page' => 'Disable page',
+    'Enable page' => 'Enable page',
+    'Delete section' => 'Delete section',
+    'Disable section' => 'Disable section',
+    'Enable section' => 'Enable section',
     'Top page' => 'Top page',
     'Page title' => 'Page title',
+    'Current page' => 'Current page',
     'Edit page' => 'Edit page',
     'Page settings' => 'Page settings',
     'Page sections' => 'Page sections',
-    'New section' => 'New section',
-    'Current page' => 'Current page',
+    'Create section' => 'Create section',
     'Are you sure you want to delete this section and all of its content?' => 'Are you sure you want to delete this section and all of its content?',
     'Are you sure you want to delete this page and all of its subpage?' => 'Are you sure you want to delete this page and all of its subpage?',
     'The navigation item or child items cannot be the parent item' => 'The navigation item or child items cannot be the parent item',

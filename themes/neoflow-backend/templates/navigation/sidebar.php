@@ -17,15 +17,10 @@
                 </span>
                 <div class="media-body">
                     <h4 class="media-heading text-primary"><?= $view->getAuthenticatedUser()->getFullName() ?></h4>
-                    <?= $view->getAuthenticatedUser()->role()->fetch()->title ?>
+                    <p><?= $view->getAuthenticatedUser()->role()->fetch()->title ?></p>
                 </div>
+
             </div>
-            <!--<hr />-->
-            <?php if ($view->app()->service('auth')->isAuthenticated()) { ?>
-                                                                                                                                        <!--                <a href="<?= generate_url('backend_logout') ?>" title="Logout" class="btn btn-xs btn-primary btn-icon-left btn-icon">
-                                                                                                                                                            <i class="fa fa-sign-out"></i>
-                                                                                                                                                            <span class="hidden-xs"> Logout</span></a>-->
-            <?php } ?>
         </div>
         <ul class="nav sidebar-nav">
             <li <?= $view->isCurrentRoute('dashboard*', 'class="active"') ?>>
@@ -130,6 +125,9 @@
             <ul class="list-unstyled">
                 <li>Version 0.1-dev</li>
             </ul>
+            <span class="small">
+                <?= translate('Session timeout in {0}', array('<span class="timer" data-timeout-redirect="' . generate_url('backend_logout') . '" data-timeout-message="' . translate('Your session is expired') . '" data-time="' . $view->config()->get('session')->get('lifetime') . '">' . date('H:i:s', $view->config()->get('session')->get('lifetime')) . '</span>')) ?>
+            </span>
         </div>
     </div>
 </nav>

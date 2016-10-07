@@ -2,7 +2,7 @@
 
 namespace Neoflow\Framework\Persistence\Caching;
 
-class DummyCache extends AbstractCache
+interface CacheInterface
 {
 
     /**
@@ -12,10 +12,7 @@ class DummyCache extends AbstractCache
      *
      * @return mixed
      */
-    public function fetch($key)
-    {
-        return false;
-    }
+    abstract public function fetch($key);
 
     /**
      * Store cache value.
@@ -27,10 +24,7 @@ class DummyCache extends AbstractCache
      *
      * @return bool
      */
-    public function store($key, $data, $ttl = 0, array $tags = array())
-    {
-        return true;
-    }
+    abstract public function store($key, $data, $ttl, array $tags);
 
     /**
      * Delete cache value.
@@ -39,10 +33,7 @@ class DummyCache extends AbstractCache
      *
      * @return bool
      */
-    public function delete($key)
-    {
-        return true;
-    }
+    abstract public function delete($key);
 
     /**
      * Check wether cache value exists.
@@ -51,18 +42,12 @@ class DummyCache extends AbstractCache
      *
      * @return bool
      */
-    public function exists($key)
-    {
-        return false;
-    }
+    abstract public function exists($key);
 
     /**
      * Clear complete cache.
      *
      * @return bool
      */
-    public function clear()
-    {
-        return true;
-    }
+    abstract public function clear();
 }

@@ -23,7 +23,7 @@
                         <?php foreach ($users as $user) { ?>
                             <tr>
                                 <td>
-                                    <a href="<?= generate_url('user_edit', array('id' => $user->id())) ?>" title="<?= translate('Edit {0}', array($user->getFullName())) ?>">
+                                    <a href="<?= generate_url('user_edit', array('id' => $user->id())) ?>" title="<?= translate('Edit user') ?>">
                                         <?= $user->email ?>
                                     </a>
                                 </td>
@@ -32,10 +32,10 @@
                                 <td><?= $user->role()->fetch()->title ?></td>
                                 </td>
                                 <td class="text-right nowrap">
-                                    <a href="<?= generate_url('user_edit', array('id' => $user->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= translate('Edit {0}', array($user->getFullName())) ?>">
+                                    <a href="<?= generate_url('user_edit', array('id' => $user->id())) ?>" class="btn btn-default btn-xs btn-icon btn-icon-left" title="<?= translate('Edit user') ?>">
                                         <i class="fa fa-fw fa-pencil"></i> <?= translate('Edit') ?>
                                     </a>
-                                    <a <?= ($user->id() === 1 ? 'disabled' : '') ?> href="<?= generate_url('user_delete', array('id' => $user->id())) ?>" class="btn btn-primary btn-xs confirm" data-message="<?= translate('Are you sure you want to delete it?') ?>" title="<?= translate('Delete {0}', array($user->getFullName())) ?>">
+                                    <a <?= ($user->id() === 1 ? 'disabled' : '') ?> href="<?= generate_url('user_delete', array('id' => $user->id())) ?>" class="btn btn-primary btn-xs confirm" data-message="<?= translate('Are you sure you want to delete it?') ?>" title="<?= translate('Delete user') ?>">
                                         <i class="fa fa-fw fa-trash-o"></i>
                                     </a>
                                 </td>

@@ -2,15 +2,14 @@
 
 namespace Neoflow\Framework\Persistence\Caching;
 
-abstract class AbstractCache
+abstract class AbstractCache implements CacheInterface
 {
-
     /**
      * App trait.
      */
     use \Neoflow\Framework\AppTrait;
 
-/**
+    /**
      * Key tagging trait.
      */
     use \Neoflow\Framework\Common\KeyTaggingTrait;
@@ -21,7 +20,7 @@ abstract class AbstractCache
     public function __construct()
     {
         $this->tags = $this->fetch('cacheTags');
-        $this->logger()->info($this->getReflection()->getShortName() . ' created');
+        $this->logger()->info($this->getReflection()->getShortName().' created');
     }
 
     /**
@@ -71,57 +70,13 @@ abstract class AbstractCache
      * Check wether cache value by tag exists.
      *
      * @param array $tag
+     *
      * @return bool
      */
     public function existsByTag($tag)
     {
         $cacheValues = $this->fetchByTag($tag);
+
         return count($cacheValues) > 0;
     }
-
-    /**
-     * Fetch cache value.
-     *
-     * @param string $key
-     *
-     * @return mixed
-     */
-    abstract public function fetch($key);
-
-    /**
-     * Store cache value.
-     *
-     * @param string $key
-     * @param mixed  $data
-     * @param int    $ttl
-     * @param array  $tags
-     *
-     * @return bool
-     */
-    abstract public function store($key, $data, $ttl, array $tags);
-
-    /**
-     * Delete cache value.
-     *
-     * @param string $key
-     *
-     * @return bool
-     */
-    abstract public function delete($key);
-
-    /**
-     * Check wether cache value exists.
-     *
-     * @param string $key
-     *
-     * @return bool
-     */
-    abstract public function exists($key);
-
-    /**
-     * Clear complete cache.
-     *
-     * @return bool
-     */
-    abstract public function clear();
 }

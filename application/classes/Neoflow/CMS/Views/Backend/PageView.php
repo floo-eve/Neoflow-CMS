@@ -40,7 +40,7 @@ class PageView extends NavitemView
                 }
                 $output .= '</li>
                                 <li>
-                                    <a href="' . generate_url('section_index', array('id' => $navitem->page_id)) . '">
+                                    <a href="' . generate_url('section_index', array('id' => $navitem->page_id)) . '" title="' . translate('Manage sections') . '">
                                         ' . $page->title . '
                                     </a>
                                 </li>
@@ -49,24 +49,24 @@ class PageView extends NavitemView
                                 </li>
                             </ul>
                             <span class="pull-right">
-                                    <a href="' . generate_url('section_index', array('id' => $page->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . translate('Sections') . '">
+                                    <a href="' . generate_url('section_index', array('id' => $page->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . translate('Manage sections') . '">
                                         <i class="fa fa-fw fa-th-list"></i>
                                     </a>
-                                    <a href="' . generate_url('page_edit', array('id' => $page->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . translate('Settings') . '">
-                                        <i class="fa fa-fw fa-cog"></i>
+                                    <a href="' . generate_url('page_edit', array('id' => $page->id())) . '" class="btn btn-default btn-xs hidden-xs" title="' . translate('Edit page') . '">
+                                        <i class="fa fa-fw fa-pencil"></i>
                                     </a>';
 
                 if ($page->is_active) {
-                    $output .= ' <a href="' . generate_url('page_toggle_activation', array('id' => $page->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to disable it?') . '" title="' . translate('Disable') . '">
+                    $output .= ' <a href="' . generate_url('page_toggle_activation', array('id' => $page->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to disable it?') . '" title="' . translate('Disable page') . '">
                                     <i class="fa fa-fw fa-ban"></i>
                                 </a>';
                 } else {
-                    $output .= ' <a href="' . generate_url('page_toggle_activation', array('id' => $page->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to activate it?') . '" title="' . translate('Enable') . '">
+                    $output .= ' <a href="' . generate_url('page_toggle_activation', array('id' => $page->id())) . '" class="btn btn-default btn-xs confirm" data-message="' . translate('Are you sure you want to enable it?') . '" title="' . translate('Enable page') . '">
                                     <i class="fa fa-fw fa-eye"></i>
                                 </a>';
                 }
 
-                $output .= ' <a href="' . generate_url('page_delete', array('id' => $page->id())) . '" class="btn btn-primary btn-xs confirm" data-message="' . translate('Are you sure you want to delete this page and all of its subpage?') . '" title="' . translate('Delete') . '">
+                $output .= ' <a href="' . generate_url('page_delete', array('id' => $page->id())) . '" class="btn btn-primary btn-xs confirm" data-message="' . translate('Are you sure you want to delete this page and all of its subpage?') . '" title="' . translate('Delete page') . '">
                                         <i class="fa fa-fw fa-trash-o"></i>
                                     </a>
                             </span>

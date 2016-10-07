@@ -26,7 +26,10 @@
 @import 'components/navigation';
 @import 'components/debugbar';
 
-
-
+.nestable.sections {
+    .nestable-list > .nestable-item {
+        padding-left: 25px;
+    }
+}
 
 

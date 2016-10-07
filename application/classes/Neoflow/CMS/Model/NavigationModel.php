@@ -33,11 +33,15 @@ class NavigationModel extends AbstractEntityModel
         return $this->hasMany('\\Neoflow\\CMS\\Model\\NavitemModel', 'navigation_id');
     }
 
+    /**
+     * Delete navigation
+     * 
+     * @return boolean
+     */
     public function delete()
     {
         // Prevent delete of main navigation
         if ($this->id() != 1) {
-
             NavitemModel::deleteAllByColumn('navigation_id', $this->id());
 
             return parent::delete();

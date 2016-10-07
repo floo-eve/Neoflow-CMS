@@ -46,11 +46,17 @@ class Session
         }
 
         $sessionLifetime = $sessionConfig->get('lifetime');
-        if (is_int($sessionLifetime)) {
-            session_set_cookie_params($sessionLifetime);
-        }
+
+        session_set_cookie_params(null, '/', null, false, true);
+        @ini_set('session.gc_maxlifetime', $sessionLifetime);
 
         $result = session_start();
+        if (isset($_SESSION['timeout_idle']) && $_SESSION['timeout_idle'] < time()) {
+            session_destroy();
+            $result = session_start();
+            session_regenerate_id();
+        }
+        $_SESSION['timeout_idle'] = time() + $sessionLifetime;
 
         // Initialize session
         if (!isset($_SESSION[$this->sessionKey]) || !is_array($_SESSION[$this->sessionKey])) {

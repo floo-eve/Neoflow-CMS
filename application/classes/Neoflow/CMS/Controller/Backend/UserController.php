@@ -138,7 +138,7 @@ class UserController extends BackendController
             if ($user && $user->validate() && $user->save()) {
                 $this->setSuccessAlert(translate('Successful updated'));
             } else {
-                throw new Exception('User not found or delete failed (ID: ' . $postData->get('user_id') . ')');
+                throw new Exception('User not found or update failed (ID: ' . $postData->get('user_id') . ')');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
