@@ -48,25 +48,6 @@ class SectionModel extends AbstractEntityModel
     }
 
     /**
-     * Render module view of section to html output.
-     *
-     * @param FrontendView $view
-     *
-     * @return string
-     *
-     * @throws InvalidArgumentException
-     */
-    public function render($view)
-    {
-        $view->set('section_id', $this->id());
-        $module = $this->module()->fetch();
-        if ($module) {
-            return $module->render($view);
-        }
-        throw new InvalidArgumentException('Cannot find module with ID: ' . $this->module_id);
-    }
-
-    /**
      * Save section.
      *
      * @return bool
@@ -85,11 +66,31 @@ class SectionModel extends AbstractEntityModel
             }
         }
 
-        return parent::save();
+        if (parent::save()) {
+            if ($this->isNew) {
+                $module = $this->module()->fetch();
+                return $module->getManager()->add($this);
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
-     * Validate setting.
+     * Delete section
+     *
+     * @return boolean
+     */
+    public function delete()
+    {
+        $module = $this->module()->fetch();
+        if ($module && $module->getManager()->remove($this)) {
+            return parent::delete();
+        }
+    }
+
+    /**
+     * Validate section.
      *
      * @return bool
      */

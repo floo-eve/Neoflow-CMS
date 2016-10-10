@@ -6,8 +6,9 @@ use Neoflow\CMS\Support\Alert\DangerAlert;
 use Neoflow\CMS\Support\Alert\InfoAlert;
 use Neoflow\CMS\Support\Alert\SuccessAlert;
 use Neoflow\CMS\Support\Alert\WarningAlert;
+use Neoflow\Framework\Core\AbstractController;
 
-abstract class AbstractController extends \Neoflow\Framework\Core\AbstractController
+abstract class AbstractController extends AbstractController
 {
 
     /**

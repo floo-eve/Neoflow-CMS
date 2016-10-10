@@ -8,6 +8,7 @@ use Neoflow\Framework\ORM\EntityCollection;
 
 abstract class AbstractView extends \Neoflow\Framework\Core\AbstractView
 {
+
     /**
      * @var ThemeModel
      */
@@ -41,14 +42,14 @@ abstract class AbstractView extends \Neoflow\Framework\Core\AbstractView
         } else {
 
             // Set theme template and view file directories
-            $this->viewFileDirectories[] = $this->getThemePath(DIRECTORY_SEPARATOR.'views');
-            $this->templateFileDirectories[] = $this->getThemePath(DIRECTORY_SEPARATOR.'templates');
+            $this->viewFileDirectories[] = $this->getThemePath(DIRECTORY_SEPARATOR . 'views');
+            $this->templateFileDirectories[] = $this->getThemePath(DIRECTORY_SEPARATOR . 'templates');
 
             // Set template and view file directories of modules
             $modules = $this->app()->get('modules');
             foreach ($modules as $module) {
-                $this->viewFileDirectories[] = $module->getPath(DIRECTORY_SEPARATOR.'views');
-                $this->templateFileDirectories[] = $module->getPath(DIRECTORY_SEPARATOR.'templates');
+                $this->viewFileDirectories[] = $module->getPath(DIRECTORY_SEPARATOR . 'views');
+                $this->templateFileDirectories[] = $module->getPath(DIRECTORY_SEPARATOR . 'templates');
             }
 
             // Store template and view file directories to cache

@@ -80,29 +80,6 @@ class PageModel extends AbstractEntityModel
     }
 
     /**
-     * Render page to view.
-     *
-     * @param FrontendView $view
-     *
-     * @return string
-     */
-    public function renderToView($view)
-    {
-        $view->set('page_title', $this->title);
-
-        $sections = $this->sections()
-            ->orderByAsc('position')
-            ->fetchAll();
-
-        foreach ($sections as $section) {
-            $content = $section->render($view);
-            $view->addContentToBlock($section->block, $content);
-        }
-
-        return $view;
-    }
-
-    /**
      * Save page.
      *
      * @return bool

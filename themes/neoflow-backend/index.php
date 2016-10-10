@@ -23,7 +23,7 @@
         <div id="body-scroll">
             <div id="wrapper">
 
-                <?php if ($view->hasBlock(2)) {
+                <?php if ($view->hasBlock(1)) {
 
                     ?>
 
@@ -32,7 +32,7 @@
 
                         <div class="page-wrapper">
                             <div class="container">
-                                <?= $view->getBlock(2) ?>
+                                <?= $view->getBlock(1) ?>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
 
                                 <?= $view->renderTemplate('page-title') ?>
                                 <?= $view->renderAlert() ?>
-                                <?= $view->getBlock(1) ?>
+                                <?= $view->getBlock(0) ?>
 
                             </div>
                         </div>

@@ -2,11 +2,14 @@
 
 namespace Neoflow\CMS\Controller\Backend;
 
+use InvalidArgumentException;
 use Neoflow\CMS\Controller\BackendController;
+use Neoflow\CMS\Core\AbstractView;
 use Neoflow\CMS\Model\ModuleModel;
 use Neoflow\CMS\Model\PageModel;
 use Neoflow\CMS\Model\SectionModel;
 use Neoflow\CMS\Views\Backend\SectionView;
+use Neoflow\Framework\Core\AbstractView as AbstractView2;
 use Neoflow\Framework\HTTP\Responsing\JsonResponse;
 use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
@@ -20,10 +23,12 @@ class SectionController extends BackendController
 
     /**
      * Constructor.
+     *
+     * @param AbstractView $view
      */
-    public function __construct()
+    public function __construct(AbstractView $view = null)
     {
-        parent::__construct();
+        parent::__construct($view);
 
         // Set title
         $this->view
@@ -144,14 +149,14 @@ class SectionController extends BackendController
                     'page_id' => $postData->get('page_id'),
                     'module_id' => $postData->get('module_id'),
                     'is_active' => $postData->get('is_active'),
-                    'block' => 1,
+                    'block' => 0,
             ));
 
             // Validate and save section
             if ($section->validate() && $section->save()) {
                 $this->setSuccessAlert(translate('successful created'));
             } else {
-                throw new Exception('Create section failed');
+                throw new \Exception('Create section failed');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
@@ -220,10 +225,10 @@ class SectionController extends BackendController
         // Get section or data if validation has failed
         if ($this->service('validation')->hasError()) {
             $data = $this->service('validation')->getData();
-            $section = SectionModel::update($data, $data['section_id']);
+            $this->section = SectionModel::update($data, $data['section_id']);
         } else {
-            $section = SectionModel::findById($args['id']);
-            if (!$section) {
+            $this->section = SectionModel::findById($args['id']);
+            if (!$this->section) {
                 throw new Exception('Section not found (ID: ' . $args['id'] . ')');
             }
         }
@@ -233,8 +238,8 @@ class SectionController extends BackendController
 
         return $this->render('backend/section/edit', array(
                 'section' => $section,
-                'page' => $section->page()->fetch(),
-                'module' => $section->module()->fetch()
+                'page' => $this->page,
+                'module' => $this->module,
         ));
     }
 

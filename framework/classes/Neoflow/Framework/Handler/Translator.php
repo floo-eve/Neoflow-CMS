@@ -45,7 +45,7 @@ class Translator
     /**
      * @var string
      */
-    protected $currentLanguageCode;
+    protected $activeLanguageCode;
 
     /**
      * @var bool
@@ -86,7 +86,7 @@ class Translator
     {
         // Load translation file
         $translationFile = $this->config()
-            ->getPath('/application/i18n/' . $this->currentLanguageCode . '.php');
+            ->getPath('/application/i18n/' . $this->activeLanguageCode . '.php');
         $this->runTranslationFile($translationFile);
 
         // Load fallback translation file
@@ -107,7 +107,7 @@ class Translator
         $request = $this->app()->get('request');
 
         // Set default language code as current
-        $this->currentLanguageCode = $this->getDefaultLanguageCode();
+        $this->activeLanguageCode = $this->getDefaultLanguageCode();
 
         // Get language code from HTTP header
         $httpLanguage = strtolower($request->getHttpLanguage());
@@ -120,27 +120,27 @@ class Translator
 
         // Set current language code
         if ($uriLanguage && in_array($uriLanguage, $this->config()->get('languages'))) {
-            $this->currentLanguageCode = $uriLanguage;
+            $this->activeLanguageCode = $uriLanguage;
         } elseif ($sessionLanguage && in_array($sessionLanguage, $this->config()->get('languages'))) {
-            $this->currentLanguageCode = $sessionLanguage;
+            $this->activeLanguageCode = $sessionLanguage;
         } elseif ($httpLanguage && in_array($httpLanguage, $this->config()->get('languages'))) {
-            $this->currentLanguageCode = $httpLanguage;
+            $this->activeLanguageCode = $httpLanguage;
         }
 
         // Set language code to session
-        $this->session()->set('_language', $this->currentLanguageCode);
+        $this->session()->set('_language', $this->activeLanguageCode);
 
         return $this;
     }
 
     /**
-     * Get current language code.
+     * Get active language code.
      *
      * @return string
      */
     public function getActiveLanguageCode()
     {
-        return $this->currentLanguageCode;
+        return $this->activeLanguageCode;
     }
 
     /**
