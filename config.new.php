@@ -1,4 +1,5 @@
 <?php
+
 return array(
     'url' => 'http://localhost/neoflow-cms',
     'database' => array(

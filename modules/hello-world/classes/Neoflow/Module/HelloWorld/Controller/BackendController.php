@@ -10,8 +10,7 @@ use Neoflow\Framework\Support\Validation\ValidationException;
 use Neoflow\Module\HelloWorld\Model\MessageModel;
 use function translate;
 
-class BackendController extends SectionController
-{
+class BackendController extends SectionController {
 
     /**
      * Index action.
@@ -20,12 +19,11 @@ class BackendController extends SectionController
      *
      * @return Response
      */
-    public function indexAction($args)
-    {
+    public function indexAction($args) {
         $message = MessageModel::findByColumn('section_id', $this->view->get('section_id'));
 
         return $this->render('module/helloworld/backend', array(
-                'message' => $message,
+                    'message' => $message,
         ));
     }
 
@@ -36,12 +34,11 @@ class BackendController extends SectionController
      *
      * @return Response
      */
-    public function blaAction($args)
-    {
+    public function blaAction($args) {
         $message = MessageModel::findByColumn('section_id', $this->view->get('section_id'));
 
         return $this->render('module/helloworld/bla', array(
-                'message' => $message,
+                    'message' => $message,
         ));
     }
 
@@ -54,8 +51,7 @@ class BackendController extends SectionController
      *
      * @throws Exception
      */
-    public function updateAction($args)
-    {
+    public function updateAction($args) {
         try {
 
             // Get post data
@@ -63,8 +59,8 @@ class BackendController extends SectionController
 
             // Get page by id
             $message = MessageModel::update(array(
-                    'message' => $postData->get('message')
-                    ), $postData->get('message_id'));
+                        'message' => $postData->get('message')
+                            ), $postData->get('message_id'));
 
             // Validate and save page
             if ($message && $message->save()) {
@@ -78,4 +74,5 @@ class BackendController extends SectionController
 
         return $this->redirectToRoute('section_edit', array('id' => $message->section_id));
     }
+
 }
