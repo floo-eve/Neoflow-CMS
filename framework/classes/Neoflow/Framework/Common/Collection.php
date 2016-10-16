@@ -95,15 +95,13 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @param callable $callback
      *
-     * @return self
+     * @return array
      *
      * @throws InvalidArgumentException
      */
     public function map($callback) {
         if (is_callable($callback)) {
-            $result = array_map($callback, $this->items);
-
-            return new self($result);
+            return array_map($callback, $this->items);
         }
         throw new InvalidArgumentException('Callback is not callable');
     }
@@ -117,7 +115,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      * @return string
      */
     public function implode($callback, $seperator = ', ') {
-        $result = $this->map($callback)->toArray();
+        $result = $this->map($callback);
 
         return implode($seperator, $result);
     }
