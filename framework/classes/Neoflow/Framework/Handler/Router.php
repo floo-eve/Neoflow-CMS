@@ -2,11 +2,11 @@
 
 namespace Neoflow\Framework\Handler;
 
-use \InvalidArgumentException;
-use \Neoflow\Framework\HTTP\Request;
-use \Neoflow\Framework\HTTP\Responsing\RedirectResponse;
-use \Neoflow\Framework\HTTP\Responsing\Response;
-use \RuntimeException;
+use InvalidArgumentException;
+use Neoflow\CMS\Core\AbstractView;
+use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
+use Neoflow\Framework\HTTP\Responsing\Response;
+use RuntimeException;
 
 class Router
 {
@@ -83,6 +83,8 @@ class Router
      * Add single namespace.
      *
      * @param array $namespace
+     *
+     * @return self
      */
     public function addNamespace($namespace)
     {
@@ -96,7 +98,7 @@ class Router
      *
      * @param string $routesFile
      *
-     * @return \Neoflow\CMS\Handler\Router;
+     * @return self;
      */
     public function runRouteFile($routesFile)
     {
@@ -121,7 +123,7 @@ class Router
         $requestUri = $this->request()->getUri();
 
         // Remove end-slash from URL
-        if (substr($requestUri, -1) === '/') {
+        if (strlen($requestUri) > 1 && substr($requestUri, -1) === '/') {
             $requestUri = rtrim($requestUri, '/');
             return new RedirectResponse($this->config()->getUrl($requestUri));
         }
@@ -152,9 +154,7 @@ class Router
                     $routeUri = str_replace('//', '/', preg_replace($this->routeUriRegexPattern, '', $routeUri));
 
                     // Check if routeUri (regexCode) is matching requestUri
-                    $bla = preg_match($routeUriRegex, $requestUri);
                     if (preg_match($routeUriRegex, $requestUri)) {
-//                        $requestUri = substr($requestUri, strlen($routeUri));
 
                         $requestUriParts = array_values(array_filter(explode('/', $requestUri)));
                         $routeUriParts = array_values(array_filter(explode('/', $route[2])));
@@ -195,7 +195,7 @@ class Router
         if (($uriLanguageCode && !in_array($uriLanguageCode, $languageCodes)) ||
             (count($languageCodes) > 1 && !$uriLanguageCode) ||
             (count($languageCodes) === 1 && $uriLanguageCode)) {
-            $url = $this->generateUrl($routing[0][0], $routing[1]);
+            $url = $this->generateUrl($routing[0][0], array_merge($routing[1], $_GET));
             return new RedirectResponse($url);
         }
 
@@ -227,12 +227,13 @@ class Router
      *
      * @param string $routeKey
      * @param array $args
+     * @param AbstractView $view
      * @return Response
      */
-    public function routeByKey($routeKey, array $args)
+    public function routeByKey($routeKey, array $args, AbstractView $view = null)
     {
         $route = $this->getRouteByKey($routeKey);
-        return $this->route($route, $args);
+        return $this->route($route, $args, $view);
     }
 
     /**
@@ -240,12 +241,12 @@ class Router
      *
      * @param array $route
      * @param array $args
-     *
+     * @param AbstractView $view
      * @throws RuntimeException
      *
      * @return Response
      */
-    public function route(array $route, array $args)
+    public function route(array $route, array $args, AbstractView $view = null)
     {
         $this->currentRouting = array('route' => $route, 'args' => $args);
 
@@ -258,13 +259,14 @@ class Router
             $controllerClass = $namespace . $controllerClass;
 
             if (class_exists($controllerClass)) {
-                $controller = new $controllerClass($this->app());
+                $controller = new $controllerClass($view);
                 if (method_exists($controller, $actionMethod)) {
                     $response = $controller->preHook($args);
                     if (!$response) {
                         $response = $controller->$actionMethod($args);
+                        $response = $controller->postHook($response, $args);
                     }
-                    return $controller->postHook($response, $args);
+                    return $response;
                 }
             }
         }
@@ -339,6 +341,11 @@ class Router
                             unset($args[$routeUriArgs[1][$i]]);
                         }
                     }
+                }
+
+                if (isset($args['slug'])) {
+                    $routeUri .= $args['slug'];
+                    unset($args['slug']);
                 }
 
                 if (count($args)) {

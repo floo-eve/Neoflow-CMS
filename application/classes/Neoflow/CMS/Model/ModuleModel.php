@@ -2,7 +2,8 @@
 
 namespace Neoflow\CMS\Model;
 
-use Neoflow\CMS\Handler\Config;
+use Neoflow\CMS\Core\AbstractView;
+use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Framework\ORM\AbstractEntityModel;
 use Neoflow\Framework\ORM\EntityRepository;
 
@@ -22,7 +23,7 @@ class ModuleModel extends AbstractEntityModel
     /**
      * @var array
      */
-    public static $properties = ['module_id', 'name', 'folder', 'route', 'title'];
+    public static $properties = ['module_id', 'name', 'folder', 'route', 'title', 'frontend_route', 'backend_route', 'module_manager'];
 
     /**
      * Get repository to fetch section.
@@ -35,16 +36,17 @@ class ModuleModel extends AbstractEntityModel
     }
 
     /**
-     * Render module frontend.
-     *
-     * @return string
+     * Get module manager
+     * @return \Neoflow\CMS\Support\Module\ManagerInterface
+     * @throws \Exception
      */
-    public function render($view)
+    public function getManager()
     {
-        $moduleFilePath = $this->getPath('/frontend.php');
-
-        return $view->renderFile($moduleFilePath, array(
-                'app' => $this->app(),));
+        $managerClass = $this->manager_class;
+        if ($managerClass && class_exists($managerClass)) {
+            return new $managerClass();
+        }
+        throw new \Exception('Module manager not found: ' . $managerClass);
     }
 
     /**

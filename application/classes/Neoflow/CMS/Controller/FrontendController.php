@@ -2,9 +2,10 @@
 
 namespace Neoflow\CMS\Controller;
 
-use Neoflow\CMS\Mapper\PageMapper;
+use InvalidArgumentException;
+use Neoflow\CMS\Core\AbstractController;
+use Neoflow\CMS\Model\PageModel;
 use Neoflow\CMS\Views\FrontendView;
-use Neoflow\Framework\Core\AbstractController;
 use Neoflow\Framework\HTTP\Responsing\Response;
 
 class FrontendController extends AbstractController
@@ -17,51 +18,68 @@ class FrontendController extends AbstractController
      */
     public function indexAction($args)
     {
-
         $page = false;
-
         $parentPages = array();
-
-
-        $pageMapper = new PageMapper();
-
-        $pageOrm = $pageMapper->getOrm();
-
-
-        if (isset($args['slug'])) {
+        if (isset($args['slug']) && count($args['slug']) > 0) {
 
             $slugParts = array_values(array_filter(explode('/', $args['slug'])));
 
             foreach ($slugParts as $slugPart) {
-
                 if ($page) {
-
                     $page->setReadonly();
-
                     $parentPages[] = $page;
-
-                    $pageOrm = $page->childPages();
+                    $page = $page
+                        ->childPages()
+                        ->where('language_id', '=', $this->view->getActiveLanguage()->id())
+                        ->where('slug', '=', $slugPart)
+                        ->fetch();
+                } else {
+                    $page = PageModel::repo()
+                        ->where('language_id', '=', $this->view->getActiveLanguage()->id())
+                        ->where('slug', '=', $slugPart)
+                        ->fetch();
                 }
-
-                $page = $pageOrm->where('slug', '=', $slugPart)->fetch();
+                if (!$page) {
+                    break;
+                }
             }
         } else {
-            $page = $pageOrm->fetch();
-
-            $page->setReadonly();
+            $page = PageModel::repo()
+                ->where('language_id', '=', $this->view->getActiveLanguage()->id())
+                ->fetch();
         }
 
         if (!$page) {
             return $this->notFoundAction($args);
         }
 
-        $this->app()
-            ->set('page', $page)
-            ->set('parentPages', $parentPages);
+        return $this
+                ->renderPage($page)
+                ->render('index');
+    }
 
-        $this->view = $page->renderToView($this->view);
+    protected function renderPage($page)
+    {
+        $this->view->set('page_title', $page->title);
 
-        return $this->render('index');
+        $sections = $page->sections()
+            ->orderByAsc('position')
+            ->fetchAll();
+
+        foreach ($sections as $section) {
+            $module = $section->module()->fetch();
+            if ($module) {
+                // Execute frontend controller of module
+                $view = new FrontendView();
+                $view->set('section_id', $section->id());
+                $this->router()->routeByKey($module->frontend_route, array('section_id' => $section->id()), $view);
+                $this->view->addContentToBlock($section->block, $view->getBlock(0));
+            } else {
+                throw new InvalidArgumentException('Cannot find module with ID: ' . $this->module_id);
+            }
+        }
+
+        return $this;
     }
 
     /**
@@ -71,8 +89,7 @@ class FrontendController extends AbstractController
      */
     public function notFoundAction($args)
     {
-        return $this->render('error/notFound')
-                ->setStatusCode(404);
+        return $this->render('error/notFound')->setStatusCode(404);
     }
 
     /**

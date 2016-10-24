@@ -1,4 +1,4 @@
-<?php $view->startBlock(2) ?>
+<?php $view->startBlock(1) ?>
 
 <div class="row">
     <div class="col-sm-6 col-lg-4">

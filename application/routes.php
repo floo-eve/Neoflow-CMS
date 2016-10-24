@@ -99,6 +99,7 @@ $this->addRoutes(array(
 $this->addRoutes(array(
     array('frontend_error', 'any', false, 'Frontend@error'),
     array('frontend_not_found', 'any', false, 'Frontend@notFound'),
+    array('frontend_index', 'any', '/', 'Frontend@index'),
 ));
 
 

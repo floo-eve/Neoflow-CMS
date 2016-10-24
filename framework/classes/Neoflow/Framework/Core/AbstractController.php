@@ -18,16 +18,27 @@ abstract class AbstractController
     protected $view;
 
     /**
+     * @var Response
+     */
+    protected $response;
+
+    /**
      * App trait.
      */
     use \Neoflow\Framework\AppTrait;
 
     /**
      * Constructor.
+     *
+     * @param AbstractView $view
      */
-    public function __construct()
+    public function __construct(AbstractView $view = null)
     {
-        $this->initView();
+        if ($view) {
+            $this->view = $view;
+        } else {
+            $this->initView();
+        }
     }
 
     /**
@@ -99,6 +110,16 @@ abstract class AbstractController
     public function redirect($url, $statusCode = 302)
     {
         return new RedirectResponse($url, $statusCode);
+    }
+
+    /**
+     * Get response
+     *
+     * @return Response
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 
     /**

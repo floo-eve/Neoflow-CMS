@@ -12,11 +12,6 @@
         }
     </style>
     <body>
-        <?= $this->getBlock(1) ?>
-
-        <?php if ($this->hasBlock(2)) { ?>
-            <hr />
-            <?= $this->getBlock(2) ?>
-        <?php } ?>
+        <?= $this->getBlock(0) ?>
     </body>
 </html>

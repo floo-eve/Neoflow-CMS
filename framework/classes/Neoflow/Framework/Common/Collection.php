@@ -9,8 +9,7 @@ use InvalidArgumentException;
 use IteratorAggregate;
 use JsonSerializable;
 
-class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSerializable
-{
+class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSerializable {
 
     /**
      * The items contained in the collection.
@@ -24,8 +23,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @param array $items
      */
-    public function __construct(array $items = array())
-    {
+    public function __construct(array $items = array()) {
         $this->items = $items;
     }
 
@@ -38,8 +36,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @throws InvalidArgumentException
      */
-    public function each($callback)
-    {
+    public function each($callback) {
         if (is_callable($callback)) {
             array_walk_recursive($this->items, $callback);
             return $this;
@@ -55,11 +52,10 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @return self
      */
-    public function where($property, $value)
-    {
+    public function where($property, $value) {
         return $this->filter(function ($item) use ($property, $value) {
-                return $item->{$property} == $value;
-            });
+                    return $item->{$property} == $value;
+                });
     }
 
     /**
@@ -70,11 +66,10 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @return self
      */
-    public function whereNot($property, $value)
-    {
+    public function whereNot($property, $value) {
         return $this->filter(function ($item) use ($property, $value) {
-                return $item->{$property} != $value;
-            });
+                    return $item->{$property} != $value;
+                });
     }
 
     /**
@@ -86,8 +81,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @throws InvalidArgumentException
      */
-    public function filter($callback)
-    {
+    public function filter($callback) {
         if (is_callable($callback)) {
             $result = array_filter($this->items, $callback);
 
@@ -101,16 +95,13 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @param callable $callback
      *
-     * @return self
+     * @return array
      *
      * @throws InvalidArgumentException
      */
-    public function map($callback)
-    {
+    public function map($callback) {
         if (is_callable($callback)) {
-            $result = array_map($callback, $this->items);
-
-            return new self($result);
+            return array_map($callback, $this->items);
         }
         throw new InvalidArgumentException('Callback is not callable');
     }
@@ -123,9 +114,8 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @return string
      */
-    public function implode($callback, $seperator = ', ')
-    {
-        $result = $this->map($callback)->toArray();
+    public function implode($callback, $seperator = ', ') {
+        $result = $this->map($callback);
 
         return implode($seperator, $result);
     }
@@ -135,8 +125,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @return mixed
      */
-    public function first()
-    {
+    public function first() {
         return reset($this->items);
     }
 
@@ -145,8 +134,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @return int
      */
-    public function count()
-    {
+    public function count() {
         return count($this->items);
     }
 
@@ -155,8 +143,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @return array
      */
-    public function toArray()
-    {
+    public function toArray() {
         return $this->items;
     }
 
@@ -168,8 +155,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @return string
      */
-    public function toJson($options = 0, $depth = 512)
-    {
+    public function toJson($options = 0, $depth = 512) {
         return json_encode($this->items, $options, $depth);
     }
 
@@ -178,8 +164,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @return ArrayIterator
      */
-    public function getIterator()
-    {
+    public function getIterator() {
         return new ArrayIterator($this->items);
     }
 
@@ -190,8 +175,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @return bool
      */
-    public function offsetExists($offset)
-    {
+    public function offsetExists($offset) {
         return array_key_exists($offset, $this->items);
     }
 
@@ -202,8 +186,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @return mixed
      */
-    public function offsetGet($offset)
-    {
+    public function offsetGet($offset) {
         return $this->items[$offset];
     }
 
@@ -213,8 +196,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      * @param mixed $offset
      * @param mixed $item
      */
-    public function offsetSet($offset, $item)
-    {
+    public function offsetSet($offset, $item) {
         if (is_null($offset)) {
             $this->items[] = $item;
         } else {
@@ -227,8 +209,7 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @param string $offset
      */
-    public function offsetUnset($offset)
-    {
+    public function offsetUnset($offset) {
         unset($this->items[$offset]);
     }
 
@@ -237,8 +218,37 @@ class Collection implements IteratorAggregate, Countable, ArrayAccess, JsonSeria
      *
      * @return array
      */
-    public function jsonSerialize()
-    {
+    public function jsonSerialize() {
         return $this->items;
     }
+
+    /**
+     * Sort entities by entity property
+     * @param string $property
+     * @param string $order
+     * @return self
+     */
+    public function sort($property, $order = 'ASC') {
+        usort($this->entities, function($a, $b) use($property) {
+            return strcmp($a->{$property}, $b->{$property});
+        });
+        if ($order === 'DESC') {
+            $this->items = array_reverse($this->items);
+        }
+        return $this;
+    }
+
+    /**
+     * Extract a slice of the collection items
+     * @param int $length
+     * @param int $offset
+     * @return self
+     */
+    public function slice($length, $offset = 0) {
+        if (is_int($length) && $length > 0) {
+            $this->items = array_slice($this->items, $offset, $length);
+        }
+        return $this;
+    }
+
 }
