@@ -5,8 +5,7 @@ namespace Neoflow\CMS\Model;
 use Neoflow\Framework\ORM\AbstractEntityModel;
 use Neoflow\Framework\ORM\EntityRepository;
 
-class NavitemModel extends AbstractEntityModel
-{
+class NavitemModel extends AbstractEntityModel {
 
     /**
      * @var string
@@ -30,8 +29,7 @@ class NavitemModel extends AbstractEntityModel
      *
      * @return EntityRepository
      */
-    public function childNavitems()
-    {
+    public function childNavitems() {
         return $this->hasMany('\\Neoflow\\CMS\\Model\\NavitemModel', 'parent_navitem_id');
     }
 
@@ -40,8 +38,7 @@ class NavitemModel extends AbstractEntityModel
      *
      * @return EntityRepository
      */
-    public function parentNavitem()
-    {
+    public function parentNavitem() {
         return $this->belongsTo('\\Neoflow\\CMS\\Model\\NavitemModel', 'parent_navitem_id');
     }
 
@@ -50,8 +47,7 @@ class NavitemModel extends AbstractEntityModel
      *
      * @return EntityRepository
      */
-    public function language()
-    {
+    public function language() {
         return $this->belongsTo('\\Neoflow\\CMS\\Model\\LanguageModel', 'language_id');
     }
 
@@ -60,8 +56,7 @@ class NavitemModel extends AbstractEntityModel
      *
      * @return EntityRepository
      */
-    public function navigation()
-    {
+    public function navigation() {
         return $this->belongsTo('\\Neoflow\\CMS\\Model\\NavigationModel', 'navigation_id');
     }
 
@@ -70,8 +65,7 @@ class NavitemModel extends AbstractEntityModel
      *
      * @return EntityRepository
      */
-    public function page()
-    {
+    public function page() {
         return $this->belongsTo('\\Neoflow\\CMS\\Model\\PageModel', 'page_id');
     }
 
@@ -80,8 +74,7 @@ class NavitemModel extends AbstractEntityModel
      *
      * @return bool
      */
-    public function save()
-    {
+    public function save() {
         if (!$this->title) {
             $page = $this->page()->fetch();
             $this->title = $page->title;
@@ -91,9 +84,9 @@ class NavitemModel extends AbstractEntityModel
             $this->position = 1;
             $navigation = $this->navigation()->fetch();
             $lastNavitem = $navigation->navitems()
-                ->where('parent_navitem_id', '=', $this->parent_navitem_id)
-                ->orderByDesc('position')
-                ->fetch();
+                    ->where('parent_navitem_id', '=', $this->parent_navitem_id)
+                    ->orderByDesc('position')
+                    ->fetch();
 
             if ($lastNavitem) {
                 $this->position = $lastNavitem->position + 1;
@@ -108,8 +101,7 @@ class NavitemModel extends AbstractEntityModel
      *
      * @return bool
      */
-    public function delete()
-    {
+    public function delete() {
         if ($this->navigation_id === 1) {
             $page = $this->page()->fetch();
             if ($page) {
@@ -132,27 +124,26 @@ class NavitemModel extends AbstractEntityModel
      *
      * @return bool
      */
-    public function validate()
-    {
+    public function validate() {
         $validator = new \Neoflow\Framework\Support\Validation\Validator($this->data);
 
         $validator
-            ->callback(function ($parent_navitem_id, $navitem) {
+                ->callback(function ($parent_navitem_id, $navitem) {
 
-                $forbiddenNavitemIds = $navitem->childNavitems()
-                    ->orderByAsc('position')
-                    ->fetchAll()
-                    ->map(function ($navitem) {
+                    $forbiddenNavitemIds = $navitem->childNavitems()
+                            ->orderByAsc('position')
+                            ->fetchAll()
+                            ->map(function ($navitem) {
                         return $navitem->id();
-                    })->toArray();
+                    });
 
-                if ($navitem->id()) {
-                    $forbiddenNavitemIds[] = $navitem->id();
-                }
+                    if ($navitem->id()) {
+                        $forbiddenNavitemIds[] = $navitem->id();
+                    }
 
-                return !in_array($parent_navitem_id, $forbiddenNavitemIds);
-            }, 'The navigation item or child items cannot be the parent item', array($this))
-            ->set('parent_navitem_id', 'Top navitem');
+                    return !in_array($parent_navitem_id, $forbiddenNavitemIds);
+                }, 'The navigation item or child items cannot be the parent item', array($this))
+                ->set('parent_navitem_id', 'Top navitem');
 
         return $validator->validate();
     }
@@ -162,8 +153,7 @@ class NavitemModel extends AbstractEntityModel
      *
      * @return self
      */
-    public function toggleVisibility()
-    {
+    public function toggleVisibility() {
         if ($this->is_visible) {
             $this->is_visible = false;
         } else {
@@ -171,4 +161,5 @@ class NavitemModel extends AbstractEntityModel
         }
         return $this;
     }
+
 }

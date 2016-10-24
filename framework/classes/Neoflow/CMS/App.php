@@ -11,16 +11,14 @@ use \Neoflow\CMS\Handler\Translator;
 use \Neoflow\CMS\Model\SettingModel;
 use \Neoflow\CMS\Model\ModuleModel;
 
-class App extends \Neoflow\Framework\App
-{
+class App extends \Neoflow\Framework\App {
 
     /**
      * Initialize app.
      *
      * @param string $path
      */
-    protected function initialize($path)
-    {
+    protected function initialize($path) {
         parent::initialize($path);
 
         $modules = ModuleModel::findAll();
@@ -44,8 +42,7 @@ class App extends \Neoflow\Framework\App
      *
      * @throws InvalidArgumentException
      */
-    protected function setConfig($path)
-    {
+    protected function setConfig($path) {
         $configFilePath = $path . '/config.php';
 
         if (!is_file($configFilePath)) {
@@ -62,16 +59,14 @@ class App extends \Neoflow\Framework\App
     /**
      * Create and set router.
      */
-    protected function setRouter()
-    {
+    protected function setRouter() {
         $this->set('router', new Router($this));
     }
 
     /**
      * Create and set translator.
      */
-    protected function setTranslator()
-    {
+    protected function setTranslator() {
         $this->set('translator', new Translator($this));
     }
 
@@ -86,8 +81,7 @@ class App extends \Neoflow\Framework\App
      *
      * @throws ErrorException
      */
-    public function errorHandler($errno, $errstr, $errfile, $errline)
-    {
+    public function errorHandler($errno, $errstr, $errfile, $errline) {
         $ex = new ErrorException($errstr, 0, $errno, $errfile, $errline);
         parent::exceptionHandler($ex);
     }
@@ -97,8 +91,7 @@ class App extends \Neoflow\Framework\App
      *
      * @param Exception $ex
      */
-    public function exceptionHandler($ex)
-    {
+    public function exceptionHandler($ex) {
         while (ob_get_level() > 0) {
             ob_end_clean();
         }
@@ -114,4 +107,5 @@ class App extends \Neoflow\Framework\App
             parent::exceptionHandler($ex);
         }
     }
+
 }

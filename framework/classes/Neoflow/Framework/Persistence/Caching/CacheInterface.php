@@ -2,8 +2,7 @@
 
 namespace Neoflow\Framework\Persistence\Caching;
 
-interface CacheInterface
-{
+interface CacheInterface {
 
     /**
      * Fetch cache value.
@@ -12,7 +11,7 @@ interface CacheInterface
      *
      * @return mixed
      */
-    abstract public function fetch($key);
+    public function fetch($key);
 
     /**
      * Store cache value.
@@ -24,7 +23,7 @@ interface CacheInterface
      *
      * @return bool
      */
-    abstract public function store($key, $data, $ttl, array $tags);
+    public function store($key, $data, $ttl, array $tags);
 
     /**
      * Delete cache value.
@@ -33,7 +32,7 @@ interface CacheInterface
      *
      * @return bool
      */
-    abstract public function delete($key);
+    public function delete($key);
 
     /**
      * Check wether cache value exists.
@@ -42,12 +41,12 @@ interface CacheInterface
      *
      * @return bool
      */
-    abstract public function exists($key);
+    public function exists($key);
 
     /**
      * Clear complete cache.
      *
      * @return bool
      */
-    abstract public function clear();
+    public function clear();
 }

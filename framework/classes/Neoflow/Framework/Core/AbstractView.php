@@ -8,8 +8,7 @@ use Neoflow\CMS\Core\View;
 use Neoflow\Framework\Common\Container;
 use Neoflow\Framework\Persistence\Caching\AbstractCache;
 
-abstract class AbstractView
-{
+abstract class AbstractView {
 
     /**
      * App trait.
@@ -57,8 +56,7 @@ abstract class AbstractView
     /**
      * Constructor.
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->data = new Container();
 
         $this->viewFileDirectories[] = $this->config()->getPath(DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'views');
@@ -77,8 +75,7 @@ abstract class AbstractView
      *
      * @throw InvalidArgumentException
      */
-    protected function addResource($url, $type, $key = 'default', $isRelative = true)
-    {
+    protected function addResource($url, $type, $key = 'default', $isRelative = true) {
         if ($type === 'stylesheets' || $type === 'scripts') {
             if (!isset($this->resources[$type][$key])) {
                 $this->resources[$type][$key] = array();
@@ -103,8 +100,7 @@ abstract class AbstractView
      *
      * @return self
      */
-    protected function addResources(array $urls, $type, $key = 'default', $isRelative = true)
-    {
+    protected function addResources(array $urls, $type, $key = 'default', $isRelative = true) {
         foreach ($urls as $url) {
             $this->addResource($url, $type, $key, $isRelative);
         }
@@ -121,8 +117,7 @@ abstract class AbstractView
      *
      * @return self
      */
-    public function addStylesheet($url, $key = 'default', $isRelative = true)
-    {
+    public function addStylesheet($url, $key = 'default', $isRelative = true) {
         return $this->addResource($url, 'stylesheets', $key, $isRelative);
     }
 
@@ -135,8 +130,7 @@ abstract class AbstractView
      *
      * @return self
      */
-    public function addStylesheets($urls, $key = 'default', $isRelative = true)
-    {
+    public function addStylesheets($urls, $key = 'default', $isRelative = true) {
         return $this->addResources($urls, 'stylesheets', $key, $isRelative);
     }
 
@@ -149,8 +143,7 @@ abstract class AbstractView
      *
      * @return self
      */
-    public function addScript($url, $key = 'default', $isRelative = true)
-    {
+    public function addScript($url, $key = 'default', $isRelative = true) {
         return $this->addResource($url, 'scripts', $key, $isRelative);
     }
 
@@ -163,8 +156,7 @@ abstract class AbstractView
      *
      * @return self
      */
-    public function addScripts($urls, $key = 'default', $isRelative = true)
-    {
+    public function addScripts($urls, $key = 'default', $isRelative = true) {
         return $this->addResources($urls, 'scripts', $key, $isRelative);
     }
 
@@ -179,8 +171,7 @@ abstract class AbstractView
      *
      * @throws InvalidArgumentException
      */
-    protected function renderResources($type, $template, $key = 'default')
-    {
+    protected function renderResources($type, $template, $key = 'default') {
         $output = '';
 
         $urls = $this->getResourceUrls($type, $key);
@@ -201,8 +192,7 @@ abstract class AbstractView
      *
      * @throws InvalidArgumentException
      */
-    protected function getResourceUrls($type, $key = 'default')
-    {
+    protected function getResourceUrls($type, $key = 'default') {
         if ($type === 'scripts' || $type === 'stylesheets') {
             if (isset($this->resources[$type][$key])) {
                 return $this->resources[$type][$key];
@@ -220,8 +210,7 @@ abstract class AbstractView
      *
      * @return array
      */
-    public function getScriptUrls($key = 'default')
-    {
+    public function getScriptUrls($key = 'default') {
         return $this->getResourceUrls('scripts', $key);
     }
 
@@ -232,8 +221,7 @@ abstract class AbstractView
      *
      * @return array
      */
-    public function getStylesheetUrls($key = 'default')
-    {
+    public function getStylesheetUrls($key = 'default') {
         return $this->getResourceUrls('stylesheets', $key);
     }
 
@@ -244,8 +232,7 @@ abstract class AbstractView
      *
      * @return string
      */
-    public function renderScripts($key = 'default')
-    {
+    public function renderScripts($key = 'default') {
         return $this->renderResources('scripts', '<script src="%s"></script>', $key);
     }
 
@@ -256,8 +243,7 @@ abstract class AbstractView
      *
      * @return string
      */
-    public function renderStylesheets($key = 'default')
-    {
+    public function renderStylesheets($key = 'default') {
         return $this->renderResources('stylesheets', '<link href="%s" rel="stylesheet" type="text/css" />', $key);
     }
 
@@ -269,8 +255,7 @@ abstract class AbstractView
      *
      * @return mixed
      */
-    public function get($key, $default = null)
-    {
+    public function get($key, $default = null) {
         return $this->data->get($key, $default);
     }
 
@@ -281,8 +266,7 @@ abstract class AbstractView
      *
      * @return string
      */
-    public function getThemeUrl($uri = '')
-    {
+    public function getThemeUrl($uri = '') {
         return $this->config()->getUrl('/theme/' . $uri);
     }
 
@@ -293,8 +277,7 @@ abstract class AbstractView
      *
      * @return string
      */
-    protected function getThemePath($uri = '')
-    {
+    protected function getThemePath($uri = '') {
         return $this->config()->getPath('/theme/' . $uri);
     }
 
@@ -307,8 +290,7 @@ abstract class AbstractView
      *
      * @return View
      */
-    public function set($key, $value, $translate = false)
-    {
+    public function set($key, $value, $translate = false) {
         if ($translate) {
             $value = translate($value);
         }
@@ -324,8 +306,7 @@ abstract class AbstractView
      *
      * @throws Exception
      */
-    public function startBlock($id)
-    {
+    public function startBlock($id) {
         if (in_array($id, $this->openBlocks)) {
             throw new Exception('A block already started with this ID: ' . $id);
         }
@@ -340,8 +321,7 @@ abstract class AbstractView
      *
      * @throws Exception
      */
-    public function stopBlock()
-    {
+    public function stopBlock() {
         if (count($this->openBlocks) === 0) {
             throw new Exception('No block started.');
         }
@@ -360,8 +340,7 @@ abstract class AbstractView
      *
      * @return string
      */
-    public function getBlock($id, $default = '')
-    {
+    public function getBlock($id, $default = '') {
         if ($this->hasBlock($id)) {
             return $this->blocks[$id];
         }
@@ -376,8 +355,7 @@ abstract class AbstractView
      *
      * @return bool
      */
-    public function hasBlock($id)
-    {
+    public function hasBlock($id) {
         return isset($this->blocks[$id]);
     }
 
@@ -389,8 +367,7 @@ abstract class AbstractView
      *
      * @return View
      */
-    public function setBlock($id, $content)
-    {
+    public function setBlock($id, $content) {
         $this->blocks[$id] = $content;
 
         return $this;
@@ -404,8 +381,7 @@ abstract class AbstractView
      *
      * @return View
      */
-    public function addContentToBlock($id, $content)
-    {
+    public function addContentToBlock($id, $content) {
         if (isset($this->blocks[$id])) {
             $this->blocks[$id] .= $content;
         } else {
@@ -426,8 +402,7 @@ abstract class AbstractView
      *
      * @throws Exception
      */
-    public function renderView($viewFile, $parameters = array(), $strict = false)
-    {
+    public function renderView($viewFile, $parameters = array(), $strict = false) {
         $this->addParameters($parameters);
 
         $viewFilePath = $this->getFilePath($viewFile, sha1('_view_' . $viewFile), $this->viewFileDirectories);
@@ -453,8 +428,7 @@ abstract class AbstractView
      *
      * @throws Exception
      */
-    public function renderTemplate($templateFile, $parameters = array())
-    {
+    public function renderTemplate($templateFile, $parameters = array()) {
         $templateFilePath = $this->getFilePath($templateFile, sha1('_template_' . $templateFile), $this->templateFileDirectories);
         if ($templateFilePath) {
             return $this->renderFile($templateFilePath, $parameters);
@@ -471,8 +445,7 @@ abstract class AbstractView
      *
      * @return bool
      */
-    protected function getFilePath($file, $cacheKey, $directories)
-    {
+    protected function getFilePath($file, $cacheKey, $directories) {
         if ($this->getCache()->exists($cacheKey)) {
             return $this->getCache()->fetch($cacheKey);
         } else {
@@ -503,8 +476,7 @@ abstract class AbstractView
      *
      * @throws Exception
      */
-    public function renderTheme($themeFile = 'index')
-    {
+    public function renderTheme($themeFile = 'index') {
         $themeFiles = array(
             $this->getThemePath(DIRECTORY_SEPARATOR . $themeFile),
             $this->getThemePath(DIRECTORY_SEPARATOR . $themeFile . '.php'),
@@ -526,8 +498,7 @@ abstract class AbstractView
      *
      * @param array $parameters
      */
-    protected function addParameters(array $parameters)
-    {
+    protected function addParameters(array $parameters) {
         $this->parameters = array_merge($this->parameters, $parameters);
     }
 
@@ -541,8 +512,7 @@ abstract class AbstractView
      *
      * @throws InvalidArgumentException
      */
-    public function renderFile($file, array $parameters = array())
-    {
+    public function renderFile($file, array $parameters = array()) {
         if (is_file($file)) {
             $parameters['view'] = $this;
 
@@ -578,8 +548,7 @@ abstract class AbstractView
      *
      * @return mixed
      */
-    public function isCurrentRoute($routeKeys, $returnValue = true, $returnFailedValue = false)
-    {
+    public function isCurrentRoute($routeKeys, $returnValue = true, $returnFailedValue = false) {
         $currentRoute = $this->router()->getCurrentRouting('route');
         $currentRouteKey = $currentRoute[0];
 
@@ -601,8 +570,8 @@ abstract class AbstractView
      *
      * @return AbstractCache
      */
-    protected function getCache()
-    {
+    protected function getCache() {
         return $this->app()->get('cache');
     }
+
 }

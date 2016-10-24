@@ -56,7 +56,7 @@ CREATE TABLE `modules` (
   `backend_route` varchar(50) NOT NULL,
   `frontend_route` varchar(100) NOT NULL,
   `manager_class` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `modules`
@@ -152,7 +152,7 @@ CREATE TABLE `pages` (
   `language_id` int(11) DEFAULT NULL,
   `is_restricted` tinyint(1) NOT NULL DEFAULT '0',
   `is_active` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `pages`
@@ -205,7 +205,7 @@ CREATE TABLE `roles` (
   `role_id` int(11) NOT NULL,
   `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `description` varchar(150) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `roles`
@@ -259,7 +259,7 @@ CREATE TABLE `sections` (
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `position` int(11) NOT NULL,
   `block` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `sections`
@@ -283,7 +283,7 @@ CREATE TABLE `settings` (
   `theme_id` int(11) NOT NULL,
   `backend_theme_id` int(11) NOT NULL,
   `language_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `settings`
@@ -303,7 +303,7 @@ CREATE TABLE `themes` (
   `title` varchar(50) NOT NULL,
   `folder` varchar(50) NOT NULL,
   `type` enum('frontend','backend') NOT NULL DEFAULT 'frontend'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='	';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `themes`
@@ -328,15 +328,14 @@ CREATE TABLE `users` (
   `reset_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `reseted_when` int(11) DEFAULT NULL,
   `role_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `users`
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `lastname`, `firstname`, `reset_key`, `reseted_when`, `role_id`) VALUES
-(1, 'john.doe@neoflow.ch', sha1('1234'), 'Doe', 'John', NULL, NULL, 1),
-(2, 'jonathan.nessier@outlook.com', sha1('1234'), 'Nessier', 'Jonathan', NULL, NULL, 4);
+(1, 'john.doe@neoflow.ch', sha1('123456'), 'Doe', 'John', NULL, NULL, 1);
 
 --
 -- Indizes der exportierten Tabellen
@@ -503,7 +502,7 @@ ALTER TABLE `themes`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints der exportierten Tabellen
 --

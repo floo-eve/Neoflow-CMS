@@ -7,8 +7,7 @@ use Neoflow\Framework\ORM\EntityRepository;
 use Neoflow\Framework\Support\Validation\ValidationException;
 use Neoflow\Framework\Support\Validation\Validator;
 
-class RoleModel extends AbstractEntityModel
-{
+class RoleModel extends AbstractEntityModel {
 
     /**
      * @var string
@@ -30,8 +29,7 @@ class RoleModel extends AbstractEntityModel
      *
      * @return EntityRepository
      */
-    public function permissions()
-    {
+    public function permissions() {
         return $this->hasManyThrough('\\Neoflow\\CMS\\Model\\PermissionModel', '\\Neoflow\\CMS\\Model\\RolePermissionModel', 'role_id', 'permission_id');
     }
 
@@ -40,8 +38,7 @@ class RoleModel extends AbstractEntityModel
      *
      * @return EntityRepository
      */
-    public function users()
-    {
+    public function users() {
         return $this->hasMany('\\Neoflow\\CMS\\Model\\UserModel', 'role_id');
     }
 
@@ -50,30 +47,29 @@ class RoleModel extends AbstractEntityModel
      *
      * @return bool
      */
-    public function validate()
-    {
+    public function validate() {
         $validator = new Validator($this->data);
 
         $validator
-            ->required()
-            ->betweenLength(3, 20)
-            ->callback(function ($title, $role) {
-                $roles = RoleModel::repo()
-                    ->where('title', '=', $title)
-                    ->where('role_id', '!=', $role->id())
-                    ->fetchAll();
+                ->required()
+                ->betweenLength(3, 20)
+                ->callback(function ($title, $role) {
+                    $roles = RoleModel::repo()
+                            ->where('title', '=', $title)
+                            ->where('role_id', '!=', $role->id())
+                            ->fetchAll();
 
-                return $roles->count() === 0;
-            }, '{0} has to be unique', array($this))
-            ->set('title', 'Title');
-
-        $validator
-            ->maxLength(150)
-            ->set('description', 'Description');
+                    return $roles->count() === 0;
+                }, '{0} has to be unique', array($this))
+                ->set('title', 'Title');
 
         $validator
-            ->required()
-            ->set('role_id', 'Role');
+                ->maxLength(150)
+                ->set('description', 'Description');
+
+        $validator
+                ->required()
+                ->set('role_id', 'Role');
 
         return $validator->validate();
     }
@@ -83,8 +79,7 @@ class RoleModel extends AbstractEntityModel
      *
      * @return bool
      */
-    public function save()
-    {
+    public function save() {
         if ($this->id() !== 1 && parent::save()) {
 
             // Delete old role permissions
@@ -108,8 +103,7 @@ class RoleModel extends AbstractEntityModel
      *
      * @return bool
      */
-    public function delete()
-    {
+    public function delete() {
         if ($this->id() !== 1) {
             if (!$this->users()->fetchAll()->count()) {
 
@@ -133,16 +127,16 @@ class RoleModel extends AbstractEntityModel
      *
      * @return mixed
      */
-    public function __get($name)
-    {
+    public function __get($name) {
         $value = parent::__get($name);
 
         if (!$value && $name === 'permission_ids') {
-            $value = $this->permissions()->fetchAll()->map('permission_id')->toArray();
+            $value = $this->permissions()->fetchAll()->map('permission_id');
 
             $this->set('permission_ids', $value);
         }
 
         return $value;
     }
+
 }

@@ -5,23 +5,21 @@ namespace Neoflow\CMS\Views\Backend;
 use Neoflow\CMS\Views\BackendView;
 use Neoflow\Framework\ORM\EntityCollection;
 
-class NavitemView extends BackendView
-{
+class NavitemView extends BackendView {
 
-    public function renderNavitemOptions(EntityCollection $navitems, $level = 0, array $selected = array(), array $disabled = array(), $property = 'navitem_id')
-    {
+    public function renderNavitemOptions(EntityCollection $navitems, $level = 0, array $selected = array(), array $disabled = array(), $property = 'navitem_id') {
         $output = '';
         foreach ($navitems as $navitem) {
             $output .= '<option ' . (in_array($navitem->$property, $disabled) ? 'disabled' : '') . ' ' . (in_array($navitem->$property, $selected) ? 'selected' : '') . ' data-level="' . $level . '" value="' . $navitem->$property . '">' . $navitem->title . '</option>';
 
             $childNavitems = $navitem->childNavitems()
-                ->orderByAsc('position')
-                ->fetchAll();
+                    ->orderByAsc('position')
+                    ->fetchAll();
 
             if (in_array($navitem->$property, $disabled)) {
                 $disabled = $childNavitems->map(function ($navitem) use($property) {
-                        return $navitem->$property;
-                    })->toArray();
+                    return $navitem->$property;
+                });
             }
 
             $output .= $this->renderNavitemOptions($childNavitems, $level + 1, $selected, $disabled);
@@ -37,8 +35,7 @@ class NavitemView extends BackendView
      *
      * @return string
      */
-    public function renderNavitemNestable(EntityCollection $navitems)
-    {
+    public function renderNavitemNestable(EntityCollection $navitems) {
         $output = '';
         if ($navitems->count()) {
             $output .= '<ol class="nestable-list list-group">';
@@ -93,8 +90,8 @@ class NavitemView extends BackendView
                         </span>';
 
                 $childNavitems = $navitem->childNavitems()
-                    ->orderByAsc('position')
-                    ->fetchAll();
+                        ->orderByAsc('position')
+                        ->fetchAll();
 
                 $output .= $this->renderNavitemNestable($childNavitems);
 
@@ -105,4 +102,5 @@ class NavitemView extends BackendView
 
         return $output;
     }
+
 }

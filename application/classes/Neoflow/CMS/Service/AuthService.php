@@ -6,8 +6,7 @@ use Exception;
 use Neoflow\CMS\Model\UserModel;
 use Neoflow\Framework\Core\AbstractService;
 
-class AuthService extends AbstractService
-{
+class AuthService extends AbstractService {
 
     /**
      * Authenticate and authorize user by email address and password.
@@ -17,8 +16,7 @@ class AuthService extends AbstractService
      *
      * @return bool
      */
-    public function login($email, $password)
-    {
+    public function login($email, $password) {
         if ($this->authenticate($email, $password)) {
             return $this->authorize();
         }
@@ -30,8 +28,7 @@ class AuthService extends AbstractService
      *
      * @return bool
      */
-    public function logout()
-    {
+    public function logout() {
         $this->session()->restart();
 
         return true;
@@ -42,8 +39,7 @@ class AuthService extends AbstractService
      *
      * @return bool
      */
-    public function isAuthenticated()
-    {
+    public function isAuthenticated() {
         return $this->session()->exists('_USER');
     }
 
@@ -52,8 +48,7 @@ class AuthService extends AbstractService
      *
      * @return UserModel
      */
-    public function getAuthenticatedUser()
-    {
+    public function getAuthenticatedUser() {
         return $this->session()->get('_USER');
     }
 
@@ -64,8 +59,7 @@ class AuthService extends AbstractService
      *
      * @return bool
      */
-    public function hasPermission($permissionKeys)
-    {
+    public function hasPermission($permissionKeys) {
         if (is_string($permissionKeys)) {
             $permissionKeys = array($permissionKeys);
         }
@@ -81,13 +75,12 @@ class AuthService extends AbstractService
      *
      * @return bool
      */
-    protected function authenticate($email, $password)
-    {
+    protected function authenticate($email, $password) {
         $user = UserModel::repo()
-            ->where('email', '=', $email)
-            ->where('password', '!=', '')
-            ->where('password', '=', sha1($password))
-            ->fetch();
+                ->where('email', '=', $email)
+                ->where('password', '!=', '')
+                ->where('password', '=', sha1($password))
+                ->fetch();
 
         if ($user) {
             $user->setReadOnly();
@@ -108,22 +101,21 @@ class AuthService extends AbstractService
      *
      * @throws Exception
      */
-    protected function authorize()
-    {
+    protected function authorize() {
         $user = $this->getAuthenticatedUser();
 
         if ($user) {
             $role = $user
-                ->role()
-                ->fetch();
+                    ->role()
+                    ->fetch();
 
             $permissions = $role
-                ->permissions()
-                ->fetchAll();
+                    ->permissions()
+                    ->fetchAll();
 
             $permissionKeys = $permissions->map(function ($permission) {
-                    return $permission->permission_key;
-                })->toArray();
+                return $permission->permission_key;
+            });
 
             $this->session()->set('_PERMISSION_KEYS', $permissionKeys);
 
@@ -137,8 +129,8 @@ class AuthService extends AbstractService
      *
      * @return array
      */
-    protected function getPermissionKeys()
-    {
+    protected function getPermissionKeys() {
         return $this->session()->get('_PERMISSION_KEYS');
     }
+
 }
