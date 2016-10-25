@@ -6,8 +6,7 @@ namespace Neoflow\Framework\Persistence\Querying;
  * @method UpdateQuery where(string $condition, string $operator, mixed $parameter) Add WHERE condition
  * @method UpdateQuery whereRaw(string $condition, array $parameters) Add raw WHERE condition
  */
-class UpdateQuery extends AbstractQuery
-{
+class UpdateQuery extends AbstractQuery {
 
     /**
      * Use WHERE statements
@@ -28,8 +27,7 @@ class UpdateQuery extends AbstractQuery
      *
      * @param string $table
      */
-    public function __construct($table)
-    {
+    public function __construct($table) {
         parent::__construct($table);
         $this->addStatement('UPDATE', $table);
     }
@@ -41,8 +39,7 @@ class UpdateQuery extends AbstractQuery
      *
      * @return UpdateQuery
      */
-    public function set(array $set = array())
-    {
+    public function set(array $set = array()) {
         foreach ($set as $column => $value) {
             $this->statements['SET'][] = $column . ' = ?';
             $this->parameters['SET'][] = $value;
@@ -58,22 +55,24 @@ class UpdateQuery extends AbstractQuery
      *
      * @return int|bool
      */
-    public function execute($id = false)
-    {
-        if ($id) {
-            $this->where($this->primaryKey, '=', $id);
-        }
-
-        $result = parent::execute();
-        if ($result) {
-            $this->getCache()->deleteByTag('_query');
-            $rowCount = $result->rowCount();
-            if ($rowCount) {
-                return $rowCount;
+    public function execute($id = false) {
+        if (count($this->statements['SET']) > 0) {
+            if ($id) {
+                $this->where($this->primaryKey, '=', $id);
             }
-            return true;
+
+            $result = parent::execute();
+            if ($result) {
+                $this->getCache()->deleteByTag('_query');
+                $rowCount = $result->rowCount();
+                if ($rowCount) {
+                    return $rowCount;
+                }
+                return true;
+            }
         }
 
         return false;
     }
+
 }

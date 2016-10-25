@@ -7,8 +7,7 @@ use Neoflow\Framework\ORM\AbstractEntityModel;
 use Neoflow\Framework\ORM\EntityRepository;
 use Neoflow\Framework\Support\Validation\Validator;
 
-class UserModel extends AbstractEntityModel
-{
+class UserModel extends AbstractEntityModel {
 
     /**
      * @var string
@@ -23,7 +22,7 @@ class UserModel extends AbstractEntityModel
     /**
      * @var array
      */
-    public static $properties = ['user_id', 'email', 'firstname', 'lastname', 'role_id'];
+    public static $properties = ['user_id', 'email', 'firstname', 'lastname', 'role_id', 'reset_key', 'reseted_when'];
 
     /**
      * @var array
@@ -35,8 +34,7 @@ class UserModel extends AbstractEntityModel
      *
      * @return EntityRepository
      */
-    public function role()
-    {
+    public function role() {
         return $this->belongsTo('\\Neoflow\\CMS\\Model\\RoleModel', 'role_id');
     }
 
@@ -45,34 +43,33 @@ class UserModel extends AbstractEntityModel
      *
      * @return bool
      */
-    public function validate()
-    {
+    public function validate() {
         $validator = new Validator($this->data);
 
         $validator
-            ->required()
-            ->email()
-            ->callback(function ($email, $user) {
-                $users = UserModel::repo()
-                    ->where('email', '=', $email)
-                    ->where('user_id', '!=', $user->id())
-                    ->fetchAll();
+                ->required()
+                ->email()
+                ->callback(function ($email, $user) {
+                    $users = UserModel::repo()
+                            ->where('email', '=', $email)
+                            ->where('user_id', '!=', $user->id())
+                            ->fetchAll();
 
-                return $users->count() === 0;
-            }, '{0} has to be unique', array($this))
-            ->set('email', 'Email address');
-
-        $validator
-            ->maxLength(50)
-            ->set('firstname', 'Firstname');
+                    return $users->count() === 0;
+                }, '{0} has to be unique', array($this))
+                ->set('email', 'Email address');
 
         $validator
-            ->maxLength(50)
-            ->set('lastname', 'Lastname');
+                ->maxLength(50)
+                ->set('firstname', 'Firstname');
 
         $validator
-            ->required()
-            ->set('role_id', 'Role');
+                ->maxLength(50)
+                ->set('lastname', 'Lastname');
+
+        $validator
+                ->required()
+                ->set('role_id', 'Role');
 
         if ($this->password && $this->password2) {
             $this->validatePassword();
@@ -81,8 +78,12 @@ class UserModel extends AbstractEntityModel
         return $validator->validate();
     }
 
-    public function validatePassword()
-    {
+    /**
+     * Validate password of user entity
+     *
+     * @return array
+     */
+    public function validatePassword() {
         $validator = new Validator(array(
             'password' => $this->password,
             'password2' => $this->password2,
@@ -90,16 +91,16 @@ class UserModel extends AbstractEntityModel
         ));
 
         $validator
-            ->required()
-            ->set('password2', 'Confirm password');
+                ->required()
+                ->set('password2', 'Confirm password');
 
         $validator
-            ->required()
-            ->minLength(6)
-            ->callback(function ($password, $password2) {
-                return $password === $password2;
-            }, 'Password is not matching confirm password', array($this->password2))
-            ->set('password', 'Password');
+                ->required()
+                ->minLength(6)
+                ->callback(function ($password, $password2) {
+                    return $password === $password2;
+                }, 'Password is not matching confirm password', array($this->password2))
+                ->set('password', 'Password');
 
         return $validator->validate();
     }
@@ -109,8 +110,7 @@ class UserModel extends AbstractEntityModel
      *
      * @return string
      */
-    public function getFullname()
-    {
+    public function getFullname() {
         return $this->firstname . ' ' . $this->lastname;
     }
 
@@ -119,8 +119,7 @@ class UserModel extends AbstractEntityModel
      *
      * @return bool
      */
-    public function save()
-    {
+    public function save() {
         // Prevent role change of initial user by removing role_id
         if ($this->id() === 1) {
             $this->remove('role_id');
@@ -129,8 +128,7 @@ class UserModel extends AbstractEntityModel
         return parent::save();
     }
 
-    public function delete()
-    {
+    public function delete() {
         // Prevent delete of initial user
         if ($this->id() != 1) {
             return parent::delete();
@@ -146,8 +144,7 @@ class UserModel extends AbstractEntityModel
      *
      * @return self
      */
-    public function setResetKey($reset = false)
-    {
+    public function setResetKey($reset = false) {
         if ($reset) {
             $this->reset_key = null;
             $this->reseted_when = null;
@@ -166,13 +163,12 @@ class UserModel extends AbstractEntityModel
      * @param string $password2
      * @return self
      */
-    public function setPassword($password, $password2)
-    {
+    public function setPassword($password, $password2) {
         return $this
-                ->addProperty('password')
-                ->set('password', $password)
-                ->addProperty('password2')
-                ->set('password2', $password2);
+                        ->addProperty('password')
+                        ->set('password', $password)
+                        ->addProperty('password2')
+                        ->set('password2', $password2);
     }
 
     /**
@@ -186,14 +182,14 @@ class UserModel extends AbstractEntityModel
      *
      * @throws Exception
      */
-    public static function updatePassword($password, $password2, $id)
-    {
+    public static function updatePassword($password, $password2, $id) {
         $user = self::findById($id);
         if ($user) {
             return $user
-                    ->setPassword($password, $password2)
-                    ->setResetKey(true);
+                            ->setPassword($password, $password2)
+                            ->setResetKey(true);
         }
         throw new Exception('User not found');
     }
+
 }

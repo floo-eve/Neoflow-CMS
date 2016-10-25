@@ -9,8 +9,7 @@ use \PDO;
 use \PDOStatement;
 use \ReflectionFunction;
 
-abstract class AbstractQuery
-{
+abstract class AbstractQuery {
 
     /**
      * Load app
@@ -52,8 +51,7 @@ abstract class AbstractQuery
      *
      * @param string $table
      */
-    public function __construct($table)
-    {
+    public function __construct($table) {
         foreach ($this->clauses as $clause => $seperator) {
             $this->statements[$clause] = array();
             $this->parameters[$clause] = array();
@@ -67,8 +65,7 @@ abstract class AbstractQuery
      *
      * @return AbstractQuery
      */
-    public function setPrimaryKey($primaryKey)
-    {
+    public function setPrimaryKey($primaryKey) {
         $this->primaryKey = $primaryKey;
         return $this;
     }
@@ -82,8 +79,7 @@ abstract class AbstractQuery
      *
      * @return AbstractQuery
      */
-    protected function addStatement($clause, $statement, array $parameters = array())
-    {
+    protected function addStatement($clause, $statement, array $parameters = array()) {
         $this->statements[$clause][] = $statement;
         $this->parameters[$clause][] = $parameters;
         return $this;
@@ -94,8 +90,7 @@ abstract class AbstractQuery
      *
      * @return PDOStatement
      */
-    public function execute()
-    {
+    public function execute() {
         $query = $this->buildQuery();
         $parameters = $this->buildParameters();
 
@@ -122,8 +117,7 @@ abstract class AbstractQuery
      * @param array $parameters
      * @param int $affectedRows
      */
-    protected function logQueryData($message, $query, array $parameters = array(), $affectedRows = 0)
-    {
+    protected function logQueryData($message, $query, array $parameters = array(), $affectedRows = 0) {
         $this->logger()->info($message);
 
         $this->logger()->debug('       Query: ' . $query);
@@ -132,8 +126,8 @@ abstract class AbstractQuery
 
         if (count($parameters) > 0) {
             $this->logger()->debug('       Params: ' . implode(', ', array_map(function ($value, $key) {
-                        return (is_string($key) ? $key : '?') . ' => ' . $value;
-                    }, $parameters, array_keys($parameters))));
+                                return (is_string($key) ? $key : '?') . ' => ' . $value;
+                            }, $parameters, array_keys($parameters))));
         }
         $this->logger()->debug('       Result: ' . $affectedRows . ' row(s) affected');
     }
@@ -143,8 +137,7 @@ abstract class AbstractQuery
      *
      * @return array
      */
-    public function getParameters()
-    {
+    public function getParameters() {
         return $this->buildParameters();
     }
 
@@ -153,8 +146,7 @@ abstract class AbstractQuery
      *
      * @return string
      */
-    public function getQuery()
-    {
+    public function getQuery() {
         $query = $this->buildQuery();
 
         return $query;
@@ -165,8 +157,7 @@ abstract class AbstractQuery
      *
      * @return string
      */
-    public function getFormatedQuery()
-    {
+    public function getFormatedQuery() {
         $query = $this->getQuery();
 
         return $this->formatQuery($query);
@@ -179,8 +170,7 @@ abstract class AbstractQuery
      *
      * @return string
      */
-    protected function formatQuery($query)
-    {
+    protected function formatQuery($query) {
         // Add line break
         $query = preg_replace('/WHERE|FROM|GROUP BY|HAVING|ORDER BY|LIMIT|OFFSET|UNION|ON DUPLICATE KEY UPDATE|VALUES/', "\n$0", $query);
 
@@ -198,8 +188,7 @@ abstract class AbstractQuery
      *
      * @return string
      */
-    protected function buildQuery()
-    {
+    protected function buildQuery() {
         $query = '';
         foreach ($this->clauses as $clause => $separator) {
             $clauseStatements = $this->statements[$clause];
@@ -222,8 +211,7 @@ abstract class AbstractQuery
      *
      * @return array
      */
-    protected function buildParameters()
-    {
+    protected function buildParameters() {
         $parameters = array();
         foreach ($this->parameters as $parameter) {
             if (is_array($parameter)) {
@@ -257,8 +245,7 @@ abstract class AbstractQuery
      *
      * @return string
      */
-    protected function quote($value)
-    {
+    protected function quote($value) {
         if (!isset($value)) {
             return 'NULL';
         }
@@ -286,8 +273,7 @@ abstract class AbstractQuery
      *
      * @return AbstractCache
      */
-    protected function getCache()
-    {
+    protected function getCache() {
         return $this->app()->get('cache');
     }
 
@@ -296,8 +282,8 @@ abstract class AbstractQuery
      *
      * @return Database
      */
-    protected function getDatabase()
-    {
+    protected function getDatabase() {
         return $this->app()->get('database');
     }
+
 }

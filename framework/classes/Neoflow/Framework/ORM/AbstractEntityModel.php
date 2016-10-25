@@ -8,8 +8,7 @@ use Neoflow\Framework\ORM\EntityRepository;
 use Neoflow\Framework\Persistence\QueryBuilder;
 use Neoflow\Framework\Persistence\Querying\SelectQuery;
 
-abstract class AbstractEntityModel
-{
+abstract class AbstractEntityModel {
 
     /**
      * App trait.
@@ -72,8 +71,7 @@ abstract class AbstractEntityModel
      * @param array $data
      * @param bool  $isReadOnly
      */
-    public function __construct(array $data = array(), $isReadOnly = false)
-    {
+    public function __construct(array $data = array(), $isReadOnly = false) {
         foreach ($data as $key => $value) {
             $this->set($key, $value, true);
         }
@@ -95,8 +93,7 @@ abstract class AbstractEntityModel
      *
      * @return string
      */
-    protected function getTableName()
-    {
+    protected function getTableName() {
         $modelClassName = get_class($this);
 
         return $modelClassName::$tableName;
@@ -107,8 +104,7 @@ abstract class AbstractEntityModel
      *
      * @return string
      */
-    protected function getPrimaryKey()
-    {
+    protected function getPrimaryKey() {
         $modelClassName = get_class($this);
 
         return $modelClassName::$primaryKey;
@@ -119,8 +115,7 @@ abstract class AbstractEntityModel
      *
      * @return string
      */
-    protected function getProperties()
-    {
+    protected function getProperties() {
         $modelClassName = get_class($this);
 
         return $modelClassName::$properties;
@@ -131,8 +126,7 @@ abstract class AbstractEntityModel
      *
      * @return string
      */
-    protected function getHiddenProperties()
-    {
+    protected function getHiddenProperties() {
         $modelClassName = get_class($this);
 
         return $modelClassName::$hiddenProperties;
@@ -143,8 +137,7 @@ abstract class AbstractEntityModel
      *
      * @return array
      */
-    public function toArray()
-    {
+    public function toArray() {
         return $this->data;
     }
 
@@ -153,8 +146,7 @@ abstract class AbstractEntityModel
      *
      * @return mixed
      */
-    public function id()
-    {
+    public function id() {
         $primaryKey = $this->getPrimaryKey();
         $id = $this->{$primaryKey};
         if ($id) {
@@ -169,8 +161,7 @@ abstract class AbstractEntityModel
      *
      * @return bool
      */
-    public function isReadOnly()
-    {
+    public function isReadOnly() {
         return $this->isReadOnly;
     }
 
@@ -179,16 +170,14 @@ abstract class AbstractEntityModel
      *
      * @return bool
      */
-    public function isModified()
-    {
+    public function isModified() {
         return $this->isModified;
     }
 
     /**
      * Set model entity read-only.
      */
-    public function setReadOnly()
-    {
+    public function setReadOnly() {
         $this->isReadOnly = true;
     }
 
@@ -198,8 +187,7 @@ abstract class AbstractEntityModel
      * @param string $key
      * @return string
      */
-    public function translated($key)
-    {
+    public function translated($key) {
         return $this->translator()->translate($this->$key);
     }
 
@@ -214,8 +202,7 @@ abstract class AbstractEntityModel
      *
      * @throws DomainException
      */
-    protected function set($key, $value = null, $silent = false)
-    {
+    protected function set($key, $value = null, $silent = false) {
         if ($this->isReadOnly()) {
             throw new DomainException('Model entity is read only and cannot set value');
         }
@@ -241,8 +228,7 @@ abstract class AbstractEntityModel
      *
      * @return bool
      */
-    protected function exists($key)
-    {
+    protected function exists($key) {
         return isset($this->data[$key]);
     }
 
@@ -254,8 +240,7 @@ abstract class AbstractEntityModel
      *
      * @return mixed
      */
-    protected function get($key, $default = null)
-    {
+    protected function get($key, $default = null) {
         if ($this->exists($key)) {
             return $this->data[$key];
         }
@@ -271,8 +256,7 @@ abstract class AbstractEntityModel
      *
      * @return self
      */
-    protected function remove($key)
-    {
+    protected function remove($key) {
         if ($this->exists($key)) {
             unset($this->data[$key]);
         }
@@ -289,8 +273,7 @@ abstract class AbstractEntityModel
      *
      * @return bool
      */
-    public function validate()
-    {
+    public function validate() {
         return true;
     }
 
@@ -301,8 +284,7 @@ abstract class AbstractEntityModel
      *
      * @return mixed
      */
-    public function __get($name)
-    {
+    public function __get($name) {
         return $this->get($name);
     }
 
@@ -312,8 +294,7 @@ abstract class AbstractEntityModel
      * @param string $name
      * @param mixed  $value
      */
-    public function __set($name, $value)
-    {
+    public function __set($name, $value) {
         $this->set($name, $value);
     }
 
@@ -324,8 +305,7 @@ abstract class AbstractEntityModel
      *
      * @return self
      */
-    public static function create($data)
-    {
+    public static function create($data) {
         return new static($data);
     }
 
@@ -339,8 +319,7 @@ abstract class AbstractEntityModel
      *
      * @throws Exception
      */
-    public static function update($data, $id)
-    {
+    public static function update($data, $id) {
         $entity = static::findById($id);
         if ($entity) {
             foreach ($data as $key => $value) {
@@ -356,8 +335,7 @@ abstract class AbstractEntityModel
      *
      * @return bool
      */
-    public function save()
-    {
+    public function save() {
         if ($this->id()) {
             return static::repo()->update($this);
         }
@@ -377,8 +355,7 @@ abstract class AbstractEntityModel
      *
      * @return array
      */
-    public function getData()
-    {
+    public function getData() {
         return $this->toArray();
     }
 
@@ -387,8 +364,7 @@ abstract class AbstractEntityModel
      *
      * @return array
      */
-    public function getModifiedData()
-    {
+    public function getModifiedData() {
         return array_intersect_key($this->data, array_flip($this->modifiedProperties));
     }
 
@@ -397,12 +373,11 @@ abstract class AbstractEntityModel
      *
      * @return bool
      */
-    public function delete()
-    {
+    public function delete() {
         static::queryBuilder()
-            ->deleteFrom($this->getTableName())
-            ->setPrimaryKey($this->getPrimaryKey())
-            ->execute($this->id());
+                ->deleteFrom($this->getTableName())
+                ->setPrimaryKey($this->getPrimaryKey())
+                ->execute($this->id());
 
         return true;
     }
@@ -416,8 +391,7 @@ abstract class AbstractEntityModel
      *
      * @return EntityRepository
      */
-    protected function belongsTo($associatedModelClassName, $foreignKeyName)
-    {
+    protected function belongsTo($associatedModelClassName, $foreignKeyName) {
         return $this->mapper->belongsTo($this, $associatedModelClassName, $foreignKeyName);
     }
 
@@ -430,8 +404,7 @@ abstract class AbstractEntityModel
      *
      * @return EntityRepository
      */
-    protected function hasOne($associatedModelClassName, $foreignKeyName)
-    {
+    protected function hasOne($associatedModelClassName, $foreignKeyName) {
         return $this->mapper->hasOne($this, $associatedModelClassName, $foreignKeyName);
     }
 
@@ -444,8 +417,7 @@ abstract class AbstractEntityModel
      *
      * @return EntityRepository
      */
-    protected function hasMany($associatedModelClassName, $foreignKeyName)
-    {
+    protected function hasMany($associatedModelClassName, $foreignKeyName) {
         return $this->mapper->hasMany($this, $associatedModelClassName, $foreignKeyName);
     }
 
@@ -459,8 +431,7 @@ abstract class AbstractEntityModel
      *
      * @return EntityRepository
      */
-    protected function hasManyThrough($associatedModelClassName, $joinModelClassName, $foreignKeyToBaseModel, $foreignKeyToAssociatedModel)
-    {
+    protected function hasManyThrough($associatedModelClassName, $joinModelClassName, $foreignKeyToBaseModel, $foreignKeyToAssociatedModel) {
         return $this->mapper->hasManyThrough($this, $associatedModelClassName, $joinModelClassName, $foreignKeyToBaseModel, $foreignKeyToAssociatedModel);
     }
 
@@ -471,8 +442,7 @@ abstract class AbstractEntityModel
      *
      * @return self
      */
-    public function addProperty($key)
-    {
+    public function addProperty($key) {
         $modelClassName = get_class($this);
 
         $modelClassName::$properties[] = $key;
@@ -487,8 +457,7 @@ abstract class AbstractEntityModel
      *
      * @return self
      */
-    public function removeProperty($key)
-    {
+    public function removeProperty($key) {
         $modelClassName = get_class($this);
 
         if (($index = array_search($key, $modelClassName::$properties)) !== false) {
@@ -503,8 +472,7 @@ abstract class AbstractEntityModel
      *
      * @return EntityRepository
      */
-    public static function repo()
-    {
+    public static function repo() {
         $repo = new EntityRepository();
         return $repo->forModel(get_called_class());
     }
@@ -516,8 +484,7 @@ abstract class AbstractEntityModel
      *
      * @return SelectQuery
      */
-    protected static function selectQuery(array $columns = array())
-    {
+    protected static function selectQuery(array $columns = array()) {
         return static::queryBuilder()->selectFrom(static::$tableName, $columns);
     }
 
@@ -526,8 +493,7 @@ abstract class AbstractEntityModel
      *
      * @return QueryBuilder
      */
-    protected static function queryBuilder()
-    {
+    protected static function queryBuilder() {
         return new QueryBuilder();
     }
 
@@ -536,8 +502,7 @@ abstract class AbstractEntityModel
      * @param int|string $id
      * @return boolean
      */
-    public static function deleteById($id)
-    {
+    public static function deleteById($id) {
         $entity = static::findById($id);
         if ($entity) {
             return $entity->delete();
@@ -552,8 +517,7 @@ abstract class AbstractEntityModel
      * @param mixed $value
      * @return EntityCollection
      */
-    public static function deleteAllByColumn($column, $value)
-    {
+    public static function deleteAllByColumn($column, $value) {
         return static::findAllByColumn($column, $value)->delete();
     }
 
@@ -564,8 +528,8 @@ abstract class AbstractEntityModel
      *
      * @return self
      */
-    public static function findById($id)
-    {
+    public static function findById($id) {
+
         return static::repo()->fetch($id);
     }
 
@@ -576,11 +540,10 @@ abstract class AbstractEntityModel
      *
      * @return self
      */
-    public static function findByColumn($column, $value)
-    {
+    public static function findByColumn($column, $value) {
         return static::repo()
-                ->where($column, '=', $value)
-                ->fetch();
+                        ->where($column, '=', $value)
+                        ->fetch();
     }
 
     /**
@@ -588,8 +551,7 @@ abstract class AbstractEntityModel
      *
      * @return EntityCollection
      */
-    public static function findAll()
-    {
+    public static function findAll() {
         return static::repo()->fetchAll();
     }
 
@@ -600,10 +562,10 @@ abstract class AbstractEntityModel
      * @param mixed $value
      * @return EntityCollection
      */
-    public static function findAllByColumn($column, $value)
-    {
+    public static function findAllByColumn($column, $value) {
         return static::repo()
-                ->where($column, '=', $value)
-                ->fetchAll();
+                        ->where($column, '=', $value)
+                        ->fetchAll();
     }
+
 }

@@ -52,12 +52,13 @@ class SectionController extends BackendController {
             $section_id = $this->request()->getPost('section_id');
         }
 
-        // Get section, module and page
-        $this->section = SectionModel::findById($section_id);
+        // Get section
+        if ($section_id) {
+            $this->section = SectionModel::findById($section_id);
 
-        // Set back url
-        $this->view->setBackRoute('section_index', array('id' => $this->section->page_id));
-        $this->view->set('section_id', $this->section->id());
+            // Set back url
+            $this->view->setBackRoute('section_index', array('id' => $this->section->page_id));
+        }
     }
 
     /**
@@ -258,30 +259,6 @@ class SectionController extends BackendController {
                     'page' => $this->section->page()->fetch(),
                     'module' => $this->section->module()->fetch(),
         ));
-    }
-
-    protected function render($viewFile, array $parameters = array(), Response $response = null) {
-
-        $module = $this->section->module()->fetch();
-        $page = $this->section->page()->fetch();
-
-        $parameters = array_merge(array(
-            'section' => $this->section,
-            'page' => $page,
-            'module' => $module), $parameters);
-
-        if (!$this->view->isCurrentRoute('section*')) {
-            $this->view->startBlock('module');
-            echo $this->view->renderView($viewFile, $parameters);
-            $this->view->stopBlock();
-            $viewFile = 'backend/section/edit';
-        } elseif ($this->view->isCurrentRoute('section_edit')) {
-            $view = new SectionView();
-            $view->set('section_id', $this->section->id());
-            $this->router()->routeByKey($module->backend_route, array('section_id' => $this->section->id()), $view);
-            $this->view->addContentToBlock('module', $view->getBlock(0));
-        }
-        return parent::render($viewFile, $parameters, $response);
     }
 
     /**

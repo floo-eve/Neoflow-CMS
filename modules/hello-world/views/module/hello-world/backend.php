@@ -12,12 +12,14 @@
             your first <i>Hello World</i> message on your website.
         </p>
 
+
         <hr />
 
-        <form method="post" action="<?= generate_url('mod_hello_world_update') ?>" class="form-horizontal">
+        <form method="post" action="<?= generate_url('mod_hello_world_backend_update') ?>" class="form-horizontal">
 
             <div class="form-group <?= $this->hasValidationError('message', 'has-error') ?>">
                 <input type="hidden" value="<?= $message->id() ?>" name="message_id" />
+                <input type="hidden" value="<?= $section->id() ?>" name="section_id" />
                 <label for="textareaMessage" class="col-sm-2 control-label">
                     <?= translate('Message') ?>
                 </label>
