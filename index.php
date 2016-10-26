@@ -11,7 +11,7 @@ include 'framework/autoload.php';
 // Initialize application
 $app = new \Neoflow\CMS\App(__DIR__);
 
-// Execute application
+// Execute application 
 $app->execute();
 
 // Publish application
