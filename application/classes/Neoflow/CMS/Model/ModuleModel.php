@@ -44,7 +44,7 @@ class ModuleModel extends AbstractEntityModel
     {
         $managerClass = $this->manager_class;
         if ($managerClass && class_exists($managerClass)) {
-            return new $managerClass();
+            return new $managerClass($this->getPath('config.ini'));
         }
         throw new \Exception('Module manager not found: ' . $managerClass);
     }

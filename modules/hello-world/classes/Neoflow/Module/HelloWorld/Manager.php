@@ -2,10 +2,10 @@
 
 namespace Neoflow\Module\HelloWorld;
 
-use Neoflow\CMS\Support\Module\ManagerInterface;
+use Neoflow\CMS\Support\Module\AbstractManager;
 use Neoflow\Module\HelloWorld\Model\MessageModel;
 
-class Manager implements ManagerInterface
+class Manager extends AbstractManager
 {
 
     public function add($section)

@@ -17,7 +17,7 @@ class FrontendController extends \Neoflow\CMS\Controller\FrontendController {
     public function indexAction($args) {
         $message = MessageModel::findByColumn('section_id', $this->view->get('section_id'));
 
-        return $this->render('module/helloworld/frontend', array(
+        return $this->render('module/hello-world/frontend', array(
                     'message' => $message
         ));
     }

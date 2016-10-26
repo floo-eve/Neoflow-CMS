@@ -28,7 +28,7 @@
             </li>
 
             <?php if (has_permission('manage_pages') || has_permission('manage_navigations')) { ?>
-                <li <?= $view->isCurrentRoute(array('navigation*', 'page*', 'section*', 'mod*', 'navitem*'), 'class="active"') ?>>
+                <li <?= $view->isCurrentRoute(array('navigation*', 'page*', 'section*', 'mod_*', 'navitem*'), 'class="active"') ?>>
                     <a href="#"><i class="fa fa-fw icon fa-files-o"></i> <?= translate('Content') ?><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <?php if (has_permission('manage_pages')) { ?>
@@ -51,14 +51,15 @@
             if (has_permission('manage_modules') || has_permission('manage_templates')) {
 
                 ?>
-                <li>
+                <li <?= $view->isCurrentRoute(['module*', 'theme*'], 'class="active"') ?>>
                     <a href="#">
                         <i class="fa fa-fw icon fa-bar-chart-o"></i> <?= translate('Extensions') ?><span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level collapse">
                         <?php if (has_permission('manage_modules')) { ?>
-                            <li>
-                                <a href="#"><?= translate('Modules') ?></a>
+                            <li <?= $view->isCurrentRoute(['module*'], 'class="active"') ?>>
+                                <a href="<?= generate_url('module_index') ?>
+                                   "><?= translate('Modules') ?></a>
                             </li>
                             <?php
                         }

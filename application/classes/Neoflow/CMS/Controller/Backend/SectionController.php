@@ -2,14 +2,11 @@
 
 namespace Neoflow\CMS\Controller\Backend;
 
-use InvalidArgumentException;
 use Neoflow\CMS\Controller\BackendController;
-use Neoflow\CMS\Core\AbstractView;
 use Neoflow\CMS\Model\ModuleModel;
 use Neoflow\CMS\Model\PageModel;
 use Neoflow\CMS\Model\SectionModel;
 use Neoflow\CMS\Views\Backend\SectionView;
-use Neoflow\Framework\Core\AbstractView as AbstractView2;
 use Neoflow\Framework\HTTP\Responsing\JsonResponse;
 use Neoflow\Framework\HTTP\Responsing\RedirectResponse;
 use Neoflow\Framework\HTTP\Responsing\Response;
@@ -38,7 +35,7 @@ class SectionController extends BackendController {
     /**
      * Constructor.
      *
-     * @param AbstractView $view
+     * @param AbstractView2 $view
      */
     public function __construct() {
         parent::__construct();
@@ -124,6 +121,7 @@ class SectionController extends BackendController {
      * @throws Exception
      */
     public function updateAction($args) {
+       
         try {
 
             // Get post data
@@ -147,7 +145,7 @@ class SectionController extends BackendController {
         // Module of section
         $module = $section->module()->fetch();
 
-        return $this->redirectToRoute($module->route, array('section_id' => $section->id()));
+        return $this->redirectToRoute($module->backend_route, array('section_id' => $section->id()));
     }
 
     /**
@@ -175,9 +173,9 @@ class SectionController extends BackendController {
 
             // Validate and save section
             if ($section->validate() && $section->save()) {
-                $this->setSuccessAlert(translate('successful created'));
+                $this->setSuccessAlert(translate('Successful created'));
             } else {
-                throw new \Exception('Create section failed');
+                throw new Exception('Create section failed');
             }
         } catch (ValidationException $ex) {
             $this->setDangerAlert($ex->getErrors());
