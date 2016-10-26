@@ -4,6 +4,7 @@ namespace Neoflow\CMS\Model;
 
 use Exception;
 use Neoflow\CMS\Support\Module\ManagerInterface;
+use Neoflow\Framework\Common\Container;
 use Neoflow\Framework\ORM\AbstractEntityModel;
 use Neoflow\Framework\ORM\EntityRepository;
 use Neoflow\Framework\Support\Filesystem\Folder;
@@ -24,7 +25,7 @@ class ModuleModel extends AbstractEntityModel {
     /**
      * @var array
      */
-    public static $properties = ['module_id', 'name', 'folder', 'route', 'title', 'frontend_route', 'backend_route', 'module_manager'];
+    public static $properties = ['module_id', 'name', 'folder', 'frontend_route', 'backend_route', 'manager_class'];
 
     /**
      * Get repository to fetch section.
@@ -64,10 +65,21 @@ class ModuleModel extends AbstractEntityModel {
                     $configFilePath = $tempModulePath . DIRECTORY_SEPARATOR . 'config.ini';
                     if (is_file($configFilePath)) {
                         $folder = new Folder($tempModulePath);
-                        $config = parse_ini_file($configFilePath);
 
-                        var_dump($config);
-                        exit;
+                        $config = new Container(parse_ini_file($configFilePath, true), true, true);
+
+                        $this->name = $config->get('name');
+                        $this->folder = $config->get('folder');
+                        $this->frontend_route = $config->get('frontend_route');
+                        $this->backend_route = $config->get('backend_route');
+                        $this->manager_class = $config->get('manager_class');
+
+                        $folder->move($this->getPath());
+
+                        // ##################################################
+                        // HEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEEeee
+
+                        return;
                     } else {
                         unlink($tempModulePath);
                         throw new Exception('Module files e.g. config.ini in root directory of module package not found');

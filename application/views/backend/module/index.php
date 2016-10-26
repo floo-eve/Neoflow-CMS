@@ -12,7 +12,7 @@
                 <table class="table table-striped datatable">
                     <thead>
                         <tr>
-                            <th><?= translate('Email address') ?></th>
+                            <th><?= translate('Name') ?></th>
                             <th class="no-order no-search"></th>
                         </tr>
                     </thead>
@@ -20,7 +20,7 @@
                         <?php foreach ($modules as $module) { ?>
                             <tr>
                                 <td>
-                                    <?= $module->title ?>
+                                    <?= $module->name ?>
                                 </td>
                                 <td class="text-right nowrap">
                                     Action buttons
@@ -46,7 +46,7 @@
                 <form method="post" enctype="multipart/form-data" action="<?= generate_url('module_install') ?>" class="form-horizontal">
                     <div class="form-group">
                         <label for="inputPackage" class="col-sm-3 control-label">
-                            <?= translate('Module package') ?>
+                            <?= translate('Package') ?>
                         </label>
                         <div class="col-sm-9">
                             <input type="file" name="package" id="inputPackage" required class="form-control" />
@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
                             <button type="submit" class="btn btn-primary btn-icon btn-icon-left">
-                                <i class="fa fa-save"></i><?= translate('Save') ?>
+                                <i class="fa fa-save"></i><?= translate('Upload') ?>
                             </button>
                         </div>
                     </div>

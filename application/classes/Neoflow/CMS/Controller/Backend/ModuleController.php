@@ -2,8 +2,10 @@
 
 namespace Neoflow\CMS\Controller\Backend;
 
+use Exception;
 use Neoflow\CMS\Controller\BackendController;
 use Neoflow\CMS\Model\ModuleModel;
+use function translate;
 
 class ModuleController extends BackendController {
 
@@ -19,8 +21,6 @@ class ModuleController extends BackendController {
         $module = ModuleModel::create(array(
                     'package' => $this->request()->getFile('package'),
         ));
-
-
 
         // Install and save module
         if ($module && $module->install() && $module->save()) {
