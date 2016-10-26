@@ -1,4 +1,5 @@
 <?php
+
 $this->addNamespace('\\Neoflow\\CMS\\Controller\\');
 $this->addNamespace('\\Neoflow\\CMS\\Controller\\Backend\\');
 
@@ -64,6 +65,7 @@ $this->addRoutes([
 // Backend module routes
 $this->addRoutes([
     array('module_index', 'get', '/backend/modules', 'Module@index'),
+    array('module_install', 'post', '/backend/module/install', 'Module@install'),
 ]);
 
 // Backend navigation routes

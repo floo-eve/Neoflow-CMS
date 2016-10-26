@@ -43,7 +43,24 @@
                 </h3>
             </div>
             <div class="panel-body">
-                install module form
+                <form method="post" enctype="multipart/form-data" action="<?= generate_url('module_install') ?>" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputPackage" class="col-sm-3 control-label">
+                            <?= translate('Module package') ?>
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="file" name="package" id="inputPackage" required class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="submit" class="btn btn-primary btn-icon btn-icon-left">
+                                <i class="fa fa-save"></i><?= translate('Save') ?>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div>
 

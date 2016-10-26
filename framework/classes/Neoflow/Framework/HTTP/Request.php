@@ -6,8 +6,7 @@ use \Exception;
 use \Neoflow\Framework\Common\Container;
 use \Neoflow\Framework\Handler\Config;
 
-class Request
-{
+class Request {
 
     /**
      * App trait
@@ -32,8 +31,7 @@ class Request
     /**
      * Constructor.
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->data = new Container();
 
         $this->data->set('cookies', new Container($_COOKIE, true));
@@ -42,20 +40,22 @@ class Request
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->data->set('post', new Container($_POST, true, true));
 
-            if (!empty($FILES)) {
+            if (isset($_FILES)) {
                 $this->hasFiles = true;
 
                 // ReArray files data
                 $files = array();
-                for ($i = 0; $i < count($_FILES['name']); ++$i) {
-                    foreach (array_keys($_FILES) as $key) {
-                        $files[$i][$key] = $_FILES[$key][$i];
+                foreach ($_FILES as $key => $file) {
+                    if (is_array($file['name'])) {
+                        $files[$key] = normalize_post_files($file);
+                    } else {
+                        $files[$key] = $file;
                     }
                 }
 
-                $this->data->set('files', new Container($files, true, true));
+                $this->data->set('files', new Container($files, true));
             } else {
-                $this->data->set('files', new Container(array(), true, true));
+                $this->data->set('files', new Container(array(), true));
             }
         } else {
             $this->data->set('post', new Container(array(), true, true));
@@ -69,8 +69,7 @@ class Request
      *
      * @return bool
      */
-    public function isMethod($method)
-    {
+    public function isMethod($method) {
         if (is_string($method)) {
             $method = array($method);
         }
@@ -83,8 +82,7 @@ class Request
      *
      * @return string
      */
-    public function getHttpLanguage()
-    {
+    public function getHttpLanguage() {
         return substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     }
 
@@ -93,8 +91,7 @@ class Request
      *
      * @return bool
      */
-    public function hasFiles()
-    {
+    public function hasFiles() {
         return $this->hasFiles;
     }
 
@@ -103,8 +100,7 @@ class Request
      *
      * @return bool|string
      */
-    public function getUriLanguage()
-    {
+    public function getUriLanguage() {
         $requestUri = $this->getUri(true);
 
         if (preg_match('/\/([a-z]{2})(\/|\?|$)/', substr($requestUri, 0, 4), $languageMatches)) {
@@ -123,8 +119,7 @@ class Request
      *
      * @throws Exception
      */
-    protected function getData($key)
-    {
+    protected function getData($key) {
         if (isset($this->data[$key])) {
             return $this->data[$key];
         }
@@ -136,8 +131,7 @@ class Request
      *
      * @return Container
      */
-    public function getPostData()
-    {
+    public function getPostData() {
         return $this->getData('post');
     }
 
@@ -148,8 +142,7 @@ class Request
      *
      * @return mixed
      */
-    public function getPost($key)
-    {
+    public function getPost($key) {
         return $this->getPostData()->get($key);
     }
 
@@ -160,8 +153,7 @@ class Request
      *
      * @return mixed
      */
-    public function getCookie($key)
-    {
+    public function getCookie($key) {
         return $this->getData('cookies')->get($key);
     }
 
@@ -170,8 +162,7 @@ class Request
      *
      * @return Container
      */
-    public function getCookies()
-    {
+    public function getCookies() {
         return $this->getData('cookies');
     }
 
@@ -180,8 +171,7 @@ class Request
      *
      * @return Container
      */
-    public function getGetData()
-    {
+    public function getGetData() {
         return $this->getData('get');
     }
 
@@ -192,8 +182,7 @@ class Request
      *
      * @return mixed
      */
-    public function getGet($key)
-    {
+    public function getGet($key) {
         return $this->getGetData()->get($key);
     }
 
@@ -202,8 +191,7 @@ class Request
      *
      * @return Container
      */
-    public function getFileData()
-    {
+    public function getFileData() {
         return $this->getData('files');
     }
 
@@ -214,8 +202,7 @@ class Request
      *
      * @return mixed
      */
-    public function getFile($key)
-    {
+    public function getFile($key) {
         return $this->getFileData()->get($key);
     }
 
@@ -226,8 +213,7 @@ class Request
      *
      * @return string
      */
-    public function getUri($withLanguageCode = false)
-    {
+    public function getUri($withLanguageCode = false) {
         $url = $this->config()->getUrl();
         $urlPath = parse_url($url, PHP_URL_PATH);
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -240,4 +226,5 @@ class Request
 
         return $requestUri;
     }
+
 }
