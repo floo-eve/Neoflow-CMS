@@ -1,5 +1,4 @@
 <?php
-
 // Set date format
 $this->setDateFormat('m/d/Y');
 $this->setDateTimeFormat('m/d/Y h:m');
@@ -190,6 +189,12 @@ $this->addTranslation(array(
     'Install module' => 'Install module',
 ));
 
+// Extensions
+$this->addTranslation(array(
+    'Folder name ({0}) is already in use' => 'Folder name ({0}) is already in use',
+    '{0} is not a valid package (zip archive)' => '{0} is not a valid package (zip archive)',
+    'Package config ({0}) not found' => 'Package config ({0}) not found'
+));
 
 // Backend
 $this->addTranslation(array(

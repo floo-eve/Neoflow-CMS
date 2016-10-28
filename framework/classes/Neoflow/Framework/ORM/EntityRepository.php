@@ -11,7 +11,8 @@ use Neoflow\Framework\Persistence\Querying\InsertQuery;
 use Neoflow\Framework\Persistence\Querying\SelectQuery;
 use Neoflow\Framework\Persistence\Querying\UpdateQuery;
 
-class EntityRepository {
+class EntityRepository
+{
 
     /**
      * Load app.
@@ -33,7 +34,8 @@ class EntityRepository {
      *
      * @return SelectQuery
      */
-    public function getQuery() {
+    public function getQuery()
+    {
         return $this->query;
     }
 
@@ -47,7 +49,8 @@ class EntityRepository {
      *
      * @throws InvalidArgumentException
      */
-    public function forModel($modelClassName, $asSelect = true) {
+    public function forModel($modelClassName, $asSelect = true)
+    {
         $this->reset();
 
         if (class_exists($modelClassName)) {
@@ -57,9 +60,9 @@ class EntityRepository {
 
             if ($asSelect) {
                 $this->query = $this->query
-                        ->selectFrom($this->getTableName())
-                        ->setPrimaryKey($this->getPrimaryKey())
-                        ->asObject($modelClassName);
+                    ->selectFrom($this->getTableName())
+                    ->setPrimaryKey($this->getPrimaryKey())
+                    ->asObject($modelClassName);
 
                 $caching = $this->config()->get('orm')->get('caching');
                 $this->caching($caching);
@@ -77,13 +80,14 @@ class EntityRepository {
      *
      * @return int|bool
      */
-    public function delete(AbstractEntityModel $entity) {
+    public function delete(AbstractEntityModel $entity)
+    {
         $this->forModel(get_class($entity), false);
 
         return $this->query
-                        ->deleteFrom($this->getTableName())
-                        ->setPrimaryKey($this->getPrimaryKey())
-                        ->execute($entity->id());
+                ->deleteFrom($this->getTableName())
+                ->setPrimaryKey($this->getPrimaryKey())
+                ->execute($entity->id());
     }
 
     /**
@@ -93,14 +97,15 @@ class EntityRepository {
      *
      * @return int|bool
      */
-    public function update(AbstractEntityModel $entity) {
+    public function update(AbstractEntityModel $entity)
+    {
         $this->forModel(get_class($entity), false);
 
         return $this->query
-                        ->update($this->getTableName())
-                        ->setPrimaryKey($this->getPrimaryKey())
-                        ->set($entity->getModifiedData())
-                        ->execute($entity->id());
+                ->update($this->getTableName())
+                ->setPrimaryKey($this->getPrimaryKey())
+                ->set($entity->getModifiedData())
+                ->execute($entity->id());
     }
 
     /**
@@ -108,7 +113,8 @@ class EntityRepository {
      *
      * @return int|bool|string
      */
-    public function save(AbstractEntityModel $entity) {
+    public function save(AbstractEntityModel $entity)
+    {
         if ($entity->id()) {
             return $this->update($entity);
         }
@@ -116,9 +122,9 @@ class EntityRepository {
         $this->forModel(get_class($entity), false);
 
         return $this->query
-                        ->insertInto($this->getTableName())
-                        ->values($entity->getData())
-                        ->execute();
+                ->insertInto($this->getTableName())
+                ->values($entity->getData())
+                ->execute();
     }
 
     /**
@@ -126,7 +132,8 @@ class EntityRepository {
      *
      * @return int|bool|string
      */
-    public function persist(AbstractEntityModel $entity) {
+    public function persist(AbstractEntityModel $entity)
+    {
         return $this->save($entity);
     }
 
@@ -137,7 +144,8 @@ class EntityRepository {
      *
      * @return self
      */
-    public function orderByAsc($column) {
+    public function orderByAsc($column)
+    {
         $this->query->orderByAsc($column);
 
         return $this;
@@ -150,7 +158,8 @@ class EntityRepository {
      *
      * @return self
      */
-    public function orderByDesc($column) {
+    public function orderByDesc($column)
+    {
         $this->query->orderByDesc($column);
 
         return $this;
@@ -163,7 +172,8 @@ class EntityRepository {
      *
      * @return self
      */
-    public function orderByRaw($statement) {
+    public function orderByRaw($statement)
+    {
         $this->query->orderByRaw($statement);
 
         return $this;
@@ -174,7 +184,8 @@ class EntityRepository {
      *
      * @return self
      */
-    public function caching($caching = true) {
+    public function caching($caching = true)
+    {
         $this->query->caching($caching);
 
         return $this;
@@ -187,7 +198,8 @@ class EntityRepository {
      *
      * @return self
      */
-    public function limit($limit) {
+    public function limit($limit)
+    {
         $this->query->limit($limit);
 
         return $this;
@@ -200,7 +212,8 @@ class EntityRepository {
      *
      * @return self
      */
-    public function offset($offset) {
+    public function offset($offset)
+    {
         $this->query->offset($offset);
 
         return $this;
@@ -214,7 +227,8 @@ class EntityRepository {
      *
      * @return self
      */
-    public function whereRaw($condition, array $parameters = array()) {
+    public function whereRaw($condition, array $parameters = array())
+    {
         $this->query->whereRaw($condition, $parameters);
 
         return $this;
@@ -229,7 +243,8 @@ class EntityRepository {
      *
      * @return self
      */
-    public function where($property, $operator, $parameter) {
+    public function where($property, $operator, $parameter)
+    {
         $this->query->where($property, $operator, $parameter);
 
         return $this;
@@ -240,7 +255,8 @@ class EntityRepository {
      *
      * @return EntityCollection|bool
      */
-    public function fetchAll() {
+    public function fetchAll()
+    {
         // Execute query
         $result = $this->query->fetchAll();
 
@@ -263,7 +279,8 @@ class EntityRepository {
      *
      * @return AbstractEntityModel
      */
-    public function fetch($id = false) {
+    public function fetch($id = false)
+    {
         // Execute query
         $result = $this->query->fetch($id);
 
@@ -279,7 +296,8 @@ class EntityRepository {
      *
      * @return int
      */
-    public function count() {
+    public function count()
+    {
         // Execute query
         $result = $this->query->count();
 
@@ -287,7 +305,7 @@ class EntityRepository {
         $this->reset();
 
         // Return result
-        return $result;
+        return (int) $result;
     }
 
     /**
@@ -299,7 +317,8 @@ class EntityRepository {
      *
      * @throws InvalidArgumentException
      */
-    protected function getTableName($modelClassName = null) {
+    protected function getTableName($modelClassName = null)
+    {
         if (!$modelClassName) {
             $modelClassName = $this->modelClassName;
         }
@@ -320,7 +339,8 @@ class EntityRepository {
      *
      * @throws Exception
      */
-    protected function getPrimaryKey($modelClassName = null) {
+    protected function getPrimaryKey($modelClassName = null)
+    {
         if (!$modelClassName) {
             $modelClassName = $this->modelClassName;
         }
@@ -335,9 +355,9 @@ class EntityRepository {
     /**
      * Reset entity repository
      */
-    protected function reset() {
+    protected function reset()
+    {
         $this->modelClassName = null;
         $this->query = new QueryBuilder();
     }
-
 }

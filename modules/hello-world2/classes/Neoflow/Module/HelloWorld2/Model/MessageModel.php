@@ -1,6 +1,6 @@
 <?php
 
-namespace Neoflow\Module\HelloWorld\Model;
+namespace Neoflow\Module\HelloWorld2\Model;
 
 use Neoflow\Framework\ORM\AbstractEntityModel;
 
@@ -10,7 +10,7 @@ class MessageModel extends AbstractEntityModel
     /**
      * @var string
      */
-    public static $tableName = 'mod_hello_world_messages';
+    public static $tableName = 'hello_world_messages';
 
     /**
      * @var string

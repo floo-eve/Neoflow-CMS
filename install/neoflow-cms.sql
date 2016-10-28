@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 10. Okt 2016 um 14:52
--- Server-Version: 5.7.11
--- PHP-Version: 7.0.4
+-- Erstellungszeit: 28. Okt 2016 um 12:40
+-- Server-Version: 5.7.14
+-- PHP-Version: 7.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,27 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `neoflow-cms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `hello_world_messages`
+--
+
+CREATE TABLE `hello_world_messages` (
+  `message_id` int(11) NOT NULL,
+  `message` varchar(200) COLLATE utf8_bin NOT NULL,
+  `section_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Daten für Tabelle `hello_world_messages`
+--
+
+INSERT INTO `hello_world_messages` (`message_id`, `message`, `section_id`) VALUES
+(13, 'Hello World :)', 27),
+(14, 'Hello World', 28),
+(18, 'Hello World', 33);
 
 -- --------------------------------------------------------
 
@@ -51,38 +72,20 @@ INSERT INTO `languages` (`language_id`, `is_active`, `code`, `title`, `flag_code
 
 CREATE TABLE `modules` (
   `module_id` int(11) NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `folder` varchar(50) NOT NULL,
-  `backend_route` varchar(50) NOT NULL,
-  `frontend_route` varchar(100) NOT NULL,
-  `manager_class` varchar(100) NOT NULL
+  `name` varchar(50) COLLATE utf8_bin NOT NULL,
+  `folder` varchar(50) COLLATE utf8_bin NOT NULL,
+  `backend_route` varchar(50) COLLATE utf8_bin NOT NULL,
+  `frontend_route` varchar(50) COLLATE utf8_bin NOT NULL,
+  `namespace` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `modules`
 --
 
-INSERT INTO `modules` (`module_id`, `title`, `folder`, `backend_route`, `frontend_route`, `manager_class`) VALUES
-(1, 'Hello World', 'hello-world', 'mod_hello_world_backend_index', 'mod_hello_world_frontend_index', '\\Neoflow\\Module\\HelloWorld\\Manager');
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `mod_hello_world_messages`
---
-
-CREATE TABLE `mod_hello_world_messages` (
-  `message_id` int(11) NOT NULL,
-  `message` varchar(200) COLLATE utf8_bin NOT NULL,
-  `section_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Daten für Tabelle `mod_hello_world_messages`
---
-
-INSERT INTO `mod_hello_world_messages` (`message_id`, `message`, `section_id`) VALUES
-(13, 'Hello World7', 27);
+INSERT INTO `modules` (`module_id`, `name`, `folder`, `backend_route`, `frontend_route`, `namespace`) VALUES
+(1, 'Hello World', 'hello-world', 'hello_world_backend_index', 'hello_world_frontend_index', '\\Neoflow\\Module\\HelloWorld'),
+(13, 'Hello World2', 'hello-world2', 'hello_world_backend_index', 'hello_world_backend_index', '\\Neoflow\\Module\\HelloWorld2');
 
 -- --------------------------------------------------------
 
@@ -127,12 +130,12 @@ CREATE TABLE `navitems` (
 
 INSERT INTO `navitems` (`navitem_id`, `title`, `page_id`, `parent_navitem_id`, `navigation_id`, `language_id`, `position`, `is_visible`) VALUES
 (1, 'Startseite', 1, NULL, 1, 1, 1, 1),
-(2, 'Über uns', 2, NULL, 1, 1, 4, 1),
+(2, 'Über uns', 2, NULL, 1, 1, 2, 1),
 (3, 'Beispiele', 3, NULL, 1, 1, 3, 1),
-(4, 'Küche', 4, NULL, 1, 1, 2, 1),
+(4, 'Küche', 4, 3, 1, 1, 2, 1),
 (5, 'Bad', 5, 3, 1, 1, 1, 1),
-(6, 'Garage', 6, NULL, 1, 1, 5, 1),
-(7, 'Impressum', 7, NULL, 1, 1, 6, 1),
+(6, 'Garage', 6, 3, 1, 1, 3, 1),
+(7, 'Impressum', 7, NULL, 1, 1, 4, 1),
 (63, 'asdfasdf', 1, NULL, 4, 1, 1, 1),
 (64, 'asdasd', 1, NULL, 4, 1, 2, 1),
 (68, 'Startseite', 1, NULL, 4, 1, 5, 1);
@@ -145,10 +148,10 @@ INSERT INTO `navitems` (`navitem_id`, `title`, `page_id`, `parent_navitem_id`, `
 
 CREATE TABLE `pages` (
   `page_id` int(11) NOT NULL,
-  `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `slug` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `keywords` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `title` varchar(100) COLLATE utf8_bin NOT NULL,
+  `slug` varchar(100) COLLATE utf8_bin NOT NULL,
+  `description` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `keywords` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `language_id` int(11) DEFAULT NULL,
   `is_restricted` tinyint(1) NOT NULL DEFAULT '0',
   `is_active` tinyint(1) NOT NULL DEFAULT '1'
@@ -203,8 +206,8 @@ INSERT INTO `permissions` (`permission_id`, `permission_key`, `title`, `descript
 
 CREATE TABLE `roles` (
   `role_id` int(11) NOT NULL,
-  `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `description` varchar(150) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL
+  `title` varchar(20) COLLATE utf8_bin NOT NULL,
+  `description` varchar(150) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -266,7 +269,9 @@ CREATE TABLE `sections` (
 --
 
 INSERT INTO `sections` (`section_id`, `page_id`, `module_id`, `is_active`, `position`, `block`) VALUES
-(27, 1, 1, 1, 1, 0);
+(27, 1, 1, 1, 1, 0),
+(28, 2, 1, 1, 1, 0),
+(33, 1, 1, 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -276,10 +281,10 @@ INSERT INTO `sections` (`section_id`, `page_id`, `module_id`, `is_active`, `posi
 
 CREATE TABLE `settings` (
   `setting_id` int(11) NOT NULL,
-  `website_title` varchar(50) DEFAULT NULL,
-  `website_description` varchar(150) DEFAULT NULL,
-  `keywords` varchar(255) DEFAULT NULL,
-  `author` varchar(50) DEFAULT NULL,
+  `website_title` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `website_description` varchar(150) COLLATE utf8_bin DEFAULT NULL,
+  `keywords` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `author` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `theme_id` int(11) NOT NULL,
   `backend_theme_id` int(11) NOT NULL,
   `language_id` int(11) DEFAULT NULL
@@ -300,9 +305,9 @@ INSERT INTO `settings` (`setting_id`, `website_title`, `website_description`, `k
 
 CREATE TABLE `themes` (
   `theme_id` int(11) NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `folder` varchar(50) NOT NULL,
-  `type` enum('frontend','backend') NOT NULL DEFAULT 'frontend'
+  `title` varchar(50) COLLATE utf8_bin NOT NULL,
+  `folder` varchar(50) COLLATE utf8_bin NOT NULL,
+  `type` enum('frontend','backend') COLLATE utf8_bin NOT NULL DEFAULT 'frontend'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -321,11 +326,11 @@ INSERT INTO `themes` (`theme_id`, `title`, `folder`, `type`) VALUES
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
-  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `lastname` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `firstname` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `reset_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8_bin NOT NULL,
+  `password` varchar(100) COLLATE utf8_bin NOT NULL,
+  `lastname` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `firstname` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `reset_key` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `reseted_when` int(11) DEFAULT NULL,
   `role_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -335,11 +340,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `lastname`, `firstname`, `reset_key`, `reseted_when`, `role_id`) VALUES
-(1, 'john.doe@neoflow.ch', sha1('123456'), 'Doe', 'John', NULL, NULL, 1);
+(1, 'john.doe@neoflow.ch', sha1('123456'), 'Doe', 'John', NULL, NULL, 1),
+(2, 'jonathan.nessier@outlook.com', sha1('123456'), 'Nessier', 'Jonathan', NULL, NULL, 4);
 
 --
 -- Indizes der exportierten Tabellen
 --
+
+--
+-- Indizes für die Tabelle `hello_world_messages`
+--
+ALTER TABLE `hello_world_messages`
+  ADD PRIMARY KEY (`message_id`),
+  ADD KEY `fk_section_id_idx` (`section_id`);
 
 --
 -- Indizes für die Tabelle `languages`
@@ -352,13 +365,6 @@ ALTER TABLE `languages`
 --
 ALTER TABLE `modules`
   ADD PRIMARY KEY (`module_id`);
-
---
--- Indizes für die Tabelle `mod_hello_world_messages`
---
-ALTER TABLE `mod_hello_world_messages`
-  ADD PRIMARY KEY (`message_id`),
-  ADD KEY `fk_section_id_idx` (`section_id`);
 
 --
 -- Indizes für die Tabelle `navigations`
@@ -439,6 +445,11 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT für Tabelle `hello_world_messages`
+--
+ALTER TABLE `hello_world_messages`
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
 -- AUTO_INCREMENT für Tabelle `languages`
 --
 ALTER TABLE `languages`
@@ -447,12 +458,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT für Tabelle `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT für Tabelle `mod_hello_world_messages`
---
-ALTER TABLE `mod_hello_world_messages`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT für Tabelle `navigations`
 --
@@ -487,7 +493,7 @@ ALTER TABLE `roles_permissions`
 -- AUTO_INCREMENT für Tabelle `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT für Tabelle `settings`
 --
@@ -502,15 +508,15 @@ ALTER TABLE `themes`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints der exportierten Tabellen
 --
 
 --
--- Constraints der Tabelle `mod_hello_world_messages`
+-- Constraints der Tabelle `hello_world_messages`
 --
-ALTER TABLE `mod_hello_world_messages`
+ALTER TABLE `hello_world_messages`
   ADD CONSTRAINT `fk_mod_hello_world_messages_section_id` FOREIGN KEY (`section_id`) REFERENCES `sections` (`section_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --

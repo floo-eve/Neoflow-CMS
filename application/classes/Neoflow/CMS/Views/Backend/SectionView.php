@@ -38,7 +38,7 @@ class SectionView extends \Neoflow\CMS\Views\BackendView
                 $output .= '</li>
                                 <li>
                                     <a href="' . generate_url($module->backend_route, array('section_id' => $section->id())) . '" title="' . translate('Edit section') . '">
-                                        ' . $module->title . '
+                                        ' . $module->name . '
                                     </a>
                                 </li>
                                 <li class="small hidden-xs">

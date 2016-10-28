@@ -4,13 +4,11 @@ namespace Neoflow\CMS\Model;
 
 use Exception;
 use Neoflow\CMS\Support\Module\ManagerInterface;
-use Neoflow\Framework\Common\Container;
-use Neoflow\Framework\ORM\AbstractEntityModel;
 use Neoflow\Framework\ORM\EntityRepository;
-use Neoflow\Framework\Support\Filesystem\Folder;
-use ZipArchive;
+use Neoflow\Framework\Support\Validation\Validator;
 
-class ModuleModel extends AbstractEntityModel {
+class ModuleModel extends AbstractExtensionModel
+{
 
     /**
      * @var string
@@ -25,15 +23,74 @@ class ModuleModel extends AbstractEntityModel {
     /**
      * @var array
      */
-    public static $properties = ['module_id', 'name', 'folder', 'frontend_route', 'backend_route', 'manager_class'];
+    public static $properties = ['module_id', 'name', 'folder', 'frontend_route', 'backend_route', 'namespace'];
 
     /**
      * Get repository to fetch section.
      *
      * @return EntityRepository
      */
-    public function section() {
+    public function section()
+    {
         return $this->belongsTo('\\WebsiteBaker\\Models\\Section', 'section_id');
+    }
+
+    /**
+     * Validate module
+     *
+     * @return bool
+     */
+    public function validate()
+    {
+        $validator = new Validator($this->data);
+
+        $validator
+            ->required()
+            ->minLength(3)
+            ->maxLength(50)
+            ->callback(function ($name, $id) {
+                return ModuleModel::repo()
+                    ->where('name', '=', $name)
+                    ->where('module_id', '!=', $id)
+                    ->count() === 0;
+            }, '{0} has to be unique', array($this->id()))
+            ->set('name', 'Name');
+
+        $validator
+            ->required()
+            ->minLength(3)
+            ->maxLength(50)
+            ->callback(function ($folder, $id) {
+                return ModuleModel::repo()
+                    ->where('folder', '=', $folder)
+                    ->where('module_id', '!=', $id)
+                    ->count() === 0;
+            }, '{0} has to be unique', array($this->id()))
+            ->set('folder', 'Folder');
+
+        $validator
+            ->required()
+            ->minLength(3)
+            ->maxLength(50)
+            ->set('frontend_route', 'Frontend Routekey');
+
+        $validator
+            ->required()
+            ->minLength(3)
+            ->maxLength(50)
+            ->set('backend_route', 'Backend Routekey');
+
+        $validator
+            ->maxLength(100)
+            ->callback(function ($namespace, $id) {
+                return ModuleModel::repo()
+                    ->where('namespace', '=', $namespace)
+                    ->where('module_id', '!=', $id)
+                    ->count() === 0;
+            }, '{0} has to be unique', array($this->id()))
+            ->set('namespace', 'Namespace');
+
+        return $validator->validate();
     }
 
     /**
@@ -41,55 +98,26 @@ class ModuleModel extends AbstractEntityModel {
      * @return ManagerInterface
      * @throws Exception
      */
-    public function getManager() {
-        $managerClass = $this->manager_class;
-        if ($managerClass && class_exists($managerClass)) {
-            return new $managerClass($this->getPath('config.ini'));
+    public function getManager()
+    {
+        $managerClass = $this->namespace . '\\Manager';
+        if (class_exists($managerClass)) {
+            return new $managerClass();
         }
-        throw new Exception('Module manager not found: ' . $managerClass);
+        throw new Exception('Manager class not found: ' . $managerClass);
     }
 
-    public function install() {
-
-        if ($this->package) {
-            $packageName = basename($this->package['name']);
-            $packagePath = $this->config()->getTempPath(DIRECTORY_SEPARATOR . $packageName);
-            $tempModulePath = $this->config()->getTempPath(uniqid());
-            if (move_uploaded_file($this->package['tmp_name'], $packagePath)) {
-
-                $zip = new ZipArchive();
-                if ($zip->open($packagePath)) {
-                    $zip->extractTo($tempModulePath);
-                    $zip->close();
-
-                    $configFilePath = $tempModulePath . DIRECTORY_SEPARATOR . 'config.ini';
-                    if (is_file($configFilePath)) {
-                        $folder = new Folder($tempModulePath);
-
-                        $config = new Container(parse_ini_file($configFilePath, true), true, true);
-
-                        $this->name = $config->get('name');
-                        $this->folder = $config->get('folder');
-                        $this->frontend_route = $config->get('frontend_route');
-                        $this->backend_route = $config->get('backend_route');
-                        $this->manager_class = $config->get('manager_class');
-
-                        $folder->move($this->getPath());
-
-                        // ##################################################
-                        // HEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEEeee
-
-                        return;
-                    } else {
-                        unlink($tempModulePath);
-                        throw new Exception('Module files e.g. config.ini in root directory of module package not found');
-                    }
-                }
-                throw new Exception('Cannot unpack module package: ' . $packageName);
-            }
-            throw new Exception('Could not move uploaded module package to temp folder');
+    /**
+     * Install module package
+     *
+     * @return bool
+     */
+    public function install()
+    {
+        if (parent::install()) {
+            return $this->getManager()->install();
         }
-        throw new Exception('There is no package to install');
+        return false;
     }
 
     /**
@@ -99,10 +127,11 @@ class ModuleModel extends AbstractEntityModel {
      *
      * @return string
      */
-    public function getUrl($uri = '') {
+    public function getUrl($uri = '')
+    {
         return $this
-                        ->config()
-                        ->getModulesUrl('/' . $this->folder . '/' . $uri);
+                ->config()
+                ->getModulesUrl('/' . $this->folder . '/' . $uri);
     }
 
     /**
@@ -112,10 +141,10 @@ class ModuleModel extends AbstractEntityModel {
      *
      * @return string
      */
-    public function getPath($uri = '') {
+    public function getPath($uri = '')
+    {
         return $this
-                        ->config()
-                        ->getModulesPath('/' . $this->folder . '/' . $uri);
+                ->config()
+                ->getModulesPath('/' . $this->folder . '/' . $uri);
     }
-
 }

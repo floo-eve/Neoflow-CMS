@@ -1,6 +1,6 @@
 <?php
 
-namespace Neoflow\Module\HelloWorld\Controller;
+namespace Neoflow\Module\HelloWorld2\Controller;
 
 use Neoflow\Framework\HTTP\Responsing\Response;
 use Neoflow\Module\HelloWorld\Model\MessageModel;

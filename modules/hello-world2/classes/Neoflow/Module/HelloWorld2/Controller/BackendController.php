@@ -1,6 +1,6 @@
 <?php
 
-namespace Neoflow\Module\HelloWorld\Controller;
+namespace Neoflow\Module\HelloWorld2\Controller;
 
 use Exception;
 use Neoflow\CMS\Controller\Backend\Module\AbstractSectionModuleController;
@@ -10,7 +10,8 @@ use Neoflow\Framework\Support\Validation\ValidationException;
 use Neoflow\Module\HelloWorld\Model\MessageModel;
 use function translate;
 
-class BackendController extends AbstractSectionModuleController {
+class BackendController extends AbstractSectionModuleController
+{
 
     /**
      * Index action.
@@ -19,11 +20,12 @@ class BackendController extends AbstractSectionModuleController {
      *
      * @return Response
      */
-    public function indexAction($args) {
+    public function indexAction($args)
+    {
         $message = MessageModel::findByColumn('section_id', $this->section->id());
 
         return $this->render('module/hello-world/backend', array(
-                    'message' => $message,
+                'message' => $message,
         ));
     }
 
@@ -36,7 +38,8 @@ class BackendController extends AbstractSectionModuleController {
      *
      * @throws Exception
      */
-    public function updateAction($args) {
+    public function updateAction($args)
+    {
         try {
 
             // Get post data
@@ -44,8 +47,8 @@ class BackendController extends AbstractSectionModuleController {
 
             // Get page by id
             $message = MessageModel::update(array(
-                        'message' => $postData->get('message')
-                            ), $postData->get('message_id'));
+                    'message' => $postData->get('message')
+                    ), $postData->get('message_id'));
 
             // Validate and save page
             if ($message && $message->save()) {
@@ -57,7 +60,6 @@ class BackendController extends AbstractSectionModuleController {
             $this->setDangerAlert($ex->getErrors());
         }
 
-        return $this->redirectToRoute('mod_hello_world_backend_index', array('section_id' => $message->section_id));
+        return $this->redirectToRoute('hello_world_backend_index', array('section_id' => $message->section_id));
     }
-
 }

@@ -57,7 +57,7 @@ class BackendController extends AbstractSectionModuleController {
             $this->setDangerAlert($ex->getErrors());
         }
 
-        return $this->redirectToRoute('mod_hello_world_backend_index', array('section_id' => $message->section_id));
+        return $this->redirectToRoute('hello_world_backend_index', array('section_id' => $message->section_id));
     }
 
 }

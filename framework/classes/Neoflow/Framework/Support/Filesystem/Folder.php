@@ -2,9 +2,10 @@
 
 namespace Neoflow\Framework\Support\Filesystem;
 
-use \Neoflow\Framework\Support\Filesystem\Exceptions\FolderException;
+use Neoflow\Framework\Support\Filesystem\Exceptions\FolderException;
 
-class Folder {
+class Folder
+{
 
     /**
      * Folder path.
@@ -18,7 +19,8 @@ class Folder {
      *
      * @param string $folderPath Folder path
      */
-    public function __construct($folderPath) {
+    public function __construct($folderPath)
+    {
         if (is_string($folderPath)) {
             $this->load($folderPath);
         }
@@ -33,7 +35,8 @@ class Folder {
      *
      * @throws FolderException
      */
-    public function load($folderPath) {
+    public function load($folderPath)
+    {
         if (is_dir($folderPath)) {
             if (is_readable($folderPath)) {
                 $this->folderPath = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $folderPath);
@@ -49,7 +52,8 @@ class Folder {
      *
      * @return string
      */
-    public function getFolderPath() {
+    public function getFolderPath()
+    {
         return $this->folderPath;
     }
 
@@ -57,7 +61,8 @@ class Folder {
      * Get folder name
      * @return string
      */
-    public function getFolderName() {
+    public function getFolderName()
+    {
         return pathinfo($this->folderPath, PATHINFO_BASENAME);
     }
 
@@ -66,7 +71,8 @@ class Folder {
      *
      * @return string
      */
-    public function getFolderDirectory() {
+    public function getFolderDirectory()
+    {
         return pathinfo($this->filePath, PATHINFO_DIRNAME);
     }
 
@@ -77,13 +83,15 @@ class Folder {
      *
      * @return bool
      */
-    public function delete($recursivly = true) {
+    public function delete($recursivly = true)
+    {
         if ($recursivly) {
-            foreach (glob($this->folderPath . '/*') as $file) {
+            foreach (glob($this->folderPath . DIRECTORY_SEPARATOR . '{,.}[!.,!..]*', GLOB_MARK | GLOB_BRACE) as $file) {
                 if (is_dir($file)) {
-                    rrmdir($file);
+                    $folder = new Folder($file);
+                    $folder->delete();
                 } else {
-                    unlink($file);
+                    \unlink($file);
                 }
             }
         }
@@ -100,7 +108,8 @@ class Folder {
      *
      * @throws FolderException
      */
-    public function move($newFolderPath) {
+    public function move($newFolderPath)
+    {
         if (!is_dir($newFolderPath)) {
             if (rename($this->folderPath, $newFolderPath)) {
                 return new self($newFolderPath);
@@ -119,7 +128,8 @@ class Folder {
      *
      * @throws FolderException
      */
-    public function rename($newFolderName) {
+    public function rename($newFolderName)
+    {
         $newFolderPath = $this->getFolderDirectory() . DIRECTORY_SEPARATOR . $newFolderName;
         if (is_dir($newFolderPath)) {
             return $this->move($newFolderPath);
@@ -136,7 +146,8 @@ class Folder {
      *
      * @throws FolderException
      */
-    public function moveToDirectory($newDirectoryPath) {
+    public function moveToDirectory($newDirectoryPath)
+    {
         if (is_dir($newDirectoryPath)) {
             if (is_writeable($newDirectoryPath)) {
                 $newFolderPath = $newDirectoryPath . DIRECTORY_SEPARATOR . $this->getFileName();
@@ -153,13 +164,14 @@ class Folder {
     /**
      * Static method: Create new folder.
      *
-     * @param string $folderPath
+     * @param string $folderPath Folder path
      *
      * @return self
      *
      * @throws FolderException
      */
-    public static function create($folderPath) {
+    public static function create($folderPath)
+    {
         if (!is_dir($folderPath)) {
             if (mkdir($folderPath)) {
                 return new self($folderPath);
@@ -169,4 +181,17 @@ class Folder {
         throw new FolderException('Cannot create folder, because the folder path ' . $folderPath . ' already exist', FolderException::ALREADY_EXIST);
     }
 
+    /**
+     * Static method: Delete folder recursivly
+     *
+     * @param string $folderPath Folder path
+     * @param bool $recursivly Set FALSE to prevent deleting all files and subfolders recursivly
+     *
+     * @return bool
+     */
+    public static function unlink($folderPath, $recursivly = false)
+    {
+        $folder = new Folder($folderPath);
+        return $folder->delete($recursivly);
+    }
 }

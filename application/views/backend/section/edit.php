@@ -23,7 +23,7 @@
                             <?= translate('Module') ?>
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="inputModule" class="form-control" disabled value="<?= $module->title ?>" />
+                            <input type="text" name="inputModule" class="form-control" disabled value="<?= $module->name ?>" />
                         </div>
                     </div>
                     <div class="form-group">

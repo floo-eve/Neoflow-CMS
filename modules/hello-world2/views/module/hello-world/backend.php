@@ -4,7 +4,7 @@
     </div>
     <div class="panel-body">
         <p>
-            <i>Hello World</i> was developped for test-cases only and is the
+            <i>Hello World2</i> was developped for test-cases only and is the
             first official page-module of the Neoflow CMS.
         </p>
         <p>
@@ -15,7 +15,7 @@
 
         <hr />
 
-        <form method="post" action="<?= generate_url('mod_hello_world_backend_update') ?>" class="form-horizontal">
+        <form method="post" action="<?= generate_url('hello_world_backend_update') ?>" class="form-horizontal">
 
             <div class="form-group <?= $this->hasValidationError('message', 'has-error') ?>">
                 <input type="hidden" value="<?= $message->id() ?>" name="message_id" />

@@ -45,7 +45,7 @@
                                 foreach ($modules as $module) {
 
                                     ?>
-                                    <option value="<?= $module->id() ?>"><?= $module->title ?></option>
+                                    <option value="<?= $module->id() ?>"><?= $module->name ?></option>
                                     <?php
                                 }
 

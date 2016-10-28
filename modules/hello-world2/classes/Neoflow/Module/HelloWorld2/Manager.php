@@ -1,18 +1,18 @@
 <?php
 
-namespace Neoflow\Module\HelloWorld;
+namespace Neoflow\Module\HelloWorld2;
 
-use Neoflow\CMS\Support\Module\AbstractManager;
-use Neoflow\Module\HelloWorld\Model\MessageModel;
+use Neoflow\CMS\Support\Module\ManagerInterface;
+use Neoflow\Module\HelloWorld2\Model\MessageModel;
 
-class Manager extends AbstractManager
+class Manager implements ManagerInterface
 {
 
     public function add($section)
     {
         return (bool) MessageModel::create(array(
                 'section_id' => $section->id(),
-                'message' => 'Hello World'
+                'message' => 'Hello World 123 :)'
             ))->save();
     }
 

@@ -1,10 +1,9 @@
 <?php
+$this->addNamespace('\\Neoflow\\Module\\HelloWorld\\Controller\\');
 
-$this->addNamespace('\\Neoflow\\Module\\');
-
-// Backend routes
+// Module routes
 $this->addRoutes(array(
-    array('mod_hello_world_backend_index', 'any', '/backend/module/hello-world', 'HelloWorld\\Controller\\Backend'),
-    array('mod_hello_world_backend_update', 'post', '/backend/module/hello-world/update', 'HelloWorld\\Controller\\Backend@update'),
-    array('mod_hello_world_frontend_index', 'any', '/hello-world', 'HelloWorld\\Controller\\Frontend'),
+    array('hello_world_backend_index', 'any', '/backend/module/hello-world', 'Backend@index'),
+    array('hello_world_backend_update', 'post', '/backend/module/hello-world/update', 'Backend@update'),
+    array('hello_world_frontend_index', 'any', '/hello-world', 'Frontend@index'),
 ));
