@@ -2,7 +2,7 @@
 
 namespace Neoflow\Module\HelloWorld;
 
-use Neoflow\CMS\Support\Module\AbstractManager;
+use Neoflow\CMS\Support\Extension\AbstractManager;
 use Neoflow\Module\HelloWorld\Model\MessageModel;
 
 class Manager extends AbstractManager

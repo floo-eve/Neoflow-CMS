@@ -7,7 +7,8 @@ use Neoflow\CMS\Support\Alert\InfoAlert;
 use Neoflow\CMS\Support\Alert\SuccessAlert;
 use Neoflow\CMS\Support\Alert\WarningAlert;
 
-abstract class AbstractController extends \Neoflow\Framework\Core\AbstractController {
+abstract class AbstractController extends \Neoflow\Framework\Core\AbstractController
+{
 
     /**
      * Create danger alert and set as session flash.
@@ -16,7 +17,8 @@ abstract class AbstractController extends \Neoflow\Framework\Core\AbstractContro
      *
      * @return self
      */
-    protected function setDangerAlert($message) {
+    protected function setDangerAlert($message)
+    {
         $this->setFlash('alert', new DangerAlert($message));
 
         return $this;
@@ -29,7 +31,8 @@ abstract class AbstractController extends \Neoflow\Framework\Core\AbstractContro
      *
      * @return self
      */
-    protected function setInfoAlert($message) {
+    protected function setInfoAlert($message)
+    {
         $this->setFlash('alert', new InfoAlert($message));
 
         return $this;
@@ -42,7 +45,8 @@ abstract class AbstractController extends \Neoflow\Framework\Core\AbstractContro
      *
      * @return self
      */
-    protected function setSuccessAlert($message) {
+    protected function setSuccessAlert($message)
+    {
         $this->setFlash('alert', new SuccessAlert($message));
 
         return $this;
@@ -55,10 +59,10 @@ abstract class AbstractController extends \Neoflow\Framework\Core\AbstractContro
      *
      * @return self
      */
-    protected function setWarningAlert($message) {
+    protected function setWarningAlert($message)
+    {
         $this->setFlash('alert', new WarningAlert($message));
 
         return $this;
     }
-
 }

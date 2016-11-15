@@ -3,7 +3,7 @@
 namespace Neoflow\CMS\Model;
 
 use Exception;
-use Neoflow\CMS\Support\Module\ManagerInterface;
+use Neoflow\CMS\Support\Extension\ManagerInterface;
 use Neoflow\Framework\ORM\EntityRepository;
 use Neoflow\Framework\Support\Validation\Validator;
 

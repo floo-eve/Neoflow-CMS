@@ -102,6 +102,8 @@ class Router
      */
     public function runRouteFile($routesFile)
     {
+        $this->namespaces = array();
+
         if (is_file($routesFile)) {
             include $routesFile;
         }

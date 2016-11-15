@@ -1,6 +1,6 @@
 <?php
 
-namespace Neoflow\CMS\Support\Module;
+namespace Neoflow\CMS\Support\Extension;
 
 interface ManagerInterface
 {
